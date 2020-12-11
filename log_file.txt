@@ -1,0 +1,15 @@
+Error in try(stop(paste0("Some antigens seems to be repeated in a mini array for",  : 
+  Some antigens seems to be repeated in a mini array forKK2-05_first
+Error in try(stop(paste0("Some antigens seems to be repeated in a mini array for",  : 
+  Some antigens seems to be repeated in a mini array forKK2-06
+Error in try(stop(paste0("Some antigens seems to be repeated in a mini array for",  : 
+  Some antigens seems to be repeated in a mini array forKK2-07
+Error in try(stop(paste0("Some antigens seems to be repeated in a mini array for",  : 
+  Some antigens seems to be repeated in a mini array forKK2-08
+Error in try(stop(paste0("Some antigens seems to be repeated in a mini array for",  : 
+  Some antigens seems to be repeated in a mini array forKK2-09
+[1] "The replicates are as expected per sample per antigen"
+[1] "The replicates are as expected per sample per antigen"
+[1] "The replicates are as expected per sample per antigen"
+[1] "The replicates are as expected per sample per antigen"
+[1] "The replicates are as expected per sample per antigen"

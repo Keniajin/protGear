@@ -1,0 +1,101 @@
+---
+title: "protGear: Protein micro array data management suite"
+output:
+  flexdashboard::flex_dashboard:
+  theme: cosmo
+orientation: rows
+vertical_layout: scroll
+runtime: shiny
+---
+
+
+```{r setup, include=FALSE}
+## Inside the working directory create a sampleID folder to contain information of the sampleID's
+## they should be named according to the sampleID names
+pacman::p_load(tidyverse,ggpubr,limma,vsn,ggpubr,gtools,plotly,shinythemes,shinyjs,shinyWidgets,GGally ,DT,
+               shinycssloaders, gridExtra,pheatmap,scales,shinyFeedback,shinyalert, data.table,stringr, trend)
+files.sources = list.files("scripts/functions_call_load/",full.names = T)
+sapply(files.sources, source)
+
+dir.create('error')
+#### save all the files as objects
+#Increasing the default maximum upload restriction of Shiny to 10GB can add to globaly
+if(Sys.getenv('SHINY_PORT') == "") options(shiny.maxRequestSize=10000*1024^2)
+```
+
+
+Data Processing {data-width=300}
+======
+
+```{r}
+
+
+shinyAppDir("load_data_dashboard/")
+```
+
+
+
+About protGear {data-width=300}
+======
+
+```{r}
+shinyAppDir("about_app/" )
+```
+
+
+Help 
+======
+
+```{r}
+dropdownMenu(type = "notifications", 
+                                          headerText = strong("HELP"), 
+                                          icon = icon("question"), 
+                                          badgeStatus = NULL,
+                                          notificationItem(
+                                            text = (steps$text[1]),
+                                            icon = icon("spinner")
+                                          ),
+                                          notificationItem(
+                                            text = steps$text[2],
+                                            icon = icon("address-card")
+                                          ),
+                                          notificationItem(
+                                            text = steps$text[3],
+                                            icon = icon("calendar")
+                                          ),
+                                          notificationItem(
+                                            text = steps$text[4],
+                                            icon = icon("user-md")
+                                          ),
+                                          notificationItem(
+                                            text = steps$text[5],
+                                            icon = icon("ambulance")
+                                          ),
+                                          notificationItem(
+                                            text = steps$text[6],
+                                            icon = icon("flask")
+                                          ),
+                                          notificationItem(
+                                            text = strong(steps$text[7]),
+                                            icon = icon("exclamation")
+                                          )  )
+```
+
+
+<!-- CV Calculation   {data-width=300} -->
+<!-- ====== -->
+
+<!-- ```{r} -->
+
+<!-- #shinyAppDir("load_data_dashboard/" ) -->
+
+<!-- ``` -->
+
+
+
+<!-- Batch Correction   {data-width=300} -->
+<!-- ====== -->
+
+
+<!-- Normalization    {data-width=300} -->
+<!-- ====== -->

@@ -1,0 +1,59 @@
+.radioSelect{
+font-size: 14px;
+font-weight: bold;
+color: #420D09;
+margin: 0px;
+padding:1px;
+}
+
+
+
+.bg_select{
+font-size: 16px;
+font-weight: bold;
+color: #FFFFFF;
+}
+
+
+.drop_select{
+font-size: 16px;
+font-weight: bold;
+
+/*color: #000000;*/
+}
+
+.bg_sidebar_cv{
+font-size: 14px;
+font-weight: bold;
+background-color: coral;
+opacity: 0.5;
+}
+
+
+.main-sidebar {
+  /*background-color: powderblue !important;*/
+  font-weight: bold;
+}
+
+
+.table_view{
+font-size: 8px;
+color: #000000;
+}
+
+
+.bg_gray{
+  background-color: #CCCCCC;
+}
+
+
+.my_textinput {
+  color: #800000;
+  
+}
+
+
+.btn_width {
+   font-size: 12px;
+   color: #FF0000;
+}
