@@ -10,7 +10,11 @@ There is a package vignette included with this package with a step by step use o
 `devtools::install_github("keniajin/protGear/")`
 
 ## To run the shiny application
-
+To use the application locally on your compute install R and launch the app using the following command. 
 `protGear::launch_protGear_interactive()`
 
-
+To Install R: 
+ - Open an internet browser and go to www.r-project.org. 
+ - Under "Getting Started" click the "download R" link
+ - Select a CRAN location (a mirror site) and click the corresponding link.
+ - Download R depending on your operating system. 
