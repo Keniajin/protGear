@@ -464,7 +464,8 @@ p <- do.call("grid.arrange", c(normalised_list_plot, ncol=2))
 
 
 ## Shiny application
-Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear includes an interactive dashboard. The dashboard is launched as below form R. To Install R: Open an internet browser and go to www.r-project.org.
+Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
+The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.
 
 ```{r, eval=F}
 protGear::launch_protGear_interactive()
