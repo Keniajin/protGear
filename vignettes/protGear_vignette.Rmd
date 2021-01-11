@@ -4,7 +4,7 @@ title: protGear:An R package with an interactive web-based protein microarray da
 author: "Kennedy Mwai"
 header-includes:
    - \usepackage[T1]{fontenc}
-date: "9/22/2020"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
   pdf_document: default
   html_document:
