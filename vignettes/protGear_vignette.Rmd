@@ -4,7 +4,7 @@ title: protGear:An R package with an interactive web-based protein microarray da
 author: "Kennedy Mwai"
 header-includes:
    - \usepackage[T1]{fontenc}
-date: '`r format(Sys.time(), "%d %B, %Y")`'
+
 output:
   html_document:
     df_print: paged
@@ -21,10 +21,10 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F, #tidy = T,tidy.opt
 
 colorize <- function(x, color) {
   if (knitr::is_latex_output()) {
-    #sprintf("\\textcolor{%s}{%s}", color, x)
+    sprintf("\\textcolor{%s}{%s}", color, x)
   } else if (knitr::is_html_output()) {
-    #sprintf("<span style='color: %s;'>%s</span>", color, 
-    #  x)
+    sprintf("<span style='color: %s;'>%s</span>", color, 
+      x)
   } else x
 }
 
