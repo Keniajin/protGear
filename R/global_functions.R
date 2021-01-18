@@ -9,6 +9,7 @@ minpositive <- function(x) min(x[x > 0], na.rm = T)
 
 
 #' List the array structure variables
+#'
 #' @param channel A character indicating the channel that the data was scanned at. It is mostly included in the MFI variable names.
 #' @param totsamples A numeric value indicating teh number of samples on a slide.
 #' @param blockspersample A numeric value indicating the numer of blocks in a mini-array. The \code{".gal"} file can help in getting this
@@ -16,7 +17,11 @@ minpositive <- function(x) min(x[x > 0], na.rm = T)
 #' @param sampleID_path A character indicating the path of the folder location with the sample identifiers matching the array structure.
 #' @param mig_prefix Optional: A character indicating the identifier of an MIG dilution file
 #' @param machine Optional:A character indicating the machine used to process the data in the folder
+#' @param FG  Optional:A character indicating the name of the foreground variable name. if not specified its created as \code{paste0("F",channel,".Median")}
+#' @param BG Optional:A character indicating the name of the background variable name.  if not specified its created as \code{paste0("B",channel,".Median")}
+#' @param FBG Optional:A character indicating the name of the foreground - background variable name.  if not specified its created as \code{paste0("F",channel,".Median...B",channel)}
 #' @param date_process Optional:A character indicating the date when the samples were processed.
+#'
 #' @description A generic function returning a list with the data structure.
 #' @return
 #' @export
@@ -24,6 +29,9 @@ minpositive <- function(x) min(x[x > 0], na.rm = T)
 #' @examples
 array_vars <- function(channel="635",
                        totsamples ,
+                       FG="",
+                       BG="",
+                       FBG="",
                        blockspersample,
                        chip_path = "data/array_data",
                        sampleID_path ="data/array_sampleID/",
@@ -36,10 +44,25 @@ array_vars <- function(channel="635",
   ## remove the parent directory
   ## the folders with the chip data with the different batches is left
   paths <- paths[!grepl(paste0( chip_path,"$") , paths)]
+  if(FG==""){
+    FG= rlang::sym(paste0("F",channel,".Median"))
+  }else{
+    FG= rlang::sym(FG)
+  }
+  if(BG==""){
+    BG= rlang::sym(paste0("B",channel,".Median"))
+  }else{
+    BG= rlang::sym(BG)
+    }
+  if(FBG==""){
+    FBG= rlang::sym(paste0("F",channel,".Median...B",channel))
+  }else{
+    FBG= rlang::sym(FBG)
+  }
 
-  genepix_vars <- list(FG= rlang::sym(paste0("F",channel,".Median")),
-                       BG= rlang::sym(paste0("B",channel,".Median")) ,
-                       FBG= rlang::sym(paste0("F",channel,".Median...B",channel)),
+  genepix_vars <- list(FG= FG,#rlang::sym(paste0("F",channel,".Median")),
+                       BG= BG,#rlang::sym(paste0("B",channel,".Median")) ,
+                       FBG= FBG,#rlang::sym(paste0("F",channel,".Median...B",channel)),
                        paths=paths,
                        chip_path=chip_path,
                        sampleID_path=sampleID_path,

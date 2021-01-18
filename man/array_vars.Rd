@@ -7,6 +7,9 @@
 array_vars(
   channel = "635",
   totsamples,
+  FG = "",
+  BG = "",
+  FBG = "",
   blockspersample,
   chip_path = "data/array_data",
   sampleID_path = "data/array_sampleID/",
@@ -19,6 +22,12 @@ array_vars(
 \item{channel}{A character indicating the channel that the data was scanned at. It is mostly included in the MFI variable names.}
 
 \item{totsamples}{A numeric value indicating teh number of samples on a slide.}
+
+\item{FG}{Optional:A character indicating the name of the foreground variable name. if not specified its created as \code{paste0("F",channel,".Median")}}
+
+\item{BG}{Optional:A character indicating the name of the background variable name.  if not specified its created as \code{paste0("B",channel,".Median")}}
+
+\item{FBG}{Optional:A character indicating the name of the foreground - background variable name.  if not specified its created as \code{paste0("F",channel,".Median...B",channel)}}
 
 \item{blockspersample}{A numeric value indicating the numer of blocks in a mini-array. The \code{".gal"} file can help in getting this}
 

@@ -29,9 +29,9 @@ shinyServer(function(input, output, session) {
   wd_this <- getwd()
   volumes = getVolumes()()
   dir.create("processed_data")
-  shinyDirChoose(input, "folderChoose",  roots = volumes, #c(home = wd_this),
-                 session = session)
 
+  shinyFiles::shinyDirChoose(input, "folderChoose",  roots = volumes, #c(home = wd_this),
+                 session = session)
 ## this works where
 sel_path <- reactive({
     return(print(parseDirPath(volumes, input$folderChoose)))
@@ -47,8 +47,9 @@ observe({ # called only once at app init
 #show intro modal
 observeEvent("", {
   showModal(modalDialog(
-    intro_html <- system.file("shiny-examples/protGear_interactive/", "intro_text.html", package="protGear"),
-    includeHTML(intro_html),
+    #intro_html <- ,
+    includeHTML(system.file("shiny-examples/protGear_interactive/", "intro_text.html", package="protGear" ,
+                            mustWork = T)),
     easyClose = TRUE,
     footer = tagList(
       actionButton(inputId = "intro", label = "DISMISS (INTRODUCTION TOUR)", icon = icon("info-circle"))
@@ -948,21 +949,21 @@ merged_dfs_reactive <- reactive({
 # table of a sample dataset of the file
 output$tbl_all_data <-  DT::renderDT({
   folder_choose <- parseDirPath(c(home = wd_this) ,input$folderChoose)
-  if(input$folderChoose!=""){
+  if(!rlang::is_empty(sel_path) ){#input$folderChoose!=''
     all_datas <- list.files(sel_path() , recursive = T)
     sample_ID_merged_dfs <-  merged_dfs_reactive()
     d_f <- plyr::ldply(sample_ID_merged_dfs)
     write_csv(d_f, paste("processed_data/raw_data-", Sys.Date(), ".csv", sep=""))
     df <- DT::datatable(d_f)
-    df
+
   }
   #options = list(lengthChange = FALSE,
   #  initComplete = JS('function(setting, json) { alert("done"); }'))
+  return( df)
 })
 
 ## download all data
 output$download_Raw_Data <- downloadHandler(
-
   filename = function() {
     paste("raw_data-", Sys.Date(), ".csv", sep="")
   },
@@ -1487,7 +1488,7 @@ output$cv_violin_plot_best2 <- renderPlot({
 # table of a sample dataset of the file
 output$sample_best2_reactive_tbl <-  DT::renderDT({
   dataCV_sample_best2 <- dataCV_sample_best2_reactive()
- if(input$folderChoose!=""){
+ if(!rlang::is_empty(sel_path) & sel_path!='' ){#input$folderChoose!=""
 
    all_vars <- names(dataCV_sample_best2)
    percs <- all_vars[grepl("perc",all_vars)]
@@ -1504,9 +1505,6 @@ output$sample_best2_reactive_tbl <-  DT::renderDT({
        backgroundRepeat = 'no-repeat',
        backgroundPosition = 'center'
      )
-
-
-
     sample_best2_df
  }else {
    sample_best2_df <- data.frame()
@@ -1728,7 +1726,7 @@ tag_data_reactive <- reactive({
 # table of a sample dataset of the file
 output$tbl_data_cv<-  DT::renderDT({
   folder_choose <- parseDirPath(c(home = wd_this) ,input$folderChoose)
-  if(input$folderChoose!=""){
+  if(!rlang::is_empty(sel_path)){#input$folderChoose!=""){
     dataCV_tag <- dataCV_tag_reactive()
     dataCV_tag <- dataCV_tag %>% mutate_if(is.numeric, ~round(., 3))
 
@@ -2268,11 +2266,13 @@ output$heatmap_normalised <- renderPlot({
 
   if(input$heat_both==T){
     p_non_norm <- pheatmap::pheatmap(non_norm_df ,scale = "none", cluster_rows = F , main="Non normalised data")
-    p2 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F ,main=paste(input$normalisation_method,"Normalised Data"))
+    p2 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F ,
+                             main=paste(input$normalisation_method,"Normalised Data"))
     p <- gridExtra::grid.arrange(grobs = list(p2[[4]],p_non_norm[[4]]))
 
   }else{
-    p <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,main=paste(input$normalisation_method,"Normalised Data"))
+    p <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
+                            main=paste(input$normalisation_method,"Normalised Data"))
   }
 return(p)
 })

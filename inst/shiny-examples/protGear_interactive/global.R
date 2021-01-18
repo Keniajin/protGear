@@ -1,6 +1,8 @@
 library(shiny)
 library(shinydashboard)
-
+library(magrittr)
+library(protGear)
+"%ni%" <- Negate('%in%')
 
 # HELP & INTRO DATA ---------------------------------------------------------------
 

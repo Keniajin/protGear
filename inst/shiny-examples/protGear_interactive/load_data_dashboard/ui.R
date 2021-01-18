@@ -96,9 +96,9 @@ shinyUI(
                         dashboardBody(
                           shinyjs::useShinyjs(),
                           # add custom JS code
-                          js_file <- system.file("shiny-examples/protGear_interactive/www", "app.js", package="protGear"),
+                          #js_file <- ,
                           #extendShinyjs("www/app.js"),
-                          extendShinyjs(js_file),
+                          extendShinyjs(system.file("shiny-examples/protGear_interactive/www", "app.js", package="protGear")),
                           tabItems(
                             tabItem("dashboard",
                                     # this Row picks the parametes
@@ -161,7 +161,7 @@ shinyUI(
                                     #downloadButton("downloadCsv", "Download as CSV")
                                     downloadButton("download_Raw_Data", "Download raw data"),
                                     br(),
-                                    DT::DTOutput("tbl_all_data") %>%withSpinner(color="#B80f0A")
+                                    DT::DTOutput("tbl_all_data") %>% withSpinner(color="#B80f0A")
 
                             )
                           )
@@ -304,8 +304,8 @@ shinyUI(
                         dashboardBody(
                           tags$head(
                             # Include our custom CSS
-                            style_file <- system.file("shiny-examples/protGear_interactive/www", "styles.css", package="protGear"),
-                            includeCSS(style_file)#"www/styles.css")
+                           # style_file <- ,
+                            includeCSS(system.file("shiny-examples/protGear_interactive/www", "styles.css", package="protGear"))#"www/styles.css")
                           ),
                           shinyjs::useShinyjs(),
                           # add custom JS code

@@ -358,7 +358,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
   }
 
 
-  ##save the MFI values without formating the background
+  ##save the MFI values without formatting the background
   data1_full_bg <- Data1 %>%
     dplyr::select(sampleID, antigen=Name,FMedian=!!genepix_vars$FG) %>%
     mutate(replicate = 1:n()) %>%
@@ -367,33 +367,31 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
   # %>%     spread(antigen, F635Median)
   # combine Name and replicate
   ## save in the background data folder files with higher background values
-  create_dir(path = "data/raw_MFI_BG/")
-  write_csv(data1_full_bg ,paste0("data/raw_MFI_BG/",iden,"_raw_MFI_BG",".csv"))
+  file_ident <- paste0(iden,"_raw_MFI_BG",".csv")
+
+  #create_dir(path = system.file("processe_data/raw_MFI_BG/"))
+  #write_csv(data1_full_bg ,system.file("processed_data/raw_MFI_BG/", 'file_ident', package="protGear"))
   #----------------------------------------------------------------------------------------------------
-
-
-
   if(method=="none"){
     #----------------------------------------------------------------------------------------------------
-    ##MFI values without subtracting the background
+      ##MFI values without subtracting the background
     Data1 <- Data1 %>%
-      dplyr::select( sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG , FMedianBG_correct=!!genepix_vars$FG,
+      dplyr::select(sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG ,
                      Block, Column, Row) %>%
+      mutate(FMedianBG_correct=FMedian) %>%
       mutate(replicate = 1:n()) #%>%
     #filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
     #----------------------------------------------------------------------------------------------------
 
   }else if(method=="subtract_local"){
-    ## this approach subracts the local backgroud estimated by the Array Jet Machine
+    ## this approach subtracts the local background estimated by the Array Jet Machine
     #----------------------------------------------------------------------------------------------------
     ##save the MFI values with subtracting the background
-
-
-    Data1 <- Data1 %>%
-      mutate(FMedianBG_correct=!!genepix_vars$FG-!!genepix_vars$BG) %>%
+  Data1 <- Data1 %>%
+      dplyr::mutate(FMedianBG_correct=(!!genepix_vars$FG)-(!!genepix_vars$BG)) %>%
       dplyr::select( sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG,FMedianBG_correct,Block, Column, Row) %>%
-      mutate(replicate = 1:n())
-    #%>%
+      dplyr::mutate(replicate = 1:n())
+     #%>%
     # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
     #----------------------------------------------------------------------------------------------------
 
@@ -439,8 +437,8 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     one <- matrix(1, nrow(Data1), 1)
     delta.vec <- function(d, f = 0.1) {
       ##  mean(d < 1e-16, na.rm = TRUE) % of values that are negative
-      ## mean(d < 1e-16, na.rm = TRUE) * (1 + f) the % of values just above the negaitve values
-      ## gives the quartile cut off value of the threshhold
+      ## mean(d < 1e-16, na.rm = TRUE) * (1 + f) the % of values just above the negative values
+      ## gives the quartile cut off value of the threshold
       quantile(d, probs = mean(d < 1e-16, na.rm = TRUE) * (1 + f), na.rm = TRUE)
     }
     #delta <- one %*% apply(as.matrix(Data1[['FMedianBG_correct']]), 2, delta.vec)
@@ -464,6 +462,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     ##Both norm exp and edwards are implemented in Limma for DNA micro array data
   }
   #Data1 <- Data1 %>% rename(F635MedianB635=F635.Median...B635)
+
   return(Data1)
 }
 
