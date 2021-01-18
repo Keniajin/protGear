@@ -1488,7 +1488,7 @@ output$cv_violin_plot_best2 <- renderPlot({
 # table of a sample dataset of the file
 output$sample_best2_reactive_tbl <-  DT::renderDT({
   dataCV_sample_best2 <- dataCV_sample_best2_reactive()
- if(!rlang::is_empty(sel_path) & sel_path!='' ){#input$folderChoose!=""
+ if(!rlang::is_empty(sel_path) ){#input$folderChoose!=""
 
    all_vars <- names(dataCV_sample_best2)
    percs <- all_vars[grepl("perc",all_vars)]
@@ -2249,6 +2249,8 @@ output$heatmap_normalised <- renderPlot({
   control_antigens <- input$rlm_antigens
   norm_df <- normalised_list$matrix_antigen_normalised
   norm_df <- data.frame(apply(norm_df, 2, function(x){rescale(x, to =c(0,1))}))
+
+
   if(!is.null(normalised_list) & input$normalisation_method=="rlm"){
     norm_df <- normalised_list$matrix_antigen_normalised
     norm_df <- norm_df %>% select(-control_antigens)
@@ -2263,6 +2265,9 @@ output$heatmap_normalised <- renderPlot({
     non_norm_df <- non_normalised_list_reactive$matrix_antigen_normalised
     non_norm_df <- data.frame(apply(non_norm_df, 2, function(x){rescale(x, to =c(0,1))}))
   }
+  print(paste(str(norm_df)))
+print(paste(names(norm_df)))
+print(paste(colSums(is.na(norm_df))))
 
   if(input$heat_both==T){
     p_non_norm <- pheatmap::pheatmap(non_norm_df ,scale = "none", cluster_rows = F , main="Non normalised data")
