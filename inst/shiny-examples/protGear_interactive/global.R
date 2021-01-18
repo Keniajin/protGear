@@ -4,7 +4,9 @@ library(shinydashboard)
 
 # HELP & INTRO DATA ---------------------------------------------------------------
 
-steps <- readr::read_csv2("help.csv")
+#steps <- readr::read_csv2("help.csv")
+steps <- system.file("shiny-examples/protGear_interactive/", "help.csv", package="protGear")
+steps <- readr::read_csv2(steps)
 #intro <- read_csv2("intro.csv")
 
 
