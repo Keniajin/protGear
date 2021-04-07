@@ -469,7 +469,6 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
 
 
 
-
 #' Merge sample ID with the array data
 #'
 #' @param iden A character indicating the name of the object to be used under data_files.
@@ -545,4 +544,104 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
 
   Data1 <-Data1 %>%  mutate(iden=iden)
   return(Data1)
+}
+
+
+
+#' Read a gpr file to visualize
+#'
+#' @param infile a .gpr file to be used to visualize the expression intensities of the slide spots
+#'
+#' @return
+#' @export
+#'
+#' @examples
+read_array_visualize <- function(infile){
+
+  x <- grep('Block.*Column|Column.*Block', readLines(infile))
+  # d_f <- read.table(inFile$datapath,skip=x-1, header = T)
+  d_f <- data.table::fread(infile,skip=x-1, header=TRUE)
+  return(d_f)
+}
+
+#' Visualize the slide mimicking the original scan image.
+#'
+#' @param infile a .gpr file to be used to visualize the expression intensities of the slide spots
+#' @param MFI_var the MFI variable to plot, can be either the background or foreground value
+#' @param interactive a logical to specify whether an interactive graph is returned or not
+#'
+#' @return
+#' @export
+#'
+#' @examples
+visualize_slide <- function(infile, MFI_var,interactive=F, d_f=NA){
+  ## d_f only used for the shiny app
+  if(is.na(d_f)){
+    d_f <- read_array_visualize(infile)
+
+    d_f <- d_f %>%
+    group_by(Block) %>%
+    mutate(meanX=mean(X),meanY=mean(Y),maxY=max(Y),maxX=max(X),minY=min(Y),minX=min(X))
+  }
+  ## define mid points to put the block labels
+  MFI_var_sys <- rlang::sym(MFI_var)
+  mid <- median(log(d_f[[MFI_var]]))
+  labels <- sprintf("<b>%s</b><br> MFI= %s ",
+                    d_f$Name,
+                    formatC(d_f$`F635 Median`,format="d", big.mark = ",")) %>%
+    lapply(htmltools::HTML)
+
+  point_size=0.5
+  if(interactive==F) point_size=1
+  ## plot the visual slide
+  p <- ggplot(d_f, aes(x=X, y=-Y, text=labels)) +
+    #geom_rect(aes(xmin = minX, xmax = maxX, ymin = -minY, ymax = -maxY),color = "black",alpha=0.0001,fill="blue") +
+    geom_point(size=point_size, aes_string(colour= sprintf("log(`%s`)", MFI_var) )) +
+    theme_void()+
+    theme(legend.position = "none")  +
+    scale_color_gradient2(midpoint=mid, low="blue", mid="white",
+                          high="red", space ="Lab" )+
+    geom_text(aes(x=meanX, y=-meanY, label=paste("Block",Block)), color="black",size=4)
+
+  if(interactive==F){
+    return(p)
+  }else if(interactive==T){
+    p <- ggplotly(p, tooltip='text')
+    return(p)
+  }
+}
+
+
+#' Visualize the slide mimicking the original scan image using a 2d plot.
+#'
+#' @param infile - a .gpr file to be used to visualize the expression intensities of the slide spots
+#' @param MFI_var the MFI variable to plot, can be either the background or foreground value
+#'
+#' @return
+#' @export
+#'
+#' @examples
+visualize_slide_2d <- function(infile, MFI_var , d_f=NA){
+  if(is.na(d_f)){
+    d_f <- read_array_visualize(infile)
+
+    d_f <- d_f %>%
+    group_by(Block) %>%
+    mutate(meanX=mean(X),meanY=mean(Y),maxY=max(Y),maxX=max(X),minY=min(Y),minX=min(X))
+  }
+
+
+  mid <- median(log(d_f[[MFI_var]]))
+  ggplot(data = d_f,
+         aes_string(x = 'X',
+                    y = sprintf("-%s", 'Y'), #-Y,
+                    z =  sprintf("log(`%s`)", MFI_var) ) ) + #log(`F635 Median`)
+    ## we have 24 vs 8 per block
+    #stat_summary_2d(fun = median ,binwidth = c(40,120)) +
+    stat_summary_2d(fun = median )+
+    scale_fill_gradient2(midpoint=mid, low="blue", mid="white",
+                         high="red", space ="Lab") +
+    theme_void()+
+    theme(legend.position = "none") +
+    geom_text(aes(x=meanX, y=-meanY, label=paste("Block",Block)), color="black",size=4)
 }

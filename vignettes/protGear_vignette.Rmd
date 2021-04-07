@@ -114,6 +114,24 @@ header_gpr[1:32]
 
 The function  `r text_spec("check_sampleID_files()",color="red")` helps to check whether each micro array file has a corresponding sample identifier file. The sample identifier files are generated from the lab plate maps to match the corresponding samples on a specific slide.If the sample identifier file is missing, protGear automatically generates the id's. 
 
+### Visualize the spatial structure of slide
+
+protGear offers a functionality to inspect the slide visually for any strong spatial biases when the scan image is not available. However, we recommend using the scanned image to visualize the slide and additionally the spatial artefacts that might not be recorded in the `.gpr` file. We include the functions `r text_spec("visualize_slide()",color="red")` and `r text_spec("visualize_slide_2d()",color="red")`  to check the spatial structure. The functions are build on `r text_spec("structure_plot()",color="red")`  which shows the block and mini-array structure of a slide. 
+
+
+
+#### Visualize the foreground using the `visualize_slide` function
+
+```{r}
+visualize_slide(infile='data/array_data/machine1/KK2-06.txt' , MFI_var ='B635 Median' )
+```
+
+#### Visualize the background using the `visualize_slide_2d` function
+
+```{r}
+visualize_slide_2d(infile='data/array_data/machine1/KK2-06.txt' , MFI_var ='F635 Median' )
+```
+
 
 ### Import microarray data
 

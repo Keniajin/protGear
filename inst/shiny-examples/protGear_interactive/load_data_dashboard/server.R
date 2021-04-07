@@ -261,6 +261,102 @@ output$structure_plot <- renderPlot({
   return(p)
 })
 
+
+
+## select the variable to plot
+## selectig the spatial variable to plot
+output$select_spatial_var <- renderUI({
+  gpr_header <- gpr_header_reactive()
+  gpr_file_reactive <- gpr_file_reactive()
+
+  if(!is.null(gpr_file_reactive)){
+    var_names <- names(gpr_file_reactive)
+    var_names <- var_names[grepl("[Mm]edian|[Mm]ean",var_names)]
+    tagList(
+      useShinyFeedback(), # include shinyFeedback  # inclusion here is ideal; b/c inside module
+      selectInput(inputId = "select_spatial",
+                  "Select the variable to visualize",
+                  choices = var_names,
+                  selected = var_names[grep(paste0("^[B]635.*Median$"),var_names)]
+      )
+    )
+  }
+})
+
+
+
+output$select_spatial_type <- renderUI({
+  graphs <- c("Point graph"='point',
+              "Array 2D graph"='2d_array')
+  # graphs_id <- c("bar_chart","ridge_plot")
+  prettyRadioButtons(inputId="spatial_type",
+                     label = 'Plot an array 2D plot or a point graph:',
+                     choices =  graphs,
+                     inline=T, animation = "jelly",
+                     status = "default",
+                     shape = "curve",bigger = T)
+
+})
+
+
+## a plot for the spatial structure of the arrays
+output$spatial_structure_plot <- renderPlotly({
+  gpr_file_reactive <- gpr_file_reactive()
+  inFile = input$gpr_file
+  MFI_var=input$select_spatial
+  if(!is.null(gpr_file_reactive)){
+    m <- list(
+      l = 20,
+      r = 50,
+      b = 50,
+      t = 50,
+      pad = 20
+    )
+
+      p <- visualize_slide(infile=inFile,
+                           MFI_var =MFI_var, interactive=T ,d_f=gpr_file_reactive)
+      p <- p  %>%
+        layout(title = paste("Spatial visualization of", MFI_var ," MFI"),
+               margin = m)
+      #ggtitle(paste("Spatial visualization of", MFI_var ," MFI"))
+
+
+  }else if(is.null(input$gpr_file)){
+    p <- empty_strucuture()
+    p <- ggplotly(p)
+  }else{
+    p <- empty_strucuture()
+    p <- ggplotly(p)
+  }
+  return(p)
+})
+
+
+
+
+output$spatial_structure_plot_2d <- renderPlot({
+  gpr_file_reactive <- gpr_file_reactive()
+  inFile = input$gpr_file
+  MFI_var=input$select_spatial
+  if(!is.null(gpr_file_reactive)){
+
+
+      p <- visualize_slide_2d(infile=inFile,
+                              MFI_var =MFI_var,d_f=gpr_file_reactive)
+      p <- p  + ggtitle(paste("Spatial visualization of", MFI_var ," MFI")) #%>% layout(title = paste("Spatial visualization of", MFI_var ," MFI"))
+
+
+  }else if(is.null(input$gpr_file)){
+    p <- empty_strucuture()
+
+  }else{
+    p <- empty_strucuture()
+
+  }
+  return(p)
+})
+
+
 ## indicating the scanning wavelength
 output$wavelength_struct <- renderInfoBox({
   gpr_header <- gpr_header_reactive()

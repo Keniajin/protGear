@@ -19,15 +19,18 @@ shinyUI(
                                                             menuItem("Structure overview",
                                                                      tabName = "structure", icon = icon("dashboard")),
                                                             menuItem("Overview image",
-                                                                     tabName = "structure_img", icon = icon("dashboard"))
-                                                )
+                                                                     tabName = "structure_img", icon = icon("dashboard")),
+                                                            menuItem("Spatial structure",
+                                                                     tabName = "spatial_struct", icon = icon("dashboard"))
+
+                                                )## end sidebar menu
                                           )),## end dashbaord side bar
                         dashboardBody(
                           shinyjs::useShinyjs(),
                           # add custom JS code
                           extendShinyjs(text = "shinyjs.hidehead = function(parm){
                                     $('header').css('display', parm);
-                                }"),
+                                }",functions = c("hidehead")),
                           tabItems(
                             tabItem("structure",
                                     column(9,
@@ -69,8 +72,39 @@ shinyUI(
                                    )
                             ),## end of structure tabItem
                             tabItem("structure_img",
-                                    img(src='image_slide.png', align = "center"),
-                            )## end of structure_img tabItem
+                                    img(src='image_slide.png', align = "center")
+                            ),## end of structure_img tabItem
+                            tabItem("spatial_struct",
+                                  fluidRow(
+                                      column(3#,class='my_textinput',
+                                           #  uiOutput("select_spatial_var")
+                                      ),
+                                      column(3,class='my_textinput',
+                                             uiOutput("select_spatial_var")
+                                      ),
+                                      column(3,class='my_textinput',
+                                             uiOutput("select_spatial_type")
+                                      ),
+                                      column(3#,class='my_textinput',
+                                            # uiOutput("select_B_var")
+                                      )
+                                  ),
+                                  br(),
+                                 fluidRow(
+                                   column(12,
+                                      # div(class="span6" , "Spatial visualization of the array MFI's",
+                                      br(),
+                                           conditionalPanel(
+                                             condition = "input.spatial_type == 'point'",
+                                             plotlyOutput('spatial_structure_plot', width="100%",height = "100%")
+                                           ),
+                                           conditionalPanel(
+                                             condition = "input.spatial_type == '2d_array'",
+                                             plotOutput('spatial_structure_plot_2d')
+                                           ), style = "height:80%;background-color: aqua;")
+                                  # )#div close
+                                   )
+                            )## end of spatial_struct tabItem
                         )## end tab items
                         )## end dashboard body
                       )## end dashboard page
@@ -98,20 +132,21 @@ shinyUI(
                           # add custom JS code
                           #js_file <- ,
                           #extendShinyjs("www/app.js"),
-                          extendShinyjs(system.file("shiny-examples/protGear_interactive/www", "app.js", package="protGear")),
+                          extendShinyjs(system.file("shiny-examples/protGear_interactive/www",
+                                                    "app.js", package="protGear"),
+                                        functions = c('hidehead','hideSidebar')),
                           tabItems(
                             tabItem("dashboard",
                                     # this Row picks the parametes
                                     fluidRow(
-                                      column(1,
+                                      column(1#,
                                              #uiOutput('blockspersample_output')
                                       ),
                                       column(3,
-                                             uiOutput('channel_output'),
-
+                                             uiOutput('channel_output')
                                       ),
                                       column(3,
-                                             uiOutput('total_samples_output')
+                                          uiOutput('total_samples_output')
                                       ),
 
                                       column(2,
@@ -198,11 +233,11 @@ shinyUI(
                           # add custom JS code
                           extendShinyjs(text = "shinyjs.hidehead = function(parm){
                                     $('header').css('display', parm);
-                                }"),
+                                }",functions = c("hidehead")),
                         tabItems(
                             tabItem("bg_graphs",
                                     fluidRow(
-                                      column(1,
+                                      column(1#,
 
                                       ),
                                       column(3,
@@ -297,7 +332,7 @@ shinyUI(
                                                 hr(),
                                                 uiOutput(class="bg_select" ,'cv_value_select'),
                                                 uiOutput(class="bg_select" ,'replicates_select'),
-                                                uiOutput(class="bg_select" ,'minimum_mfi_select'),
+                                                uiOutput(class="bg_select" ,'minimum_mfi_select')
 
 
                                          )),## end dashbaord side bar
@@ -311,7 +346,7 @@ shinyUI(
                           # add custom JS code
                           extendShinyjs(text = "shinyjs.hidehead = function(parm){
                                     $('header').css('display', parm);
-                                }"),
+                                }",functions = c("hidehead")),
                           tabItems(
                             tabItem("bg_correct_cv",
                                     fluidRow(
@@ -341,17 +376,17 @@ shinyUI(
                             tabItem("tag_plots",
                                     fluidRow(
                                       column(3,
-                                             uiOutput('bg_correct_infobox'),
+                                             uiOutput('bg_correct_infobox')
                                              ),
                                       column(3,
-                                             uiOutput('tag_infobox'),
+                                             uiOutput('tag_infobox')
                                       ),
                                       column(3,
-                                             uiOutput('cv_infobox'),
+                                             uiOutput('cv_infobox')
                                       ),
                                       column(2,
                                              uiOutput('sample_ID_select'),
-                                             hr(),
+                                             hr()
                                              )
                                     ),
                                     fluidRow(
@@ -363,19 +398,19 @@ shinyUI(
                                     column(6,
                                           div(class="span6" , "Box plot of the TAG antigens",
                                           plotOutput('tag_box_sample', width="100%") %>% withSpinner(color="#0dc5c1"),
-                                          style = "height:80%;background-color: aqua;"),
+                                          style = "height:80%;background-color: aqua;")
 
                                     )
                                     ),
                                     fluidRow(class='bg_gray',
-                                      column(2,
+                                      column(2
                                             ),
                                       column(3,
-                                             uiOutput('tag_antigen_radio_select'),
+                                             uiOutput('tag_antigen_radio_select')
 
                                       ),
                                       column(3,
-                                                uiOutput('antigen_tag_specific_select'),
+                                                uiOutput('antigen_tag_specific_select')
                                             ),
                                       hr()
                                       ),
@@ -387,7 +422,7 @@ shinyUI(
                                                  plotOutput('tag_antigens_box', width="100%") %>% withSpinner(color="#0dc5c1"),
                                                  style = "height:100%;")
                                       )
-                                    ),
+                                    )
 
                             ),## end of ttag_plots
                             tabItem("download_bg_correct",
@@ -429,7 +464,7 @@ shinyUI(
                           # add custom JS code
                           extendShinyjs(text = "shinyjs.hidehead = function(parm){
                                     $('header').css('display', parm);
-                                }"),
+                                }",functions = c("hidehead")),
                           tabItems(
                             tabItem("normalisation",
                                     fluidRow(
@@ -437,13 +472,13 @@ shinyUI(
                                            uiOutput('normalisation_infobox')
                                       ),
                                       column(3,
-                                             uiOutput('bg_correct_infobox2'),
+                                             uiOutput('bg_correct_infobox2')
                                       ),
                                       column(3,
-                                             uiOutput('tag_infobox2'),
+                                             uiOutput('tag_infobox2')
                                       ),
                                       column(3,
-                                             uiOutput('cv_infobox2'),
+                                             uiOutput('cv_infobox2')
                                       )
                                     ),
                                     fluidRow(
@@ -472,11 +507,11 @@ shinyUI(
                             ),## end of Norm1 tabItem
                             tabItem("norm2",
                                 fluidRow(
-                                  column(4,
+                                  column(4
 
                                   ),
                                   column(3,
-                                    uiOutput('normalisation_drop_down'),
+                                    uiOutput('normalisation_drop_down')
                                   )
                                 ),
                                 fluidRow(
@@ -488,11 +523,11 @@ shinyUI(
                             ),## end of tabItem
                             tabItem("heatmap_norm",
                                     fluidRow(
-                                      column(4,
+                                      column(4
 
                                       ),
                                       column(3,
-                                           uiOutput('select_heatmap'),
+                                           uiOutput('select_heatmap')
                                       )
                                     ),
                                     fluidRow(
