@@ -1,10 +1,10 @@
 ---
 title: "protGear: Protein micro array data management suite"
 output:
-   flexdashboard::flex_dashboard:
-   theme: cosmo
-   orientation: rows
-   vertical_layout: scroll
+  flexdashboard::flex_dashboard:
+  theme: cosmo
+orientation: rows
+vertical_layout: scroll
 runtime: shiny
 ---
 
@@ -30,11 +30,11 @@ if(Sys.getenv('SHINY_PORT') == "") options(shiny.maxRequestSize=10000*1024^2)
 Data Processing {data-width=300}
 ======================================================================
 
-```{r, height = "100%"}
-fluidRow(
-    column(12,div(style = "height:1200px;margin: 0,padding:0,;",
+```{r, height = "100vh"}
+fluidRow(class="sidebarItemExpanded",
+    column(12,div(style = "height: 100vh;margin:0,padding:0;",
 shinyAppDir("load_data_dashboard/",
-            options = list(width = "100%", height = "100%"))
+            options = list(width = "100%", height = "100vh"))
 )))
 ```
 
@@ -46,7 +46,7 @@ About protGear {data-width=300}
 
 ```{r, height = "100%"}
 fluidRow(
-    column(12,div(style = "height:1000px;background-color: white;",
+    column(12,div(style = "height:1000px;background-color: white;margin: 0;padding: 0;",
 shinyAppDir("about_app/",
             options = list(width = "100%", height = "100%"))
 )))

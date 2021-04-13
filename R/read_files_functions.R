@@ -178,8 +178,8 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
   # %>%     spread(antigen, F635Median)
   # combine Name and replicate
   ## save in the background data folder files with higher background values
-  create_dir(path = "data/raw_BG/")
-  write_csv(data1_bg ,paste0("data/raw_BG/",iden,"_rawBG.csv"))
+ # create_dir(path = "data/raw_BG/")
+  #write_csv(data1_bg ,paste0("data/raw_BG/",iden,"_rawBG.csv"))
   #----------------------------------------------------------------------------------------------------
   return(data1_bg)
 }

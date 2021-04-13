@@ -6,7 +6,8 @@
 ## http://www.cryer.co.uk/file-types/a/atf/genepix_file_formats.htm#example
 
 ## this loads packages from CRAN
-pacman::p_load(shiny,shinyFiles,DT,tidyverse,shinydashboard,shinyjs)
+pacman::p_load(shiny,shinyFiles,DT,tidyverse,shinydashboard,shinyjs,
+               factoextra,FactoMineR)
 
 ## this loads packages from github
 pacman::p_load_gh("hadley/shinySignals","jcheng5/bubbles")
@@ -2361,9 +2362,10 @@ output$heatmap_normalised <- renderPlot({
     non_norm_df <- non_normalised_list_reactive$matrix_antigen_normalised
     non_norm_df <- data.frame(apply(non_norm_df, 2, function(x){rescale(x, to =c(0,1))}))
   }
-  print(paste(str(norm_df)))
-print(paste(names(norm_df)))
-print(paste(colSums(is.na(norm_df))))
+  #test sections
+  #print(paste(str(norm_df)))
+  #print(paste(names(norm_df)))
+  #print(paste(colSums(is.na(norm_df))))
 
   if(input$heat_both==T){
     p_non_norm <- pheatmap::pheatmap(non_norm_df ,scale = "none", cluster_rows = F , main="Non normalised data")
@@ -2379,6 +2381,77 @@ return(p)
 })
 
 
+## output for heatmap
+output$slider_pca<- renderUI({
+
+  sliderInput(inputId = 'vars_pca', label = 'Select vars to view',
+              value = 20,
+              min = 10, max = 50)
+
+})
+
+
+## plot a PCA
+
+output$PCA_normalised <- renderPlot({
+  normalised_list <- normalised_list_reactive()
+  non_normalised_list_reactive <- non_normalised_list_reactive()
+  control_antigens <- input$rlm_antigens
+  norm_df <- normalised_list$matrix_antigen_normalised
+  norm_df <- data.frame(apply(norm_df, 2, function(x){rescale(x, to =c(0,1))}))
+
+  if(!is.null(input$vars_pca)){
+    vars_visualise <- input$vars_pca
+  }else{
+    vars_visualise=20
+  }
+
+  if(!is.null(normalised_list) & input$normalisation_method=="rlm"){
+    norm_df <- normalised_list$matrix_antigen_normalised
+    norm_df <- norm_df %>% select(-control_antigens)
+    norm_df <- data.frame(apply(norm_df, 2, function(x){rescale(x, to =c(0,1))}))
+    non_norm_df <- non_normalised_list_reactive$matrix_antigen_normalised
+    non_norm_df <- non_norm_df %>%  select(-control_antigens)
+    non_norm_df <- data.frame(apply(non_norm_df, 2, function(x){rescale(x, to =c(0,1))}))
+
+  }else{
+    norm_df <- normalised_list$matrix_antigen_normalised
+    norm_df <- data.frame(apply(norm_df, 2, function(x){rescale(x, to =c(0,1))}))
+    non_norm_df <- non_normalised_list_reactive$matrix_antigen_normalised
+    non_norm_df <- data.frame(apply(non_norm_df, 2, function(x){rescale(x, to =c(0,1))}))
+  }
+
+  ## compute PCA
+  res_pca <- prcomp( norm_df, scale = TRUE)
+  var <- get_pca_var(res_pca)
+
+  #Visualize the PCA
+  p1 <- fviz_pca_ind(res_pca,
+                    col.var = "contrib", # Color by contributions to the PC
+                    gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+                    repel = TRUE     # Avoid text overlapping
+  )+    theme_minimal()
+
+  #p2 <- fviz_cos2(res_pca, choice='var',axes=1:2)
+  # Select the top vars_visualise contributing variables
+  p2 <-fviz_pca_biplot(res_pca, label="var",
+                    select.var = list(contrib = vars_visualise)) +
+    theme_minimal()
+
+  # Total cos2 of variables on Dim.1 and Dim.2
+  p3 <-     fviz_cos2(res_pca, choice = "var", axes = 1:2 , top = vars_visualise)
+
+
+  # Color by cos2 values: quality on the factor map
+ p4 <-  fviz_pca_var(res_pca, col.var = "cos2",
+               gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+               select.var = list(contrib = vars_visualise),
+               repel = TRUE # Avoid text overlapping
+  )
+
+  p <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
+  return(p)
+})
 
 
 # function to hide or show or hide tabs with loading

@@ -1,3 +1,9 @@
+.sidebarItemExpanded {
+  overflow: auto;
+  height: calc(100vh - 50px) !important;
+}
+
+
 .radioSelect{
 font-size: 14px;
 font-weight: bold;
@@ -12,6 +18,13 @@ padding:1px;
 font-size: 16px;
 font-weight: bold;
 color: #FFFFFF;
+}
+
+
+.slide_select{
+font-size: 16px;
+font-weight: bold;
+color: #000000;
 }
 
 
@@ -49,7 +62,7 @@ color: #000000;
 
 .my_textinput {
   color: #800000;
-  
+
 }
 
 

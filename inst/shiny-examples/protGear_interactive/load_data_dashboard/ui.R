@@ -56,7 +56,8 @@ shinyUI(
                                       box(width="100%",
                                           div(class="span6" , "Structure of the array map",
                                               plotOutput('structure_plot', width="100%",height = "500px"),
-                                              style = "height:80%;background-color: aqua;")
+                                              style = "height:80vh;background-color: white;") %>%
+                                            withSpinner(color="#0dc5c1")
                                       ))
                                     ),## end column 1
                                    column(3,
@@ -96,12 +97,14 @@ shinyUI(
                                       br(),
                                            conditionalPanel(
                                              condition = "input.spatial_type == 'point'",
-                                             plotlyOutput('spatial_structure_plot', width="100%",height = "100%")
+                                             plotlyOutput('spatial_structure_plot', width="100%",height = "100vh")%>%
+                                               withSpinner(color="#0dc5c1")
                                            ),
                                            conditionalPanel(
                                              condition = "input.spatial_type == '2d_array'",
                                              plotOutput('spatial_structure_plot_2d')
-                                           ), style = "height:80%;background-color: aqua;")
+                                           ), style = "height:100vh;background-color: white;") %>%
+                                     withSpinner(color="#0dc5c1")
                                   # )#div close
                                    )
                             )## end of spatial_struct tabItem
@@ -178,12 +181,12 @@ shinyUI(
                                         #  bubblesOutput("packagePlot", width = "100%", height = 600)
                                         div(class="span6" , "Buffer spots overview",
                                             plotOutput('data_process', width="100%")%>% withSpinner(color="#0dc5c1"),
-                                            style = "height:80%;background-color: aqua;")
+                                            style = "height:80%;background-color: white;")
                                       ),
                                       box(
                                         div(class="span6" , "Data overview",
                                             plotlyOutput('data_box', width="100%")%>% withSpinner(color="#0dc5c1"),
-                                            style = "height:80%;background-color: aqua;"),
+                                            style = "height:80%;background-color: white;"),
                                         # slide bar for the
                                         sliderInput("slider_antigen", label = h3("Select the antigen range to view"), min = 0,
                                                     max = 120, value = c(40, 60))
@@ -257,7 +260,7 @@ shinyUI(
                                                  plotlyOutput('bg_plots')%>% withSpinner(color="#0dc5c1"),
                                                  style = "height:800px;background-color: white;width:auto;")
                                              ),
-                                      column(4,
+                                      column(4,class="sidebarItemExpanded",
                                        p("We have implement different approaches of background correction."),
                                       h2(strong("The implemented approaches are", style = "font-family: 'times'; font-si16pt")),
                                       p(strong("- Local bakground subtraction"),"This method involves subtracting the median of the background pixel
@@ -353,18 +356,18 @@ shinyUI(
                                       column(6,
                                              div(class="span6" , "Correlation of data replicates coloured by CV",
                                                  plotOutput('cv_corr_plot', width="100%") %>% withSpinner(color="#0dc5c1"),
-                                                 style = "height:80%;background-color: aqua;")
+                                                 style = "height:80%;background-color: white;")
                                       ),
                                       column(6,
                                              div(class="span6" , "Violin plots showing the distribution of CV",
                                                  plotOutput('cv_violin_plot', width="100%")%>% withSpinner(color="#0dc5c1"),
-                                                 style = "height:80%;background-color: aqua;")
+                                                 style = "height:80%;background-color: white;")
                                       )) ,
                                     fluidRow(
                                       column(6,
                                              div(class="span6" , "Correlation of best 2 replicates ",
                                                  plotOutput('cv_violin_plot_best2', width="100%")%>% withSpinner(color="#0dc5c1"),
-                                                 style = "height:80%;background-color: aqua;")
+                                                 style = "height:80%;background-color: white;")
                                       ),
                                       column(6,
                                              div(class="table_view" , h3("A table showing the CV errors using",textOutput('cv_ui', inline = TRUE),"% cut off"),
@@ -393,12 +396,12 @@ shinyUI(
                                       column(6,
                                            div(class="span6" , "Box plot of the TAG antigens",
                                                plotOutput('tag_box', width="100%") %>% withSpinner(color="#0dc5c1"),
-                                          style = "height:80%;background-color: aqua;")
+                                          style = "height:80%;background-color: white;")
                                     ),
                                     column(6,
                                           div(class="span6" , "Box plot of the TAG antigens",
                                           plotOutput('tag_box_sample', width="100%") %>% withSpinner(color="#0dc5c1"),
-                                          style = "height:80%;background-color: aqua;")
+                                          style = "height:80%;background-color: white;")
 
                                     )
                                     ),
@@ -448,7 +451,8 @@ shinyUI(
                                                  menuItem("Normalisation", tabName = "normalisation"),
                                                 # menuItemOutput('normalisation'),
                                                   menuItem("Compare normalisations", tabName = "norm2"),
-                                                  menuItem("Array heatmap of normalised data", tabName = "heatmap_norm")
+                                                  menuItem("Array heatmap of normalised data", tabName = "heatmap_norm"),
+                                                  menuItem("PCA of normalised data", tabName = "pca_norm")
                                                 )
                                          ),
                                          br(),
@@ -486,7 +490,7 @@ shinyUI(
                                       box(width="100%",
                                           div(class="span6" , "Normalisation",
                                               plotOutput('normalised_sd_plot', width="100%",height = "600px"),
-                                              style = "height:80%;background-color: aqua;")
+                                              style = "height:80%;background-color: white;")
                                       )),
                                       column(3,
                                              p("We have implement different approaches of normalisation."),
@@ -518,7 +522,7 @@ shinyUI(
                                       box(width="100%",
                                           div(class="span6" , "Normalisation techniques comparison",
                                               plotOutput('mutiple_plot', width="100%",height = "600px"),
-                                              style = "height:80%;background-color: aqua;")
+                                              style = "height:80%;background-color: white;")
                                   ))
                             ),## end of tabItem
                             tabItem("heatmap_norm",
@@ -534,7 +538,24 @@ shinyUI(
                                       box(width="100%",
                                           div(class="span6" , "Heatmap of normalised data",
                                               plotOutput('heatmap_normalised', width="100%",height = "600px"),
-                                              style = "height:80%;background-color: aqua;")
+                                              style = "height:80%;background-color: white;")
+                                      ))
+                            ),## end of tabItem
+                            tabItem("pca_norm",
+                                    fluidRow(
+                                      column(4
+
+                                      ),
+                                      column(3,
+                                             uiOutput(class="slide_select" ,'slider_pca')
+                                             #uiOutput('select_pca')
+                                      )
+                                    ),
+                                    fluidRow(
+                                      box(width="100%",
+                                          div(class="span6" , "PCA of normalised data",
+                                              plotOutput('PCA_normalised', width="100%",height = "600px"),
+                                              style = "height:80%;background-color: white;")
                                       ))
                             )## end of tabItem
                           )## end tab items
