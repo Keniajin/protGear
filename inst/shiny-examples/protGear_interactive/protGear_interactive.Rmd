@@ -24,6 +24,21 @@ dir.create('error')
 #### save all the files as objects
 #Increasing the default maximum upload restriction of Shiny to 10GB can add to globally
 if(Sys.getenv('SHINY_PORT') == "") options(shiny.maxRequestSize=10000*1024^2)
+
+
+jsToggleFS <- 'shinyjs.toggleFullScreen = function() {
+    var element = document.documentElement,
+      enterFS = element.requestFullscreen || element.msRequestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen,
+      exitFS = document.exitFullscreen || document.msExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen;
+    if (!document.fullscreenElement && !document.msFullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+      enterFS.call(element);
+    } else {
+      exitFS.call(document);
+    }
+  }'
+
+#useShinyjs(),
+#extendShinyjs(text = jsToggleFS)
 ```
 
 

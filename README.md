@@ -8,8 +8,8 @@ There is a package vignette included with this package with a step by step use o
 ## Installing the package
 
 ``` r
-library(devtools)
-devtools::install_github("keniajin/protGear/")
+library(remotes)
+remotes::install_github("Keniajin/protGear/")
 ```
 
 ## To run the shiny application

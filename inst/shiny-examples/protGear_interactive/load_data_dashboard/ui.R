@@ -542,7 +542,7 @@ shinyUI(
                                       ))
                             ),## end of tabItem
                             tabItem("pca_norm",
-                                    fluidRow(
+                                    fluidRow(class="slide_select",
                                       column(4
 
                                       ),

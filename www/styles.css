@@ -1,3 +1,30 @@
+
+
+/* https://stackoverflow.com/questions/50370958/color-tick-mark-tick-mark-labels-in-sliderinput-shiny*/
+
+.irs-grid-text:nth-child(-2n+18) {
+  color: white;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-color: black
+
+}
+
+.irs-grid-text:nth-child(2n+20) {
+  color: white;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-color: black
+}
+
+.irs-grid-pol:nth-of-type(-n+18) {
+  background:white
+}
+
+.irs-grid-pol:nth-of-type(n+18) {
+  background:white
+  }
+
+
+
 .sidebarItemExpanded {
   overflow: auto;
   height: calc(100vh - 50px) !important;
@@ -24,7 +51,8 @@ color: #FFFFFF;
 .slide_select{
 font-size: 16px;
 font-weight: bold;
-color: #000000;
+color: #FFFFFF;
+background-color:#000000;
 }
 
 

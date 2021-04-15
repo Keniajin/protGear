@@ -1412,7 +1412,9 @@ output$minimum_mfi_select <- renderUI({
 
 
 output$replicates_select <- renderUI({
-  sliderInput(inputId = 'lab_replicates', label = 'Select the number of lab replicates', value = 1, min = 1, max = 5)
+  sliderInput(inputId = 'lab_replicates',
+              label = 'Select the number of lab replicates',
+              value = 1, min = 1, max = 5)
 })
 
 
@@ -2384,7 +2386,7 @@ return(p)
 ## output for heatmap
 output$slider_pca<- renderUI({
 
-  sliderInput(inputId = 'vars_pca', label = 'Select vars to view',
+  sliderInput(inputId = 'vars_pca', label = 'Select variables to plot on the PCA',
               value = 20,
               min = 10, max = 50)
 
