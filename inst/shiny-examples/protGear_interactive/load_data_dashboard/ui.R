@@ -526,7 +526,7 @@ shinyUI(
                                   ))
                             ),## end of tabItem
                             tabItem("heatmap_norm",
-                                    fluidRow(
+                                    fluidRow(class="slide_select",
                                       column(4
 
                                       ),
@@ -535,9 +535,9 @@ shinyUI(
                                       )
                                     ),
                                     fluidRow(
-                                      box(width="100%",
+                                      column(12,
                                           div(class="span6" , "Heatmap of normalised data",
-                                              plotOutput('heatmap_normalised', width="100%",height = "600px"),
+                                              plotOutput('heatmap_normalised', width="100%",height = "1000px"),
                                               style = "height:80%;background-color: white;")
                                       ))
                             ),## end of tabItem

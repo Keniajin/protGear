@@ -109,12 +109,13 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
   ## read in the sample ID files
   ## this can be pulled from a mysql table
   ## if the sample ID is not available, we create an automated sampleID
-  if(file.exists(paste0(genepix_vars$sampleID_path,iden ,".csv"))){
-    arraynames <- read.csv(paste0(genepix_vars$sampleID_path,iden ,".csv") ,
+  if(file.exists(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")))){
+    arraynames <- read.csv(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")) ,
                            header = T , stringsAsFactors = F , colClasses="character")
   }else{
-    warning(paste0(iden, " Not found in the sampleID files"))
-    arraynames <- data.frame(v1=(1:genepix_vars$totsamples) , v2=paste0("SID_gen",1:genepix_vars$totsamples),barcode=iden)
+    warning(paste0(iden, " Not found in the sampleID files here", genepix_vars$sampleID_path))
+    arraynames <- data.frame(v1=(1:genepix_vars$totsamples) ,
+                             v2=paste0("SID_gen",1:genepix_vars$totsamples),barcode=iden)
 
   }
 
@@ -485,11 +486,11 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
 {
   ## read in the sample ID files
   ## this can be pulled from a mysql table
-  if(file.exists(paste0(genepix_vars$sampleID_path,iden ,".csv"))){
-    arraynames <- read.csv(paste0(genepix_vars$sampleID_path,iden ,".csv") ,
+  if(file.exists(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")))){
+    arraynames <- read.csv(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")) ,
                            header = T , stringsAsFactors = F , colClasses="character")
   }else{
-    warning(paste0(iden, " Not found in the sampleID files"))
+    warning(paste0(iden, " Not found in the sampleID files", genepix_vars$sampleID_path))
     arraynames <- data.frame(v1=(1:genepix_vars$totsamples) , v2=paste0("SID_gen",1:genepix_vars$totsamples),barcode=iden)
 
   }

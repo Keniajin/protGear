@@ -9,8 +9,8 @@
 pacman::p_load(shiny,shinyFiles,DT,tidyverse,shinydashboard,shinyjs,
                factoextra,FactoMineR)
 
-## this loads packages from github
-pacman::p_load_gh("hadley/shinySignals","jcheng5/bubbles")
+## this loads or installs packages from github
+pacman::p_load_gh("hadley/shinySignals","jcheng5/bubbles","GuangchuangYu/ggplotify")
 
 
 
@@ -2341,6 +2341,14 @@ output$select_heatmap<- renderUI({
 })
 
 ## heatmap plot
+output$heatmap_normalised_see <- renderPlot({
+
+  p3 <- pheatmap::pheatmap(cars)
+  p3 <-ggplotify::as.ggplot(p3)
+  p3 <- p3 +  theme_void()
+  return(p3)
+})
+
 
 output$heatmap_normalised <- renderPlot({
   normalised_list <- normalised_list_reactive()
@@ -2370,16 +2378,30 @@ output$heatmap_normalised <- renderPlot({
   #print(paste(colSums(is.na(norm_df))))
 
   if(input$heat_both==T){
-    p_non_norm <- pheatmap::pheatmap(non_norm_df ,scale = "none", cluster_rows = F , main="Non normalised data")
+    p_non_norm <- pheatmap::pheatmap(non_norm_df ,
+                                     scale = "none",
+                                     cluster_rows = F ,
+                                     main="Non normalised data",
+                                     silent = T)
+    p_non_norm <- ggplotify::as.ggplot(p_non_norm)+ theme_void()
     p2 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F ,
-                             main=paste(input$normalisation_method,"Normalised Data"))
-    p <- gridExtra::grid.arrange(grobs = list(p2[[4]],p_non_norm[[4]]))
+                             main=paste(input$normalisation_method,"Normalised Data"),
+                             silent = T)
+    p2 <- ggplotify::as.ggplot(p2) + theme_void()
+    #p <- gridExtra::grid.arrange(grobs = list(p2[[4]],p_non_norm[[4]]))
+    p <- ggpubr::ggarrange(p_non_norm,p2, nrow = 2)
 
   }else{
-    p <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
-                            main=paste(input$normalisation_method,"Normalised Data"))
+    p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
+                            main=paste(input$normalisation_method,"Normalised Data"),
+                            silent = T)
+    p3 <- ggplotify::as.ggplot(p3)
+    p <- p3 +  theme_void()
+
   }
-return(p)
+
+  return(p)
+
 })
 
 
@@ -2452,7 +2474,7 @@ output$PCA_normalised <- renderPlot({
   )
 
   p <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
-  return(p)
+  p
 })
 
 
