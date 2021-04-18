@@ -6,8 +6,7 @@ header-includes:
    - \usepackage[T1]{fontenc}
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  html_document:
-    df_print: paged
+  html_document: default
   pdf_document: default
 ---
 
