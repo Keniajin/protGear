@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -65,7 +65,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/keniajin/protGear/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -79,13 +79,14 @@
 
       
 
-      </header><script src="protGear_vignette_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="protGear_vignette_files/header-attrs-2.7/header-attrs.js"></script><script src="protGear_vignette_files/kePrint-0.0.1/kePrint.js"></script><link href="protGear_vignette_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>protGear:An R package with an interactive web-based protein microarray data processing suite</h1>
                         <h4 class="author">Kennedy Mwai</h4>
             
-            <h4 class="date">11 January, 2021</h4>
+            <h4 class="date">18 April, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/keniajin/protGear/blob/master/vignettes/protGear_vignette.Rmd"><code>vignettes/protGear_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>protGear_vignette.Rmd</code></div>
@@ -123,7 +124,7 @@
 <p>To install <code>protGear</code> run the following commands in R</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## make sure devtools package is installed</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">'keniajin/protGear'</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"keniajin/protGear"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="package-load-and-importing-data" class="section level2">
@@ -145,18 +146,21 @@
 <p>The parameters “<code>chip_path</code>”, “<code>channel</code>” , “<code>totsamples</code>” and “<code>sampleID_path</code>” are mandatory.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## specify the the parameters to process the data</span>
-<span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/array_vars.html">array_vars</a></span><span class="op">(</span>channel<span class="op">=</span><span class="st">"635"</span> ,
-                           chip_path <span class="op">=</span> <span class="st">"data/array_data"</span>,
-                           totsamples <span class="op">=</span> <span class="fl">21</span>,
-                           blockspersample <span class="op">=</span> <span class="fl">2</span>,
-                           sampleID_path <span class="op">=</span> <span class="st">"data/array_sampleID/"</span>,
-                           mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,
-                           machine <span class="op">=</span><span class="fl">1</span>,
-                           date_process <span class="op">=</span> <span class="st">"0520"</span><span class="op">)</span></code></pre></div>
+<span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/array_vars.html">array_vars</a></span><span class="op">(</span>
+  channel <span class="op">=</span> <span class="st">"635"</span>,
+  chip_path <span class="op">=</span> <span class="st">"data/array_data"</span>,
+  totsamples <span class="op">=</span> <span class="fl">21</span>,
+  blockspersample <span class="op">=</span> <span class="fl">2</span>,
+  sampleID_path <span class="op">=</span> <span class="st">"data/array_sampleID/"</span>,
+  mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,
+  machine <span class="op">=</span> <span class="fl">1</span>,
+  date_process <span class="op">=</span> <span class="st">"0520"</span>
+<span class="op">)</span></code></pre></div>
 <p>The exact channel used should be checked in the header of the file from the quantification software under <code>Wavelengths</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">header_gpr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"data/array_data/machine1/KK2-06.txt"</span>,
-                        n<span class="op">=</span><span class="fl">40</span><span class="op">)</span>
+  n <span class="op">=</span> <span class="fl">40</span>
+<span class="op">)</span>
 <span class="va">header_gpr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"\""</span>, <span class="st">""</span>, <span class="va">header_gpr</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span><span class="op">]</span><span class="op">)</span>
 <span class="va">header_gpr</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span><span class="op">]</span></code></pre></div>
 <pre><code>##  [1] "ATF\t1.0"                                                                  
@@ -208,15 +212,18 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#### read in all the datasets</span>
 <span class="co">### list all the file names under data folder</span>
-<span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>, 
-                        pattern<span class="op">=</span><span class="st">"*.txt$|*.gpr$"</span>, full.names<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
+  pattern <span class="op">=</span> <span class="st">"*.txt$|*.gpr$"</span>, full.names <span class="op">=</span> <span class="cn">F</span>
+<span class="op">)</span>
 <span class="co">#' @___________________read_in_the_files_with_the_text_data_from_the_chip_____________________________</span>
-<span class="co">### read all the data files and save them in a list </span>
-<span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>,<span class="st">"/"</span><span class="op">)</span> 
-<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">filenames</span>, 
-                         .f <span class="op">=</span> <span class="va">read_array_files</span>,
-                         data_path<span class="op">=</span><span class="va">data_path</span> ,
-                         genepix_vars<span class="op">=</span><span class="va">genepix_vars</span><span class="op">)</span>
+<span class="co">### read all the data files and save them in a list</span>
+<span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">"/"</span><span class="op">)</span>
+<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  .x <span class="op">=</span> <span class="va">filenames</span>,
+  .f <span class="op">=</span> <span class="va">read_array_files</span>,
+  data_path <span class="op">=</span> <span class="va">data_path</span>,
+  genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span>
+<span class="op">)</span>
 <span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">data_files</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -234,16 +241,18 @@
 <p>In ‘<code>.gpr</code>’ files the Background column starts with a ‘<code>B</code>’ followed by the wavelength or channel. In order to perform background correction, we extract the background mean fluorescent intensities (MFI’s) using the function <span style="     color: red !important;">extract_bg()</span> . The function accepts the arguments <code>iden</code> which is the file identifier, <code>data_files</code> a list of data objects with names utilised by <code>iden</code> and <code>genepix_vars</code> defined using <span style="     color: red !important;">array_vars()</span> function. We utilise the <code>purr::map</code> function to extract the background MFI of multiple data files.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## utilising the map package we process a number of files  under data_files list</span>
-<span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span> 
-<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">dfs</span>, .f<span class="op">=</span><span class="va">extract_bg</span>,data_files<span class="op">=</span><span class="va">data_files</span>,<span class="va">genepix_vars</span><span class="op">)</span>
+<span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span>
+<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">extract_bg</span>, data_files <span class="op">=</span> <span class="va">data_files</span>, <span class="va">genepix_vars</span><span class="op">)</span>
 <span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">allData_bg</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">allData_bg</span><span class="op">)</span></code></pre></div>
 <p>Before selecting the best background correction approach the MFI signals are be inspected visually. In protGear we first utilise the function <span style="     color: red !important;">plot_FB()</span> that graphs the background, <em>BG_Median</em> and foreground values, <em>FBG_Median</em>. On the protGear Shiny platform the visuals are interactive and you can identify the features or blocks with strong bias.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_FB.html">plot_FB</a></span><span class="op">(</span><span class="va">allData_bg</span>,antigen_name<span class="op">=</span><span class="st">"antigen"</span>,bg_MFI<span class="op">=</span><span class="st">"BG_Median"</span>,FG_MFI<span class="op">=</span><span class="st">"FBG_Median"</span>,log<span class="op">=</span><span class="cn">F</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_FB.html">plot_FB</a></span><span class="op">(</span><span class="va">allData_bg</span>, antigen_name <span class="op">=</span> <span class="st">"antigen"</span>, bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>, FG_MFI <span class="op">=</span> <span class="st">"FBG_Median"</span>, log <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_bg.html">plot_bg</a></span><span class="op">(</span>df<span class="op">=</span><span class="va">allData_bg</span>, x_axis<span class="op">=</span><span class="st">"Block"</span>,bg_MFI<span class="op">=</span><span class="st">"BG_Median"</span>,
-        log_mfi<span class="op">=</span><span class="cn">T</span><span class="op">)</span> 
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_bg.html">plot_bg</a></span><span class="op">(</span>
+  df <span class="op">=</span> <span class="va">allData_bg</span>, x_axis <span class="op">=</span> <span class="st">"Block"</span>, bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>,
+  log_mfi <span class="op">=</span> <span class="cn">T</span>
+<span class="op">)</span>
 <span class="va">p1</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -251,8 +260,10 @@
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
 <p>After background visualization and selecting the best approach the array data are merged with their specific sample identifier files. Each array file has its own corresponding sample identifier file. The method of background subtraction selected is also specified under <span style="     color: red !important;">method</span> below. The background correction is performed by <span style="     color: red !important;">bg_correct()</span> function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">dfs</span>, .f<span class="op">=</span><span class="va">merge_sampleID</span> ,data_files<span class="op">=</span><span class="va">data_files</span> , 
-                             <span class="va">genepix_vars</span>, method<span class="op">=</span><span class="st">"subtract_local"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  .x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">merge_sampleID</span>, data_files <span class="op">=</span> <span class="va">data_files</span>,
+  <span class="va">genepix_vars</span>, method <span class="op">=</span> <span class="st">"subtract_local"</span>
+<span class="op">)</span>
 <span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">sample_ID_merged_dfs</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="visualizing-buffer-spot" class="section level2">
@@ -260,12 +271,12 @@
 <a href="#visualizing-buffer-spot" class="anchor"></a>Visualizing buffer spot</h2>
 <p>This is specific to experiment design if a specific buffer spot is included. This is used to check for unexpected scanning artefacts. The buffer spots should have similar values in different slides. Some outliers might be expected for buffer spots close sample spots or landmark.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">sample_ID_merged_dfs</span>, .f<span class="op">=</span><span class="va">buffer_spots</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">buffer_spots</span><span class="op">)</span>
 
 <span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">buffer_transp</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">buffers</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">buffer_transp</span><span class="op">)</span>
-<span class="fu"><a href="../reference/plot_buffer.html">plot_buffer</a></span><span class="op">(</span><span class="va">buffers</span>,buffer_names<span class="op">=</span><span class="st">"antigen"</span>,buffer_mfi<span class="op">=</span><span class="st">"FMedianBG_correct"</span>,slide_id<span class="op">=</span><span class="st">".id"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/plot_buffer.html">plot_buffer</a></span><span class="op">(</span><span class="va">buffers</span>, buffer_names <span class="op">=</span> <span class="st">"antigen"</span>, buffer_mfi <span class="op">=</span> <span class="st">"FMedianBG_correct"</span>, slide_id <span class="op">=</span> <span class="st">".id"</span><span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 </div>
 <div id="coefficient-of-variation-cv-calculation" class="section level2">
@@ -274,69 +285,78 @@
 <p>To calculate the CV’s we utilise the <span style="     color: red !important;">cv_estimation()</span> function with a <code>cv_cut_off</code> specified , sample identifier variable and antigen specified under <code>sampleID_var</code> and <code>antigen</code> respectively. The <code>replicate_var</code> and <code>mfi_var</code> identifies the variable with the replicate rank generated and MFI’s values.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________calculated_cv_for_each_data_file_______________________________________</span>
-<span class="co">#' data without the selected mean for the best 2 CVs </span>
-<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">sample_ID_merged_dfs</span>, .f<span class="op">=</span><span class="va">cv_estimation</span> ,lab_replicates<span class="op">=</span><span class="fl">3</span>  ,
-                     cv_cut_off<span class="op">=</span><span class="fl">20</span>,
-                     sampleID_var<span class="op">=</span><span class="st">'sampleID'</span>, antigen_var<span class="op">=</span><span class="st">'antigen'</span> ,replicate_var<span class="op">=</span><span class="st">'replicate'</span> ,
-                     mfi_var<span class="op">=</span><span class="st">'FMedianBG_correct'</span><span class="op">)</span>
+<span class="co">#' data without the selected mean for the best 2 CVs</span>
+<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  .x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">cv_estimation</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>,
+  cv_cut_off <span class="op">=</span> <span class="fl">20</span>,
+  sampleID_var <span class="op">=</span> <span class="st">"sampleID"</span>, antigen_var <span class="op">=</span> <span class="st">"antigen"</span>, replicate_var <span class="op">=</span> <span class="st">"replicate"</span>,
+  mfi_var <span class="op">=</span> <span class="st">"FMedianBG_correct"</span>
+<span class="op">)</span>
 
-<span class="va">lab_replicates</span><span class="op">=</span><span class="fl">3</span>
+<span class="va">lab_replicates</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV</span><span class="op">)</span>
-<span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">aa</span>,<span class="fu">aes</span><span class="op">(</span>color<span class="op">=</span><span class="va">cvCat_all</span><span class="op">)</span> ,
-        columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">lab_replicates</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">""</span>,  axisLabels <span class="op">=</span> <span class="st">"show"</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">aa</span>, <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">cvCat_all</span><span class="op">)</span>,
+  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">lab_replicates</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">""</span>, axisLabels <span class="op">=</span> <span class="st">"show"</span>
+<span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 <p>Here we create a summary of the CV values for each sample/slide utilising the <span style="     color: red !important;">cv_by_sample_estimation()</span> function. This helps to identify samples with high values of CV. On the protGear dashboard an interactive table is created to show the summary for each sample.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#' @________________________________summary_of_cv_for_each_sample________________________________________ </span>
+<code class="sourceCode R"><span class="co">#' @________________________________summary_of_cv_for_each_sample________________________________________</span>
 <span class="co">#' creates summaries by cv's greater than 20 and less than 20</span>
 
 <span class="va">cv_cut_off</span> <span class="op">&lt;-</span> <span class="fl">20</span>
-<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">dataCV</span>, .f<span class="op">=</span><span class="fu">protGear</span><span class="fu">::</span><span class="va"><a href="../reference/cv_by_sample_estimation.html">cv_by_sample_estimation</a></span> , cv_variable<span class="op">=</span><span class="st">"cvCat_all"</span>,
-                            lab_replicates<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
+<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  .x <span class="op">=</span> <span class="va">dataCV</span>, .f <span class="op">=</span> <span class="fu">protGear</span><span class="fu">::</span><span class="va"><a href="../reference/cv_by_sample_estimation.html">cv_by_sample_estimation</a></span>, cv_variable <span class="op">=</span> <span class="st">"cvCat_all"</span>,
+  lab_replicates <span class="op">=</span> <span class="fl">3</span>
+<span class="op">)</span>
 <span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_sample</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">all_cv_sample</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">less_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &lt;= "</span>,<span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gt_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &gt; "</span>,<span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">less_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &lt;= "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gt_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &gt; "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">less_20_per</span> <span class="op">&lt;-</span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &lt;="</span>,<span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gt_20_per</span> <span class="op">&lt;-</span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &gt;"</span>,<span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">all_cv_sample</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>,<span class="va">`CV &lt;= 20_perc`</span>, color<span class="op">=</span><span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>,<span class="va">`CV &gt; 20_perc`</span>, color<span class="op">=</span><span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>,<span class="va">Others_perc</span>,color<span class="op">=</span><span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<span class="va">less_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &lt;="</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gt_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &gt;"</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">all_cv_sample</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &lt;= 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &gt; 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">Others_perc</span>, color <span class="op">=</span> <span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide all repeats considered"</span><span class="op">)</span> </code></pre></div>
+  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide all repeats considered"</span><span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <p>We have implemented a function <span style="     color: red !important;">best_CV_estimation()</span> to select the best replicates if an experiment has more than 2 technical replicates. This helps to select the less variable replicates.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#' @________________________________data_with_selected_best_2_CV_______________________________________ </span>
+<code class="sourceCode R"><span class="co">#' @________________________________data_with_selected_best_2_CV_______________________________________</span>
 <span class="co">#' data with the selected mean for the best 2 CVs</span>
-<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">dataCV</span>, .f<span class="op">=</span><span class="va">best_CV_estimation</span> , slide_id<span class="op">=</span><span class="st">"iden"</span>,lab_replicates<span class="op">=</span><span class="fl">3</span>,
-                           cv_cut_off<span class="op">=</span><span class="fl">20</span><span class="op">)</span>
+<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  .x <span class="op">=</span> <span class="va">dataCV</span>, .f <span class="op">=</span> <span class="va">best_CV_estimation</span>, slide_id <span class="op">=</span> <span class="st">"iden"</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>,
+  cv_cut_off <span class="op">=</span> <span class="fl">20</span>
+<span class="op">)</span>
 
 <span class="co">## give the names to the returned list</span>
 <span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
 
-<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">dataCV_best2</span>, .f<span class="op">=</span><span class="va">cv_by_sample_estimation</span> , 
-                                  cv_variable<span class="op">=</span><span class="st">"best_CV_cat"</span>,lab_replicates<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
+<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  .x <span class="op">=</span> <span class="va">dataCV_best2</span>, .f <span class="op">=</span> <span class="va">cv_by_sample_estimation</span>,
+  cv_variable <span class="op">=</span> <span class="st">"best_CV_cat"</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>
+<span class="op">)</span>
 <span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_sample_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">all_cv_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample_best2</span><span class="op">)</span></code></pre></div>
 <p>On the violin below we observe that with selecting the less variable replicates , the percentage of the “good CV” values increases.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## plot only the CV perccentages</span>
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">all_cv_sample_best2</span><span class="op">)</span><span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>,<span class="va">`CV &lt;= 20_perc`</span>, color<span class="op">=</span><span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>,<span class="va">`CV &gt; 20_perc`</span>, color<span class="op">=</span><span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>,<span class="va">Others_perc</span>,color<span class="op">=</span><span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">all_cv_sample_best2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &lt;= 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &gt; 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">Others_perc</span>, color <span class="op">=</span> <span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide"</span><span class="op">)</span> </code></pre></div>
+  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide"</span><span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
 <div id="subtract-the-tag-values" class="section level2">
@@ -344,13 +364,13 @@
 <a href="#subtract-the-tag-values" class="anchor"></a>Subtract the tag values</h2>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tag_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"TAG_antigens.csv"</span><span class="op">)</span>
-<span class="va">tag_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD4TAG"</span> , <span class="st">"GST"</span>, <span class="st">"MBP"</span><span class="op">)</span>
-<span class="va">batch_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>machine<span class="op">=</span><span class="st">"m1"</span>, day<span class="op">=</span><span class="st">"0520"</span><span class="op">)</span></code></pre></div>
+<span class="va">tag_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD4TAG"</span>, <span class="st">"GST"</span>, <span class="st">"MBP"</span><span class="op">)</span>
+<span class="va">batch_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>machine <span class="op">=</span> <span class="st">"m1"</span>, day <span class="op">=</span> <span class="st">"0520"</span><span class="op">)</span></code></pre></div>
 <p>Tag subtraction is applied for antigens containing purification tags. A file with the specific TAG name for each antigen is loaded. The file has the <code>antigen,TAG and TAG_name</code> and the TAG_name must be part of the antigens listed.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tag_file</span>, n<span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tag_file</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">tb1</span> <span class="op">%&gt;%</span> 
+<span class="va">tb1</span> <span class="op">%&gt;%</span>
   <span class="fu">kable</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">kable_styling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table table">
@@ -480,31 +500,33 @@ CD4TAG
 </table>
 <p>The function <span style="     color: red !important;">tag_subtract()</span> implements the TAG subtration by matching the TAG names with the corresponding TAG values.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#' @________________________________subtract_the_tag_values_______________________________________ </span>
+<code class="sourceCode R"><span class="co">#' @________________________________subtract_the_tag_values_______________________________________</span>
 <span class="co">#'</span>
-<span class="co">## tag subtract </span>
-<span class="co">## read in the KILCHip TAG file to substract GST-1, MBP -2 and  CD4TAG - 0 file </span>
-<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x<span class="op">=</span><span class="va">dataCV_best2</span>, .f<span class="op">=</span><span class="va">tag_subtract</span> , 
-                         tag_antigens<span class="op">=</span><span class="va">tag_antigens</span>, mean_best_CV_var<span class="op">=</span><span class="st">"mean_best_CV"</span>,tag_file<span class="op">=</span><span class="va">tag_file</span>,
-                         antigen_var<span class="op">=</span><span class="st">'antigen'</span>,
-                         batch_vars<span class="op">=</span><span class="va">batch_vars</span><span class="op">)</span>
+<span class="co">## tag subtract</span>
+<span class="co">## read in the KILCHip TAG file to substract GST-1, MBP -2 and  CD4TAG - 0 file</span>
+<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+  .x <span class="op">=</span> <span class="va">dataCV_best2</span>, .f <span class="op">=</span> <span class="va">tag_subtract</span>,
+  tag_antigens <span class="op">=</span> <span class="va">tag_antigens</span>, mean_best_CV_var <span class="op">=</span> <span class="st">"mean_best_CV"</span>, tag_file <span class="op">=</span> <span class="va">tag_file</span>,
+  antigen_var <span class="op">=</span> <span class="st">"antigen"</span>,
+  batch_vars <span class="op">=</span> <span class="va">batch_vars</span>
+<span class="op">)</span>
 <span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_tag</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_tag</span><span class="op">)</span></code></pre></div>
 <p>In this example here we plot a graph of antigens Tagged with GST before and after TAG subtration.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">TAG_name</span><span class="op">==</span><span class="st">"GST"</span><span class="op">)</span> 
+<code class="sourceCode R"><span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">TAG_name</span> <span class="op">==</span> <span class="st">"GST"</span><span class="op">)</span>
 
-<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span> 
-<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.id</span>,<span class="va">sampleID</span>,<span class="va">antigen</span>,<span class="va">mean_best_CV</span>,<span class="va">mean_best_CV_tag</span><span class="op">)</span>
+<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span>, <span class="va">mean_best_CV_tag</span><span class="op">)</span>
 
-<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span> 
-  <span class="fu">gather</span><span class="op">(</span><span class="va">measure</span>,<span class="va">mfi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">.id</span><span class="op">:</span><span class="va">antigen</span><span class="op">)</span><span class="op">)</span>
+<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span>
+  <span class="fu">gather</span><span class="op">(</span><span class="va">measure</span>, <span class="va">mfi</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">.id</span><span class="op">:</span><span class="va">antigen</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">aaa</span>,<span class="fu">aes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">antigen</span><span class="op">)</span>,<span class="va">mfi</span>,color<span class="op">=</span><span class="va">measure</span><span class="op">)</span><span class="op">)</span>  <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill<span class="op">=</span><span class="va">measure</span><span class="op">)</span>,alpha<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">+</span>
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">aaa</span>, <span class="fu">aes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">antigen</span><span class="op">)</span>, <span class="va">mfi</span>, color <span class="op">=</span> <span class="va">measure</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">measure</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"antigen name"</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu">xlab</span><span class="op">(</span><span class="st">"antigen name"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Before and after TAG subtraction"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
@@ -521,105 +543,188 @@ CD4TAG
 <li>VSN normalisation.</li>
 </ol>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_to_normalise</span> <span class="op">&lt;-</span>  <span class="va">dataCV_tag</span>  <span class="op">%&gt;%</span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>  
-  <span class="fu">select</span><span class="op">(</span>slide<span class="op">=</span><span class="va">.id</span>,<span class="va">sampleID</span>,<span class="va">sample_array_ID</span>,<span class="va">antigen</span>,<span class="va">mean_best_CV</span><span class="op">)</span> <span class="op">%&gt;%</span>  
+<code class="sourceCode R"><span class="va">df_to_normalise</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op">%&gt;%</span>
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span>slide <span class="op">=</span> <span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">sample_array_ID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">group_by</span><span class="op">(</span><span class="va">sampleID</span>, <span class="va">slide</span><span class="op">)</span>
-<span class="va">df_to_normalise</span><span class="op">$</span><span class="va">sample_index</span> <span class="op">&lt;-</span> <span class="fu">group_indices</span><span class="op">(</span>.data <span class="op">=</span><span class="va">df_to_normalise</span> <span class="op">)</span>
+<span class="va">df_to_normalise</span><span class="op">$</span><span class="va">sample_index</span> <span class="op">&lt;-</span> <span class="fu">group_indices</span><span class="op">(</span>.data <span class="op">=</span> <span class="va">df_to_normalise</span><span class="op">)</span>
 
-<span class="co">### </span>
+<span class="co">###</span>
 <span class="va">to_normalise</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op">%&gt;%</span>
- <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">slide</span>,<span class="op">-</span><span class="va">sampleID</span>,<span class="op">-</span><span class="va">sample_array_ID</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">select</span><span class="op">(</span><span class="va">antigen</span>, <span class="va">sample_index</span>, <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>  
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">slide</span>, <span class="op">-</span><span class="va">sampleID</span>, <span class="op">-</span><span class="va">sample_array_ID</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="va">antigen</span>, <span class="va">sample_index</span>, <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">gather</span><span class="op">(</span><span class="va">variable</span>, <span class="va">value</span>, <span class="op">-</span><span class="op">(</span><span class="va">antigen</span><span class="op">:</span><span class="va">sample_index</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">unite</span><span class="op">(</span><span class="va">temp</span>, <span class="va">antigen</span> <span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">variable</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">spread</span><span class="op">(</span><span class="va">temp</span>, <span class="va">value</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">unite</span><span class="op">(</span><span class="va">temp</span>, <span class="va">antigen</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">variable</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">spread</span><span class="op">(</span><span class="va">temp</span>, <span class="va">value</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 
 <span class="co">### get the row names of the machine data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">to_normalise</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">to_normalise</span><span class="op">$</span><span class="va">sample_index</span>
-<span class="co">#batch_all &lt;- as.factor(paste0(to_normalise$machine,"/",to_normalise$day))</span>
-<span class="co">#machines &lt;- as.factor(to_normalise$machine)</span>
-<span class="co">#day_batches &lt;- as.factor(to_normalise$day)</span>
+<span class="co"># batch_all &lt;- as.factor(paste0(to_normalise$machine,"/",to_normalise$day))</span>
+<span class="co"># machines &lt;- as.factor(to_normalise$machine)</span>
+<span class="co"># day_batches &lt;- as.factor(to_normalise$day)</span>
 
 <span class="co">## create the matrix to normalise</span>
-<span class="va">matrix_antigen</span> <span class="op">&lt;-</span>  <span class="va">to_normalise</span> <span class="op">%&gt;%</span> 
-  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">sample_index</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">matrix_antigen</span> <span class="op">&lt;-</span> <span class="va">to_normalise</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">sample_index</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 
 
 <span class="co">## create the matix to hold the important parameters</span>
-<span class="va">array_matrix</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">antigen</span><span class="op">==</span><span class="st">"AMA1"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">select</span><span class="op">(</span><span class="va">sample_array_ID</span>,<span class="va">sample_index</span>,<span class="va">slide</span><span class="op">)</span>
+<span class="va">array_matrix</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">antigen</span> <span class="op">==</span> <span class="st">"AMA1"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="va">sample_array_ID</span>, <span class="va">sample_index</span>, <span class="va">slide</span><span class="op">)</span>
 
-<span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>,<span class="st">"CD4TAG"</span><span class="op">)</span></code></pre></div>
+<span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span></code></pre></div>
 <p>The <span style="     color: red !important;">matrix_normalise()</span> function is used to normalise the data and returns a list of plots and a matrix of normalised values. A plot is returned if <code>return_plot = T</code> otherwise only a matrix of normalised values will be returned.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">normlise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span><span class="va">matrix_antigen</span>, method <span class="op">=</span> <span class="st">"log2"</span>, array_matrix<span class="op">=</span><span class="va">array_matrix</span>,
-                       return_plot <span class="op">=</span> <span class="cn">T</span>,control_antigens<span class="op">=</span><span class="va">control_antigens</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">normlise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span><span class="va">matrix_antigen</span>,
+  method <span class="op">=</span> <span class="st">"log2"</span>, array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
+  return_plot <span class="op">=</span> <span class="cn">T</span>, control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
+<span class="op">)</span>
 
 <span class="va">normlise_df</span><span class="op">$</span><span class="va">plot_normalisation</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
 <p>On the dashboard we compare the different normalisation techniques using the <span style="     color: red !important;">mutiple_plot()</span> function after loading the data.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>,<span class="st">"CD4TAG"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span>
 <span class="co">## no normalisation</span>
-  <span class="va">normalise_list_none</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>matrix_antigen<span class="op">=</span><span class="va">matrix_antigen</span>, 
-                                         method <span class="op">=</span> <span class="st">"none"</span>, 
-                                         array_matrix<span class="op">=</span><span class="va">array_matrix</span>,
-                                         return_plot <span class="op">=</span> <span class="cn">T</span>,
-                                         control_antigens<span class="op">=</span><span class="va">control_antigens</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_none</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_none"</span> ,<span class="st">"plot_none"</span><span class="op">)</span>
+<span class="va">normalise_list_none</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
+  matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
+  method <span class="op">=</span> <span class="st">"none"</span>,
+  array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
+  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_none</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_none"</span>, <span class="st">"plot_none"</span><span class="op">)</span>
 <span class="co">## log2 normalisation</span>
-  <span class="va">normalise_list_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>matrix_antigen<span class="op">=</span><span class="va">matrix_antigen</span>, 
-                                           method <span class="op">=</span> <span class="st">"log2"</span>, 
-                                           array_matrix<span class="op">=</span><span class="va">array_matrix</span>,
-                                           return_plot <span class="op">=</span> <span class="cn">T</span>,
-                                           control_antigens<span class="op">=</span><span class="va">control_antigens</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_log"</span> ,<span class="st">"plot_log"</span><span class="op">)</span>
+<span class="va">normalise_list_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
+  matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
+  method <span class="op">=</span> <span class="st">"log2"</span>,
+  array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
+  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_log"</span>, <span class="st">"plot_log"</span><span class="op">)</span>
 <span class="co">## vsn normalisation</span>
-   <span class="va">normalise_list_vsn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>matrix_antigen<span class="op">=</span><span class="va">matrix_antigen</span>, 
-                                           method <span class="op">=</span> <span class="st">"vsn"</span>, 
-                                           array_matrix<span class="op">=</span><span class="va">array_matrix</span>,
-                                           return_plot <span class="op">=</span> <span class="cn">T</span>,
-                                           control_antigens<span class="op">=</span><span class="va">control_antigens</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_vsn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_vsn"</span> ,<span class="st">"plot_vsn"</span><span class="op">)</span>
-  <span class="co">## cyclic loess with log</span>
-     <span class="va">normalise_list_cyclic_loess_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>matrix_antigen<span class="op">=</span><span class="va">matrix_antigen</span>, 
-                                                        method <span class="op">=</span> <span class="st">"cyclic_loess_log"</span>, 
-                                                        array_matrix<span class="op">=</span><span class="va">array_matrix</span>,
-                                                        return_plot <span class="op">=</span> <span class="cn">T</span>,
-                                                        control_antigens<span class="op">=</span><span class="va">control_antigens</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_cyclic_loess_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_cyclic_loess_log"</span> ,
-                                                <span class="st">"plot_cyclic_loess_log"</span><span class="op">)</span>
-    
+<span class="va">normalise_list_vsn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
+  matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
+  method <span class="op">=</span> <span class="st">"vsn"</span>,
+  array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
+  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_vsn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_vsn"</span>, <span class="st">"plot_vsn"</span><span class="op">)</span>
+<span class="co">## cyclic loess with log</span>
+<span class="va">normalise_list_cyclic_loess_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
+  matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
+  method <span class="op">=</span> <span class="st">"cyclic_loess_log"</span>,
+  array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
+  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_cyclic_loess_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="st">"matrix_antigen_cyclic_loess_log"</span>,
+  <span class="st">"plot_cyclic_loess_log"</span>
+<span class="op">)</span>
 
-     <span class="va">normalise_list_rlm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>matrix_antigen<span class="op">=</span><span class="va">matrix_antigen</span>, 
-                                                  method <span class="op">=</span> <span class="st">"rlm"</span>, 
-                                                  array_matrix<span class="op">=</span><span class="va">array_matrix</span>,
-                                                  return_plot <span class="op">=</span> <span class="cn">T</span>,
-                                                  control_antigens<span class="op">=</span><span class="va">control_antigens</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_rlm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_rlm"</span> ,<span class="st">"plot_rlm"</span><span class="op">)</span>
-    
-  
-    <span class="co">## create a list after normalisation</span>
- <span class="va">normalised_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">normalise_list_none</span> , 
-                      <span class="va">normalise_list_log</span>,
-                      <span class="va">normalise_list_vsn</span>,
-                      <span class="va">normalise_list_cyclic_loess_log</span>,
-                      <span class="va">normalise_list_rlm</span><span class="op">)</span>
-  <span class="co">##</span>
- <span class="va">normalised_list_plot</span> <span class="op">&lt;-</span> <span class="va">normalised_list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"plot"</span>,<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalised_list</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+
+<span class="va">normalise_list_rlm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
+  matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
+  method <span class="op">=</span> <span class="st">"rlm"</span>,
+  array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
+  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_rlm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_rlm"</span>, <span class="st">"plot_rlm"</span><span class="op">)</span>
+
+
+<span class="co">## create a list after normalisation</span>
+<span class="va">normalised_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="va">normalise_list_none</span>,
+  <span class="va">normalise_list_log</span>,
+  <span class="va">normalise_list_vsn</span>,
+  <span class="va">normalise_list_cyclic_loess_log</span>,
+  <span class="va">normalise_list_rlm</span>
+<span class="op">)</span>
+<span class="co">##</span>
+<span class="va">normalised_list_plot</span> <span class="op">&lt;-</span> <span class="va">normalised_list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"plot"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalised_list</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">normalised_list_plot</span>, ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">normalised_list_plot</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;"></p>
+</div>
+<div id="heatmap-of-the-normalised-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#heatmap-of-the-normalised-data" class="anchor"></a>Heatmap of the normalised data</h2>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">normlise_df</span><span class="op">$</span><span class="va">matrix_antigen_normalised</span>
+<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">pheatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">norm_df</span>,
+  scale <span class="op">=</span> <span class="st">"none"</span>, cluster_rows <span class="op">=</span> <span class="cn">F</span>,
+  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"VSN"</span>, <span class="st">"Normalised Data"</span><span class="op">)</span>,
+  silent <span class="op">=</span> <span class="cn">T</span>
+<span class="op">)</span>
+<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">ggplotify</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplotify/man/as.ggplot.html">as.ggplot</a></span><span class="op">(</span><span class="va">p3</span><span class="op">)</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p3</span> <span class="op">+</span> <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span>
+<span class="va">p</span></code></pre></div>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+</div>
+<div id="pca-analysis" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pca-analysis" class="anchor"></a>PCA analysis</h2>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">normlise_df</span><span class="op">$</span><span class="va">matrix_antigen_normalised</span>
+<span class="va">res_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">norm_df</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">var</span> <span class="op">&lt;-</span> <span class="fu">get_pca_var</span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span>
+<span class="va">vars_visualise</span> <span class="op">&lt;-</span> <span class="fl">20</span>
+<span class="co"># Visualize the PCA</span>
+<span class="co">## individuals contributing to the PCA</span>
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">fviz_pca_ind</span><span class="op">(</span><span class="va">res_pca</span>,
+  col.var <span class="op">=</span> <span class="st">"contrib"</span>, <span class="co"># Color by contributions to the PC</span>
+  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,
+  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span>
+<span class="op">)</span> <span class="op">+</span> <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># Select the top vars_visualise contributing variables</span>
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">fviz_pca_biplot</span><span class="op">(</span><span class="va">res_pca</span>,
+  label <span class="op">=</span> <span class="st">"var"</span>,
+  select.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>contrib <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span>
+  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span>
+
+
+<span class="co"># Total cos2 of variables on Dim.1 and Dim.2</span>
+<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">fviz_cos2</span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, top <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>
+
+
+<span class="co"># Color by cos2 values: quality on the factor map</span>
+<span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu">fviz_pca_var</span><span class="op">(</span><span class="va">res_pca</span>,
+  col.var <span class="op">=</span> <span class="st">"cos2"</span>,
+  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,
+  select.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>contrib <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>,
+  repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span>
+<span class="op">)</span>
+
+
+<span class="co">## combine the plots into one grid</span>
+<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<p><img src="protGear_vignette_files/figure-html/pca,%20-1.png" width="1536" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p</span></code></pre></div>
+<pre><code>## TableGrob (2 x 2) "arrange": 4 grobs
+##   z     cells    name           grob
+## 1 1 (1-1,1-1) arrange gtable[layout]
+## 2 2 (1-1,2-2) arrange gtable[layout]
+## 3 3 (2-2,1-1) arrange gtable[layout]
+## 4 4 (2-2,2-2) arrange gtable[layout]</code></pre>
 </div>
 <div id="shiny-application" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny-application" class="anchor"></a>Shiny application</h2>
 <p>Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">protGear</span><span class="fu">::</span><span class="fu"><a href="../reference/launch_protGear_interactive.html">launch_protGear_interactive</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
