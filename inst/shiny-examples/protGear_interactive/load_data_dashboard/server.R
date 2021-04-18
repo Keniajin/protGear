@@ -14,7 +14,6 @@ pacman::p_load_gh("hadley/shinySignals","jcheng5/bubbles","GuangchuangYu/ggploti
 
 
 
-
 #' Title
 #'
 #' @param input
@@ -517,7 +516,7 @@ output$blockspersample_output <- renderUI({
     tagList(
       useShinyFeedback(), # include shinyFeedback  # inclusion here is ideal; b/c inside module
       numericInput("blockspersample_param",
-        "Input the number blocks per sample (reactangle) as per the graph below",
+        "Input the number blocks per sample (rectangle) as per the graph below",
         value = value_check
       )
     )

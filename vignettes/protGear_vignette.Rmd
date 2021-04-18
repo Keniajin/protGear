@@ -4,7 +4,7 @@ title: protGear:An R package with an interactive web-based protein microarray da
 author: "Kennedy Mwai"
 header-includes:
    - \usepackage[T1]{fontenc}
-date: '`r format(Sys.time(), "%d %B, %Y")`'
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     df_print: paged
@@ -13,9 +13,8 @@ output:
 
 ```{r setup, include=FALSE}
 library(pacman)
-pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, knitr ,grid)
+pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR)
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F, #tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
-                      dev = "png", dev.args = list(type = "cairo-png"),
                        tidy='styler', tidy.opts=list(strict=T))
 
 
@@ -50,14 +49,14 @@ In this vignette the general work-flow of protGear will be outlined by processin
 Create 2 folders that hold the '`.gpr`' files and the corresponding sample identifier files.
 
 
-```{r , echo=FALSE}
-img1_path <- "folder_structure.png"
-#img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
+```{r chunk1 , echo=FALSE}
+img1_path <- "images/vignette/folder_structure.png"
+img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
 #include_graphics(img1_path)
  #grid.raster(img1)
 ```
 
-![Folder structure of array and sample ID files](folder_structure.png){width=70%}
+![Folder structure of array and sample ID files](images/vignette/folder_structure.png){width=70%}
 
 
 
@@ -65,7 +64,7 @@ img1_path <- "folder_structure.png"
 
 To install `protGear` run the following commands in R
 
-```{r, eval=FALSE}
+```{r chunk2, eval=FALSE}
 ## make sure devtools package is installed
 devtools::install_github('keniajin/protGear', dependencies=TRUE)
 ```
@@ -73,7 +72,7 @@ devtools::install_github('keniajin/protGear', dependencies=TRUE)
 
 ## Package load and importing data
 
-```{r}
+```{r chunk3}
 library(protGear)
 ```
 
@@ -89,7 +88,7 @@ The first part is to specify the parameters of the micro-array experiment to ass
   
 The parameters "`chip_path`", "`channel`" , "`totsamples`" and "`sampleID_path`" are mandatory. 
 
-```{r}
+```{r chunk4}
 ## specify the the parameters to process the data
 genepix_vars <- array_vars(channel="635" ,
                            chip_path = "data/array_data",
@@ -104,7 +103,7 @@ genepix_vars <- array_vars(channel="635" ,
 
 The exact channel used should be checked in the header of the file from the quantification software under `Wavelengths`. 
 
-```{r}
+```{r chunk5}
 header_gpr <- readLines("data/array_data/machine1/KK2-06.txt",
                         n=40)
 header_gpr <- gsub("\"", "", header_gpr[1:32])
@@ -116,40 +115,44 @@ The function  `r text_spec("check_sampleID_files()",color="red")` helps to check
 
 ### Visualize the spatial structure of slide
 
-protGear offers a functionality to inspect the slide visually for any strong spatial biases when the scan image is not available. However, we recommend using the scanned image to visualize the slide and additionally the spatial artefacts that might not be recorded in the `.gpr` file. We include the functions `r text_spec("visualize_slide()",color="red")` and `r text_spec("visualize_slide_2d()",color="red")`  to check the spatial structure. The functions are build on `r text_spec("structure_plot()",color="red")`  which shows the block and mini-array structure of a slide. 
+protGear offers a functionality to inspect the slide visually for any strong spatial biases when the scan image is not available. However, we recommend using the scanned image to visualize the spatial artefacts that might not be recorded in the `.gpr` file. We include the functions `r text_spec("visualize_slide()",color="red")` and `r text_spec("visualize_slide_2d()",color="red")`  to check the spatial structure. The functions are build on `r text_spec("structure_plot()",color="red")`  which shows the block and mini-array structure of a slide. 
 
 
 
 #### Visualize the foreground using the `visualize_slide` function
 
-```{r}
-visualize_slide(infile='data/array_data/machine1/KK2-06.txt' , MFI_var ='B635 Median' )
+```{r chunk6}
+p <- visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
+                MFI_var ='B635 Median' )
+p
 ```
 
 #### Visualize the background using the `visualize_slide_2d` function
 
-```{r}
-visualize_slide_2d(infile='data/array_data/machine1/KK2-06.txt' , MFI_var ='F635 Median' )
+```{r chunk7}
+p2 <- visualize_slide_2d(infile ='data/array_data/machine1/KK2-06.txt' , 
+                   MFI_var ='F635 Median' )
+p2
 ```
 
 
 ### Import microarray data
 
-Microarray data is imported using the `r text_spec("read_array_files()",color="red")` function. The function accepts the following mandatory arguments; 
+Micro array data is imported using the `r text_spec("read_array_files()",color="red")` function. The function accepts the following mandatory arguments; 
 
  - `filename` - the name of the file which the data are to be read from. In this example a list of multiple files from a folder is used and passed to `r text_spec("read_array_files()","red")` using `r text_spec("purrr",color="red")`. 
  - `data_path` - The path where the file with the data  is located 
  - `genepix_vars` -  A list of specific definitions of the experiment design. See  `r text_spec("array_vars()",color="red")`  
  
  
-```{r}
+```{r chunk8}
 #### read in all the datasets
 ### list all the file names under data folder
-filenames <- list.files(file.path(genepix_vars$paths[[2]]), 
+filenames <- list.files(file.path(genepix_vars$paths[[3]]), 
                         pattern="*.txt$|*.gpr$", full.names=F)
 #' @___________________read_in_the_files_with_the_text_data_from_the_chip_____________________________
 ### read all the data files and save them in a list 
-data_path <- paste0(genepix_vars$paths[[2]],"/") 
+data_path <- paste0(genepix_vars$paths[[3]],"/") 
 data_files <- purrr::map(.x = filenames, 
                          .f = read_array_files,
                          data_path=data_path ,
@@ -169,7 +172,7 @@ Background noise is caused by non-specific fluorescence such as auto-fluorescenc
 
 In  '`.gpr`' files the Background column starts with a '`B`' followed by the wavelength or channel. In order to perform background correction, we extract the background mean fluorescent intensities (MFI's) using the function `r text_spec("extract_bg()",color="red")` . The function accepts the arguments `iden` which is the file identifier,  `data_files` a list of data objects with names utilised by `iden` and `genepix_vars` defined using  `r text_spec("array_vars()",color="red")` function. We utilise the `purr::map` function to extract the background MFI of multiple data files. 
 
-```{r}
+```{r chunk9}
 ## utilising the map package we process a number of files  under data_files list
 dfs <- names(data_files) 
 allData_bg <- purrr::map(.x=dfs, .f=extract_bg,data_files=data_files,genepix_vars)
@@ -180,7 +183,7 @@ allData_bg <- plyr::ldply(allData_bg)
 
 Before selecting the best background correction approach the MFI signals are be inspected visually. In protGear we first utilise the function `r text_spec("plot_FB()",color="red")` that graphs the background, _BG_Median_ and foreground values, _FBG_Median_. On the protGear Shiny platform the visuals are interactive and you can identify the features or blocks with strong bias. 
 
-```{r}
+```{r chunk10}
 p1 <- plot_FB(allData_bg,antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Median",log=F)
 
 p2 <- plot_bg(df=allData_bg, x_axis="Block",bg_MFI="BG_Median",
@@ -195,7 +198,7 @@ After background visualization and selecting the best approach the array data ar
 
 
 
-```{r}
+```{r chunk11}
 sample_ID_merged_dfs <- purrr::map(.x=dfs, .f=merge_sampleID ,data_files=data_files , 
                              genepix_vars, method="subtract_local")
 sample_ID_merged_dfs <- set_names(sample_ID_merged_dfs, purrr::map(filenames, name_of_files))
@@ -204,9 +207,9 @@ sample_ID_merged_dfs <- set_names(sample_ID_merged_dfs, purrr::map(filenames, na
 
 ## Visualizing buffer spot
 
-This is specific to experiment design if a specific buffer spot is included. This is used to check for unexpected scanning artefacts. The buffer spots should have similar values in  different slides. Some outliers might be expected for buffer spots close sample spots or landmark. 
+This is specific to experiment design if a specific buffer spot is included. This is used as a quality control check for unexpected scanning artefacts. The buffer spots should have similar values in  different slides. Some outliers might be expected for buffer spots close sample spots or landmark. 
 
-```{r}
+```{r chunk12}
 buffer_transp <- purrr::map(.x=sample_ID_merged_dfs, .f=buffer_spots)
 
 buffer_transp <- set_names(buffer_transp, purrr::map(filenames, name_of_files))
@@ -220,7 +223,7 @@ plot_buffer(buffers,buffer_names="antigen",buffer_mfi="FMedianBG_correct",slide_
 To calculate the CV's we utilise the  `r text_spec("cv_estimation()",color="red")` function with a `cv_cut_off` specified , sample identifier variable and antigen specified under `sampleID_var` and `antigen` respectively. The `replicate_var` and `mfi_var` identifies the variable with the replicate rank generated and MFI's values. 
 
 
-```{r}
+```{r chunk13}
 #' @________________________________calculated_cv_for_each_data_file_______________________________________
 #' data without the selected mean for the best 2 CVs 
 dataCV <- purrr::map(.x=sample_ID_merged_dfs, .f=cv_estimation ,lab_replicates=3  ,
@@ -242,7 +245,7 @@ GGally::ggpairs(aa,aes(color=cvCat_all) ,
 
 Here we create a summary of the CV values for each sample/slide utilising the `r text_spec("cv_by_sample_estimation()",color="red")` function.  This helps to identify samples with high values of CV. On the protGear dashboard an interactive table is created to show the summary for each sample. 
 
-```{r}
+```{r chunk14}
 
 
 #' @________________________________summary_of_cv_for_each_sample________________________________________ 
@@ -257,7 +260,7 @@ all_cv_sample <- plyr::ldply(dataCV_sample)
 ```
 
 
-```{r}
+```{r chunk15}
 less_20 <- rlang::sym(paste0("CV <= ",cv_cut_off, "_perc"))
 gt_20 <- rlang::sym(paste0("CV > ",cv_cut_off, "_perc"))
 
@@ -275,7 +278,7 @@ ggplot(all_cv_sample)+
 
 We have implemented a function `r text_spec("best_CV_estimation()",color="red")` to select the best replicates if an experiment has more than 2 technical replicates. This helps to select the less variable replicates.
 
-```{r}
+```{r chunk16}
 #' @________________________________data_with_selected_best_2_CV_______________________________________ 
 #' data with the selected mean for the best 2 CVs
 dataCV_best2 <- purrr::map(.x=dataCV, .f=best_CV_estimation , slide_id="iden",lab_replicates=3,
@@ -294,7 +297,7 @@ all_cv_sample_best2 <- plyr::ldply(dataCV_sample_best2)
 
 On the violin below we observe that with selecting the less variable replicates , the percentage of the "good CV" values increases.
 
-```{r}
+```{r chunk17}
 ## plot only the CV perccentages
 ggplot(all_cv_sample_best2)+
   geom_violin(aes(.id,`CV <= 20_perc`, color="% CV =<20")) +
@@ -308,7 +311,7 @@ ggplot(all_cv_sample_best2)+
 
 ## Subtract the tag values
 
-```{r}
+```{r chunk18}
 tag_file <- read.csv("TAG_antigens.csv")
 tag_antigens <- c("CD4TAG" , "GST", "MBP")
 batch_vars <- list(machine="m1", day="0520")
@@ -317,7 +320,7 @@ batch_vars <- list(machine="m1", day="0520")
 
 Tag subtraction is applied for antigens containing purification tags. A file with the specific TAG name for each antigen is loaded. The file has the `antigen,TAG and TAG_name` and the TAG_name must be part of the antigens listed.
 
-```{r}
+```{r chunk19}
 tb1 <- data.frame(head(tag_file, n=10))
 
 tb1 %>% 
@@ -327,7 +330,7 @@ tb1 %>%
 
 The function `r text_spec("tag_subtract()",color="red")` implements the TAG subtration by matching the TAG names with the corresponding TAG values. 
 
-```{r}
+```{r chunk20}
 #' @________________________________subtract_the_tag_values_______________________________________ 
 #'
 ## tag subtract 
@@ -341,9 +344,9 @@ dataCV_tag <- plyr::ldply(dataCV_tag)
 ```
 
 
-In this example here we plot a graph of antigens Tagged with GST before and after TAG subtration.
+In this example here we plot a graph of antigens Tagged with GST before and after TAG subtraction.
 
-```{r}
+```{r chunk21}
 aaa <- dataCV_tag %>% 
   filter(TAG_name=="GST") 
 
@@ -372,7 +375,7 @@ To normalise the data, we create a matrix `matrix_antigen` with all the data com
 4) VSN normalisation. 
 
 
-```{r}
+```{r chunk22}
 df_to_normalise <-  dataCV_tag  %>%  ungroup() %>%  
   select(slide=.id,sampleID,sample_array_ID,antigen,mean_best_CV) %>%  
   group_by(sampleID, slide)
@@ -380,7 +383,8 @@ df_to_normalise$sample_index <- group_indices(.data =df_to_normalise )
 
 ### 
 to_normalise <- df_to_normalise %>%
- ungroup() %>% select(-slide,-sampleID,-sample_array_ID) %>% 
+ ungroup() %>% 
+  select(-slide,-sampleID,-sample_array_ID) %>% 
   select(antigen, sample_index, everything()) %>%  
   gather(variable, value, -(antigen:sample_index)) %>%
   unite(temp, antigen ) %>% select(-variable) %>%
@@ -412,8 +416,8 @@ control_antigens <- c("CommercialHumanIgG","CD4TAG")
 
 The `r text_spec("matrix_normalise()",color="red")`  function is used to normalise the data and returns a list of plots and a matrix of normalised values. A plot is returned if ` return_plot = T` otherwise only a matrix of normalised values will be returned. 
 
-```{r}
-normlise_df <- matrix_normalise(matrix_antigen, method = "log2", array_matrix=array_matrix,
+```{r chunk23}
+normlise_df <- matrix_normalise(matrix_antigen, method = "vsn", array_matrix=array_matrix,
                        return_plot = T,control_antigens=control_antigens)
 
 normlise_df$plot_normalisation
@@ -423,7 +427,7 @@ normlise_df$plot_normalisation
 On the dashboard we compare the different normalisation techniques using the `r text_spec("mutiple_plot()",color="red")` function after loading the data.
 
 
-```{r}
+```{r chunk24}
 control_antigens <- c("CommercialHumanIgG","CD4TAG")
 ## no normalisation
   normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen, 
@@ -481,11 +485,64 @@ p <- do.call("grid.arrange", c(normalised_list_plot, ncol=2))
 ```
 
 
-## Shiny application
-Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
-The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.
+## Heatmap of the normalised data
 
-```{r, eval=F}
+```{r}
+norm_df <- normlise_df$matrix_antigen_normalised
+p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
+                            main=paste('VSN',"Normalised Data"),
+                            silent = T)
+p3 <- ggplotify::as.ggplot(p3)
+p <- p3 +  theme_void()
+p
+```
+
+## PCA analysis
+
+```{r pca, , fig.align='center',fig.width=16,fig.height=12}
+norm_df <- normlise_df$matrix_antigen_normalised
+res_pca <- prcomp( norm_df, scale = TRUE)
+var <- get_pca_var(res_pca)
+vars_visualise=20
+#Visualize the PCA
+## individuals contributing to the PCA
+p1 <- fviz_pca_ind(res_pca,
+                    col.var = "contrib", # Color by contributions to the PC
+                    gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+                    repel = TRUE     # Avoid text overlapping
+  )+    theme_minimal()
+  
+# Select the top vars_visualise contributing variables
+p2 <-fviz_pca_biplot(res_pca, label="var",
+                    select.var = list(contrib = vars_visualise)) +
+    theme_minimal()
+  
+  
+# Total cos2 of variables on Dim.1 and Dim.2
+p3 <-     fviz_cos2(res_pca, choice = "var", axes = 1:2 , top = vars_visualise)
+
+  
+# Color by cos2 values: quality on the factor map
+p4 <-  fviz_pca_var(res_pca, col.var = "cos2",
+               gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+               select.var = list(contrib = vars_visualise),
+               repel = TRUE # Avoid text overlapping
+  )
+
+ 
+## combine the plots into one grid
+p <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
+p
+```
+
+
+
+## Shiny application
+
+protGear has a built in user-friendly Shiny® dashboard [Supplementary 3 Figure 1 and Supplementary 3B] to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
+The dashboard is launched as below from R or RStudio. 
+
+```{r launch_shiny, eval=F}
 protGear::launch_protGear_interactive()
 ```
 
