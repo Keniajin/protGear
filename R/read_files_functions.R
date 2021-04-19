@@ -373,7 +373,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
   #create_dir(path = system.file("processe_data/raw_MFI_BG/"))
   #write_csv(data1_full_bg ,system.file("processed_data/raw_MFI_BG/", 'file_ident', package="protGear"))
   #----------------------------------------------------------------------------------------------------
-  if(method=="none"){
+  if(method=="none"|method==""){
     #----------------------------------------------------------------------------------------------------
       ##MFI values without subtracting the background
     Data1 <- Data1 %>%
@@ -460,7 +460,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     #the background intensities as a covariate, and the expected signal given the observed foreground becomes
     #the corrected intensity. This results in a smooth monotonic transformation of the background subtracted
     #intensities such that all the corrected intensities are positive.
-    ##Both norm exp and edwards are implemented in Limma for DNA micro array data
+    ##Both norm exp are implemented in Limma for DNA micro array data
   }
   #Data1 <- Data1 %>% rename(F635MedianB635=F635.Median...B635)
 

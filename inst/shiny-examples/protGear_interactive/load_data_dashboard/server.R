@@ -221,7 +221,7 @@ gpr_header_reactive <- reactive({
 ## empty structure
 empty_strucuture <- reactive({
   text = paste("\nLoad one of the file that has MFI data\n",
-               "       to visualize the structure ")
+               "       to visualize/define the structure ")
   plot_empty2 <- ggplot() +
     annotate("text", x = 4, y = 25, size=8, label = text) +
     theme_bw() +
@@ -1313,7 +1313,10 @@ output$bg_correction_select_1 <- renderUI({
                              "Local bakground subtraction"="subtract_local",
                              "Global background subtraction"="subtract_global",
                              "Moving mininimum"="movingmin_bg",
-                             "Half Moving mininimum"="minimum_half")
+                             "Half Moving mininimum"="minimum_half",
+                             "Log-linear background correction"="edwards",
+                             "Normal Exponential (normexp)"=""
+                             )
   selectInput(inputId = 'bg_correct_1',
               label = 'Background correction',
               selected = 'subtract_local',
@@ -1329,9 +1332,15 @@ output$bg_correct_graphs <- renderPlot({
       select(antigen,FMedian,FMedianBG_correct) %>%
       gather(var,mfi,-antigen)
 
+
+
+    # New facet label names for var variable
+   supp_labs <- c("FMedian before background correction", "FMedian after background correction")
+    names(supp_labs) <- c("FMedian", "FMedianBG_correct")
+
     p <- ggplot(all_df,aes(x=antigen, y=mfi))+
       geom_boxplot()+
-      facet_wrap(~var, nrow = 2)+
+      facet_wrap(~var, nrow = 2,labeller = labeller(var = supp_labs))+
       geom_hline(yintercept = 0, color='red')+
       theme_light()+
     #  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
@@ -1363,10 +1372,13 @@ observe({ # called only once at app init
 
 output$bg_correction_drop_down <- renderUI({
   bg_correct_approaches <- c("None"="none",
-              "Local bakground subtraction"="subtract_local",
-              "Global background subtraction"="subtract_global",
-              "Moving mininimum"="movingmin_bg",
-              "Half Moving mininimum"="minimum_half")
+                             "Local bakground subtraction"="subtract_local",
+                             "Global background subtraction"="subtract_global",
+                             "Moving mininimum"="movingmin_bg",
+                             "Half Moving mininimum"="minimum_half",
+                             "Log-linear background correction"="edwards",
+                             "Normal Exponential (normexp)"="")
+
 
   dropdownButton(
     tags$h3("List of Inputs"),
@@ -1390,7 +1402,9 @@ output$bg_correction_select <-  renderUI({
                              "Local bakground subtraction"="subtract_local",
                              "Global background subtraction"="subtract_global",
                              "Moving mininimum"="movingmin_bg",
-                             "Half Moving mininimum"="minimum_half")
+                             "Half Moving mininimum"="minimum_half",
+                             "Log-linear background correction"="edwards",
+                             "Normal Exponential (normexp)"="")
   selectInput(inputId = 'bg_correct',
               label = 'Background correction',
               selected = selected_bg,
@@ -1937,7 +1951,9 @@ output$bg_correct_infobox <- output$bg_correct_infobox2 <- renderInfoBox({
                                "Local bakground subtraction"="subtract_local",
                                "Global background subtraction"="subtract_global",
                                "Moving mininimum"="movingmin_bg",
-                               "Half Moving mininimum"="minimum_half")
+                               "Half Moving mininimum"="minimum_half",
+                               "Log-linear background correction"="edwards",
+                               "Normal Exponential (normexp)"="")
     bg_app <- names(which(bg_correct_approaches == input$bg_correct))
     infoBox("Background correction",bg_app ,
             subtitle = paste0("") ,

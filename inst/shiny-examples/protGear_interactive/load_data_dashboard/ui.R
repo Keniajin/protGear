@@ -16,9 +16,9 @@ shinyUI(
                                                 uiOutput("gpr_file_load"),
                                                 br(),
                                                 sidebarMenu(id="structure_view",
-                                                            menuItem("Structure overview",
+                                                            menuItem("Define the array structure",
                                                                      tabName = "structure", icon = icon("dashboard")),
-                                                            menuItem("Overview image",
+                                                            menuItem("Demo structure image",
                                                                      tabName = "structure_img", icon = icon("dashboard")),
                                                             menuItem("Spatial structure",
                                                                      tabName = "spatial_struct", icon = icon("dashboard"))
