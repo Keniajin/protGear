@@ -122,7 +122,7 @@ shinyUI(
                                                 uiOutput('dir_files'),
                                                 br(),
                                                 uiOutput("batch_select"),
-                                                h4("This will just show the folder named +sampleID+"),
+                                                h4("Make sure this isthe folder with +sampleID's+"),
                                                 uiOutput("sampleID_select"),
                                                 br(),
                                                 sidebarMenu(id="data_load_tabs",

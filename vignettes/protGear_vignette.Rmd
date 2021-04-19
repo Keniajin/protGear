@@ -20,7 +20,6 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F, #tidy = T,tidy.opt
                        tidy='styler', tidy.opts=list(strict=T))
 
 
-
 ```
 
 

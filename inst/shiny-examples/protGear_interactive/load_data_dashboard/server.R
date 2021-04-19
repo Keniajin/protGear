@@ -723,7 +723,7 @@ output$sampleID_select <- renderUI({
   ## the path
   folder_choose <- parseDirPath(c(home = wd_this) ,input$folderChoose)
   paths <- list.dirs(path =sel_path() , full.names = TRUE)
-  #paths <- paths[grepl("sampleID" , paths)]
+  #paths <- paths[grepl("sample[Ii][Dd]" , paths)]
   path_toutput <- gsub(paste0(getwd(),"/"),"", paths)
 
   selectInput('sampleID_path_param',
@@ -2077,7 +2077,8 @@ to_normalise_reactive <- reactive({
       ungroup() %>% select(-slide,-sampleID,-sample_array_ID) %>%
       select(antigen, machine,day,sample_index, everything()) %>%
       gather(variable, value, -(antigen:sample_index)) %>%
-      unite(temp, antigen ) %>% select(-variable) %>%
+      unite(temp, antigen ) %>%
+      select(-variable) %>%
       spread(temp, value)
 
     row.names(to_normalise) <- to_normalise$sample_index
@@ -2093,7 +2094,7 @@ array_matrix_reactive <- reactive({
     batch_vars_name <- c("machine","day")
     df_to_normalise <-  dataCV_tag  %>%
       ungroup() %>%
-      select(slide=.id,sampleID,sample_array_ID,antigen,batch_vars_name,mean_best_CV) %>%
+      dplyr::select(slide=.id,sampleID,sample_array_ID,antigen,batch_vars_name,mean_best_CV) %>%
       group_by(sampleID,machine, slide)
 
     df_to_normalise$sample_index <- group_indices(.data =df_to_normalise )
@@ -2170,11 +2171,14 @@ normalised_list_reactive <- reactive({
                                        control_antigens=control_antigens)
   }else if(!is.null(to_normalise) & input$normalisation_method=="rlm"){
     array_matrix <- array_matrix_reactive()
+    print(row.names(to_normalise))
     matrix_antigen <-  to_normalise %>%
+    #  rownames_to_column(.data, var = "rowname") %>%
       ## check consistency of names
     select(antigens) %>%
       as.matrix(.)
-
+  ## check why it looses row names above
+  row.names(matrix_antigen) <- row.names(to_normalise)
     normalise_list <- matrix_normalise(matrix_antigen=matrix_antigen,
                                        method = input$normalisation_method,
                                        array_matrix=array_matrix,

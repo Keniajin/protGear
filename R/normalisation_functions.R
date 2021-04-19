@@ -80,10 +80,6 @@ matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=F,batch
     }else if(is.null(control_antigens) | is.null(array_matrix)){
       stop("Specify the control antigens or array_matrix to use RLM")
     }
-
-
-
-
   }
 
   cv_val <- round(sd(as.matrix(exprs_normalised),na.rm = T)/mean(as.matrix(exprs_normalised), na.rm = T),4)*100
@@ -181,8 +177,15 @@ rlm_normalise_matrix <- function(matrix_antigen, array_matrix,control_antigens){
   array_matrix <- array_matrix %>%
     group_by(slide) %>%
     mutate(Array=group_indices())
+
+
+
   rlm_normalise_df <- as.data.frame.matrix(matrix_antigen) %>%
-    mutate(sample_index=row.names(matrix_antigen)) %>%
+    #dplyr::mutate(sample_index=row.names(matrix_antigen))
+    rownames_to_column(var = "sample_index")
+
+
+  rlm_normalise_df <- rlm_normalise_df %>%
     select(sample_index, everything()) %>%
     gather(antigen, MFI_val,-sample_index) %>%
     left_join(array_matrix, by="sample_index") %>%
