@@ -59,7 +59,7 @@ To install `protGear` run the following commands in R
 
 ```{r, eval=FALSE}
 ## make sure devtools package is installed
-devtools::install_github('keniajin/protGear', dependencies=TRUE)
+remotes::install_github('Keniajin/protGear', dependencies=TRUE)
 ```
 
 
@@ -465,7 +465,7 @@ p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
                             silent = T)
 p3 <- ggplotify::as.ggplot(p3)
 p <- p3 +  theme_void()
-p
+print(p)
 ```
 
 ## PCA analysis
@@ -502,8 +502,8 @@ p4 <-  fviz_pca_var(res_pca, col.var = "cos2",
 
  
 ## combine the plots into one grid
-p <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
-p
+## combine the plots into one grid
+p_pca <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
 ```
 
 ## Shiny application
