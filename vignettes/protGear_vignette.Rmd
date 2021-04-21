@@ -465,7 +465,19 @@ p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
                             silent = T)
 p3 <- ggplotify::as.ggplot(p3)
 p <- p3 +  theme_void()
-print(p)
+ggsave(p ,
+         filename ="heatmap.png" ,
+         width = 16 , height = 12 , 
+         limitsize = F,
+         dpi=200 )
+```
+
+
+```{r image_heat, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'}
+
+files <- list.files(pattern = 'heatmap')
+
+knitr::include_graphics(files[[1]])
 ```
 
 ## PCA analysis
@@ -503,8 +515,25 @@ p4 <-  fviz_pca_var(res_pca, col.var = "cos2",
  
 ## combine the plots into one grid
 ## combine the plots into one grid
+## combine the plots into one grid
 p_pca <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
+
+ggsave(p_pca ,
+         filename ="p_pca.png" ,
+         width = 16 , height = 12 , 
+          units = "in",
+         limitsize = F,
+         dpi=300)
+ 
 ```
+
+
+
+```{r image_pca, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'}
+files <- list.files(pattern = 'p_pca')
+knitr::include_graphics(files[[1]])
+```
+
 
 ## Shiny application
 Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
