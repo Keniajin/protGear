@@ -340,7 +340,8 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 #' \code{minimum_half and movingmin_bg} use the block of the protein array as the grid.
 #' If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
 #' a block.  If method="movingmin_bg" then any intensity which is negative after background subtraction is reset to the minimum positive value
-#' in a block.
+#' in a block. For \code{edwards} we implement a similar algorithm with \code{\link[limma]{backgroundCorrect(method="edwards")}} and for \code{'normexp'}
+#' we use  the saddle-point approximation to maximum likelihood, \code{\link[limma]{backgroundCorrect}} for more details.
 #' @description  A generic function to perform background correction.
 #' @return
 #' @export
@@ -461,6 +462,24 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     #the corrected intensity. This results in a smooth monotonic transformation of the background subtracted
     #intensities such that all the corrected intensities are positive.
     ##Both norm exp are implemented in Limma for DNA micro array data
+    Data1 <- Data1 %>%
+      mutate(FMedianBG_correct=!!genepix_vars$FG-!!genepix_vars$BG)
+    E <- as.matrix(Data1[['FMedianBG_correct']])
+    rownames(E) <- rownames(Data1)
+
+    ## here we use Here "saddle" gives the saddle-point approximation to maximum likelihood from
+    # Ritchie et al (2007) and improved by Silver et al (2009) --> check limma for details
+    ## can we use offset--> updates
+    bg_correct <- limma::backgroundCorrect.matrix(E=E, method = "auto", offset = 0,
+                                                  printer = NULL,
+                                                  normexp.method = "saddle", verbose = TRUE)
+    bg_correct <- data.frame(FMedianBG_correct=bg_correct)
+
+    ## select the important variables and join with the background corrected data
+    Data1 <- Data1 %>%
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,
+                     BGMedian=!!genepix_vars$BG,Block, Column, Row) %>%
+      bind_cols(bg_correct)
   }
   #Data1 <- Data1 %>% rename(F635MedianB635=F635.Median...B635)
 

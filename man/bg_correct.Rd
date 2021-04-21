@@ -29,5 +29,6 @@ Background correction
 \code{minimum_half and movingmin_bg} use the block of the protein array as the grid.
 If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
 a block.  If method="movingmin_bg" then any intensity which is negative after background subtraction is reset to the minimum positive value
-in a block.
+in a block. For \code{edwards} we implement a similar algorithm with \code{\link[limma]{backgroundCorrect(method="edwards")}} and for \code{'normexp'}
+we use  the saddle-point approximation to maximum likelihood, \code{\link[limma]{backgroundCorrect}} for more details.
 }

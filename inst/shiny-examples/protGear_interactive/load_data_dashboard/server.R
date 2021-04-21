@@ -1315,7 +1315,7 @@ output$bg_correction_select_1 <- renderUI({
                              "Moving mininimum"="movingmin_bg",
                              "Half Moving mininimum"="minimum_half",
                              "Log-linear background correction"="edwards",
-                             "Normal Exponential (normexp)"=""
+                             "Normal Exponential (normexp)"="normexp"
                              )
   selectInput(inputId = 'bg_correct_1',
               label = 'Background correction',
@@ -1377,7 +1377,7 @@ output$bg_correction_drop_down <- renderUI({
                              "Moving mininimum"="movingmin_bg",
                              "Half Moving mininimum"="minimum_half",
                              "Log-linear background correction"="edwards",
-                             "Normal Exponential (normexp)"="")
+                             "Normal Exponential (normexp)"="normexp")
 
 
   dropdownButton(
@@ -1404,7 +1404,7 @@ output$bg_correction_select <-  renderUI({
                              "Moving mininimum"="movingmin_bg",
                              "Half Moving mininimum"="minimum_half",
                              "Log-linear background correction"="edwards",
-                             "Normal Exponential (normexp)"="")
+                             "Normal Exponential (normexp)"="normexp")
   selectInput(inputId = 'bg_correct',
               label = 'Background correction',
               selected = selected_bg,
@@ -1953,7 +1953,7 @@ output$bg_correct_infobox <- output$bg_correct_infobox2 <- renderInfoBox({
                                "Moving mininimum"="movingmin_bg",
                                "Half Moving mininimum"="minimum_half",
                                "Log-linear background correction"="edwards",
-                               "Normal Exponential (normexp)"="")
+                               "Normal Exponential (normexp)"="normexp")
     bg_app <- names(which(bg_correct_approaches == input$bg_correct))
     infoBox("Background correction",bg_app ,
             subtitle = paste0("") ,
