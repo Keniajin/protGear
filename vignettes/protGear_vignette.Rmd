@@ -115,17 +115,16 @@ protGear offers a functionality to inspect the slide visually for any strong spa
 #### Visualize the foreground using the `visualize_slide` function
 
 ```{r chunk6, fig.align='left'}
-p <- visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
+visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
                 MFI_var ='B635 Median' )
-p
+
 ```
 
 #### Visualize the background using the `visualize_slide_2d` function
 
 ```{r chunk7, fig.align='left'}
-p2 <- visualize_slide_2d(infile ='data/array_data/machine1/KK2-06.txt' , 
+visualize_slide_2d(infile ='data/array_data/machine1/KK2-06.txt' , 
                    MFI_var ='F635 Median' )
-p2
 ```
 
 
