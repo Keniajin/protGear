@@ -536,6 +536,7 @@ files <- list.files(pattern = 'p_pca')
 knitr::include_graphics('p_pca.PNG')
 ```
 
+![Chart 1](p_pca.PNG)
 
 ## Shiny application
 Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
