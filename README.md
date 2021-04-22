@@ -23,11 +23,10 @@ To Install R:
  - Select a CRAN location (a mirror site) and click the corresponding link.
  - Download R depending on your operating system. 
 
-## protGear Vignette
+## protGear help pages
 
-The main page - https://keniajin.github.io/protgear/ 
-Vignette - https://keniajin.github.io/protGear/articles/protGear_vignette.html
- 
+- The main page - https://keniajin.github.io/protgear/ 
+- Vignette - https://keniajin.github.io/protGear/articles/protGear_vignette.html
 
 ## Contribute
 
