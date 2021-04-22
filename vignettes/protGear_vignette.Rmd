@@ -466,7 +466,7 @@ p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
 p3 <- ggplotify::as.ggplot(p3)
 p <- p3 +  theme_void()
 ggsave(p ,
-         filename ="heatmap.png" ,
+         filename ="heatmap.PNG" ,
          width = 16 , height = 12 , 
          limitsize = F,
          dpi=200 )
@@ -477,7 +477,8 @@ ggsave(p ,
 
 files <- list.files(pattern = 'heatmap')
 
-knitr::include_graphics(files[[1]])
+#knitr::include_graphics(files[[1]])
+knitr::include_graphics('heatmap.PNG')
 ```
 
 ## PCA analysis
@@ -519,7 +520,7 @@ p4 <-  fviz_pca_var(res_pca, col.var = "cos2",
 p_pca <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
 
 ggsave(p_pca ,
-         filename ="p_pca.png" ,
+         filename ="p_pca.PNG" ,
          width = 16 , height = 12 , 
           units = "in",
          limitsize = F,
@@ -531,7 +532,8 @@ ggsave(p_pca ,
 
 ```{r image_pca, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'}
 files <- list.files(pattern = 'p_pca')
-knitr::include_graphics(files[[1]])
+#knitr::include_graphics(files[[1]])
+knitr::include_graphics('p_pca.PNG')
 ```
 
 
