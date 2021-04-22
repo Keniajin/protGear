@@ -168,7 +168,8 @@
 <code>minimum_half and movingmin_bg</code> use the block of the protein array as the grid.
 If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
 a block.  If method="movingmin_bg" then any intensity which is negative after background subtraction is reset to the minimum positive value
-in a block.</p>
+in a block. For <code>edwards</code> we implement a similar algorithm with <code>backgroundCorrect(method="edwards")</code> and for <code>'normexp'</code>
+we use  the saddle-point approximation to maximum likelihood, <code><a href='https://rdrr.io/pkg/limma/man/backgroundcorrect.html'>backgroundCorrect</a></code> for more details.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

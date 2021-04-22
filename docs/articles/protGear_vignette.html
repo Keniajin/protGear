@@ -86,7 +86,7 @@
       <h1 data-toc-skip>protGear:An R package with an interactive web-based protein microarray data processing suite</h1>
                         <h4 class="author">Kennedy Mwai</h4>
             
-            <h4 class="date">19 April, 2021</h4>
+            <h4 class="date">22 April, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/keniajin/protGear/blob/master/vignettes/protGear_vignette.Rmd"><code>vignettes/protGear_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>protGear_vignette.Rmd</code></div>
@@ -124,7 +124,7 @@
 <p>To install <code>protGear</code> run the following commands in R</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## make sure devtools package is installed</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"keniajin/protGear"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Keniajin/protGear"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="package-load-and-importing-data" class="section level2">
@@ -668,8 +668,17 @@ CD4TAG
 <span class="op">)</span>
 <span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">ggplotify</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplotify/man/as.ggplot.html">as.ggplot</a></span><span class="op">(</span><span class="va">p3</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p3</span> <span class="op">+</span> <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span>
-<span class="va">p</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-25-1.png" width="700"></p>
+<span class="fu">ggsave</span><span class="op">(</span><span class="va">p</span>,
+  filename <span class="op">=</span> <span class="st">"heatmap.png"</span>,
+  width <span class="op">=</span> <span class="fl">16</span>, height <span class="op">=</span> <span class="fl">12</span>,
+  limitsize <span class="op">=</span> <span class="cn">F</span>,
+  dpi <span class="op">=</span> <span class="fl">200</span>
+<span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="heatmap.png" alt="PCA analysis" width="100%"><p class="caption">
+PCA analysis
+</p>
+</div>
 </div>
 <div id="pca-analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -709,22 +718,29 @@ CD4TAG
 
 
 <span class="co">## combine the plots into one grid</span>
-<span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<span class="co">## combine the plots into one grid</span>
+<span class="co">## combine the plots into one grid</span>
+<span class="va">p_pca</span> <span class="op">&lt;-</span> <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/pca,%20-1.png" width="1536" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span></code></pre></div>
-<pre><code>## TableGrob (2 x 2) "arrange": 4 grobs
-##   z     cells    name           grob
-## 1 1 (1-1,1-1) arrange gtable[layout]
-## 2 2 (1-1,2-2) arrange gtable[layout]
-## 3 3 (2-2,1-1) arrange gtable[layout]
-## 4 4 (2-2,2-2) arrange gtable[layout]</code></pre>
+<code class="sourceCode R"><span class="fu">ggsave</span><span class="op">(</span><span class="va">p_pca</span>,
+  filename <span class="op">=</span> <span class="st">"p_pca.png"</span>,
+  width <span class="op">=</span> <span class="fl">16</span>, height <span class="op">=</span> <span class="fl">12</span>,
+  units <span class="op">=</span> <span class="st">"in"</span>,
+  limitsize <span class="op">=</span> <span class="cn">F</span>,
+  dpi <span class="op">=</span> <span class="fl">300</span>
+<span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="p_pca.png" alt="PCA analysis" width="100%"><p class="caption">
+PCA analysis
+</p>
+</div>
 </div>
 <div id="shiny-application" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny-application" class="anchor"></a>Shiny application</h2>
 <p>Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">protGear</span><span class="fu">::</span><span class="fu"><a href="../reference/launch_protGear_interactive.html">launch_protGear_interactive</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
