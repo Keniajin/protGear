@@ -561,7 +561,7 @@ CD4TAG
 <div id="normalisation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#normalisation" class="anchor"></a>Normalisation</h2>
-<p>To normalise the data, we create a matrix <code>matrix_antigen</code> with all the data combined. We ensure the slide identifier is included as row names of the matrix or we have a way to join them after normalisation. The <code>array_matrix</code> matrix is used to hold these parameters. We have implemented four different normalisation techniques;</p>
+<p>To normalise the data, we create a matrix <code>matrix_antigen</code> with all the data combined. We ensure the slide identifier is included as row names of the matrix or we have a way to join them after normalisation. The <code>array_matrix</code> matrix is used to hold these parameters. In place of <code>AMA1</code> in the example below you use one of your features or antigen. We have implemented four different normalisation techniques;</p>
 <ol style="list-style-type: decimal">
 <li>
 <span class="math inline">\(Log_2\)</span> normalisation</li>
@@ -599,7 +599,8 @@ CD4TAG
   <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 
 
-<span class="co">## create the matix to hold the important parameters</span>
+<span class="co">## create the matrix to hold the important parameters</span>
+<span class="co">## in place of AMA1 you use one of your features or antigen</span>
 <span class="va">array_matrix</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">antigen</span> <span class="op">==</span> <span class="st">"AMA1"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>

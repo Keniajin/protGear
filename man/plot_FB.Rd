@@ -9,7 +9,7 @@ plot_FB(
   antigen_name = "antigen",
   bg_MFI = "BG_Median",
   FG_MFI = "FBG_Median",
-  log_mfi = F
+  log_mfi = FALSE
 )
 }
 \arguments{

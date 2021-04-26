@@ -4,7 +4,7 @@
 \alias{visualize_slide}
 \title{Visualize the slide mimicking the original scan image.}
 \usage{
-visualize_slide(infile, MFI_var, interactive = F, d_f = NA)
+visualize_slide(infile, MFI_var, interactive = FALSE, d_f = NA)
 }
 \arguments{
 \item{infile}{a .gpr file to be used to visualize the expression intensities of the slide spots}

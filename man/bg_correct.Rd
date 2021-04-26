@@ -25,10 +25,11 @@ A generic function to perform background correction.
 \details{
 Background correction
 
- The function implements background correction methods developed by \code{\link[limma]{backgroundCorrect}}. But for
-\code{minimum_half and movingmin_bg} use the block of the protein array as the grid.
+ The function implements background correction methods developed by \code{\link[limma]{backgroundCorrect}}. But the
+\code{minimum_half and movingmin_bg} uses the block of the protein array as the grid. If method="movingmin_bg" the minimum
+background value within a  block is subtracted.
 If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
-a block.  If method="movingmin_bg" then any intensity which is negative after background subtraction is reset to the minimum positive value
+a block.  If method="movingmin_value" then any intensity which is negative after background subtraction is reset to the minimum positive value
 in a block. For \code{edwards} we implement a similar algorithm with \code{\link[limma]{backgroundCorrect(method="edwards")}} and for \code{'normexp'}
 we use  the saddle-point approximation to maximum likelihood, \code{\link[limma]{backgroundCorrect}} for more details.
 }

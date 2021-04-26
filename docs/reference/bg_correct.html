@@ -164,10 +164,11 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Background correction</p>
-<p>The function implements background correction methods developed by <code><a href='https://rdrr.io/pkg/limma/man/backgroundcorrect.html'>backgroundCorrect</a></code>. But for
-<code>minimum_half and movingmin_bg</code> use the block of the protein array as the grid.
+<p>The function implements background correction methods developed by <code><a href='https://rdrr.io/pkg/limma/man/backgroundcorrect.html'>backgroundCorrect</a></code>. But the
+<code>minimum_half and movingmin_bg</code> uses the block of the protein array as the grid. If method="movingmin_bg" the minimum
+background value within a  block is subtracted.
 If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
-a block.  If method="movingmin_bg" then any intensity which is negative after background subtraction is reset to the minimum positive value
+a block.  If method="movingmin_value" then any intensity which is negative after background subtraction is reset to the minimum positive value
 in a block. For <code>edwards</code> we implement a similar algorithm with <code>backgroundCorrect(method="edwards")</code> and for <code>'normexp'</code>
 we use  the saddle-point approximation to maximum likelihood, <code><a href='https://rdrr.io/pkg/limma/man/backgroundcorrect.html'>backgroundCorrect</a></code> for more details.</p>
 

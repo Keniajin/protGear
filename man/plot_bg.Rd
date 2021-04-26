@@ -4,7 +4,7 @@
 \alias{plot_bg}
 \title{Plot background}
 \usage{
-plot_bg(df, x_axis = "antigen", bg_MFI = "B635_Median", log_mfi = T)
+plot_bg(df, x_axis = "antigen", bg_MFI = "B635_Median", log_mfi = TRUE)
 }
 \arguments{
 \item{df}{A     default dataset to use for plot.}

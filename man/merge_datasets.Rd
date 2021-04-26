@@ -12,7 +12,7 @@ merge_datasets(
   totsamples,
   blockspersample,
   sampleID_path,
-  bg = F
+  bg = FALSE
 )
 }
 \arguments{

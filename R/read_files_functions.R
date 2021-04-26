@@ -378,7 +378,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     #----------------------------------------------------------------------------------------------------
       ##MFI values without subtracting the background
     Data1 <- Data1 %>%
-      dplyr::select(sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG ,BGMedian,
+      dplyr::select(sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG ,BGMedian=!!genepix_vars$BG,
                      Block, Column, Row) %>%
       mutate(FMedianBG_correct=FMedian) %>%
       mutate(replicate = 1:n()) #%>%
@@ -391,7 +391,8 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     ##save the MFI values with subtracting the background
   Data1 <- Data1 %>%
       dplyr::mutate(FMedianBG_correct=(!!genepix_vars$FG)-(!!genepix_vars$BG)) %>%
-      dplyr::select( sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row) %>%
+      dplyr::select( sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG,
+                     BGMedian=!!genepix_vars$BG,FMedianBG_correct,Block, Column, Row) %>%
       dplyr::mutate(replicate = 1:n())
      #%>%
     # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
@@ -403,7 +404,8 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     ##save the MFI values with subtracting the background
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG-global_BGMedian) %>%
-      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row) %>%
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,
+                     BGMedian=!!genepix_vars$BG, FMedianBG_correct,Block, Column, Row) %>%
       mutate(replicate = 1:n())
     #%>%
     # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
@@ -415,7 +417,8 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       ## this is generated while reading the array files using read_array_files function
       mutate(FMedianBG_correct=!!genepix_vars$FG-minimum_BGMedian) %>%
       dplyr::select( sampleID,sample_array_ID, antigen=Name,
-                     FMedian=!!genepix_vars$FG,FMedianBG_correct,BGMedian,Block, Column, Row) %>%
+                     FMedian=!!genepix_vars$FG,BGMedian=!!genepix_vars$BG,
+                     FMedianBG_correct,Block, Column, Row) %>%
       mutate(replicate = 1:n())
     # %>%
     # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
@@ -427,7 +430,8 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     ##save the MFI values with subtracting the background
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG - !!genepix_vars$BG) %>%
-      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row)  %>%
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,
+                     BGMedian=!!genepix_vars$BG,FMedianBG_correct,Block, Column, Row)  %>%
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
                                       (minpositive(FMedianBG_correct)/2),FMedianBG_correct)) %>%
@@ -439,7 +443,8 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     #----------------------------------------------------------------------------------------------------
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG - !!genepix_vars$BG) %>%
-      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row)  %>%
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,
+                     BGMedian=!!genepix_vars$BG,FMedianBG_correct,Block, Column, Row)  %>%
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
                                       (minpositive(FMedianBG_correct)),FMedianBG_correct)) %>%

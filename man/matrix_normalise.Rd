@@ -7,11 +7,11 @@
 matrix_normalise(
   matrix_antigen,
   method = "log2",
-  batch_correct = F,
+  batch_correct = FALSE,
   batch_var1,
   batch_var2 = day_batches,
-  return_plot = F,
-  plot_by_antigen = T,
+  return_plot = FALSE,
+  plot_by_antigen = TRUE,
   control_antigens = NULL,
   array_matrix = NULL
 )
