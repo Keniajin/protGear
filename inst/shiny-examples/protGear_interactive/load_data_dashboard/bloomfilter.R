@@ -23,8 +23,8 @@ BloomFilter <- setRefClass("BloomFilter",
     # @param n - Set size
     # @param p - Desired false positive probability (e.g. 0.01 for 1%)
     initialize = function(n = 10000, p = 0.001) {
-      m = (as.numeric(n) * log(1 / p)) / (log(2)^2)
-      
+      m <- (as.numeric(n) * log(1 / p)) / (log(2)^2)
+
       .m <<- as.integer(m)
       .bits <<- bit(.m)
       .k <<- max(1L, as.integer(round((as.numeric(.m)/n) * log(2))))

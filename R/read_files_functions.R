@@ -46,7 +46,7 @@ read_array_files <- function(i,data_path,genepix_vars){
     }
 
     d_f <- d_f %>%
-      mutate(global_BGMedian=median(!!genepix_vars$BG,na.rm = T)) %>%
+      mutate(global_BGMedian=median(!!genepix_vars$BG,na.rm = TRUE)) %>%
       ## minimum BG per block and >1 -- Moving minimum approach per block
       group_by(Block) %>%
       mutate(minimum_BGMedian=minpositive(!!genepix_vars$BG)) %>%
@@ -74,8 +74,8 @@ read_array_files <- function(i,data_path,genepix_vars){
 #' @param bg
 #'
 #'
-merge_datasets <- function(dfs,filenames , data_files ,totsamples, blockspersample ,sampleID_path,bg=F){
-  if(bg==T){
+merge_datasets <- function(dfs,filenames , data_files ,totsamples, blockspersample ,sampleID_path,bg=FALSE){
+  if(bg==TRUE){
     data1_transp <- purrr::map(.x=dfs, .f=transp_bg,
                                totsamples=totsamples,blockspersample=blockspersample,
                                sampleID_path=sampleID_path,data_files=data_files )
@@ -111,7 +111,7 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
   ## if the sample ID is not available, we create an automated sampleID
   if(file.exists(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")))){
     arraynames <- read.csv(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")) ,
-                           header = T , stringsAsFactors = F , colClasses="character")
+                           header = TRUE , stringsAsFactors = FALSE , colClasses="character")
   }else{
     warning(paste0(iden, " Not found in the sampleID files here", genepix_vars$sampleID_path))
     arraynames <- data.frame(v1=(1:genepix_vars$totsamples) ,
@@ -128,7 +128,7 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 
   ## capture errors for same sample ID in a slide
   if(length(unique(arraynames$v2)) <genepix_vars$totsamples) {
-    sink("error/error_replicates.txt" , append = T)
+    sink("error/error_replicates.txt" , append = TRUE)
     print(paste0("Most likely there is a repeated sample name for " , iden))
     sink()
     arraynames <- arraynames %>%
@@ -198,7 +198,6 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 #' @export
 #'
 #' @examples
-#' Plot background values
 #' @title Plot background
 #' @param df A 	default dataset to use for plot.
 #' @param antigen_name  The \code{variable} describing which features/proteins/antibodies in the data should be used to plot
@@ -212,7 +211,7 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 #'
 #'
 plot_bg <- function(df, x_axis="antigen",bg_MFI="B635_Median",
-                    log_mfi=T){
+                    log_mfi=TRUE){
   ## create an id to help in having a numeric sample ID to sort your data
   ## this is because all sampleIDs from the samples were not unique
   ## rename the original sampleID sampleID2
@@ -225,7 +224,7 @@ plot_bg <- function(df, x_axis="antigen",bg_MFI="B635_Median",
 
   # bg_plot$sampleID <- group_indices(.data =bg_plot )
 
-  if(log_mfi==T){
+  if(log_mfi==TRUE){
     p_pubr <- ggboxplot(data = bg_plot ,
                         x=x_axis , y="log_bg",
                         facet.by = "replicate",ncol=1)
@@ -239,7 +238,7 @@ plot_bg <- function(df, x_axis="antigen",bg_MFI="B635_Median",
 
 
 
-  }else if(log_mfi==F){
+  }else if(log_mfi==FALSE){
     p_pubr <- ggboxplot(data = bg_plot ,
                         x=x_axis , y=bg_MFI,
                         facet.by = "replicate",ncol=1)
@@ -283,7 +282,7 @@ plot_bg <- function(df, x_axis="antigen",bg_MFI="B635_Median",
 #'
 #' @examples
 plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Median",
-                    log_mfi=F){
+                    log_mfi=FALSE){
   ## create an id to help in having a numeric sample ID to sort your data
   ## this is because all sampleIDs from the samples were not unique
   ## rename the original sampleID sampleID2
@@ -296,7 +295,7 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 
 
 
-  if(log_mfi==T){
+  if(log_mfi==TRUE){
     p <- ggplot(bg_plot , aes(log_fb,log_bg,
                               text = paste("Antigen: ", antigen,
                                            "<br>FG: $", FBG_Median,
@@ -307,7 +306,7 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 
 
 
-  }else if(log_mfi==F){
+  }else if(log_mfi==FALSE){
 
     p <- ggplot(bg_plot , aes(FBG_Median,BG_Median,
                               text = paste("Antigen: ", antigen,
@@ -336,10 +335,11 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 #' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @param method 	a description of the background correction to be used.  Possible values are \code{"none","subtract_local",
 #' "subtract_global","movingmin_bg","minimum_half","edwards" or "normexp"}. The default is \code{"subtract_local"}.
-#' @details  The function implements background correction methods developed by \code{\link[limma]{backgroundCorrect}}. But for
-#' \code{minimum_half and movingmin_bg} use the block of the protein array as the grid.
+#' @details  The function implements background correction methods developed by \code{\link[limma]{backgroundCorrect}}. But the
+#' \code{minimum_half and movingmin_bg} uses the block of the protein array as the grid. If method="movingmin_bg" the minimum
+#' background value within a  block is subtracted.
 #' If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
-#' a block.  If method="movingmin_bg" then any intensity which is negative after background subtraction is reset to the minimum positive value
+#' a block.  If method="movingmin_value" then any intensity which is negative after background subtraction is reset to the minimum positive value
 #' in a block. For \code{edwards} we implement a similar algorithm with \code{\link[limma]{backgroundCorrect(method="edwards")}} and for \code{'normexp'}
 #' we use  the saddle-point approximation to maximum likelihood, \code{\link[limma]{backgroundCorrect}} for more details.
 #' @description  A generic function to perform background correction.
@@ -374,11 +374,11 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
   #create_dir(path = system.file("processe_data/raw_MFI_BG/"))
   #write_csv(data1_full_bg ,system.file("processed_data/raw_MFI_BG/", 'file_ident', package="protGear"))
   #----------------------------------------------------------------------------------------------------
-  if(method=="none"|method==""){
+  if(method=="none"| method==""){
     #----------------------------------------------------------------------------------------------------
       ##MFI values without subtracting the background
     Data1 <- Data1 %>%
-      dplyr::select(sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG ,
+      dplyr::select(sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG ,BGMedian,
                      Block, Column, Row) %>%
       mutate(FMedianBG_correct=FMedian) %>%
       mutate(replicate = 1:n()) #%>%
@@ -391,7 +391,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     ##save the MFI values with subtracting the background
   Data1 <- Data1 %>%
       dplyr::mutate(FMedianBG_correct=(!!genepix_vars$FG)-(!!genepix_vars$BG)) %>%
-      dplyr::select( sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG,FMedianBG_correct,Block, Column, Row) %>%
+      dplyr::select( sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row) %>%
       dplyr::mutate(replicate = 1:n())
      #%>%
     # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
@@ -403,36 +403,50 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     ##save the MFI values with subtracting the background
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG-global_BGMedian) %>%
-      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,FMedianBG_correct,Block, Column, Row) %>%
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row) %>%
       mutate(replicate = 1:n())
     #%>%
     # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
     #----------------------------------------------------------------------------------------------------
   }else if(method=="movingmin_bg"){
-    ## this is subtracte
+    ## this is subtracted
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG - !!genepix_vars$BG) %>%
-      #mutate(FMedianBG_correct=!!genepix_vars$FG-minimum_BGMedian) %>%
-      dplyr::select( sampleID,sample_array_ID, antigen=Name,FMedian=!!genepix_vars$FG,FMedianBG_correct,Block, Column, Row) %>%
+      ## this is generated while reading the array files using read_array_files function
+      mutate(FMedianBG_correct=!!genepix_vars$FG-minimum_BGMedian) %>%
+      dplyr::select( sampleID,sample_array_ID, antigen=Name,
+                     FMedian=!!genepix_vars$FG,FMedianBG_correct,BGMedian,Block, Column, Row) %>%
       mutate(replicate = 1:n())
     # %>%
     # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
 
   }else if(method=="minimum_half"){
     ## this approach ensures all the MFI values are positive
-    ## if the MFI <0 after subtraction the MFI is set to the half of the minimum corrected intenisities
+    ## if the MFI <0 after subtraction the MFI is set to the half of the minimum corrected intensities
     #----------------------------------------------------------------------------------------------------
     ##save the MFI values with subtracting the background
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG - !!genepix_vars$BG) %>%
-      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,FMedianBG_correct,Block, Column, Row)  %>%
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row)  %>%
       group_by(Block) %>%
-      mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,(minpositive(FMedianBG_correct, na.rm = T)/2),FMedianBG_correct)) %>%
+      mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
+                                      (minpositive(FMedianBG_correct)/2),FMedianBG_correct)) %>%
       mutate(replicate = 1:n())
-    #%>%
-    #  filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
     #----------------------------------------------------------------------------------------------------
-  }else if(method=="edwards"){
+  }else if(method=="minimum_value"){
+    ## this approach ensures all the MFI values are positive
+    ## if the MFI <0 after subtraction the MFI is set to the minimum of the corrected intensities
+    #----------------------------------------------------------------------------------------------------
+    Data1 <- Data1 %>%
+      mutate(FMedianBG_correct=!!genepix_vars$FG - !!genepix_vars$BG) %>%
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,FMedianBG_correct,Block, Column, Row)  %>%
+      group_by(Block) %>%
+      mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
+                                      (minpositive(FMedianBG_correct)),FMedianBG_correct)) %>%
+      mutate(replicate = 1:n())
+
+    #----------------------------------------------------------------------------------------------------
+  } else if(method=="edwards"){
     #a log-linear interpolation method is used to adjust lower intensities as in Edwards (2003).
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG-!!genepix_vars$BG)
@@ -455,7 +469,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<delta,
                                       (delta * exp(1 - (BGMedian + delta)/FMedian)),FMedianBG_correct)) %>%
-      select(-c(BGMedian))
+        dplyr::mutate(replicate = 1:n())
   }else if(method=="normexp"){
     ##a convolution of normal and exponential distributions is fitted to the foreground intensities using
     #the background intensities as a covariate, and the expected signal given the observed foreground becomes
@@ -479,7 +493,9 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     Data1 <- Data1 %>%
       dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,
                      BGMedian=!!genepix_vars$BG,Block, Column, Row) %>%
-      bind_cols(bg_correct)
+      bind_cols(bg_correct) %>%
+      group_by(Block) %>%
+      dplyr::mutate(replicate = 1:n())
   }
   #Data1 <- Data1 %>% rename(F635MedianB635=F635.Median...B635)
 
@@ -507,7 +523,7 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
   ## this can be pulled from a mysql table
   if(file.exists(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")))){
     arraynames <- read.csv(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")) ,
-                           header = T , stringsAsFactors = F , colClasses="character")
+                           header = TRUE , stringsAsFactors = FALSE , colClasses="character")
   }else{
     warning(paste0(iden, " Not found in the sampleID files", genepix_vars$sampleID_path))
     arraynames <- data.frame(v1=(1:genepix_vars$totsamples) , v2=paste0("SID_gen",1:genepix_vars$totsamples),barcode=iden)
@@ -522,7 +538,7 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
 
   ## capture errors for same sample ID in a slide
   if(length(unique(arraynames$v2)) <genepix_vars$totsamples) {
-    sink("error/error_replicates.txt" , append = T)
+    sink("error/error_replicates.txt" , append = TRUE)
     print(paste0("Most likely there is a repeated sample name for " , iden))
     sink()
     arraynames <- arraynames %>%
@@ -594,7 +610,7 @@ read_array_visualize <- function(infile){
 #' @export
 #'
 #' @examples
-visualize_slide <- function(infile, MFI_var,interactive=F, d_f=NA){
+visualize_slide <- function(infile, MFI_var,interactive=FALSE, d_f=NA){
   ## d_f only used for the shiny app
   if(is.na(d_f)){
     d_f <- read_array_visualize(infile)
@@ -611,8 +627,8 @@ visualize_slide <- function(infile, MFI_var,interactive=F, d_f=NA){
                     formatC(d_f$`F635 Median`,format="d", big.mark = ",")) %>%
     lapply(htmltools::HTML)
 
-  point_size=0.5
-  if(interactive==F) point_size=1
+  point_size <- 0.5
+  if(interactive==FALSE) point_size <- 1
   ## plot the visual slide
   p <- ggplot(d_f, aes(x=X, y=-Y, text=labels)) +
     #geom_rect(aes(xmin = minX, xmax = maxX, ymin = -minY, ymax = -maxY),color = "black",alpha=0.0001,fill="blue") +
@@ -623,9 +639,9 @@ visualize_slide <- function(infile, MFI_var,interactive=F, d_f=NA){
                           high="red", space ="Lab" )+
     geom_text(aes(x=meanX, y=-meanY, label=paste("Block",Block)), color="black",size=4)
 
-  if(interactive==F){
+  if(interactive==FALSE){
     return(p)
-  }else if(interactive==T){
+  }else if(interactive==TRUE){
     p <- ggplotly(p, tooltip='text')
     return(p)
   }

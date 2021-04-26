@@ -29,7 +29,6 @@ A generic function for plotting of R objects.
 Plot background values
 }
 \examples{
-Plot background values
 
 
 }

@@ -72,7 +72,7 @@ library(protGear)
 The first part is to specify the parameters of the micro-array experiment to assist in processing the data.  The parameters specified are 
 
   - channel - The scanner fluorescence output used to record the data. It can be  green,red,blue among others with a specified number. 
-  - chip_path - the folder where the 'gpr' or 'txt' files are stored.
+  - chip_path - the folder where the sub folders of 'gpr' or 'txt' files are stored. This path contains sub folders with the array data, for example the sub folders for the different batches. 
   - totsamples - the number of samples in a slide or array.  
   - blockspersample - The number of blocks a sample it takes. In this example each sample occupies 2 blocks each with 384 spots. 
   - sampleID_path - the folder where the sample identifiers files are stored
@@ -90,6 +90,7 @@ genepix_vars <- array_vars(channel="635" ,
                            sampleID_path = "data/array_sampleID/",
                            mig_prefix = "_first",
                            machine =1,
+                           ## optional 
                            date_process = "0520")
 ```
 
@@ -135,7 +136,8 @@ Microarray data is imported using the `r text_spec("read_array_files()",color="r
  - `filename` - the name of the file which the data are to be read from. In this example a list of multiple files from a folder is used and passed to `r text_spec("read_array_files()","red")` using `r text_spec("purrr",color="red")`. 
  - `data_path` - The path where the file with the data  is located 
  - `genepix_vars` -  A list of specific definitions of the experiment design. See  `r text_spec("array_vars()",color="red")`  
- 
+
+For this example I use the sub-folder 2 specified using `genepix_vars$paths[[2]]` `r genepix_vars$paths[[2]]`. 
  
 ```{r}
 #### read in all the datasets

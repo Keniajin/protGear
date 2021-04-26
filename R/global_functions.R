@@ -4,7 +4,7 @@
 "%ni%" <- Negate("%in%")
 
 
-minpositive <- function(x) min(x[x > 0], na.rm = T)
+minpositive <- function(x) min(x[x > 0], na.rm = TRUE)
 
 
 
@@ -40,24 +40,24 @@ array_vars <- function(channel="635",
                        date_process = "" ){
 
   ####List the directories with the CHIP data###############
-  paths <- list.dirs(path = chip_path, recursive =  T)
+  paths <- list.dirs(path = chip_path, recursive =  TRUE)
   ## remove the parent directory
   ## the folders with the chip data with the different batches is left
   paths <- paths[!grepl(paste0( chip_path,"$") , paths)]
   if(FG==""){
-    FG= rlang::sym(paste0("F",channel,".Median"))
+    FG <- rlang::sym(paste0("F",channel,".Median"))
   }else{
-    FG= rlang::sym(FG)
+    FG <- rlang::sym(FG)
   }
   if(BG==""){
-    BG= rlang::sym(paste0("B",channel,".Median"))
+    BG <- rlang::sym(paste0("B",channel,".Median"))
   }else{
-    BG= rlang::sym(BG)
+    BG <- rlang::sym(BG)
     }
   if(FBG==""){
-    FBG= rlang::sym(paste0("F",channel,".Median...B",channel))
+    FBG <- rlang::sym(paste0("F",channel,".Median...B",channel))
   }else{
-    FBG= rlang::sym(FBG)
+    FBG <- rlang::sym(FBG)
   }
 
   genepix_vars <- list(FG= FG,#rlang::sym(paste0("F",channel,".Median")),
@@ -121,7 +121,7 @@ name_of_files <- function(i) {
 #' @description A generic function to write into the log file with a replicate check error
 #' @param iden An id for the file with replicates error
 error_replicates <- function(iden) {
-  sink("errors/error_replicates.txt" , append = T)
+  sink("errors/error_replicates.txt" , append = TRUE)
   print(paste0("The replicates per antigen per sample are more than expected for ", iden))
   sink()
 }
@@ -145,8 +145,8 @@ check_sampleID_files <- function(genepix_vars){
   ##
   sid_files <- gsub(".csv", "",list.files(genepix_vars$sampleID_path))
   ## check if all the chip files have an existing sampleID file
-  sid_check <- gsub(".txt|.gpr", "",list.files(genepix_vars$chip_path , recursive = T,
-                                               pattern="*.txt|*.gpr", full.names=F))
+  sid_check <- gsub(".txt|.gpr", "",list.files(genepix_vars$chip_path , recursive = TRUE,
+                                               pattern="*.txt|*.gpr", full.names=FALSE))
   ## convert all the file names to caps to avoid merge errrors due to case
   sid_check <- toupper(sub(".*/(.*)", "\\1", sid_check))
 

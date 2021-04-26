@@ -2,7 +2,7 @@
 % Please edit documentation in R/buffer_spot_functions.R
 \name{buffer_spots}
 \alias{buffer_spots}
-\title{Extract buffer spor data}
+\title{Extract buffer spots of data}
 \usage{
 buffer_spots(Data1)
 }
@@ -10,7 +10,7 @@ buffer_spots(Data1)
 \item{Data1}{An object of the class data frame}
 }
 \value{
-
+A data frame of the buffer control spots
 }
 \description{
 A function to extract the buffer spots data. A buffer spot only has the solution for

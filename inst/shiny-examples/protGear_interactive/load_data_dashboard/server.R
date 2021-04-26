@@ -27,7 +27,7 @@ pacman::p_load_gh("hadley/shinySignals","jcheng5/bubbles","GuangchuangYu/ggploti
 shinyServer(function(input, output, session) {
   js$hidehead('none')
   wd_this <- getwd()
-  volumes = getVolumes()()
+  volumes <- getVolumes()()
   dir.create("processed_data")
 
   shinyFiles::shinyDirChoose(input, "folderChoose",  roots = volumes, #c(home = wd_this),
@@ -112,7 +112,7 @@ observeEvent("", {
 })
 
 # initiate reactive value storage
-rv = reactiveValues()
+rv <- reactiveValues()
 
 observeEvent(input$all_tabs, {
   # store last tab
@@ -220,7 +220,7 @@ gpr_header_reactive <- reactive({
 
 ## empty structure
 empty_strucuture <- reactive({
-  text = paste("\nLoad one of the file that has MFI data\n",
+  text <- paste("\nLoad one of the file that has MFI data\n",
                "       to visualize/define the structure ")
   plot_empty2 <- ggplot() +
     annotate("text", x = 4, y = 25, size=8, label = text) +
@@ -302,8 +302,8 @@ output$select_spatial_type <- renderUI({
 ## a plot for the spatial structure of the arrays
 output$spatial_structure_plot <- renderPlotly({
   gpr_file_reactive <- gpr_file_reactive()
-  inFile = input$gpr_file
-  MFI_var=input$select_spatial
+  inFile <- input$gpr_file
+  MFI_var <- input$select_spatial
   if(!is.null(gpr_file_reactive)){
     m <- list(
       l = 20,
@@ -336,8 +336,8 @@ output$spatial_structure_plot <- renderPlotly({
 
 output$spatial_structure_plot_2d <- renderPlot({
   gpr_file_reactive <- gpr_file_reactive()
-  inFile = input$gpr_file
-  MFI_var=input$select_spatial
+  inFile <- input$gpr_file
+  MFI_var <- input$select_spatial
   if(!is.null(gpr_file_reactive)){
 
 
@@ -401,7 +401,7 @@ observeEvent(input$total_miniarray, {
   if(!is.null(gpr_file_reactive)){
     blocks <- max(gpr_file_reactive$Block, na.rm = T)
   }else{
-    blocks = 0
+    blocks <- 0
   }
 
   if (input$total_miniarray >blocks |input$total_miniarray <0  ) {
@@ -443,12 +443,12 @@ observeEvent(input$blockspersample_param, {
   req(input$total_miniarray)
   gpr_file_reactive <- gpr_file_reactive()
   if(!is.null(gpr_file_reactive)){
-    mini_arrays=input$total_miniarray
+    mini_arrays <- input$total_miniarray
     blocks <- max(gpr_file_reactive$Block, na.rm = T)
     value_check <- blocks/mini_arrays
 
   }else{
-    value_check=0
+    value_check <- 0
   }
   #alue_check=2
   if (input$blockspersample_param>value_check |input$blockspersample_param<value_check    ) {
@@ -504,12 +504,12 @@ output$select_B_var <- renderUI({
 output$blockspersample_output <- renderUI({
   gpr_file_reactive <- gpr_file_reactive()
  if(!is.null(input$total_miniarray)){
-   mini_arrays=input$total_miniarray
+   mini_arrays <- input$total_miniarray
    blocks <- max(gpr_file_reactive$Block, na.rm = T)
    value_check <- blocks/mini_arrays
 
  }else{
-   value_check=1
+   value_check <- 1
  }
   if(!is.null(gpr_file_reactive)){
 
@@ -888,7 +888,7 @@ params_display <- reactive({
   inFile <- input$gpr_file
   if(!is.null(inFile)){
   if(is.null(input$chip_path_param) | input$chip_path_param==""){
-    params_df = NULL
+    params_df <- NULL
   }else{
     data_files <- data_files_reactive()
     genepix_vars <- genepix_vars()
@@ -905,7 +905,7 @@ params_display <- reactive({
                       antigen_list=antigen_list)
   }
     }else{
-      params_df = NULL
+      params_df <- NULL
   }
 
  return(params_df)
@@ -955,21 +955,21 @@ empty_plot <- reactive({
   if(!is.null(inFile)){
 
     if(is.na(input$total_miniarray)){
-      x=0
-    }else {x=1}
+      x <- 0
+    }else {x <- 1}
 
     if(x==0){
-      text = paste("\nPlot will appear after\n",
+      text <- paste("\nPlot will appear after\n",
                    " a) defining the number of mini-arrays in design structure\n",
                    " b) selecting folder with data")
     }else  {
-      text = paste("\nPlot will appear after\n",
+      text <- paste("\nPlot will appear after\n",
                    " a) selecting folder with data\n"
       )
     }
 
   }else{
-    text = paste("\nPlot will appear after\n",
+    text <- paste("\nPlot will appear after\n",
                  " a) defining the array design structure then \n",
                  " b) selecting folder with data")
   }
@@ -984,7 +984,7 @@ empty_plot <- reactive({
 
 
 empty_plot_error <- reactive({
-  text = paste("\nCheck data stucture well.\n",
+  text <- paste("\nCheck data stucture well.\n",
                "       replicates definition or ")
   plot_empty <- ggplot() +
     annotate("text", x = 4, y = 25, size=8, label = text) +
@@ -996,7 +996,7 @@ empty_plot_error <- reactive({
 
 
 empty_plot_NS <- reactive({
-  text = paste("\nNot selected.\n",
+  text <- paste("\nNot selected.\n",
                " ")
   plot_empty <- ggplot() +
     annotate("text", x = 4, y = 25, size=8, label = text) +
@@ -1008,7 +1008,7 @@ empty_plot_NS <- reactive({
 
 
 empty_plot_no_rep <- reactive({
-  text = paste("\nThe experiment did not have\n",
+  text <- paste("\nThe experiment did not have\n",
                "       lab replicates or \n",
                "Select the no of lab replicates")
   plot_empty <- ggplot() +
@@ -2446,7 +2446,7 @@ output$PCA_normalised <- renderPlot({
   if(!is.null(input$vars_pca)){
     vars_visualise <- input$vars_pca
   }else{
-    vars_visualise=20
+    vars_visualise <- 20
   }
 
   if(!is.null(normalised_list) & input$normalisation_method=="rlm"){

@@ -6,7 +6,8 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       h2("Installation"),
-      p("protGear is available on Github, so you can install it in the usual way from your R console:"),
+      p("protGear is available on Github, so you can install it in the usual way
+        from your R console:"),
       code('remotes::install_github("Keniajin/protGear")'),
       br(),
       br(),
@@ -19,9 +20,11 @@ ui <- fluidPage(
     ),
     mainPanel(
       h1("Introducing protGear"),
-      p("protGear is a package for protein micro-array data processing just before the main analysis. ",
+      p("protGear is a package for protein micro-array data processing just
+        before the main analysis. ",
         em("one-stop-shop  "),
-        "pre-processing suite for protein microarrays that is compatible with data from the major protein microarray scanners."),
+        "pre-processing suite for protein microarrays that is compatible
+        with data from the major protein microarray scanners."),
       br(),
       p("For an introduction examples, visit the ",
         a("protGear page.",

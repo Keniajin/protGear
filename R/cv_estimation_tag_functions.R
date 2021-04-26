@@ -31,7 +31,7 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
     #dataC$replicate <- sub(".*_(.*)", "\\1", dataC$antigen)
 
     ## create a wide data to
-    sink("log_file.txt" , append = T)
+    sink("log_file.txt" , append = TRUE)
     if(length(unique(dataC$replicate ))>lab_replicates)  {
       try( stop(paste0("Some antigens seems to be repeated in a mini array for", iden)) , outFile = stdout())
       error_replicates(iden)
@@ -56,7 +56,7 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
     #dataC$antigen <- sub("\\_[^\\_]*$" , "", dataC$antigen)
 
     ## create a wide data to
-    sink("log_file.txt" , append = T)
+    sink("log_file.txt" , append = TRUE)
     if(length(unique(dataC$replicate ))>lab_replicates)  {
       try( stop(paste0("The replicates per antigen per sample are more than expected for ", iden)) , outFile = stdout())
       error_replicates(iden)
@@ -75,15 +75,15 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
     dataC <- dataC %>%
       dplyr::group_by_at(c(antigen_var,sampleID_var)) %>%
       ###mean and then for each grouping of 2
-      summarize(meanX=mean(get(mfi_var) , na.rm=T),
-                meanX2_X3=mean(get(mfi_var)[-1] , na.rm=T),
-                meanX1_X3=mean(get(mfi_var)[-2] , na.rm=T),
-                meanX1_X2=mean(get(mfi_var)[-3] , na.rm=T),
+      summarize(meanX=mean(get(mfi_var) , na.rm=TRUE),
+                meanX2_X3=mean(get(mfi_var)[-1] , na.rm=TRUE),
+                meanX1_X3=mean(get(mfi_var)[-2] , na.rm=TRUE),
+                meanX1_X2=mean(get(mfi_var)[-3] , na.rm=TRUE),
                 ###standard deviation and then for each grouping of 2
-                sdX=round(sd(get(mfi_var) , na.rm=T),2),
-                sdX2_X3=round(sd(get(mfi_var)[-1] , na.rm=T),2),
-                sdX1_X3=round(sd(get(mfi_var)[-2] , na.rm=T),2),
-                sdX1_X2=round(sd(get(mfi_var)[-3] , na.rm=T),2),
+                sdX=round(sd(get(mfi_var) , na.rm=TRUE),2),
+                sdX2_X3=round(sd(get(mfi_var)[-1] , na.rm=TRUE),2),
+                sdX1_X3=round(sd(get(mfi_var)[-2] , na.rm=TRUE),2),
+                sdX1_X2=round(sd(get(mfi_var)[-3] , na.rm=TRUE),2),
                 ### cv
                 CVX=(round(sdX/meanX,4))*100 ,
                 CVX2_X3=(round(sdX2_X3/meanX2_X3,4))*100 ,
@@ -92,7 +92,7 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
       mutate(cvCat_all = ifelse(CVX>=0 & CVX<=cv_cut_off , paste0("CV <= ",cv_cut_off),
                                 ifelse(CVX >cv_cut_off & CVX <101, paste0("CV > ",cv_cut_off),"Others")))   %>%
       mutate(cvSelected_all = ifelse(CVX>=0 & CVX<=cv_cut_off , CVX,
-                                     ifelse(CVX >cv_cut_off | CVX<=0 ,pmin(CVX2_X3, CVX1_X3,CVX1_X2 , na.rm = T),NA)))
+                                     ifelse(CVX >cv_cut_off | CVX<=0 ,pmin(CVX2_X3, CVX1_X3,CVX1_X2 , na.rm = TRUE),NA)))
     dataC <- dataC %>%
       left_join(Data3, by=c(antigen_var,sampleID_var)) %>%
       select(antigen, sampleID, sample_array_ID,everything())
@@ -151,7 +151,7 @@ best_CV_estimation <- function(dataCV,slide_id,lab_replicates , cv_cut_off) {
              mean_best_CV =selected) %>%
       dplyr::select(-xbar,-selected)
     data_best_CV <-  data_best_CV %>%
-      mutate(best_CV = pmin(CVX2_X3,CVX1_X3,CVX1_X2, na.rm = T) ,
+      mutate(best_CV = pmin(CVX2_X3,CVX1_X3,CVX1_X2, na.rm = TRUE) ,
              best_CV_cat  = ifelse(best_CV>=0 & best_CV<=cv_cut_off , paste0("CV <= ",cv_cut_off),
                                    ifelse(best_CV >cv_cut_off & best_CV<101, paste0("CV > ",cv_cut_off),"Others")))
 

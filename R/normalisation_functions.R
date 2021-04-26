@@ -16,8 +16,8 @@
 #' @export
 #'
 #' @examples
-matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=F,batch_var1,batch_var2=day_batches,
-                             return_plot=F,plot_by_antigen=T,control_antigens=NULL, array_matrix=NULL){
+matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=FALSE,batch_var1,batch_var2=day_batches,
+                             return_plot=FALSE,plot_by_antigen=TRUE,control_antigens=NULL, array_matrix=NULL){
   if(method=="log2"){
     exprs_log <- matrix_antigen
     ## since log can handle negative values , we convert all the negative values to a constant value
@@ -39,12 +39,12 @@ matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=F,batch
     exprs_antigen <-
       Biobase::ExpressionSet(assayData = matrix_antigen)
 
-    if(batch_correct==F){
+    if(batch_correct==FALSE){
       ## normalise without adjusting for the strata on VSN
       data_points <- dim(matrix_antigen)[[1]]
       exprs_normalised <-  vsn::justvsn(x=exprs_antigen ,
                                         minDataPointsPerStratum=data_points)
-    }else if(batch_correct==T){
+    }else if(batch_correct==TRUE){
       exprs_normalised <-
         vsn::justvsn(x = exprs_antigen , strata = machines ,
                      minDataPointsPerStratum=data_points)
@@ -82,7 +82,7 @@ matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=F,batch
     }
   }
 
-  cv_val <- round(sd(as.matrix(exprs_normalised),na.rm = T)/mean(as.matrix(exprs_normalised), na.rm = T),4)*100
+  cv_val <- round(sd(as.matrix(exprs_normalised),na.rm = TRUE)/mean(as.matrix(exprs_normalised), na.rm = TRUE),4)*100
   cv_val <- paste(cv_val,"%",sep = "")
   #exprs_normalised_df <- as.data.frame(exprs_normalised)
 
@@ -98,7 +98,7 @@ matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=F,batch
   }
 
   ## Whether to plot by sample or antigen
-  if(plot_by_antigen==T){
+  if(plot_by_antigen==TRUE){
     plot_normalisation <- plot_normalised_antigen(exprs_normalised_df=matrix_antigen_normalised,
                                                   method=method,batch_correct=batch_correct)
   }else{
@@ -108,7 +108,7 @@ matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=F,batch
 
 
 
-  if(return_plot==T){
+  if(return_plot==TRUE){
     return(list(matrix_antigen_normalised=matrix_antigen_normalised,
                 plot_normalisation=plot_normalisation))
   }else {
@@ -260,7 +260,7 @@ rlm_normalise <- function(rlm_normalise_df){
   p_features <- nrow(sample_elist$E)
   p_controls <- nrow(controls_elist$E)
   n_arrays <- ncol(sample_elist$E)
-  n_blocks <- max(controls_elist$genes$Block , na.rm=T)
+  n_blocks <- max(controls_elist$genes$Block , na.rm=TRUE)
   y <- c(controls_elist$E)
 
 
@@ -443,8 +443,8 @@ output_trend_stats <- function(name, p_val, z_val){
 #' @examples
 plot_normalised <- function(exprs_normalised_df,method,batch_correct){
   exprs_normalised_df_plot <-  exprs_normalised_df %>%
-    dplyr::mutate(mean_all_anti = rowMeans(., na.rm = T),
-                  stdev_all_anti = genefilter::rowSds(as.matrix(.), na.rm = T)) %>%
+    dplyr::mutate(mean_all_anti = rowMeans(., na.rm = TRUE),
+                  stdev_all_anti = genefilter::rowSds(as.matrix(.), na.rm = TRUE)) %>%
     dplyr::mutate(rank_mean_all_anti=rank(mean_all_anti) ,
                   method=method, batch_correct=batch_correct) %>%
     arrange(rank_mean_all_anti)
@@ -467,7 +467,7 @@ plot_normalised <- function(exprs_normalised_df,method,batch_correct){
 
   p_norm <- ggplot(exprs_normalised_df_plot ,  aes(x=rank_mean_all_anti, y=stdev_all_anti)) +
     geom_jitter(color="red") + theme_classic() +
-    expand_limits(y=c(0,10))+  stat_cor() +geom_smooth(color='blue',se = F, size=0.5)+
+    expand_limits(y=c(0,10))+  stat_cor() +geom_smooth(color='blue',se = FALSE, size=0.5)+
     ggtitle(paste(norm_method,"Normalisation")) + xlab("pooled mean rank (mean of features by sample)") +
     ylab("pooled SD") +
     labs(caption=paste0(m_kendall , "\n", cs_stuart)) +
@@ -494,7 +494,7 @@ plot_normalised_antigen <- function(exprs_normalised_df,method,batch_correct){
   antigen_summ <- exprs_normalised_df %>%
     gather(antigen,MFI) %>%
     group_by(antigen) %>%
-    summarise(mean_mfi=mean(MFI,na.rm = T), sd_mfi=sd(MFI,na.rm = T)) %>%
+    summarise(mean_mfi=mean(MFI,na.rm = TRUE), sd_mfi=sd(MFI,na.rm = TRUE)) %>%
     dplyr::mutate(rank_mean_all_anti=rank(mean_mfi) ,
                   method=method, batch_correct=batch_correct) %>%
     arrange(rank_mean_all_anti)
@@ -517,7 +517,7 @@ plot_normalised_antigen <- function(exprs_normalised_df,method,batch_correct){
 
   p_norm <- ggplot(antigen_summ ,  aes(x=rank_mean_all_anti, y=sd_mfi)) +
     geom_jitter(color="red") + theme_classic() +
-    expand_limits(y=c(0,10))+  stat_cor() +geom_smooth(color='blue',se = F, size=0.5)+
+    expand_limits(y=c(0,10))+  stat_cor() +geom_smooth(color='blue',se = FALSE, size=0.5)+
     ggtitle(paste(norm_method,"Normalisation")) + xlab("Pooled mean rank (mean of features)") +
     ylab("pooled SD") +
     labs(caption=paste0(m_kendall2 , "\n", cs_stuart2)) +
