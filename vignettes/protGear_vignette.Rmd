@@ -361,7 +361,7 @@ ggplot(aaa,aes(as.factor(antigen),mfi,color=measure))  +
 
 ## Normalisation
 
-To normalise the data, we create a matrix `matrix_antigen` with all the data combined. We ensure the slide identifier is included as row names of the matrix or we have a way to join them after normalisation. The `array_matrix` matrix is used to hold these parameters.  We have implemented  four different normalisation techniques;
+To normalise the data, we create a matrix `matrix_antigen` with all the data combined. We ensure the slide identifier is included as row names of the matrix or we have a way to join them after normalisation. The `array_matrix` matrix is used to hold these parameters. In place of `AMA1` in the example below you use one of your features or antigen. We have implemented  four different normalisation techniques;
 
 1) $Log_2$ normalisation
 2) Loess normalisation
@@ -396,7 +396,8 @@ matrix_antigen <-  to_normalise %>%
   as.matrix(.)
 
 
-## create the matix to hold the important parameters
+## create the matrix to hold the important parameters 
+## in place of AMA1 you use one of your features or antigen
 array_matrix <- df_to_normalise %>% 
   filter(antigen=="AMA1") %>% 
   ungroup() %>% 

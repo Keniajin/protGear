@@ -86,7 +86,7 @@
       <h1 data-toc-skip>protGear:An R package with an interactive web-based protein microarray data processing suite</h1>
                         <h4 class="author">Kennedy Mwai</h4>
             
-            <h4 class="date">22 April, 2021</h4>
+            <h4 class="date">26 April, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/keniajin/protGear/blob/master/vignettes/protGear_vignette.Rmd"><code>vignettes/protGear_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>protGear_vignette.Rmd</code></div>
@@ -135,7 +135,7 @@
 <p>The first part is to specify the parameters of the micro-array experiment to assist in processing the data. The parameters specified are</p>
 <ul>
 <li>channel - The scanner fluorescence output used to record the data. It can be green,red,blue among others with a specified number.</li>
-<li>chip_path - the folder where the ‘gpr’ or ‘txt’ files are stored.</li>
+<li>chip_path - the folder where the sub folders of ‘gpr’ or ‘txt’ files are stored. This path contains sub folders with the array data, for example the sub folders for the different batches.</li>
 <li>totsamples - the number of samples in a slide or array.<br>
 </li>
 <li>blockspersample - The number of blocks a sample it takes. In this example each sample occupies 2 blocks each with 384 spots.</li>
@@ -154,6 +154,7 @@
   sampleID_path <span class="op">=</span> <span class="st">"data/array_sampleID/"</span>,
   mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,
   machine <span class="op">=</span> <span class="fl">1</span>,
+  <span class="co">## optional</span>
   date_process <span class="op">=</span> <span class="st">"0520"</span>
 <span class="op">)</span></code></pre></div>
 <p>The exact channel used should be checked in the header of the file from the quantification software under <code>Wavelengths</code>.</p>
@@ -204,22 +205,20 @@
 <h4 class="hasAnchor">
 <a href="#visualize-the-foreground-using-the-visualize_slide-function" class="anchor"></a>Visualize the foreground using the <code>visualize_slide</code> function</h4>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/visualize_slide.html">visualize_slide</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/visualize_slide.html">visualize_slide</a></span><span class="op">(</span>
   infile <span class="op">=</span> <span class="st">"data/array_data/machine1/KK2-06.txt"</span>,
   MFI_var <span class="op">=</span> <span class="st">"B635 Median"</span>
-<span class="op">)</span>
-<span class="va">p</span></code></pre></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/chunk6-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
 <div id="visualize-the-background-using-the-visualize_slide_2d-function" class="section level4">
 <h4 class="hasAnchor">
 <a href="#visualize-the-background-using-the-visualize_slide_2d-function" class="anchor"></a>Visualize the background using the <code>visualize_slide_2d</code> function</h4>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/visualize_slide_2d.html">visualize_slide_2d</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/visualize_slide_2d.html">visualize_slide_2d</a></span><span class="op">(</span>
   infile <span class="op">=</span> <span class="st">"data/array_data/machine1/KK2-06.txt"</span>,
   MFI_var <span class="op">=</span> <span class="st">"F635 Median"</span>
-<span class="op">)</span>
-<span class="va">p2</span></code></pre></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/chunk7-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
 </div>
@@ -236,6 +235,7 @@
 <code>genepix_vars</code> - A list of specific definitions of the experiment design. See <span style="     color: red !important;">array_vars()</span>
 </li>
 </ul>
+<p>For this example I use the sub-folder 2 specified using <code>genepix_vars$paths[[2]]</code> data/array_data/machine2.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#### read in all the datasets</span>
 <span class="co">### list all the file names under data folder</span>
