@@ -86,7 +86,7 @@
       <h1 data-toc-skip>protGear:An R package with an interactive web-based protein microarray data processing suite</h1>
                         <h4 class="author">Kennedy Mwai</h4>
             
-            <h4 class="date">26 April, 2021</h4>
+            <h4 class="date">29 April, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/keniajin/protGear/blob/master/vignettes/protGear_vignette.Rmd"><code>vignettes/protGear_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>protGear_vignette.Rmd</code></div>
@@ -108,7 +108,7 @@
 <h3 class="hasAnchor">
 <a href="#general-information" class="anchor"></a>General information</h3>
 <p>protGear is a package for protein micro data processing just before the main analysis. The package loads the ‘<code>gpr</code>’ or ‘<code>txt</code>’ file format extracted by the quantification software and merges this with the specific sample identifiers. The package processes multiple files extracted in a batch with their corresponding sample identifier file. The sample identifier file has 2 variables ‘<code>v1</code>’ and ‘<code>v2</code>’ which indicate the mini-array or block number and sample identifier respectively. The ‘<code>gpr</code>’ file and the corresponding sample identifier file have the same file name. protGear also provides a web based <span class="math inline">\(Shiny^{(R)}\)</span> platform for real time visualization of the data processing.</p>
-<p>In this vignette the general work-flow of protGear will be outlined by processing a sample dataset from a multicentre study Plasmodium falciparum Merozoite Protein Microarray. The multicentre study design motivated the development of the protGear suite.</p>
+<p>In this vignette the general work-flow of protGear will be outlined by processing a sample dataset from a multicentre study <strong>Plasmodium falciparum</strong> Merozoite Protein Microarray. The multicentre study design motivated the development of the protGear suite.</p>
 </div>
 <div id="analysis-setup" class="section level3">
 <h3 class="hasAnchor">
@@ -124,12 +124,12 @@
 <p>To install <code>protGear</code> run the following commands in R</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## make sure devtools package is installed</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Keniajin/protGear"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Keniajin/protGear"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="package-load-and-importing-data" class="section level2">
+<div id="importing-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#package-load-and-importing-data" class="anchor"></a>Package load and importing data</h2>
+<a href="#importing-data" class="anchor"></a>Importing data</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/keniajin/protGear">protGear</a></span><span class="op">)</span></code></pre></div>
 <p>The first part is to specify the parameters of the micro-array experiment to assist in processing the data. The parameters specified are</p>
@@ -197,13 +197,14 @@
 ## [31] "ScanArea=1"                                                               
 ## [32] "Supplier="</code></pre>
 <p>The function <span style="     color: red !important;">check_sampleID_files()</span> helps to check whether each micro array file has a corresponding sample identifier file. The sample identifier files are generated from the lab plate maps to match the corresponding samples on a specific slide.If the sample identifier file is missing, protGear automatically generates the id’s.</p>
-<div id="visualize-the-spatial-structure-of-slide" class="section level3">
+<div id="spatial-structure-of-slide" class="section level3">
 <h3 class="hasAnchor">
-<a href="#visualize-the-spatial-structure-of-slide" class="anchor"></a>Visualize the spatial structure of slide</h3>
+<a href="#spatial-structure-of-slide" class="anchor"></a>Spatial structure of slide</h3>
 <p>protGear offers a functionality to inspect the slide visually for any strong spatial biases when the scan image is not available. However, we recommend using the scanned image to visualize the spatial artefacts that might not be recorded in the <code>.gpr</code> file. We include the functions <span style="     color: red !important;">visualize_slide()</span> and <span style="     color: red !important;">visualize_slide_2d()</span> to check the spatial structure. The functions are build on <span style="     color: red !important;">structure_plot()</span> which shows the block and mini-array structure of a slide.</p>
-<div id="visualize-the-foreground-using-the-visualize_slide-function" class="section level4">
+<div id="visualize-the-foreground-mfi" class="section level4">
 <h4 class="hasAnchor">
-<a href="#visualize-the-foreground-using-the-visualize_slide-function" class="anchor"></a>Visualize the foreground using the <code>visualize_slide</code> function</h4>
+<a href="#visualize-the-foreground-mfi" class="anchor"></a>Visualize the foreground MFI</h4>
+<p>Here we visualize the foreground MFI using the <span style="     color: red !important;">visualize_slide</span> function</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/visualize_slide.html">visualize_slide</a></span><span class="op">(</span>
   infile <span class="op">=</span> <span class="st">"data/array_data/machine1/KK2-06.txt"</span>,
@@ -211,9 +212,10 @@
 <span class="op">)</span></code></pre></div>
 <p><img src="protGear_vignette_files/figure-html/chunk6-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
-<div id="visualize-the-background-using-the-visualize_slide_2d-function" class="section level4">
+<div id="visualize-the-background-mfi" class="section level4">
 <h4 class="hasAnchor">
-<a href="#visualize-the-background-using-the-visualize_slide_2d-function" class="anchor"></a>Visualize the background using the <code>visualize_slide_2d</code> function</h4>
+<a href="#visualize-the-background-mfi" class="anchor"></a>Visualize the background MFI</h4>
+<p>Here we visualize the background MFI using the <code>visualize_slide_2d</code> function</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/visualize_slide_2d.html">visualize_slide_2d</a></span><span class="op">(</span>
   infile <span class="op">=</span> <span class="st">"data/array_data/machine1/KK2-06.txt"</span>,
@@ -222,9 +224,9 @@
 <p><img src="protGear_vignette_files/figure-html/chunk7-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
 </div>
-<div id="import-microarray-data" class="section level3">
+<div id="import--gprtxt-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#import-microarray-data" class="anchor"></a>Import microarray data</h3>
+<a href="#import--gprtxt-data" class="anchor"></a>Import .gpr/txt data</h3>
 <p>Microarray data is imported using the <span style="     color: red !important;">read_array_files()</span> function. The function accepts the following mandatory arguments;</p>
 <ul>
 <li>
@@ -235,7 +237,7 @@
 <code>genepix_vars</code> - A list of specific definitions of the experiment design. See <span style="     color: red !important;">array_vars()</span>
 </li>
 </ul>
-<p>For this example I use the sub-folder 2 specified using <code>genepix_vars$paths[[2]]</code> data/array_data/machine2.</p>
+<p>For this example I use the sub-folder 2 specified using <code>genepix_vars$paths[[2]]</code> which is this path under vignette folder data/array_data/machine2.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#### read in all the datasets</span>
 <span class="co">### list all the file names under data folder</span>
@@ -245,13 +247,13 @@
 <span class="co">#' @___________________read_in_the_files_with_the_text_data_from_the_chip_____________________________</span>
 <span class="co">### read all the data files and save them in a list</span>
 <span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, <span class="st">"/"</span><span class="op">)</span>
-<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">filenames</span>,
   .f <span class="op">=</span> <span class="va">read_array_files</span>,
   data_path <span class="op">=</span> <span class="va">data_path</span>,
   genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span>
 <span class="op">)</span>
-<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">data_files</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">data_files</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="background-correction" class="section level2">
@@ -269,51 +271,69 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## utilising the map package we process a number of files  under data_files list</span>
 <span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span>
-<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">extract_bg</span>, data_files <span class="op">=</span> <span class="va">data_files</span>, <span class="va">genepix_vars</span><span class="op">)</span>
-<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">allData_bg</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">extract_bg</span>, data_files <span class="op">=</span> <span class="va">data_files</span>, <span class="va">genepix_vars</span><span class="op">)</span>
+<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">allData_bg</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">allData_bg</span><span class="op">)</span></code></pre></div>
+<div id="foreground-vs-background" class="section level3">
+<h3 class="hasAnchor">
+<a href="#foreground-vs-background" class="anchor"></a>Foreground vs Background</h3>
 <p>Before selecting the best background correction approach the MFI signals are be inspected visually. In protGear we first utilise the function <span style="     color: red !important;">plot_FB()</span> that graphs the background, <em>BG_Median</em> and foreground values, <em>FBG_Median</em>. On the protGear Shiny platform the visuals are interactive and you can identify the features or blocks with strong bias.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_FB.html">plot_FB</a></span><span class="op">(</span><span class="va">allData_bg</span>, antigen_name <span class="op">=</span> <span class="st">"antigen"</span>, bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>, FG_MFI <span class="op">=</span> <span class="st">"FBG_Median"</span>, log <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_FB.html">plot_FB</a></span><span class="op">(</span><span class="va">allData_bg</span>,
+  antigen_name <span class="op">=</span> <span class="st">"antigen"</span>,
+  bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>, FG_MFI <span class="op">=</span> <span class="st">"FBG_Median"</span>, log <span class="op">=</span> <span class="cn">F</span>
+<span class="op">)</span>
 
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_bg.html">plot_bg</a></span><span class="op">(</span>
+
+<span class="va">p1</span></code></pre></div>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
+</div>
+<div id="background-mfi-by-blocks" class="section level3">
+<h3 class="hasAnchor">
+<a href="#background-mfi-by-blocks" class="anchor"></a>Background MFI by blocks</h3>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_bg.html">plot_bg</a></span><span class="op">(</span>
   df <span class="op">=</span> <span class="va">allData_bg</span>, x_axis <span class="op">=</span> <span class="st">"Block"</span>, bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>,
   log_mfi <span class="op">=</span> <span class="cn">T</span>
 <span class="op">)</span>
-<span class="va">p1</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p2</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
-<p>After background visualization and selecting the best approach the array data are merged with their specific sample identifier files. Each array file has its own corresponding sample identifier file. The method of background subtraction selected is also specified under <span style="     color: red !important;">method</span> below. The background correction is performed by <span style="     color: red !important;">bg_correct()</span> function.</p>
+<span class="va">p2</span></code></pre></div>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-10-1.png" width="700" style="display: block; margin: auto;"></p>
+</div>
+<div id="background-correction-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#background-correction-1" class="anchor"></a>Background correction</h3>
+<p>After background visualization and selecting the best approach the array data are merged with their specific sample identifier files.</p>
+<p><em><span style="     color: red !important;">Note:</span></em> Each array file must have its own corresponding sample identifier <code>.csv</code> file stored in <span style="     color: red !important;">array_vars()</span> function under <code>sampleID_path</code>. Check General information section.</p>
+<p>The method of background subtraction selected is specified under <span style="     color: red !important;">method</span> below. The background correction is performed by <span style="     color: red !important;">bg_correct()</span> function.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">merge_sampleID</span>, data_files <span class="op">=</span> <span class="va">data_files</span>,
   <span class="va">genepix_vars</span>, method <span class="op">=</span> <span class="st">"subtract_local"</span>
 <span class="op">)</span>
-<span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">sample_ID_merged_dfs</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">sample_ID_merged_dfs</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="visualizing-buffer-spot" class="section level2">
+</div>
+<div id="buffer-spots" class="section level2">
 <h2 class="hasAnchor">
-<a href="#visualizing-buffer-spot" class="anchor"></a>Visualizing buffer spot</h2>
-<p>This is specific to experiment design if a specific buffer spot is included. This is used to check for unexpected scanning artefacts. The buffer spots should have similar values in different slides. Some outliers might be expected for buffer spots close sample spots or landmark.</p>
+<a href="#buffer-spots" class="anchor"></a>Buffer spots</h2>
+<p>Buffer spots are specific to the experiment design and are not always included. Buffer spots are used to check for unexpected scanning artefacts. The buffer spots should have similar values in different slides. Some outliers are expected for buffer spots close sample spots or landmark. However you can specify the name of your control antigens here <span style="     color: blue !important;">buffer_spot=“buffer”</span> if you do not have buffer spots.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">buffer_spots</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">buffer_spots</span>, buffer_spot <span class="op">=</span> <span class="st">"buffer"</span><span class="op">)</span>
 
-<span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">buffer_transp</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">buffer_transp</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">buffers</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">buffer_transp</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plot_buffer.html">plot_buffer</a></span><span class="op">(</span><span class="va">buffers</span>, buffer_names <span class="op">=</span> <span class="st">"antigen"</span>, buffer_mfi <span class="op">=</span> <span class="st">"FMedianBG_correct"</span>, slide_id <span class="op">=</span> <span class="st">".id"</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-12-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="coefficient-of-variation-cv-calculation" class="section level2">
+<div id="coefficient-of-variation-cv" class="section level2">
 <h2 class="hasAnchor">
-<a href="#coefficient-of-variation-cv-calculation" class="anchor"></a>Coefficient of Variation (CV) calculation</h2>
+<a href="#coefficient-of-variation-cv" class="anchor"></a>Coefficient of Variation (CV)</h2>
 <p>To calculate the CV’s we utilise the <span style="     color: red !important;">cv_estimation()</span> function with a <code>cv_cut_off</code> specified , sample identifier variable and antigen specified under <code>sampleID_var</code> and <code>antigen</code> respectively. The <code>replicate_var</code> and <code>mfi_var</code> identifies the variable with the replicate rank generated and MFI’s values.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________calculated_cv_for_each_data_file_______________________________________</span>
 <span class="co">#' data without the selected mean for the best 2 CVs</span>
-<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">cv_estimation</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>,
   cv_cut_off <span class="op">=</span> <span class="fl">20</span>,
   sampleID_var <span class="op">=</span> <span class="st">"sampleID"</span>, antigen_var <span class="op">=</span> <span class="st">"antigen"</span>, replicate_var <span class="op">=</span> <span class="st">"replicate"</span>,
@@ -321,32 +341,35 @@
 <span class="op">)</span>
 
 <span class="va">lab_replicates</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV</span><span class="op">)</span>
-<span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">aa</span>, <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">cvCat_all</span><span class="op">)</span>,
+<span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/GGally/man/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">aa</span>, <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">cvCat_all</span><span class="op">)</span>,
   columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">lab_replicates</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">""</span>, axisLabels <span class="op">=</span> <span class="st">"show"</span>
 <span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-13-1.png" width="700" style="display: block; margin: auto;"></p>
+<div id="summary-of-cv-values" class="section level3">
+<h3 class="hasAnchor">
+<a href="#summary-of-cv-values" class="anchor"></a>Summary of CV values</h3>
 <p>Here we create a summary of the CV values for each sample/slide utilising the <span style="     color: red !important;">cv_by_sample_estimation()</span> function. This helps to identify samples with high values of CV. On the protGear dashboard an interactive table is created to show the summary for each sample.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________summary_of_cv_for_each_sample________________________________________</span>
 <span class="co">#' creates summaries by cv's greater than 20 and less than 20</span>
 
 <span class="va">cv_cut_off</span> <span class="op">&lt;-</span> <span class="fl">20</span>
-<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV</span>, .f <span class="op">=</span> <span class="fu">protGear</span><span class="fu">::</span><span class="va"><a href="../reference/cv_by_sample_estimation.html">cv_by_sample_estimation</a></span>, cv_variable <span class="op">=</span> <span class="st">"cvCat_all"</span>,
   lab_replicates <span class="op">=</span> <span class="fl">3</span>
 <span class="op">)</span>
-<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_sample</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_sample</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">all_cv_sample</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">less_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &lt;= "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gt_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &gt; "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">less_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rlang/man/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &lt;= "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gt_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rlang/man/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &gt; "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">less_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &lt;="</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gt_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &gt;"</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
+<span class="va">less_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rlang/man/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &lt;="</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gt_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rlang/man/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &gt;"</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">ggplot</span><span class="op">(</span><span class="va">all_cv_sample</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &lt;= 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &gt; 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -354,25 +377,29 @@
   <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide all repeats considered"</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-15-1.png" width="700" style="display: block; margin: auto;"></p>
+</div>
+<div id="best-replicates" class="section level3">
+<h3 class="hasAnchor">
+<a href="#best-replicates" class="anchor"></a>Best replicates</h3>
 <p>We have implemented a function <span style="     color: red !important;">best_CV_estimation()</span> to select the best replicates if an experiment has more than 2 technical replicates. This helps to select the less variable replicates.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________data_with_selected_best_2_CV_______________________________________</span>
 <span class="co">#' data with the selected mean for the best 2 CVs</span>
-<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV</span>, .f <span class="op">=</span> <span class="va">best_CV_estimation</span>, slide_id <span class="op">=</span> <span class="st">"iden"</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>,
   cv_cut_off <span class="op">=</span> <span class="fl">20</span>
 <span class="op">)</span>
 
 <span class="co">## give the names to the returned list</span>
-<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
 
-<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV_best2</span>, .f <span class="op">=</span> <span class="va">cv_by_sample_estimation</span>,
   cv_variable <span class="op">=</span> <span class="st">"best_CV_cat"</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>
 <span class="op">)</span>
-<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_sample_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_sample_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">all_cv_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample_best2</span><span class="op">)</span></code></pre></div>
 <p>On the violin below we observe that with selecting the less variable replicates , the percentage of the “good CV” values increases.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -384,19 +411,22 @@
   <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide"</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-17-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="subtract-the-tag-values" class="section level2">
+</div>
+<div id="tag-subtraction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#subtract-the-tag-values" class="anchor"></a>Subtract the tag values</h2>
+<a href="#tag-subtraction" class="anchor"></a>Tag subtraction</h2>
+<p>Tag subtraction is applied for antigens containing purification tags. A file with the specific TAG name for each antigen is loaded. The file has the <code>antigen,TAG and TAG_name</code> and the TAG_name must be part of the antigens listed.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tag_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"TAG_antigens.csv"</span><span class="op">)</span>
 <span class="va">tag_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD4TAG"</span>, <span class="st">"GST"</span>, <span class="st">"MBP"</span><span class="op">)</span>
 <span class="va">batch_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>machine <span class="op">=</span> <span class="st">"m1"</span>, day <span class="op">=</span> <span class="st">"0520"</span><span class="op">)</span></code></pre></div>
-<p>Tag subtraction is applied for antigens containing purification tags. A file with the specific TAG name for each antigen is loaded. The file has the <code>antigen,TAG and TAG_name</code> and the TAG_name must be part of the antigens listed.</p>
+<div id="overview-of-the-tag-file" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview-of-the-tag-file" class="anchor"></a>Overview of the TAG file</h3>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tag_file</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
-
 <span class="va">tb1</span> <span class="op">%&gt;%</span>
   <span class="fu">kable</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">kable_styling</span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -525,27 +555,31 @@ CD4TAG
 </tr>
 </tbody>
 </table>
+</div>
+<div id="subtracting-the-tag-values" class="section level3">
+<h3 class="hasAnchor">
+<a href="#subtracting-the-tag-values" class="anchor"></a>Subtracting the TAG values</h3>
 <p>The function <span style="     color: red !important;">tag_subtract()</span> implements the TAG subtration by matching the TAG names with the corresponding TAG values.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________subtract_the_tag_values_______________________________________</span>
 <span class="co">#'</span>
 <span class="co">## tag subtract</span>
 <span class="co">## read in the KILCHip TAG file to substract GST-1, MBP -2 and  CD4TAG - 0 file</span>
-<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV_best2</span>, .f <span class="op">=</span> <span class="va">tag_subtract</span>,
   tag_antigens <span class="op">=</span> <span class="va">tag_antigens</span>, mean_best_CV_var <span class="op">=</span> <span class="st">"mean_best_CV"</span>, tag_file <span class="op">=</span> <span class="va">tag_file</span>,
   antigen_var <span class="op">=</span> <span class="st">"antigen"</span>,
   batch_vars <span class="op">=</span> <span class="va">batch_vars</span>
 <span class="op">)</span>
-<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_tag</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">set_names</span><span class="op">(</span><span class="va">dataCV_tag</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/purrr/man/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 <span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_tag</span><span class="op">)</span></code></pre></div>
-<p>In this example here we plot a graph of antigens Tagged with GST before and after TAG subtration.</p>
+<p>In this example here we plot a graph of antigens Tagged with GST before and after TAG subtraction.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">TAG_name</span> <span class="op">==</span> <span class="st">"GST"</span><span class="op">)</span>
 
 <span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span>, <span class="va">mean_best_CV_tag</span><span class="op">)</span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span>, <span class="va">mean_best_CV_tag</span><span class="op">)</span>
 
 <span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span>
   <span class="fu">gather</span><span class="op">(</span><span class="va">measure</span>, <span class="va">mfi</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">.id</span><span class="op">:</span><span class="va">antigen</span><span class="op">)</span><span class="op">)</span>
@@ -556,7 +590,8 @@ CD4TAG
   <span class="fu">xlab</span><span class="op">(</span><span class="st">"antigen name"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Before and after TAG subtraction"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-20-1.png" width="700"></p>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-21-1.png" width="700" style="display: block; margin: auto;"></p>
+</div>
 </div>
 <div id="normalisation" class="section level2">
 <h2 class="hasAnchor">
@@ -615,7 +650,10 @@ CD4TAG
 <span class="op">)</span>
 
 <span class="va">normlise_df</span><span class="op">$</span><span class="va">plot_normalisation</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-22-1.png" width="700"></p>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-23-1.png" width="700" style="display: block; margin: auto;"></p>
+<div id="compare-normalisation-methods" class="section level3">
+<h3 class="hasAnchor">
+<a href="#compare-normalisation-methods" class="anchor"></a>Compare normalisation methods</h3>
 <p>On the dashboard we compare the different normalisation techniques using the <span style="     color: red !important;">mutiple_plot()</span> function after loading the data.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span>
@@ -682,11 +720,12 @@ CD4TAG
 <span class="va">normalised_list_plot</span> <span class="op">&lt;-</span> <span class="va">normalised_list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"plot"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalised_list</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">normalised_list_plot</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-24-1.png" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-25-1.png" width="1152" style="display: block; margin: auto;"></p>
 </div>
-<div id="heatmap-of-the-normalised-data" class="section level2">
+</div>
+<div id="heatmaps" class="section level2">
 <h2 class="hasAnchor">
-<a href="#heatmap-of-the-normalised-data" class="anchor"></a>Heatmap of the normalised data</h2>
+<a href="#heatmaps" class="anchor"></a>Heatmaps</h2>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">normlise_df</span><span class="op">$</span><span class="va">matrix_antigen_normalised</span>
 <span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">pheatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">norm_df</span>,
@@ -702,7 +741,7 @@ CD4TAG
   limitsize <span class="op">=</span> <span class="cn">F</span>,
   dpi <span class="op">=</span> <span class="fl">200</span>
 <span class="op">)</span></code></pre></div>
-<div class="figure">
+<div class="figure" style="text-align: center">
 <img src="heatmap.png" alt="PCA analysis" width="100%"><p class="caption">
 PCA analysis
 </p>

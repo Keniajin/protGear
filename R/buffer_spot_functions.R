@@ -3,6 +3,7 @@
 #' Extract buffer spots of data
 #'
 #' @param Data1 An object of the class data frame
+#' @param buffer_spot A character string containing the name of the buffer spots.
 #'
 #' @description A function to extract the buffer spots data. A buffer spot only has the solution for
 #'  proprietary ingredients for stabilizing protein and minimizing evaporation.
@@ -10,15 +11,25 @@
 #' @export
 #'
 #' @examples
-buffer_spots <- function(Data1) {
+buffer_spots <- function(Data1 , buffer_spot="buffer") {
   Data2_buffer <- Data1 %>%
     # within each Name count sampleID. We had grouped this earlier
     # n() - gives number of observations in the current group
     mutate(replicate = 1:n()) %>%
     # Select only relevant variables
     dplyr:::select(sampleID, antigen, replicate,FMedianBG_correct,
-                   Block, Column, Row) %>%
-    filter(grepl('^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))   %>%
+                   Block, Column, Row)
+
+  if(buffer_spot=='buffer'){
+    Data2_buffer <- Data2_buffer %>%
+      filter(grepl('^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
+  }else {
+    Data2_buffer <- Data2_buffer %>%
+      filter(grepl(paste0('^',buffer_spot), tolower(antigen)))
+  }
+
+
+  Data2_buffer <- Data2_buffer %>%
     # combine Name and replicate
     unite(antigen,antigen,replicate)
   return(Data2_buffer)
@@ -27,7 +38,7 @@ buffer_spots <- function(Data1) {
 
 #'  Plot the buffer values
 #'
-#' @param buffer_names A character string containing the name of the buffer spot identifier variable. Default set to 'antigen'.
+#' @param buffer_names A character string containing the name of the variable with buffer spots. Default set to 'antigen'.
 #' @param buffer_mfi A character string containing the name of the variable with MFI value.Assuming background correction is done already.
 #' Default to 'FMedianBG_correct'
 #' @param slide_id  A character string containing the name of the slide/array identifier variable.

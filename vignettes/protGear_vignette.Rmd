@@ -6,16 +6,23 @@ header-includes:
    - \usepackage[T1]{fontenc}
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
+    toc: true
+    toc_float:
+      collapsed: false
+    number_sections: false
+    theme: spacelab
+    highlight: tango
 ---
 
 ```{r setup, include=FALSE}
 library(pacman)
 pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR)
 
-knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F, #tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
+knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F,
+                      fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
                       dev = "png", dev.args = list(type = "cairo-png"),
                        tidy='styler', tidy.opts=list(strict=T))
 
@@ -35,7 +42,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F, #tidy = T,tidy.opt
 ### General information
 protGear is a package for protein micro data processing just before the main analysis. The package loads the '`gpr`' or '`txt`' file format extracted by the quantification software and merges this with the specific sample identifiers. The package processes multiple files extracted in a batch with their corresponding sample identifier file. The sample identifier file has 2 variables '`v1`' and '`v2`' which indicate the mini-array or block number and sample identifier respectively. The '`gpr`' file and the corresponding sample identifier file have the same file name.  protGear also provides a web based $Shiny^{(R)}$ platform for real time visualization of the data processing. 
 
-In this vignette the general work-flow of protGear will be outlined by processing a sample dataset from a multicentre study Plasmodium falciparum Merozoite Protein Microarray. The multicentre study design motivated the development of the protGear suite. 
+In this vignette the general work-flow of protGear will be outlined by processing a sample dataset from a multicentre study __Plasmodium falciparum__ Merozoite Protein Microarray. The multicentre study design motivated the development of the protGear suite. 
 
 
 ### Analysis setup
@@ -63,7 +70,7 @@ remotes::install_github('Keniajin/protGear', dependencies=TRUE)
 ```
 
 
-## Package load and importing data
+## Importing data
 
 ```{r}
 library(protGear)
@@ -107,13 +114,15 @@ header_gpr[1:32]
 
 The function  `r text_spec("check_sampleID_files()",color="red")` helps to check whether each micro array file has a corresponding sample identifier file. The sample identifier files are generated from the lab plate maps to match the corresponding samples on a specific slide.If the sample identifier file is missing, protGear automatically generates the id's. 
 
-### Visualize the spatial structure of slide
+### Spatial structure of slide
 
 protGear offers a functionality to inspect the slide visually for any strong spatial biases when the scan image is not available. However, we recommend using the scanned image to visualize the spatial artefacts that might not be recorded in the `.gpr` file. We include the functions `r text_spec("visualize_slide()",color="red")` and `r text_spec("visualize_slide_2d()",color="red")`  to check the spatial structure. The functions are build on `r text_spec("structure_plot()",color="red")`  which shows the block and mini-array structure of a slide. 
 
 
 
-#### Visualize the foreground using the `visualize_slide` function
+#### Visualize the foreground MFI 
+
+Here we visualize the foreground MFI using the `r text_spec("visualize_slide",color="red")` function
 
 ```{r chunk6, fig.align='left'}
 visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
@@ -121,7 +130,9 @@ visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
 
 ```
 
-#### Visualize the background using the `visualize_slide_2d` function
+#### Visualize the background MFI  
+
+Here we visualize  the background MFI using the `visualize_slide_2d` function
 
 ```{r chunk7, fig.align='left'}
 visualize_slide_2d(infile ='data/array_data/machine1/KK2-06.txt' , 
@@ -129,7 +140,7 @@ visualize_slide_2d(infile ='data/array_data/machine1/KK2-06.txt' ,
 ```
 
 
-### Import microarray data
+### Import .gpr/txt data
 
 Microarray data is imported using the `r text_spec("read_array_files()",color="red")` function. The function accepts the following mandatory arguments; 
 
@@ -137,7 +148,7 @@ Microarray data is imported using the `r text_spec("read_array_files()",color="r
  - `data_path` - The path where the file with the data  is located 
  - `genepix_vars` -  A list of specific definitions of the experiment design. See  `r text_spec("array_vars()",color="red")`  
 
-For this example I use the sub-folder 2 specified using `genepix_vars$paths[[2]]` `r genepix_vars$paths[[2]]`. 
+For this example I use the sub-folder 2 specified using `genepix_vars$paths[[2]]` which is this path under vignette folder `r genepix_vars$paths[[2]]`. 
  
 ```{r}
 #### read in all the datasets
@@ -156,6 +167,7 @@ data_files <- set_names(data_files, purrr::map(filenames, name_of_files))
 
 
 ## Background Correction
+
 Background noise is caused by non-specific fluorescence such as auto-fluorescence of the glass slide or non-specific binding of parameters and reference substances. To cut down the effect of background noise we have included different approaches for background correction. First, we extract the background values, visualize and select the best background approach. We have implemented five different approaches;
   
   1) Local background subtraction
@@ -174,21 +186,35 @@ allData_bg <- set_names(allData_bg, purrr::map(filenames, name_of_files))
 allData_bg <- plyr::ldply(allData_bg)
 ```
 
+### Foreground vs Background
 
 Before selecting the best background correction approach the MFI signals are be inspected visually. In protGear we first utilise the function `r text_spec("plot_FB()",color="red")` that graphs the background, _BG_Median_ and foreground values, _FBG_Median_. On the protGear Shiny platform the visuals are interactive and you can identify the features or blocks with strong bias. 
 
 ```{r}
-p1 <- plot_FB(allData_bg,antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Median",log=F)
+p1 <- plot_FB(allData_bg,antigen_name="antigen",
+              bg_MFI="BG_Median",FG_MFI="FBG_Median",log=F)
 
+
+p1
+
+```
+
+### Background MFI by blocks
+
+```{r}
 p2 <- plot_bg(df=allData_bg, x_axis="Block",bg_MFI="BG_Median",
         log_mfi=T) 
-p1
 p2
 ```
 
+### Background correction
+
+After background visualization and selecting the best approach the array data are merged with their specific sample identifier files. 
+
+_`r text_spec("Note:",color="red")`_ Each array file must have its own corresponding sample identifier `.csv` file stored in `r text_spec("array_vars()",color="red")` function under `sampleID_path`. Check General information section.  
 
 
-After background visualization and selecting the best approach the array data are merged with their specific sample identifier files. Each array file has its own corresponding sample identifier file. The method of background subtraction selected is also specified under `r text_spec("method",color="red")` below. The background correction is performed by  `r text_spec("bg_correct()",color="red")` function.
+The method of background subtraction selected is specified under `r text_spec("method",color="red")` below. The background correction is performed by  `r text_spec("bg_correct()",color="red")` function.
 
 
 
@@ -199,12 +225,12 @@ sample_ID_merged_dfs <- set_names(sample_ID_merged_dfs, purrr::map(filenames, na
 ```
 
 
-## Visualizing buffer spot
+## Buffer spots
 
-This is specific to experiment design if a specific buffer spot is included. This is used to check for unexpected scanning artefacts. The buffer spots should have similar values in  different slides. Some outliers might be expected for buffer spots close sample spots or landmark. 
+Buffer spots are specific to the experiment design and are not always included. Buffer spots are used to check for unexpected scanning artefacts. The buffer spots should have similar values in  different slides. Some outliers are expected for buffer spots close sample spots or landmark. However you can specify the name of your control antigens here `r text_spec('buffer_spot="buffer"',color="blue")` if you do not have buffer spots.
 
 ```{r}
-buffer_transp <- purrr::map(.x=sample_ID_merged_dfs, .f=buffer_spots)
+buffer_transp <- purrr::map(.x=sample_ID_merged_dfs, .f=buffer_spots ,  buffer_spot="buffer")
 
 buffer_transp <- set_names(buffer_transp, purrr::map(filenames, name_of_files))
 
@@ -213,7 +239,8 @@ plot_buffer(buffers,buffer_names="antigen",buffer_mfi="FMedianBG_correct",slide_
 
 ```
 
-## Coefficient of Variation (CV) calculation
+## Coefficient of Variation (CV)
+
 To calculate the CV's we utilise the  `r text_spec("cv_estimation()",color="red")` function with a `cv_cut_off` specified , sample identifier variable and antigen specified under `sampleID_var` and `antigen` respectively. The `replicate_var` and `mfi_var` identifies the variable with the replicate rank generated and MFI's values. 
 
 
@@ -235,7 +262,7 @@ GGally::ggpairs(aa,aes(color=cvCat_all) ,
    
 ```
 
-
+### Summary of CV values
 
 Here we create a summary of the CV values for each sample/slide utilising the `r text_spec("cv_by_sample_estimation()",color="red")` function.  This helps to identify samples with high values of CV. On the protGear dashboard an interactive table is created to show the summary for each sample. 
 
@@ -270,6 +297,8 @@ ggplot(all_cv_sample)+
 ```
 
 
+### Best replicates
+
 We have implemented a function `r text_spec("best_CV_estimation()",color="red")` to select the best replicates if an experiment has more than 2 technical replicates. This helps to select the less variable replicates.
 
 ```{r}
@@ -303,7 +332,9 @@ ggplot(all_cv_sample_best2)+
 ```
 
 
-## Subtract the tag values
+## Tag subtraction
+
+Tag subtraction is applied for antigens containing purification tags. A file with the specific TAG name for each antigen is loaded. The file has the `antigen,TAG and TAG_name` and the TAG_name must be part of the antigens listed.
 
 ```{r}
 tag_file <- read.csv("TAG_antigens.csv")
@@ -312,15 +343,17 @@ batch_vars <- list(machine="m1", day="0520")
 ```
 
 
-Tag subtraction is applied for antigens containing purification tags. A file with the specific TAG name for each antigen is loaded. The file has the `antigen,TAG and TAG_name` and the TAG_name must be part of the antigens listed.
+### Overview of the TAG file
 
 ```{r}
 tb1 <- data.frame(head(tag_file, n=10))
-
 tb1 %>% 
   kable() %>%
   kable_styling()
 ```
+
+
+### Subtracting the TAG values
 
 The function `r text_spec("tag_subtract()",color="red")` implements the TAG subtration by matching the TAG names with the corresponding TAG values. 
 
@@ -338,7 +371,7 @@ dataCV_tag <- plyr::ldply(dataCV_tag)
 ```
 
 
-In this example here we plot a graph of antigens Tagged with GST before and after TAG subtration.
+In this example here we plot a graph of antigens Tagged with GST before and after TAG subtraction.
 
 ```{r}
 aaa <- dataCV_tag %>% 
@@ -418,6 +451,9 @@ normlise_df$plot_normalisation
 
 ```
 
+
+### Compare normalisation methods
+
 On the dashboard we compare the different normalisation techniques using the `r text_spec("mutiple_plot()",color="red")` function after loading the data.
 
 
@@ -479,8 +515,7 @@ p <- do.call("grid.arrange", c(normalised_list_plot, ncol=2))
 ```
 
 
-
-## Heatmap of the normalised data
+## Heatmaps
 
 ```{r}
 norm_df <- normlise_df$matrix_antigen_normalised

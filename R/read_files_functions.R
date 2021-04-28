@@ -45,11 +45,15 @@ read_array_files <- function(i,data_path,genepix_vars){
       genepix_vars$FG<- names(d_f)[names(d_f) %like% paste0(genepix_vars$FG,'$')]
     }
 
+    expression_med <- paste0("median(`", genepix_vars$BG,"`, na.rm = TRUE)")
+    exp_minpos <-  paste0("minpositive(`", genepix_vars$BG,"`)")
     d_f <- d_f %>%
-      mutate(global_BGMedian=median(!!genepix_vars$BG,na.rm = TRUE)) %>%
+
+      mutate(global_BGMedian := !! parse_expr(expression_med)) %>%
       ## minimum BG per block and >1 -- Moving minimum approach per block
       group_by(Block) %>%
-      mutate(minimum_BGMedian=minpositive(!!genepix_vars$BG)) %>%
+
+      mutate(minimum_BGMedian := !! parse_expr(exp_minpos)) %>%
       ungroup()
 
 
@@ -404,7 +408,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
     ##save the MFI values with subtracting the background
     Data1 <- Data1 %>%
       mutate(FMedianBG_correct=!!genepix_vars$FG-global_BGMedian) %>%
-      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,BGMedian,
+      dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,
                      BGMedian=!!genepix_vars$BG, FMedianBG_correct,Block, Column, Row) %>%
       mutate(replicate = 1:n())
     #%>%
@@ -530,7 +534,7 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
     arraynames <- read.csv(file.path(genepix_vars$sampleID_path,paste0(iden ,".csv")) ,
                            header = TRUE , stringsAsFactors = FALSE , colClasses="character")
   }else{
-    warning(paste0(iden, " Not found in the sampleID files", genepix_vars$sampleID_path))
+    warning(paste0(iden, ".csv Not found in the sampleID files", genepix_vars$sampleID_path))
     arraynames <- data.frame(v1=(1:genepix_vars$totsamples) , v2=paste0("SID_gen",1:genepix_vars$totsamples),barcode=iden)
 
   }

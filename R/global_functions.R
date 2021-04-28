@@ -4,7 +4,17 @@
 "%ni%" <- Negate("%in%")
 
 
-minpositive <- function(x) min(x[x > 0], na.rm = TRUE)
+#' Get the minimum positive value
+#'
+#' @param x  A numeric vector or variable
+#'
+#' @return
+#' @export
+#'
+#' @examples
+minpositive <- function(x){
+ min(x[x > 0], na.rm = TRUE)
+}
 
 
 

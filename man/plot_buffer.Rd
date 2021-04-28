@@ -14,7 +14,7 @@ plot_buffer(
 \arguments{
 \item{df}{A data frame to be used to plot}
 
-\item{buffer_names}{A character string containing the name of the buffer spot identifier variable. Default set to 'antigen'.}
+\item{buffer_names}{A character string containing the name of the variable with buffer spots. Default set to 'antigen'.}
 
 \item{buffer_mfi}{A character string containing the name of the variable with MFI value.Assuming background correction is done already.
 Default to 'FMedianBG_correct'}

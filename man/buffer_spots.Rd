@@ -4,10 +4,12 @@
 \alias{buffer_spots}
 \title{Extract buffer spots of data}
 \usage{
-buffer_spots(Data1)
+buffer_spots(Data1, buffer_spot = "buffer")
 }
 \arguments{
 \item{Data1}{An object of the class data frame}
+
+\item{buffer_spot}{A character string containing the name of the buffer spots.}
 }
 \value{
 A data frame of the buffer control spots
