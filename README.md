@@ -40,10 +40,4 @@ Mwai K, Kibinge N, Tuju J, Kamuyu G, Kimathi R, Mburu J, Chepsat E, Nyamako L, C
 
 DOI: https://doi.org/10.1016/j.csbj.2021.04.044 
 
-@article{mwai2021protgear,
-  title={protGear: A protein microarray data pre-processing suite},
-  author={Mwai, Kennedy and Kibinge, Nelson and Tuju, James and Kamuyu, Gathoni and Kimathi, Rinter and Mburu, James and Chepsat, Emily and Nyamako, Lydia and Chege, Timothy and Nkumama, Irene and others},
-  journal={Computational and Structural Biotechnology Journal},
-  year={2021},
-  publisher={Elsevier}
-}
+
