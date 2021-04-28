@@ -1,12 +1,11 @@
 ---
-title: protGear:An R package with an interactive web-based protein microarray data
+title: protGear vignette
   processing suite
 author: "Kennedy Mwai"
 header-includes:
    - \usepackage[T1]{fontenc}
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
-  pdf_document: default
   html_document:
     df_print: paged
     toc: true
@@ -15,6 +14,7 @@ output:
     number_sections: false
     theme: spacelab
     highlight: tango
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -40,10 +40,11 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F,
 ## Introduction 
 
 ### General information
-protGear is a package for protein micro data processing just before the main analysis. The package loads the '`gpr`' or '`txt`' file format extracted by the quantification software and merges this with the specific sample identifiers. The package processes multiple files extracted in a batch with their corresponding sample identifier file. The sample identifier file has 2 variables '`v1`' and '`v2`' which indicate the mini-array or block number and sample identifier respectively. The '`gpr`' file and the corresponding sample identifier file have the same file name.  protGear also provides a web based $Shiny^{(R)}$ platform for real time visualization of the data processing. 
+protGear is a package for protein micro data processing just before the main analysis. The package loads the '`gpr`' or '`txt`' file format extracted by the quantification software and merges this with the specific sample identifiers. The package processes multiple files extracted batch by batch with their corresponding sample identifier file. The sample identifier file has 2 variables '`v1`' and '`v2`' which indicate the mini-array or block number and sample identifier respectively. The '`gpr`' file and the corresponding sample identifier file have the same file name.  protGear also provides a web based $Shiny^{(R)}$ platform for real time visualization of the data processing. 
 
 In this vignette the general work-flow of protGear will be outlined by processing a sample dataset from a multicentre study __Plasmodium falciparum__ Merozoite Protein Microarray. The multicentre study design motivated the development of the protGear suite. 
 
+The details of the methodologies are published here https://doi.org/10.1016/j.csbj.2021.04.044
 
 ### Analysis setup
 Create 2 folders that hold the '`.gpr`' files and the corresponding sample identifier files.
@@ -59,6 +60,10 @@ img1_path <- "folder_structure.png"
 ![Folder structure of array and sample ID files](folder_structure.png){width=70%}
 
 
+
+## Sample identifier file
+
+![sample ID file structure](image_slide.png)
 
 ### Installation
 
