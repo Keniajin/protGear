@@ -449,7 +449,7 @@ control_antigens <- c("CommercialHumanIgG","CD4TAG")
 The `r text_spec("matrix_normalise()",color="red")`  function is used to normalise the data and returns a list of plots and a matrix of normalised values. A plot is returned if ` return_plot = T` otherwise only a matrix of normalised values will be returned. 
 
 ```{r}
-normlise_df <- matrix_normalise(matrix_antigen, method = "log2", array_matrix=array_matrix,
+normlise_df <- matrix_normalise(matrix_antigen, method = "vsn", array_matrix=array_matrix,
                        return_plot = T,control_antigens=control_antigens)
 
 normlise_df$plot_normalisation

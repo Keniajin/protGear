@@ -494,7 +494,7 @@ plot_normalised_antigen <- function(exprs_normalised_df,method,batch_correct){
   antigen_summ <- exprs_normalised_df %>%
     gather(antigen,MFI) %>%
     group_by(antigen) %>%
-    summarise(mean_mfi=mean(MFI,na.rm = TRUE), sd_mfi=sd(MFI,na.rm = TRUE)) %>%
+    dplyr::summarise(mean_mfi=mean(MFI,na.rm = TRUE), sd_mfi=sd(MFI,na.rm = TRUE)) %>%
     dplyr::mutate(rank_mean_all_anti=rank(mean_mfi) ,
                   method=method, batch_correct=batch_correct) %>%
     arrange(rank_mean_all_anti)

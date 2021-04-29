@@ -4,7 +4,7 @@ Title: Protein Micro Array Data Management and Interactive Visualization
 Version: 0.1.0
 Authors@R: c(person("Kennedy", "Mwai", role = c("cre", "aut"), email = "ken@keniajin.com|keniajn@gmail.com"),
              person(c("James", "Mburu"), role = "aut" , email = "mburuwanja@gmail.com") ,
-             person(c("Jacqueline", "Waeni"), role = "tester" , email = "jacqwaeni@gmail.com"))
+             person(c("Jacqueline", "Waeni"), role = "ctb" , email = "jacqwaeni@gmail.com"))
 Maintainer: The package maintainer <ken@keniajin.com>
 Description: A generic three-step pre-processing package for protein microarray data. This package contains different data pre-processing procedures to allow comparison of their performance.These steps are background correction, the coefficient of variation (CV) based filtering,  batch correction and normalization.
 License: GPL-3
