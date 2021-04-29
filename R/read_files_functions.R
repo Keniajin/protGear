@@ -439,6 +439,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
                                       (minpositive(FMedianBG_correct)/2),FMedianBG_correct)) %>%
+      group_by(sampleID,Name) %>%
       mutate(replicate = 1:n())
     #----------------------------------------------------------------------------------------------------
   }else if(method=="minimum_value"){
@@ -452,6 +453,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
                                       (minpositive(FMedianBG_correct)),FMedianBG_correct)) %>%
+      group_by(sampleID,Name) %>%
       mutate(replicate = 1:n())
 
     #----------------------------------------------------------------------------------------------------
@@ -478,6 +480,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<delta,
                                       (delta * exp(1 - (BGMedian + delta)/FMedian)),FMedianBG_correct)) %>%
+      group_by(sampleID,Name) %>%
         dplyr::mutate(replicate = 1:n())
   }else if(method=="normexp"){
     ##a convolution of normal and exponential distributions is fitted to the foreground intensities using
@@ -503,7 +506,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,
                      BGMedian=!!genepix_vars$BG,Block, Column, Row) %>%
       bind_cols(bg_correct) %>%
-      group_by(Block) %>%
+      group_by(sampleID,Name) %>%
       dplyr::mutate(replicate = 1:n())
   }
   #Data1 <- Data1 %>% rename(F635MedianB635=F635.Median...B635)
