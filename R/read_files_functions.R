@@ -65,8 +65,6 @@ read_array_files <- function(i,data_path,genepix_vars){
 
 # Format and group bi ID & Antigen Name
 # Transpose dataset and assign corresponding sample ID
-
-
 #' Merge array data with the sample ID
 #'         \\\_Start_Function_Extract_Data\\\         #
 #' @param dfs A character vector with the names of the
@@ -180,12 +178,8 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
   data1_bg <- Data1 %>% dplyr::select( sampleID, antigen=Name,Block,FBG_Median=!!genepix_vars$FG , BG_Median=!!genepix_vars$BG ) %>%
     mutate(replicate = 1:n() ) %>%
     filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
-  # %>%     spread(antigen, F635Median)
   # combine Name and replicate
-  ## save in the background data folder files with higher background values
- # create_dir(path = "data/raw_BG/")
-  #write_csv(data1_bg ,paste0("data/raw_BG/",iden,"_rawBG.csv"))
-  #----------------------------------------------------------------------------------------------------
+ #----------------------------------------------------------------------------------------------------
   return(data1_bg)
 }
 
