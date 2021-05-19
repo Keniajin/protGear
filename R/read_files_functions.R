@@ -130,7 +130,7 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 
   ## capture errors for same sample ID in a slide
   if(length(unique(arraynames$v2)) <genepix_vars$totsamples) {
-    sink("error/error_replicates.txt" , append = TRUE)
+    sink("error_replicates.txt" , append = TRUE)
     print(paste0("Most likely there is a repeated sample name for " , iden))
     sink()
     arraynames <- arraynames %>%
