@@ -86,7 +86,7 @@
       <h1 data-toc-skip>protGear vignette processing suite</h1>
                         <h4 class="author">Kennedy Mwai</h4>
             
-            <h4 class="date">29 April, 2021</h4>
+            <h4 class="date">17 June, 2021</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/keniajin/protGear/blob/master/vignettes/protGear_vignette.Rmd"><code>vignettes/protGear_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>protGear_vignette.Rmd</code></div>
@@ -736,6 +736,8 @@ CD4TAG
 <a href="#heatmaps" class="anchor"></a>Heatmaps</h2>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">normlise_df</span><span class="op">$</span><span class="va">matrix_antigen_normalised</span>
+<span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">norm_df</span> <span class="op">%&gt;%</span>
+  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">control_antigens</span><span class="op">)</span>
 <span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">pheatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">norm_df</span>,
   scale <span class="op">=</span> <span class="st">"none"</span>, cluster_rows <span class="op">=</span> <span class="cn">F</span>,
   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"VSN"</span>, <span class="st">"Normalised Data"</span><span class="op">)</span>,
