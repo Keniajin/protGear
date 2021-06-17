@@ -6,6 +6,7 @@ header-includes:
    - \usepackage[T1]{fontenc}
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
+  pdf_document: default
   html_document:
     df_print: paged
     toc: true
@@ -14,7 +15,6 @@ output:
     number_sections: false
     theme: spacelab
     highlight: tango
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -449,7 +449,7 @@ control_antigens <- c("CommercialHumanIgG","CD4TAG")
 The `r text_spec("matrix_normalise()",color="red")`  function is used to normalise the data and returns a list of plots and a matrix of normalised values. A plot is returned if ` return_plot = T` otherwise only a matrix of normalised values will be returned. 
 
 ```{r}
-normlise_df <- matrix_normalise(matrix_antigen, method = "rlm", array_matrix=array_matrix,
+normlise_df <- matrix_normalise(matrix_antigen, method = "vsn", array_matrix=array_matrix,
                        return_plot = T,control_antigens=control_antigens)
 
 normlise_df$plot_normalisation
@@ -524,6 +524,8 @@ p <- do.call("grid.arrange", c(normalised_list_plot, ncol=2))
 
 ```{r}
 norm_df <- normlise_df$matrix_antigen_normalised
+norm_df <- norm_df %>% 
+  select(-control_antigens)
 p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
                             main=paste('VSN',"Normalised Data"),
                             silent = T)
