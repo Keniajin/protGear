@@ -433,7 +433,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
                                       (minpositive(FMedianBG_correct)/2),FMedianBG_correct)) %>%
-      group_by(sampleID,Name) %>%
+      group_by(sampleID,antigen) %>%
       mutate(replicate = 1:n())
     #----------------------------------------------------------------------------------------------------
   }else if(method=="minimum_value"){
@@ -447,7 +447,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<0.1,
                                       (minpositive(FMedianBG_correct)),FMedianBG_correct)) %>%
-      group_by(sampleID,Name) %>%
+      group_by(sampleID,antigen) %>%
       mutate(replicate = 1:n())
 
     #----------------------------------------------------------------------------------------------------
@@ -474,7 +474,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       group_by(Block) %>%
       mutate(FMedianBG_correct=ifelse(FMedianBG_correct<delta,
                                       (delta * exp(1 - (BGMedian + delta)/FMedian)),FMedianBG_correct)) %>%
-      group_by(sampleID,Name) %>%
+      group_by(sampleID,antigen) %>%
         dplyr::mutate(replicate = 1:n())
   }else if(method=="normexp"){
     ##a convolution of normal and exponential distributions is fitted to the foreground intensities using
@@ -500,7 +500,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
       dplyr::select( sampleID, sample_array_ID,antigen=Name,FMedian=!!genepix_vars$FG,
                      BGMedian=!!genepix_vars$BG,Block, Column, Row) %>%
       bind_cols(bg_correct) %>%
-      group_by(sampleID,Name) %>%
+      group_by(sampleID,antigen) %>%
       dplyr::mutate(replicate = 1:n())
   }
   #Data1 <- Data1 %>% rename(F635MedianB635=F635.Median...B635)
@@ -533,7 +533,6 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
   }else{
     warning(paste0(iden, ".csv Not found in the sampleID files", genepix_vars$sampleID_path))
     arraynames <- data.frame(v1=(1:genepix_vars$totsamples) , v2=paste0("SID_gen",1:genepix_vars$totsamples),barcode=iden)
-
   }
 
   ## replicate to the number of blocks
@@ -583,7 +582,6 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
   ## DO the background correction
   ## specify the
   Data1 <- bg_correct(iden, Data1 ,genepix_vars, method=method)
-
   Data1 <-Data1 %>%  mutate(iden=iden)
   return(Data1)
 }
