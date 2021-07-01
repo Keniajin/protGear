@@ -22,6 +22,5 @@ A generic function to extract the background data for micro array data.
 \details{
 \\\_End_function\\\         #
 
-
 Extract the background values
 }

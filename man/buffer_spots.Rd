@@ -16,5 +16,5 @@ A data frame of the buffer control spots
 }
 \description{
 A function to extract the buffer spots data. A buffer spot only has the solution for
- proprietary ingredients for stabilizing protein and minimizing evaporation.
+proprietary ingredients for stabilizing protein and minimizing evaporation.
 }

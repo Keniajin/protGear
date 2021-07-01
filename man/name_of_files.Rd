@@ -7,7 +7,9 @@
 name_of_files(i)
 }
 \arguments{
-\item{i}{- a list filenames with .txt or .gpr extension}
+\item{i}{\itemize{
+\item a list filenames with .txt or .gpr extension
+}}
 }
 \value{
 

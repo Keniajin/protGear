@@ -7,7 +7,9 @@
 visualize_slide_2d(infile, MFI_var, d_f = NA)
 }
 \arguments{
-\item{infile}{- a .gpr file to be used to visualize the expression intensities of the slide spots}
+\item{infile}{\itemize{
+\item a .gpr file to be used to visualize the expression intensities of the slide spots
+}}
 
 \item{MFI_var}{the MFI variable to plot, can be either the background or foreground value}
 }

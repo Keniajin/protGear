@@ -33,7 +33,7 @@ tag_subtract(
 
 }
 \description{
-\\\_End_Function_\\\         #
+\\\\emph{End_Function}\\\         #
 }
 \details{
 Subtract the purification TAG data

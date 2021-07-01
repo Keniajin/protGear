@@ -2,7 +2,7 @@
 % Please edit documentation in R/global_functions.R
 \name{check_sampleID_files}
 \alias{check_sampleID_files}
-\title{\\\_End_Function_\\\         #
+\title{\\\\emph{End_Function}\\\         #
 Check existing sample ID names}
 \usage{
 check_sampleID_files(genepix_vars)

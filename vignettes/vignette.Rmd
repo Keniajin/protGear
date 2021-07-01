@@ -23,11 +23,11 @@ output:
   pdf_document: default
 ---
 
-<!-- \VignetteEngine{knitr::knitr} --> 
+
 
 ```{r setup, include=FALSE}
 library(pacman)
-pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR,magick )
+pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR,magick,rlang )
 
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),

@@ -25,7 +25,7 @@ A generic function to perform background correction.
 \details{
 Background correction
 
- The function implements background correction methods developed by \code{\link[limma]{backgroundCorrect}}. But the
+The function implements background correction methods developed by \code{\link[limma]{backgroundCorrect}}. But the
 \code{minimum_half and movingmin_bg} uses the block of the protein array as the grid. If method="movingmin_bg" the minimum
 background value within a  block is subtracted.
 If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in

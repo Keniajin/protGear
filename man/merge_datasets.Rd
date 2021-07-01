@@ -3,7 +3,7 @@
 \name{merge_datasets}
 \alias{merge_datasets}
 \title{Merge array data with the sample ID
-        \\\_Start_Function_Extract_Data\\\         #}
+\\\_Start_Function_Extract_Data\\\         #}
 \usage{
 merge_datasets(
   dfs,
@@ -22,5 +22,5 @@ merge_datasets(
 }
 \description{
 Merge array data with the sample ID
-        \\\_Start_Function_Extract_Data\\\         #
+\\\_Start_Function_Extract_Data\\\         #
 }
