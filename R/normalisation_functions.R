@@ -196,7 +196,7 @@ rlm_normalise_matrix <- function(matrix_antigen, array_matrix,control_antigens){
   ## create a variable to indicate the control antigens
   rlm_normalise_df <-   rlm_normalise_df %>%
     #mutate(Description=ifelse(grepl(paste0(control_antigens),antigen),"Control","Sample"))
-    mutate(Description=ifelse(antigen %in% control_antigens ,"Control","Sample"))
+    mutate(Description=ifelse(antigen %in% all_of(control_antigens) ,"Control","Sample"))
   return(rlm_normalise_df)
 }
 

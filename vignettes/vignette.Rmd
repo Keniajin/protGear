@@ -5,8 +5,13 @@ author: "Kennedy Mwai"
 header-includes:
    - \usepackage[T1]{fontenc}
 date: '`r format(Sys.time(), "%d %B, %Y")`'
+package: protGear
+vignette: >
+  %\VignetteIndexEntry{protGear}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::knit}
+link-citations: true
 output:
-  pdf_document: default
   html_document:
     df_print: paged
     toc: true
@@ -15,11 +20,14 @@ output:
     number_sections: false
     theme: spacelab
     highlight: tango
+  pdf_document: default
 ---
+
+<!-- \VignetteEngine{knitr::knitr} --> 
 
 ```{r setup, include=FALSE}
 library(pacman)
-pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR)
+pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR,magick )
 
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
@@ -465,7 +473,7 @@ On the dashboard we compare the different normalisation techniques using the `r 
 ```{r}
 control_antigens <- c("CommercialHumanIgG","CD4TAG")
 ## no normalisation
-  normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen, 
+normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen, 
                                          method = "none", 
                                          array_matrix=array_matrix,
                                          return_plot = T,
@@ -605,7 +613,7 @@ files <- list.files(pattern = 'p_pca')
 ![PCA Chart Repeat](p_pca.PNG)
 
 ## Shiny application
-Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
+Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
 The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.
 
 ```{r, eval=F}
