@@ -6,3 +6,7 @@
 data/
 processed_data/
 to_update.md
+protGear.Rproj
+log_file.txt
+.gitignore
+.Rbuildignore
