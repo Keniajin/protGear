@@ -600,18 +600,18 @@ ggsave(p_pca ,
           units = "in",
          limitsize = FALSE,
          dpi=300)
- 
+p_pca 
 ```
 
 
 
 ```{r image_pca, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'}
-files <- list.files(pattern = 'p_pca')
+#files <- list.files(pattern = 'p_pca')
 #knitr::include_graphics(files[[1]])
 #knitr::include_graphics('p_pca.PNG')
 ```
 
-![PCA Chart Repeat](p_pca.PNG)
+<!-- ![PCA Chart Repeat](p_pca.PNG) -->
 
 ## Shiny application
 Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
