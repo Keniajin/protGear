@@ -8,7 +8,7 @@
 #'
 #' @param x  A numeric vector or variable
 #'
-#' @return
+#' @return Returns the minimum positive value in an object
 #' @export
 #'
 #' @examples
@@ -33,10 +33,12 @@ minpositive <- function(x){
 #' @param date_process Optional:A character indicating the date when the samples were processed.
 #'
 #' @description A generic function returning a list with the data structure.
-#' @return
+#' @import rlang
+#' @return a list of parameters required to process the data
 #' @export
 #'
 #' @examples
+#' @return genepix_vars
 array_vars <- function(channel="635",
                        totsamples ,
                        FG="",
@@ -93,9 +95,9 @@ array_vars <- function(channel="635",
 #' Title Create directory function
 #'
 #'
-#' @param path
-#'
-#' @return
+#' @param path folder location to create a directory
+#' @description creating a directory
+#' @return created directory
 #' @export
 #'
 #' @examples
@@ -112,14 +114,16 @@ create_dir <- function(path){
 #'
 #' @param i - a list filenames with .txt or .gpr extension
 #'
-#' @return
+#' @return a list of file names
 #' @export
 #' @description A generic function returning a vector with the names of files in the same directory
 #' @examples
+#' @return name
 name_of_files <- function(i) {
   name <- gsub("\\.txt*|\\.gpr*", "", i, perl = TRUE)
   name <- gsub(" repeat", "", name, perl = TRUE)
   name <- gsub(" ", "_", name, perl = TRUE)
+  return(name)
 }
 
 
@@ -130,6 +134,7 @@ name_of_files <- function(i) {
 #'
 #' @description A generic function to write into the log file with a replicate check error
 #' @param iden An id for the file with replicates error
+#' @return  a log file showing the replicate errors
 error_replicates <- function(iden) {
   sink("errors/error_replicates.txt" , append = TRUE)
   print(paste0("The replicates per antigen per sample are more than expected for ", iden))
@@ -146,7 +151,9 @@ error_replicates <- function(iden) {
 #' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @description  A generic function to check if the file(s) witht the MFI values have a corresponding sample ID file. Sample ID file is
 #' a file with the identifiers for the samples in array file.
-#' @return
+#' @return A file with missing corresponding sample ID files
+#' @importFrom stats median quantile rnorm sd
+#' @importFrom utils read.csv write.table
 #' @export
 #'
 #' @examples
@@ -165,7 +172,7 @@ check_sampleID_files <- function(genepix_vars){
 
 
   ## create a folder to collect the errrors
-  if(dir.exists("errors")==F){
+  if(dir.exists("errors")==FALSE){
     dir.create("errors")
   }
   if(length(miss_id_file)>0){

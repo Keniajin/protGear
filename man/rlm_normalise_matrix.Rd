@@ -6,8 +6,15 @@
 \usage{
 rlm_normalise_matrix(matrix_antigen, array_matrix, control_antigens)
 }
-\value{
+\arguments{
+\item{matrix_antigen}{A matrix with antigen data}
 
+\item{array_matrix}{A matrix with control antigen data}
+
+\item{control_antigens}{the control antigens for RLM normalisation}
+}
+\value{
+A RLM normalised data frame
 }
 \description{
 A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.

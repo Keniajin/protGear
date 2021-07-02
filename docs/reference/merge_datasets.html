@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Merge array data with the sample ID
-\\_Start_Function_Extract_Data\\         # — merge_datasets • protGear</title>
+<title>Merge array data with the sample ID — merge_datasets • protGear</title>
 
 
 <!-- jquery -->
@@ -40,10 +39,8 @@
 
 
 
-<meta property="og:title" content="Merge array data with the sample ID
-\\_Start_Function_Extract_Data\\         # — merge_datasets" />
-<meta property="og:description" content="Merge array data with the sample ID
-\\_Start_Function_Extract_Data\\         #" />
+<meta property="og:title" content="Merge array data with the sample ID — merge_datasets" />
+<meta property="og:description" content="merge several slide datasets" />
 
 
 
@@ -108,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/keniajin/protGear/">
+  <a href="https://github.com/Keniajin/protGear/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -126,15 +123,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Merge array data with the sample ID
-\\_Start_Function_Extract_Data\\         #</h1>
-    <small class="dont-index">Source: <a href='https://github.com/keniajin/protGear/blob/master/R/read_files_functions.R'><code>R/read_files_functions.R</code></a></small>
+    <h1>Merge array data with the sample ID</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Keniajin/protGear/blob/master/R/read_files_functions.R'><code>R/read_files_functions.R</code></a></small>
     <div class="hidden name"><code>merge_datasets.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Merge array data with the sample ID
-\\_Start_Function_Extract_Data\\         #</p>
+    <p>merge several slide datasets</p>
     </div>
 
     <pre class="usage"><span class='fu'>merge_datasets</span><span class='op'>(</span>
@@ -155,11 +150,34 @@
       <td><p>A character vector with the names of the</p></td>
     </tr>
     <tr>
+      <th>filenames</th>
+      <td><p>A vector or list of files names</p></td>
+    </tr>
+    <tr>
+      <th>data_files</th>
+      <td><p>A list with of data files</p></td>
+    </tr>
+    <tr>
+      <th>totsamples</th>
+      <td><p>The total number of samples per slide. defined in genepix vars</p></td>
+    </tr>
+    <tr>
+      <th>blockspersample</th>
+      <td><p>the number of samples in a block</p></td>
+    </tr>
+    <tr>
+      <th>sampleID_path</th>
+      <td><p>location of the sample id files defined in the genepix vars</p></td>
+    </tr>
+    <tr>
       <th>bg</th>
-      <td></td>
+      <td><p>A logical character indicating whether the background data is being merged or not</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A data frame of slide data merged together, for eith bg data or bg corrected data</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

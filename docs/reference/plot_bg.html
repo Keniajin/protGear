@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="Plot background — plot_bg" />
-<meta property="og:description" content="A generic function for plotting of R objects.
-A generic function for plotting of R objects." />
+<meta property="og:description" content="A generic function for plotting of R objects." />
 
 
 
@@ -106,7 +105,7 @@ A generic function for plotting of R objects." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/keniajin/protGear/">
+  <a href="https://github.com/Keniajin/protGear/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -125,13 +124,12 @@ A generic function for plotting of R objects." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot background</h1>
-    <small class="dont-index">Source: <a href='https://github.com/keniajin/protGear/blob/master/R/read_files_functions.R'><code>R/read_files_functions.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/Keniajin/protGear/blob/master/R/read_files_functions.R'><code>R/read_files_functions.R</code></a></small>
     <div class="hidden name"><code>plot_bg.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>A generic function for plotting of R objects.</p>
-<p>A generic function for plotting of R objects.</p>
     </div>
 
     <pre class="usage"><span class='fu'>plot_bg</span><span class='op'>(</span><span class='va'>df</span>, x_axis <span class='op'>=</span> <span class='st'>"antigen"</span>, bg_MFI <span class='op'>=</span> <span class='st'>"B635_Median"</span>, log_mfi <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
@@ -144,6 +142,10 @@ A generic function for plotting of R objects." />
       <td><p>A     default dataset to use for plot.</p></td>
     </tr>
     <tr>
+      <th>x_axis</th>
+      <td><p>The variable on the x axis</p></td>
+    </tr>
+    <tr>
       <th>bg_MFI</th>
       <td><p>A numeric <code>variable</code> describing which is the background MFI</p></td>
     </tr>
@@ -151,22 +153,11 @@ A generic function for plotting of R objects." />
       <th>log_mfi</th>
       <td><p>a logical value indicating whether the MFI values should be log transformed or not.</p></td>
     </tr>
-    <tr>
-      <th>antigen_name</th>
-      <td><p>The <code>variable</code> describing which features/proteins/antibodies in the data should be used to plot</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
-
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Plot background values</p>
+    <p>A ggplot of background values</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>

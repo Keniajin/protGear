@@ -49,7 +49,7 @@ observeEvent("", {
   showModal(modalDialog(
     #intro_html <- ,
     includeHTML(system.file("shiny-examples/protGear_interactive/", "intro_text.html", package="protGear" ,
-                            mustWork = T)),
+                            mustWork = TRUE)),
     easyClose = TRUE,
     footer = tagList(
       actionButton(inputId = "intro", label = "DISMISS (INTRODUCTION TOUR)", icon = icon("info-circle"))
@@ -294,7 +294,7 @@ output$select_spatial_type <- renderUI({
                      choices =  graphs,
                      inline=T, animation = "jelly",
                      status = "default",
-                     shape = "curve",bigger = T)
+                     shape = "curve",bigger = TRUE)
 
 })
 
@@ -314,7 +314,7 @@ output$spatial_structure_plot <- renderPlotly({
     )
 
       p <- visualize_slide(infile=inFile,
-                           MFI_var =MFI_var, interactive=T ,d_f=gpr_file_reactive)
+                           MFI_var =MFI_var, interactive=TRUE ,d_f=gpr_file_reactive)
       p <- p  %>%
         layout(title = paste("Spatial visualization of", MFI_var ," MFI"),
                margin = m)
@@ -399,7 +399,7 @@ observeEvent(input$total_miniarray, {
   gpr_file_reactive <- gpr_file_reactive()
 
   if(!is.null(gpr_file_reactive)){
-    blocks <- max(gpr_file_reactive$Block, na.rm = T)
+    blocks <- max(gpr_file_reactive$Block, na.rm = TRUE)
   }else{
     blocks <- 0
   }
@@ -444,7 +444,7 @@ observeEvent(input$blockspersample_param, {
   gpr_file_reactive <- gpr_file_reactive()
   if(!is.null(gpr_file_reactive)){
     mini_arrays <- input$total_miniarray
-    blocks <- max(gpr_file_reactive$Block, na.rm = T)
+    blocks <- max(gpr_file_reactive$Block, na.rm = TRUE)
     value_check <- blocks/mini_arrays
 
   }else{
@@ -505,7 +505,7 @@ output$blockspersample_output <- renderUI({
   gpr_file_reactive <- gpr_file_reactive()
  if(!is.null(input$total_miniarray)){
    mini_arrays <- input$total_miniarray
-   blocks <- max(gpr_file_reactive$Block, na.rm = T)
+   blocks <- max(gpr_file_reactive$Block, na.rm = TRUE)
    value_check <- blocks/mini_arrays
 
  }else{
@@ -924,7 +924,7 @@ output$blocks_count <- renderInfoBox({
     infoBox("Each array file has : ", paste(params_df$blocks, "blocks"),
             subtitle = paste("with",params_df$spotsperblock, "spots per block") ,
             icon = icon("th",lib = "font-awesome"),
-            color = "red",width = 4,fill = F)
+            color = "red",width = 4,fill = FALSE)
   }
 
 })
@@ -941,7 +941,7 @@ output$antigens_count  <- renderInfoBox({
     infoBox("Each array file has: ", params_df$antigens,
             subtitle = paste0("antigens") ,
             icon = icon("allergies",lib = "font-awesome"),
-            color = "red",width = 4,fill = F)
+            color = "red",width = 4,fill = FALSE)
   }
 
 })
@@ -1046,7 +1046,7 @@ merged_dfs_reactive <- reactive({
 output$tbl_all_data <-  DT::renderDT({
   folder_choose <- parseDirPath(c(home = wd_this) ,input$folderChoose)
   if(!rlang::is_empty(sel_path) ){#input$folderChoose!=''
-    all_datas <- list.files(sel_path() , recursive = T)
+    all_datas <- list.files(sel_path() , recursive = TRUE)
     sample_ID_merged_dfs <-  merged_dfs_reactive()
     d_f <- plyr::ldply(sample_ID_merged_dfs)
     write_csv(d_f, paste("processed_data/raw_data-", Sys.Date(), ".csv", sep=""))
@@ -1223,7 +1223,7 @@ output$slide_names_bg <- renderUI({
                `selected-text-format` = "count > 3"
              ),
              selected = paste(dfs),
-             multiple = T)
+             multiple = TRUE)
   }
 })
 
@@ -1235,9 +1235,9 @@ output$select_log_MFI <- renderUI({
   prettyRadioButtons(inputId="log_mfi",
                      label = 'Plot with log or raw MFI:',
                      choices =  graphs,
-                     inline=T, animation = "jelly",
+                     inline=TRUE, animation = "jelly",
                      status = "default",
-                     shape = "curve",bigger = T)
+                     shape = "curve",bigger = TRUE)
 
 })
 
@@ -1249,7 +1249,7 @@ output$select_block_antigen <- renderUI({
                choices =  graphs,
                # choiceValues=all_var_prefix,
                #selected = character(0),
-               inline=T)
+               inline=TRUE)
 
 })
 
@@ -1657,7 +1657,7 @@ output$tag_subtract_select <- renderUI({
 
 
 output$tag_file_load <- renderUI({
-  if(input$tag_subtract_btn==T){
+  if(input$tag_subtract_btn==TRUE){
     fileInput("tag_file", "Choose CSV File with tag antigens",
               buttonLabel = "Browse...",
               accept = c(
@@ -1707,7 +1707,7 @@ output$tag_antigens_select <- renderUI({
                   label="Select the TAG antigens:",
                   choices= antigen_list,
                   selected = list_tag ,
-                  multiple = T)
+                  multiple = TRUE)
     }
 })
 
@@ -1721,7 +1721,7 @@ output$sample_ID_select <- renderUI({
                 label="Choose a sample to compare TAG values:",
                 choices= sample_list,
                 # selected = "" ,
-                multiple = F)
+                multiple = FALSE)
   }
 })
 
@@ -1732,7 +1732,7 @@ output$tag_antigen_radio_select <- renderUI({
                label = 'Select the antigen to visualize:',
                choices =  tag_antigens,
              selected = tag_antigens[[1]],
-               inline=T)
+               inline=TRUE)
 
 })
 
@@ -1742,7 +1742,7 @@ output$tag_antigen_radio_select <- renderUI({
 ## tag subtracted data
 dataCV_tag_reactive <- reactive({
   inFile <- input$tag_file
-  if(input$chip_path_param!="" & !is.null(inFile) & input$tag_subtract_btn==T ) {
+  if(input$chip_path_param!="" & !is.null(inFile) & input$tag_subtract_btn==TRUE ) {
     dataCV_best2 <- data_CV_best2_reactive()
     filenames <- filenames_reactive()
     tag_antigens <- input$tag_antigens
@@ -1812,7 +1812,7 @@ output$antigen_tag_specific_select <- renderUI({
                 `selected-text-format` = "count > 3"
               ),
               selected = paste(antigens),
-              multiple = T)
+              multiple = TRUE)
 })
 
 
@@ -1945,7 +1945,7 @@ output$bg_correct_infobox <- output$bg_correct_infobox2 <- renderInfoBox({
             subtitle = paste0("") ,
             # icon = shiny::icon("user-md"),
             icon = icon("exclamation-triangle"),
-            color = "red",width = 4,fill = F)
+            color = "red",width = 4,fill = FALSE)
   }else{
     bg_correct_approaches <- c("None"="none",
                                "Local bakground subtraction"="subtract_local",
@@ -1958,7 +1958,7 @@ output$bg_correct_infobox <- output$bg_correct_infobox2 <- renderInfoBox({
     infoBox("Background correction",bg_app ,
             subtitle = paste0("") ,
             icon = shiny::icon("layer-group"),
-            color = "aqua",width = 4,fill = F)
+            color = "aqua",width = 4,fill = FALSE)
   }
 
 })
@@ -1970,13 +1970,13 @@ output$tag_infobox <- output$tag_infobox2 <- renderInfoBox({
             subtitle = paste0("") ,
             # icon = shiny::icon("user-md"),
             icon = icon("exclamation-triangle"),
-            color = "red",width = 4,fill = F)
+            color = "red",width = 4,fill = FALSE)
   }else{
     antigens <- paste(input$tag_antigens,collapse=" ,")
     infoBox("TAG antigens",antigens ,
             subtitle = '' ,
             icon = shiny::icon("tag"),
-            color = "aqua",width = 4,fill = F)
+            color = "aqua",width = 4,fill = FALSE)
   }
 
 })
@@ -1988,12 +1988,12 @@ output$cv_infobox <- output$cv_infobox2 <- renderInfoBox({
             subtitle = paste0("") ,
             # icon = shiny::icon("user-md"),
             icon = icon("exclamation-triangle"),
-            color = "red",width = 4,fill = F)
+            color = "red",width = 4,fill = FALSE)
   }else{
     infoBox("Selected CV cutoff",paste(input$cv_value,"% with") ,
             subtitle = paste0(input$lab_replicates," lab replicates") ,
             icon = shiny::icon("cut"),
-            color = "aqua",width = 4,fill = F)
+            color = "aqua",width = 4,fill = FALSE)
   }
 
 })
@@ -2002,7 +2002,7 @@ output$cv_infobox <- output$cv_infobox2 <- renderInfoBox({
 ### hide the menu item for TAG visuals
 output$tag_plots <- renderMenu({
   req(input$tag_subtract_btn)
-  if(input$tag_subtract_btn == T)
+  if(input$tag_subtract_btn == TRUE)
 
     menuItem("Tag subtract", tabName = "tag_plots", icon = icon("bell")#,
              #menuSubItem("No option",tabName="RO_00"),
@@ -2048,7 +2048,7 @@ output$rlm_antigens_select <- renderUI({
     selectInput(inputId="rlm_antigens",
                 label="Choose the RLM antigens:",
                 choices= antigen_list,
-                multiple = T)
+                multiple = TRUE)
   }
 })
 
@@ -2059,7 +2059,7 @@ output$normalisation_infobox <- renderInfoBox({
             subtitle = paste0("") ,
             # icon = shiny::icon("user-md"),
             icon = icon("exclamation-triangle"),
-            color = "red",width = 4,fill = F)
+            color = "red",width = 4,fill = FALSE)
   }else{
     normalisation_approaches <- c("Log2 Normalisation"="log2",
                                   "VSN"="vsn",
@@ -2070,7 +2070,7 @@ output$normalisation_infobox <- renderInfoBox({
     infoBox("Normalisation approach",paste(normal_app) ,
             subtitle = "" ,
             icon = shiny::icon("cut"),
-            color = "aqua",width = 4,fill = F)
+            color = "aqua",width = 4,fill = FALSE)
   }
 
 })
@@ -2138,7 +2138,7 @@ non_normalised_list_reactive <- reactive({
     normalise_list <- matrix_normalise(matrix_antigen=matrix_antigen,
                                        method = "none",
                                        array_matrix=array_matrix,
-                                       return_plot = T,
+                                       return_plot = TRUE,
                                        control_antigens=control_antigens)
   }else {
     normalise_list <- NULL
@@ -2183,7 +2183,7 @@ normalised_list_reactive <- reactive({
     normalise_list <- matrix_normalise(matrix_antigen=matrix_antigen,
                                        method = input$normalisation_method,
                                        array_matrix=array_matrix,
-                                       return_plot = T,
+                                       return_plot = TRUE,
                                        control_antigens=control_antigens)
   }else if(!is.null(to_normalise) & input$normalisation_method=="rlm"){
     array_matrix <- array_matrix_reactive()
@@ -2198,7 +2198,7 @@ normalised_list_reactive <- reactive({
     normalise_list <- matrix_normalise(matrix_antigen=matrix_antigen,
                                        method = input$normalisation_method,
                                        array_matrix=array_matrix,
-                                       return_plot = T,
+                                       return_plot = TRUE,
                                        control_antigens=control_antigens)
   }else {
     normalise_list <- NULL
@@ -2256,72 +2256,72 @@ normalised_list_all_reactive <- reactive({
   normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen,
                                          method = "none",
                                          array_matrix=array_matrix,
-                                         return_plot = T,
+                                         return_plot = TRUE,
                                          control_antigens=control_antigens)
   names(normalise_list_none) <- c("matrix_antigen_none" ,"plot_none")
 
   ## log normalisation
-  if(input$log2==T){
+  if(input$log2==TRUE){
     normalise_list_log <- matrix_normalise(matrix_antigen=matrix_antigen,
                                            method = "log2",
                                            array_matrix=array_matrix,
-                                           return_plot = T,
+                                           return_plot = TRUE,
                                            control_antigens=control_antigens)
     names(normalise_list_log) <- c("matrix_antigen_log" ,"plot_log")
-  }else if(input$log2==F){
+  }else if(input$log2==FALSE){
     p <- empty_plot_NS() + ggtitle("Log normalisation")
     normalise_list_log <- list(plot_log=p, matrix_antigen_log=NULL)
   }
 
 
-  if(input$vsn==T){
+  if(input$vsn==TRUE){
     normalise_list_vsn <- matrix_normalise(matrix_antigen=matrix_antigen,
                                            method = "vsn",
                                            array_matrix=array_matrix,
-                                           return_plot = T,
+                                           return_plot = TRUE,
                                            control_antigens=control_antigens)
     names(normalise_list_vsn) <- c("matrix_antigen_vsn" ,"plot_vsn")
-  }else if(input$vsn==F){
+  }else if(input$vsn==FALSE){
     p <- empty_plot_NS() + ggtitle("VSN normalisation")
     normalise_list_vsn <- list(plot_vsn=p, matrix_antigen_vsn=NULL)
   }
 
 
-  if(input$cyclic_loess_log==T){
+  if(input$cyclic_loess_log==TRUE){
     normalise_list_cyclic_loess_log <- matrix_normalise(matrix_antigen=matrix_antigen,
                                                         method = "cyclic_loess_log",
                                                         array_matrix=array_matrix,
-                                                        return_plot = T,
+                                                        return_plot = TRUE,
                                                         control_antigens=control_antigens)
     names(normalise_list_cyclic_loess_log) <- c("matrix_antigen_cyclic_loess_log" ,"plot_cyclic_loess_log")
 
-  }else if(input$cyclic_loess_log==F){
+  }else if(input$cyclic_loess_log==FALSE){
     p <- empty_plot_NS() + ggtitle("Cyclic Loess Log")
     normalise_list_cyclic_loess_log <- list(plot_cyclic_loess_log=p, matrix_antigen_cyclic_loess_log=NULL)
   }
-  if(input$cyclic_loess==T){
+  if(input$cyclic_loess==TRUE){
     normalise_list_cyclic_loess <- matrix_normalise(matrix_antigen=matrix_antigen,
                                                     method = "cyclic_loess",
                                                     array_matrix=array_matrix,
-                                                    return_plot = T,
+                                                    return_plot = TRUE,
                                                     control_antigens=control_antigens)
     names(normalise_list_cyclic_loess) <- c("matrix_antigen_cyclic_loess" ,"plot_cyclic_loess")
 
-  }else if(input$cyclic_loess==F){
+  }else if(input$cyclic_loess==FALSE){
     p <- empty_plot_NS() + ggtitle("Cyclic Loess")
     normalise_list_cyclic_loess <- list(plot_cyclic_loess=p, matrix_antigen_cyclic_loess=NULL)
   }
 
 
-  if(input$rlm==T){
+  if(input$rlm==TRUE){
     normalise_list_rlm <- matrix_normalise(matrix_antigen=matrix_antigen,
                                                   method = "rlm",
                                                   array_matrix=array_matrix,
-                                                  return_plot = T,
+                                                  return_plot = TRUE,
                                                   control_antigens=control_antigens)
     names(normalise_list_rlm) <- c("matrix_antigen_rlm" ,"plot_rlm")
 
-  }else if(input$rlm==F){
+  }else if(input$rlm==FALSE){
     p <- empty_plot_NS() + ggtitle("RLM")
     normalise_list_rlm <- list(plot_rlm=p, matrix_antigen_rlm=NULL)
   }
@@ -2351,11 +2351,11 @@ output$select_heatmap<- renderUI({
   prettyRadioButtons(inputId="heat_both",
                      label = 'Plot with log or raw MFI:',
                      choices =  heat_map_c,
-                     inline=T,
+                     inline=TRUE,
                      selected = FALSE,
                      animation = "jelly",
                      status = "default",
-                     shape = "curve",bigger = T)
+                     shape = "curve",bigger = TRUE)
 
 })
 
@@ -2396,24 +2396,24 @@ output$heatmap_normalised <- renderPlot({
   #print(paste(names(norm_df)))
   #print(paste(colSums(is.na(norm_df))))
 
-  if(input$heat_both==T){
+  if(input$heat_both==TRUE){
     p_non_norm <- pheatmap::pheatmap(non_norm_df ,
                                      scale = "none",
-                                     cluster_rows = F ,
+                                     cluster_rows = FALSE ,
                                      main="Non normalised data",
-                                     silent = T)
+                                     silent = TRUE)
     p_non_norm <- ggplotify::as.ggplot(p_non_norm)+ theme_void()
-    p2 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F ,
+    p2 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = FALSE ,
                              main=paste(input$normalisation_method,"Normalised Data"),
-                             silent = T)
+                             silent = TRUE)
     p2 <- ggplotify::as.ggplot(p2) + theme_void()
     #p <- gridExtra::grid.arrange(grobs = list(p2[[4]],p_non_norm[[4]]))
     p <- ggpubr::ggarrange(p_non_norm,p2, nrow = 2)
 
   }else{
-    p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
+    p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = FALSE,
                             main=paste(input$normalisation_method,"Normalised Data"),
-                            silent = T)
+                            silent = TRUE)
     p3 <- ggplotify::as.ggplot(p3)
     p <- p3 +  theme_void()
 
@@ -2503,9 +2503,9 @@ observe({
   tag_file_reactive <- tag_file_reactive()
 
   req(input$tag_subtract_btn)
-  if(is.null(tag_file_reactive) & input$tag_subtract_btn==T){
+  if(is.null(tag_file_reactive) & input$tag_subtract_btn==TRUE){
   hideTab(inputId = "all_tabs", target = "normalise_panel")
-  }else  if(input$tag_subtract_btn==F & is.null(tag_file_reactive)){
+  }else  if(input$tag_subtract_btn==FALSE & is.null(tag_file_reactive)){
     showTab(inputId = "all_tabs", target = "normalise_panel")
   }else{
     showTab(inputId = "all_tabs", target = "normalise_panel")

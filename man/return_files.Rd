@@ -12,7 +12,7 @@ return_files(filenames, data_path)
 \item{data_path}{A directory path for the file names to be read.}
 }
 \value{
-
+A list of named slide files
 }
 \description{
 This returns the list of all the files as data frames.

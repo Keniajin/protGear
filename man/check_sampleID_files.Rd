@@ -2,7 +2,7 @@
 % Please edit documentation in R/global_functions.R
 \name{check_sampleID_files}
 \alias{check_sampleID_files}
-\title{\\\\emph{End_Function}\\\         #
+\title{\\\_End_Function_\\\         #
 Check existing sample ID names}
 \usage{
 check_sampleID_files(genepix_vars)
@@ -11,7 +11,7 @@ check_sampleID_files(genepix_vars)
 \item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
 }
 \value{
-
+A file with missing corresponding sample ID files
 }
 \description{
 A generic function to check if the file(s) witht the MFI values have a corresponding sample ID file. Sample ID file is

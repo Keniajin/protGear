@@ -16,7 +16,7 @@ best_CV_estimation(dataCV, slide_id, lab_replicates, cv_cut_off)
 \item{cv_cut_off}{a numeric value for the CV cut off. Should be between 0-100}
 }
 \value{
-
+A data frame with the best CV's estimated
 }
 \description{
 A function to select the best CV by combining the replicates in duplicates. The function has been build for up to to 3 replicates so far

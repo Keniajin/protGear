@@ -7,10 +7,14 @@
 output_trend_stats(name, p_val, z_val)
 }
 \arguments{
-\item{z_val}{}
+\item{name}{Name of the test}
+
+\item{p_val}{p value from the test}
+
+\item{z_val}{the Z value of the test}
 }
 \value{
-
+A statistics of mean standard deviation trend
 }
 \description{
 Trend test using Cox–Stuart (C–S) and Mann–Kendall (M–K) trend tests

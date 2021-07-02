@@ -30,14 +30,16 @@ matrix_normalise(
 
 \item{return_plot}{A logical value indicating whether a plot is returned to show the results of normalisation.}
 
+\item{plot_by_antigen}{Logical to indicate whether to plot by antigen or not
+slide name for the matrix_antigen object.}
+
 \item{control_antigens}{logical vector specifying the subset of spots which are non-differentially-expressed control spots,
 for use with \code{method="rlm"}}
 
-\item{array_matrix}{An object of class dataframe or matrix used with \code{method='rlm'} indicating the sample index and
-slide name for the matrix_antigen object.}
+\item{array_matrix}{An object of class dataframe or matrix used with \code{method='rlm'} indicating the sample index and}
 }
 \value{
-
+A data frame of normalised values
 }
 \description{
 Normalize  Arrays

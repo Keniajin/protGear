@@ -10,7 +10,7 @@ minpositive(x)
 \item{x}{A numeric vector or variable}
 }
 \value{
-
+Returns the minimum positive value in an object
 }
 \description{
 Get the minimum positive value

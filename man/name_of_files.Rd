@@ -7,12 +7,12 @@
 name_of_files(i)
 }
 \arguments{
-\item{i}{\itemize{
-\item a list filenames with .txt or .gpr extension
-}}
+\item{i}{- a list filenames with .txt or .gpr extension}
 }
 \value{
+a list of file names
 
+name
 }
 \description{
 A generic function returning a vector with the names of files in the same directory

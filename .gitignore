@@ -6,3 +6,4 @@ data/
 processed_data/
 docs
 to_update.md
+inst/doc

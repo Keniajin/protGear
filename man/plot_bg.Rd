@@ -9,24 +9,17 @@ plot_bg(df, x_axis = "antigen", bg_MFI = "B635_Median", log_mfi = TRUE)
 \arguments{
 \item{df}{A     default dataset to use for plot.}
 
+\item{x_axis}{The variable on the x axis}
+
 \item{bg_MFI}{A numeric \code{variable} describing which is the background MFI}
 
 \item{log_mfi}{a logical value indicating whether the MFI values should be log transformed or not.}
-
-\item{antigen_name}{The \code{variable} describing which features/proteins/antibodies in the data should be used to plot}
 }
 \value{
-
-
-
+A ggplot of background values
 }
 \description{
 A generic function for plotting of R objects.
-
-A generic function for plotting of R objects.
-}
-\details{
-Plot background values
 }
 \examples{
 

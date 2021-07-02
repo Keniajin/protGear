@@ -5,9 +5,10 @@
 #' @param lab_replicates A numeric value indicating the number of lab replicates.
 #' @param  sampleID_var A character string containing the name of the sample identifier variable. Default set to 'sampleID'
 #' @param dataCV A dataframe
-#'
+#' @import dplyr tidyr
+#' @importFrom tidyr gather
 #' @description A function to give the summary of the CV's by the sampleID
-#' @return
+#' @return A data frame of CV calculated by sample
 #' @export
 #'
 #' @examples

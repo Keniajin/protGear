@@ -10,7 +10,7 @@ plot_mean_sd(exprs_normalised)
 \item{exprs_normalised}{A normalised object of class data frame or matrix}
 }
 \value{
-
+A ggplot of mean vs standard deviation
 }
 \description{
 A genereic function to plot \code{mean} vs \code{sd} after normalisation.

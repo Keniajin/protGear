@@ -2,8 +2,8 @@
 #' @description This returns the list of all the files as data frames.
 #' @param filenames A list with the required file names to be read.
 #' @param data_path A directory path for the file names to be read.
-#'
-#' @return
+#' @importFrom purrr set_names
+#' @return A list of named slide files
 #' @export
 #'
 #' @examples
@@ -21,7 +21,9 @@ return_files <- function(filenames,data_path ){
 #' @param data_path  The path where the file with the data  is located
 #' @param genepix_vars  A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @description This helps to read the chip file(s).
-#' @return a number of dataframes in the global environment
+#' @return a number of data frames in the global environment
+#' @import data.table
+#' @importFrom purrr set_names
 #' @export
 #' @examples
 #'
@@ -63,19 +65,21 @@ read_array_files <- function(i,data_path,genepix_vars){
 
 
 
-# Format and group bi ID & Antigen Name
-# Transpose dataset and assign corresponding sample ID
-#' Merge array data with the sample ID
-#'         \\\_Start_Function_Extract_Data\\\         #
+#'
+#' @title Merge array data with the sample ID
+#' @description  merge several slide datasets
+#'
 #' @param dfs A character vector with the names of the
-#' @param filenames
-#' @param data_files
-#' @param totsamples
-#' @param blockspersample
-#' @param sampleID_path
-#' @param bg
+#' @param filenames A vector or list of files names
+#' @param data_files A list with of data files
+#' @param totsamples The total number of samples per slide. defined in genepix vars
+#' @param blockspersample the number of samples in a block
+#' @param sampleID_path  location of the sample id files defined in the genepix vars
+#' @param bg A logical character indicating whether the background data is being merged or not
 #'
-#'
+#' @export
+#' @import purrr
+#' @return  A data frame of slide data merged together, for eith bg data or bg corrected data
 merge_datasets <- function(dfs,filenames , data_files ,totsamples, blockspersample ,sampleID_path,bg=FALSE){
   if(bg==TRUE){
     data1_transp <- purrr::map(.x=dfs, .f=transp_bg,
@@ -102,7 +106,8 @@ merge_datasets <- function(dfs,filenames , data_files ,totsamples, blockspersamp
 #' @param data_files A list of data objects with names utlised by iden.
 #' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @description A generic function to extract the background data for micro array data.
-#' @return
+#' @return A data frame of background values
+#' @importFrom dplyr select arrange
 #' @export
 #'
 #' @examples
@@ -185,26 +190,19 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 
 
 
-#' Plot background values
-#' @title Plot background
-#' @param df A 	default dataset to use for plot.
-#' @param antigen_name  The \code{variable} describing which features/proteins/antibodies in the data should be used to plot
-#' @param bg_MFI A numeric \code{variable} describing which is the background MFI
-#' @param log_mfi 	a logical value indicating whether the MFI values should be log transformed or not.
-#' @description  A generic function for plotting of R objects.
-#' @return
-#' @export
-#'
+
 #' @examples
 #' @title Plot background
-#' @param df A 	default dataset to use for plot.
-#' @param antigen_name  The \code{variable} describing which features/proteins/antibodies in the data should be used to plot
-#' @param bg_MFI A numeric \code{variable} describing which is the background MFI
-#' @param log_mfi 	a logical value indicating whether the MFI values should be log transformed or not.
-#' @description  A generic function for plotting of R objects.
-#' @return
-#' @export
 #'
+#' @param df A 	default dataset to use for plot.
+#' @param bg_MFI A numeric \code{variable} describing which is the background MFI
+#' @param x_axis The variable on the x axis
+#' @param log_mfi 	a logical value indicating whether the MFI values should be log transformed or not.
+#'
+#' @description  A generic function for plotting of R objects.
+#' @return A ggplot of background values
+#' @export
+#' @import ggpubr
 #' @examples
 #'
 #'
@@ -275,9 +273,9 @@ plot_bg <- function(df, x_axis="antigen",bg_MFI="B635_Median",
 #' @param FG_MFI A numeric \code{variable} describing which is the foreground MFI
 #' @param log_mfi 	a logical value indicating whether the MFI values should be log transformed or not.
 #' @description A generic function for plotting the background and foreground values.
-#' @return
+#' @return a ggplot of foreground vs background MFI values
 #' @export
-#'
+#' @import ggplot2 dplyr
 #' @examples
 plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Median",
                     log_mfi=FALSE){
@@ -338,12 +336,12 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 #' background value within a  block is subtracted.
 #' If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
 #' a block.  If method="movingmin_value" then any intensity which is negative after background subtraction is reset to the minimum positive value
-#' in a block. For \code{edwards} we implement a similar algorithm with \code{\link[limma]{backgroundCorrect(method="edwards")}} and for \code{'normexp'}
+#' in a block. For \code{edwards} we implement a similar algorithm with \code{limma::backgroundCorrect(method="edwards")} and for \code{'normexp'}
 #' we use  the saddle-point approximation to maximum likelihood, \code{\link[limma]{backgroundCorrect}} for more details.
 #' @description  A generic function to perform background correction.
-#' @return
+#' @return A data frame with background corrected data
 #' @export
-#'
+#' @import rlang dplyr limma
 #' @examples
 bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
   #----------------------------------------------------------------------------------------------------
@@ -519,9 +517,9 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
 #' @param method A description of the background correction to be used. See \code{\link{bg_correct}}.
 #' @description  A generic function that merges the protein data with the sample identifiers or sample names. If the file
 #' does not have sample identifiers the function generates it automatically.
-#' @return
+#' @return a data frame merged with corresponding sample ID's. The sample ID are specified in the sample ID files
 #' @export
-#'
+#' @import dplyr
 #' @examples
 merge_sampleID <- function(iden,data_files,genepix_vars,method)
 {
@@ -592,9 +590,9 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
 #'
 #' @param infile a .gpr file to be used to visualize the expression intensities of the slide spots
 #'
-#' @return
+#' @return a data frame to visualize the background or foreground values
 #' @export
-#'
+#' @import data.table
 #' @examples
 read_array_visualize <- function(infile){
 
@@ -608,9 +606,12 @@ read_array_visualize <- function(infile){
 #'
 #' @param infile a .gpr file to be used to visualize the expression intensities of the slide spots
 #' @param MFI_var the MFI variable to plot, can be either the background or foreground value
+#' @param d_f  a data frame with array data
 #' @param interactive a logical to specify whether an interactive graph is returned or not
 #'
-#' @return
+#' @import htmltools ggplot2
+#' @importFrom plotly ggplotly
+#' @return A ggplot of slide foreground values
 #' @export
 #'
 #' @examples
@@ -656,10 +657,11 @@ visualize_slide <- function(infile, MFI_var,interactive=FALSE, d_f=NA){
 #'
 #' @param infile - a .gpr file to be used to visualize the expression intensities of the slide spots
 #' @param MFI_var the MFI variable to plot, can be either the background or foreground value
+#' @param d_f a data frame with array data
 #'
-#' @return
+#' @return A 2d plot of either the background or foreground values
 #' @export
-#'
+#' @import ggplot2
 #' @examples
 visualize_slide_2d <- function(infile, MFI_var , d_f=NA){
   if(is.na(d_f)){

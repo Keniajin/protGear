@@ -21,7 +21,7 @@ cv_by_sample_estimation(
 \item{sampleID_var}{A character string containing the name of the sample identifier variable. Default set to 'sampleID'}
 }
 \value{
-
+A data frame of CV calculated by sample
 }
 \description{
 A function to give the summary of the CV's by the sampleID

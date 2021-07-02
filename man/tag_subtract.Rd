@@ -30,10 +30,10 @@ tag_subtract(
 \item{antigen_var}{A character string containing the name of the features/protein variable. Default to 'antigen'}
 }
 \value{
-
+A data frame of TAG values subtracted
 }
 \description{
-\\\\emph{End_Function}\\\         #
+\\\_End_Function_\\\         #
 }
 \details{
 Subtract the purification TAG data

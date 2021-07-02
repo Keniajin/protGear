@@ -7,7 +7,7 @@
 launch_protGear_interactive()
 }
 \value{
-launches the app
+launches the shiny interactive protGear app
 }
 \description{
 This is Function is to launch the shiny application

@@ -12,9 +12,11 @@ visualize_slide(infile, MFI_var, interactive = FALSE, d_f = NA)
 \item{MFI_var}{the MFI variable to plot, can be either the background or foreground value}
 
 \item{interactive}{a logical to specify whether an interactive graph is returned or not}
+
+\item{d_f}{a data frame with array data}
 }
 \value{
-
+A ggplot of slide foreground values
 }
 \description{
 Visualize the slide mimicking the original scan image.

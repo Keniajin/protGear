@@ -105,7 +105,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/keniajin/protGear/">
+  <a href="https://github.com/Keniajin/protGear/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -124,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>bg_correct</h1>
-    <small class="dont-index">Source: <a href='https://github.com/keniajin/protGear/blob/master/R/read_files_functions.R'><code>R/read_files_functions.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/Keniajin/protGear/blob/master/R/read_files_functions.R'><code>R/read_files_functions.R</code></a></small>
     <div class="hidden name"><code>bg_correct.Rd</code></div>
     </div>
 
@@ -158,9 +158,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>A data frame with background corrected data</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Background correction</p>
@@ -169,7 +167,7 @@
 background value within a  block is subtracted.
 If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
 a block.  If method="movingmin_value" then any intensity which is negative after background subtraction is reset to the minimum positive value
-in a block. For <code>edwards</code> we implement a similar algorithm with <code>backgroundCorrect(method="edwards")</code> and for <code>'normexp'</code>
+in a block. For <code>edwards</code> we implement a similar algorithm with <code><a href='https://rdrr.io/pkg/limma/man/backgroundcorrect.html'>limma::backgroundCorrect(method="edwards")</a></code> and for <code>'normexp'</code>
 we use  the saddle-point approximation to maximum likelihood, <code><a href='https://rdrr.io/pkg/limma/man/backgroundcorrect.html'>backgroundCorrect</a></code> for more details.</p>
 
   </div>

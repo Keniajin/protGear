@@ -10,7 +10,7 @@ launch_select(theApp)
 \item{theApp}{accepts one of the folders containing the shiny appplication}
 }
 \value{
-launches the app you select
+launches the app defined under theApp
 }
 \description{
 This is Function is to launch mutiple shiny applications for protGear

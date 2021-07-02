@@ -2,8 +2,7 @@
 % Please edit documentation in R/read_files_functions.R
 \name{merge_datasets}
 \alias{merge_datasets}
-\title{Merge array data with the sample ID
-\\\_Start_Function_Extract_Data\\\         #}
+\title{Merge array data with the sample ID}
 \usage{
 merge_datasets(
   dfs,
@@ -18,9 +17,21 @@ merge_datasets(
 \arguments{
 \item{dfs}{A character vector with the names of the}
 
-\item{bg}{}
+\item{filenames}{A vector or list of files names}
+
+\item{data_files}{A list with of data files}
+
+\item{totsamples}{The total number of samples per slide. defined in genepix vars}
+
+\item{blockspersample}{the number of samples in a block}
+
+\item{sampleID_path}{location of the sample id files defined in the genepix vars}
+
+\item{bg}{A logical character indicating whether the background data is being merged or not}
+}
+\value{
+A data frame of slide data merged together, for eith bg data or bg corrected data
 }
 \description{
-Merge array data with the sample ID
-\\\_Start_Function_Extract_Data\\\         #
+merge several slide datasets
 }

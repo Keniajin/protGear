@@ -22,7 +22,7 @@ Default to 'FMedianBG_correct'}
 \item{slide_id}{A character string containing the name of the slide/array identifier variable.}
 }
 \value{
-
+plot of buffer spots
 }
 \description{
 Plot the buffer values

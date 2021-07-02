@@ -14,7 +14,7 @@ read_array_files(i, data_path, genepix_vars)
 \item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
 }
 \value{
-a number of dataframes in the global environment
+a number of data frames in the global environment
 }
 \description{
 This helps to read the chip file(s).

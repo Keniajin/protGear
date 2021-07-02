@@ -9,6 +9,9 @@ error_replicates(iden)
 \arguments{
 \item{iden}{An id for the file with replicates error}
 }
+\value{
+a log file showing the replicate errors
+}
 \description{
 A generic function to write into the log file with a replicate check error
 }

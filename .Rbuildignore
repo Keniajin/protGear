@@ -4,3 +4,4 @@
 ^docs$
 ^pkgdown$
 ^protGear\.Rproj$
+^README\.Rmd$

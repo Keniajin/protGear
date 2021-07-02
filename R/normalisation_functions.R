@@ -10,9 +10,10 @@
 #' @param control_antigens  logical vector specifying the subset of spots which are non-differentially-expressed control spots,
 #' for use with \code{method="rlm"}
 #' @param array_matrix  An object of class dataframe or matrix used with \code{method='rlm'} indicating the sample index and
+#' @param plot_by_antigen Logical to indicate whether to plot by antigen or not
 #' slide name for the matrix_antigen object.
-#'
-#' @return
+#' @import limma magrittr tibble
+#' @return A data frame of normalised values
 #' @export
 #'
 #' @examples
@@ -122,9 +123,10 @@ matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=FALSE,b
 #'
 #' @param exprs_normalised A normalised object of class data frame or matrix
 #'
-#' @return
+#' @return A ggplot of mean vs standard deviation
 #' @export
 #' @description A genereic function to plot \code{mean} vs \code{sd} after normalisation.
+#' @import ggplot2
 #' @examples
 plot_mean_sd <- function(exprs_normalised){
 
@@ -138,13 +140,13 @@ plot_mean_sd <- function(exprs_normalised){
 
 
 
-#' Remove batch effect
+#' Remove batch effect under development
 #'
-#' @return
+#' @return a data frame of batch corrected data by limma
 #' @export
-#'
+#' @import limma
 #' @examples
-remove_batch_effect <- function(){
+remove_batch_effect <- function( ){
   ## running the limma batch removal approach after VSN (mathematical effect???)
   ## yet to include limma normalisation -->]
   # which can be included here from the antigen matrix object
@@ -163,11 +165,12 @@ remove_batch_effect <- function(){
 
 
 #' Nomrmalise using RLM
-#' @param matrix_antigen
-#' @param array_matrix
-#' @param control_antigens
+#' @param matrix_antigen A matrix with antigen data
+#' @param array_matrix A matrix with control antigen data
+#' @param control_antigens the control antigens for RLM normalisation
 #' @description  A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
-#' @return
+#' @return A RLM normalised data frame
+#' @import dplyr
 #' @export
 #'
 #' @examples
@@ -178,9 +181,7 @@ rlm_normalise_matrix <- function(matrix_antigen, array_matrix,control_antigens){
     group_by(slide) %>%
     mutate(Array=group_indices())
 
-
-
-  rlm_normalise_df <- as.data.frame.matrix(matrix_antigen) %>%
+    rlm_normalise_df <- as.data.frame.matrix(matrix_antigen) %>%
     #dplyr::mutate(sample_index=row.names(matrix_antigen))
     rownames_to_column(var = "sample_index")
 
@@ -203,11 +204,10 @@ rlm_normalise_matrix <- function(matrix_antigen, array_matrix,control_antigens){
 
 #' RLM normalisation
 #'
-#' @param rlm_normalise_df
+#' @param rlm_normalise_df rlm normalised data frame
 #' @description  A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
-#' @return
+#' @return an elist of RLM normalisation to be utilised by \code{\link{rlm_normalise_matrix}}
 #' @export
-#'
 #' @examples
 rlm_normalise <- function(rlm_normalise_df){
   rlm_normalise_C <- rlm_normalise_df %>%
@@ -410,11 +410,11 @@ rlm_normalise <- function(rlm_normalise_df){
 
 #' Trend test using Cox–Stuart (C–S) and Mann–Kendall (M–K) trend tests
 #'
-#' @param name
-#' @param p_val
-#' @param z_val
+#' @param name Name of the test
+#' @param p_val p value from the test
+#' @param z_val the Z value of the test
 #'
-#' @return
+#' @return A statistics of mean standard deviation trend
 #' @export
 #'
 #' @examples
@@ -433,11 +433,12 @@ output_trend_stats <- function(name, p_val, z_val){
 
 #' Comparison of normalised data by sample
 #'
-#' @param exprs_normalised_df
-#' @param method
-#' @param batch_correct
+#' @param exprs_normalised_df a normalised data frame
+#' @param method the method of normalisation used
+#' @param batch_correct the batch correction
 #'
-#' @return
+#' @import dplyr  trend ggplot2
+#' @return A ggplot of normalised data
 #' @export
 #'
 #' @examples
@@ -481,11 +482,12 @@ plot_normalised <- function(exprs_normalised_df,method,batch_correct){
 
 #' Comparison of normalised data by feature
 #'
-#' @param exprs_normalised_df
-#' @param method
-#' @param batch_correct
+#' @param exprs_normalised_df a normalised data frame
+#' @param method the method of normalisation used
+#' @param batch_correct the batch correction
 #'
-#' @return
+#' @import dplyr trend
+#' @return A ggplot of various normalisation approaches
 #' @export
 #'
 #' @examples

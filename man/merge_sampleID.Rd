@@ -16,7 +16,7 @@ merge_sampleID(iden, data_files, genepix_vars, method)
 \item{method}{A description of the background correction to be used. See \code{\link{bg_correct}}.}
 }
 \value{
-
+a data frame merged with corresponding sample ID's. The sample ID are specified in the sample ID files
 }
 \description{
 A generic function that merges the protein data with the sample identifiers or sample names. If the file

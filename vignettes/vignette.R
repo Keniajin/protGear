@@ -1,11 +1,11 @@
 ## ----setup, include=FALSE-----------------------------------------------------
 library(pacman)
-pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR,magick )
+pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR,magick,rlang,GGally,ggplotify ,remotes)
 
-knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = F,
+knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
                       dev = "png", dev.args = list(type = "cairo-png"),
-                       tidy='styler', tidy.opts=list(strict=T))
+                       tidy='styler', tidy.opts=list(strict=TRUE))
 
 
 
@@ -245,7 +245,7 @@ control_antigens <- c("CommercialHumanIgG","CD4TAG")
 
 ## -----------------------------------------------------------------------------
 normlise_df <- matrix_normalise(matrix_antigen, method = "vsn", array_matrix=array_matrix,
-                       return_plot = T,control_antigens=control_antigens)
+                       return_plot = TRUE,control_antigens=control_antigens)
 
 normlise_df$plot_normalisation
 
@@ -253,31 +253,31 @@ normlise_df$plot_normalisation
 ## -----------------------------------------------------------------------------
 control_antigens <- c("CommercialHumanIgG","CD4TAG")
 ## no normalisation
-  normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen, 
+normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen, 
                                          method = "none", 
                                          array_matrix=array_matrix,
-                                         return_plot = T,
+                                         return_plot = TRUE,
                                          control_antigens=control_antigens)
   names(normalise_list_none) <- c("matrix_antigen_none" ,"plot_none")
 ## log2 normalisation
   normalise_list_log <- matrix_normalise(matrix_antigen=matrix_antigen, 
                                            method = "log2", 
                                            array_matrix=array_matrix,
-                                           return_plot = T,
+                                           return_plot = TRUE,
                                            control_antigens=control_antigens)
   names(normalise_list_log) <- c("matrix_antigen_log" ,"plot_log")
 ## vsn normalisation
    normalise_list_vsn <- matrix_normalise(matrix_antigen=matrix_antigen, 
                                            method = "vsn", 
                                            array_matrix=array_matrix,
-                                           return_plot = T,
+                                           return_plot = TRUE,
                                            control_antigens=control_antigens)
     names(normalise_list_vsn) <- c("matrix_antigen_vsn" ,"plot_vsn")
   ## cyclic loess with log
      normalise_list_cyclic_loess_log <- matrix_normalise(matrix_antigen=matrix_antigen, 
                                                         method = "cyclic_loess_log", 
                                                         array_matrix=array_matrix,
-                                                        return_plot = T,
+                                                        return_plot = TRUE,
                                                         control_antigens=control_antigens)
     names(normalise_list_cyclic_loess_log) <- c("matrix_antigen_cyclic_loess_log" ,
                                                 "plot_cyclic_loess_log")
@@ -286,7 +286,7 @@ control_antigens <- c("CommercialHumanIgG","CD4TAG")
      normalise_list_rlm <- matrix_normalise(matrix_antigen=matrix_antigen, 
                                                   method = "rlm", 
                                                   array_matrix=array_matrix,
-                                                  return_plot = T,
+                                                  return_plot = TRUE,
                                                   control_antigens=control_antigens)
     names(normalise_list_rlm) <- c("matrix_antigen_rlm" ,"plot_rlm")
     
@@ -309,23 +309,24 @@ p <- do.call("grid.arrange", c(normalised_list_plot, ncol=2))
 norm_df <- normlise_df$matrix_antigen_normalised
 norm_df <- norm_df %>% 
   select(-control_antigens)
-p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = F,
+p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = FALSE,
                             main=paste('VSN',"Normalised Data"),
-                            silent = T)
+                            silent = TRUE)
 p3 <- ggplotify::as.ggplot(p3)
 p <- p3 +  theme_void()
 ggsave(p ,
          filename ="heatmap.PNG" ,
          width = 16 , height = 12 , 
-         limitsize = F,
+         limitsize = FALSE,
          dpi=200 )
+p
 
 ## ----image_heat, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'-------
 
-files <- list.files(pattern = 'heatmap')
+#files <- list.files(pattern = 'heatmap')
 
 #knitr::include_graphics(files[[1]])
-knitr::include_graphics('heatmap.PNG')
+#knitr::include_graphics('heatmap.PNG')
 
 ## ----pca, , fig.align='center',fig.width=16,fig.height=12---------------------
 norm_df <- normlise_df$matrix_antigen_normalised
@@ -367,7 +368,7 @@ ggsave(p_pca ,
          filename ="p_pca.PNG" ,
          width = 16 , height = 12 , 
           units = "in",
-         limitsize = F,
+         limitsize = FALSE,
          dpi=300)
  
 

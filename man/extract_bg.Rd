@@ -14,13 +14,14 @@ extract_bg(iden, data_files, genepix_vars = genepix_vars)
 \item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
 }
 \value{
-
+A data frame of background values
 }
 \description{
 A generic function to extract the background data for micro array data.
 }
 \details{
 \\\_End_function\\\         #
+
 
 Extract the background values
 }

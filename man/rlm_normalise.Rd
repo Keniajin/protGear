@@ -6,8 +6,11 @@
 \usage{
 rlm_normalise(rlm_normalise_df)
 }
+\arguments{
+\item{rlm_normalise_df}{rlm normalised data frame}
+}
 \value{
-
+an elist of RLM normalisation to be utilised by \code{\link{rlm_normalise_matrix}}
 }
 \description{
 A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.

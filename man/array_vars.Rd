@@ -42,7 +42,9 @@ array_vars(
 \item{date_process}{Optional:A character indicating the date when the samples were processed.}
 }
 \value{
+a list of parameters required to process the data
 
+genepix_vars
 }
 \description{
 A generic function returning a list with the data structure.

@@ -24,7 +24,7 @@ plot_FB(
 \item{log_mfi}{a logical value indicating whether the MFI values should be log transformed or not.}
 }
 \value{
-
+a ggplot of foreground vs background MFI values
 }
 \description{
 A generic function for plotting the background and foreground values.

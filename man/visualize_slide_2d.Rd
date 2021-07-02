@@ -7,14 +7,14 @@
 visualize_slide_2d(infile, MFI_var, d_f = NA)
 }
 \arguments{
-\item{infile}{\itemize{
-\item a .gpr file to be used to visualize the expression intensities of the slide spots
-}}
+\item{infile}{- a .gpr file to be used to visualize the expression intensities of the slide spots}
 
 \item{MFI_var}{the MFI variable to plot, can be either the background or foreground value}
+
+\item{d_f}{a data frame with array data}
 }
 \value{
-
+A 2d plot of either the background or foreground values
 }
 \description{
 Visualize the slide mimicking the original scan image using a 2d plot.

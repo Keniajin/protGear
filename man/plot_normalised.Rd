@@ -7,10 +7,14 @@
 plot_normalised(exprs_normalised_df, method, batch_correct)
 }
 \arguments{
-\item{batch_correct}{}
+\item{exprs_normalised_df}{a normalised data frame}
+
+\item{method}{the method of normalisation used}
+
+\item{batch_correct}{the batch correction}
 }
 \value{
-
+A ggplot of normalised data
 }
 \description{
 Comparison of normalised data by sample

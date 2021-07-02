@@ -7,11 +7,11 @@
 create_dir(path)
 }
 \arguments{
-\item{path}{}
+\item{path}{folder location to create a directory}
 }
 \value{
-
+created directory
 }
 \description{
-Title Create directory function
+creating a directory
 }

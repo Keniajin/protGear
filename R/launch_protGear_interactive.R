@@ -1,7 +1,8 @@
 #' launch_protGear_interactive
 #'
 #' This is Function is to launch the shiny application
-#' @return launches the app
+#' @return launches the shiny interactive protGear app
+#' @import rmarkdown shiny flexdashboard shinydashboard pacman
 #' @export
 #' @examples
 
@@ -19,7 +20,7 @@ launch_protGear_interactive <- function() {
 #'
 #' This is Function is to launch mutiple shiny applications for protGear
 #' @param theApp accepts one of the folders containing the shiny appplication
-#' @return launches the app you select
+#' @return launches the app defined under theApp
 #' @export
 #' @examples
 #' launch_select()
