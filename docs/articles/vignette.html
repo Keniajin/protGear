@@ -54,7 +54,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/protGear_vignette.html">protGear vignette processing suite</a>
+      <a href="../articles/vignette.html">protGear vignette processing suite</a>
     </li>
   </ul>
 </li>
@@ -64,7 +64,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/keniajin/protGear/">
+  <a href="https://github.com/Keniajin/protGear/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -79,17 +79,17 @@
 
       
 
-      </header><script src="protGear_vignette_files/header-attrs-2.7/header-attrs.js"></script><script src="protGear_vignette_files/kePrint-0.0.1/kePrint.js"></script><link href="protGear_vignette_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+      </header><script src="vignette_files/header-attrs-2.9/header-attrs.js"></script><script src="vignette_files/kePrint-0.0.1/kePrint.js"></script><link href="vignette_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>protGear vignette processing suite</h1>
                         <h4 class="author">Kennedy Mwai</h4>
             
-            <h4 class="date">17 June, 2021</h4>
+            <h4 class="date">02 July, 2021</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/keniajin/protGear/blob/master/vignettes/protGear_vignette.Rmd"><code>vignettes/protGear_vignette.Rmd</code></a></small>
-      <div class="hidden name"><code>protGear_vignette.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/Keniajin/protGear/blob/master/vignettes/vignette.Rmd"><code>vignettes/vignette.Rmd</code></a></small>
+      <div class="hidden name"><code>vignette.Rmd</code></div>
 
     </div>
 
@@ -139,7 +139,7 @@
 <h2 class="hasAnchor">
 <a href="#importing-data" class="anchor"></a>Importing data</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/keniajin/protGear">protGear</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Keniajin/protGear">protGear</a></span><span class="op">)</span></code></pre></div>
 <p>The first part is to specify the parameters of the micro-array experiment to assist in processing the data. The parameters specified are</p>
 <ul>
 <li>channel - The scanner fluorescence output used to record the data. It can be green,red,blue among others with a specified number.</li>
@@ -218,7 +218,7 @@
   infile <span class="op">=</span> <span class="st">"data/array_data/machine1/KK2-06.txt"</span>,
   MFI_var <span class="op">=</span> <span class="st">"B635 Median"</span>
 <span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/chunk6-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
+<p><img src="vignette_files/figure-html/chunk6-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
 <div id="visualize-the-background-mfi" class="section level4">
 <h4 class="hasAnchor">
@@ -229,7 +229,7 @@
   infile <span class="op">=</span> <span class="st">"data/array_data/machine1/KK2-06.txt"</span>,
   MFI_var <span class="op">=</span> <span class="st">"F635 Median"</span>
 <span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/chunk7-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
+<p><img src="vignette_files/figure-html/chunk7-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
 </div>
 <div id="import--gprtxt-data" class="section level3">
@@ -294,7 +294,7 @@
 
 
 <span class="va">p1</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="background-mfi-by-blocks" class="section level3">
 <h3 class="hasAnchor">
@@ -305,7 +305,7 @@
   log_mfi <span class="op">=</span> <span class="cn">T</span>
 <span class="op">)</span>
 <span class="va">p2</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-10-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-10-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="background-correction-1" class="section level3">
 <h3 class="hasAnchor">
@@ -332,7 +332,7 @@
 
 <span class="va">buffers</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">buffer_transp</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plot_buffer.html">plot_buffer</a></span><span class="op">(</span><span class="va">buffers</span>, buffer_names <span class="op">=</span> <span class="st">"antigen"</span>, buffer_mfi <span class="op">=</span> <span class="st">"FMedianBG_correct"</span>, slide_id <span class="op">=</span> <span class="st">".id"</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-12-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-12-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="coefficient-of-variation-cv" class="section level2">
 <h2 class="hasAnchor">
@@ -356,7 +356,7 @@
   columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">lab_replicates</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">""</span>, axisLabels <span class="op">=</span> <span class="st">"show"</span>
 <span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-13-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-13-1.png" width="700" style="display: block; margin: auto;"></p>
 <div id="summary-of-cv-values" class="section level3">
 <h3 class="hasAnchor">
 <a href="#summary-of-cv-values" class="anchor"></a>Summary of CV values</h3>
@@ -385,7 +385,7 @@
   <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide all repeats considered"</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-15-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-15-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="best-replicates" class="section level3">
 <h3 class="hasAnchor">
@@ -419,7 +419,7 @@
   <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide"</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-17-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-17-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="tag-subtraction" class="section level2">
@@ -598,7 +598,7 @@ CD4TAG
   <span class="fu">xlab</span><span class="op">(</span><span class="st">"antigen name"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Before and after TAG subtraction"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-21-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-21-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="normalisation" class="section level2">
@@ -650,15 +650,15 @@ CD4TAG
   <span class="fu">select</span><span class="op">(</span><span class="va">sample_array_ID</span>, <span class="va">sample_index</span>, <span class="va">slide</span><span class="op">)</span>
 
 <span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span></code></pre></div>
-<p>The <span style="     color: red !important;">matrix_normalise()</span> function is used to normalise the data and returns a list of plots and a matrix of normalised values. A plot is returned if <code>return_plot = T</code> otherwise only a matrix of normalised values will be returned.</p>
+<p>The <span style="     color: red !important;">matrix_normalise()</span> function is used to normalise the data and returns a list of plots and a matrix of normalised values. A plot is returned if <code>return_plot = TRUE</code> otherwise only a matrix of normalised values will be returned.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">normlise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span><span class="va">matrix_antigen</span>,
   method <span class="op">=</span> <span class="st">"vsn"</span>, array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
-  return_plot <span class="op">=</span> <span class="cn">T</span>, control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
+  return_plot <span class="op">=</span> <span class="cn">TRUE</span>, control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
 
 <span class="va">normlise_df</span><span class="op">$</span><span class="va">plot_normalisation</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-23-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-23-1.png" width="700" style="display: block; margin: auto;"></p>
 <div id="compare-normalisation-methods" class="section level3">
 <h3 class="hasAnchor">
 <a href="#compare-normalisation-methods" class="anchor"></a>Compare normalisation methods</h3>
@@ -670,7 +670,7 @@ CD4TAG
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
   method <span class="op">=</span> <span class="st">"none"</span>,
   array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
-  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_none</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_none"</span>, <span class="st">"plot_none"</span><span class="op">)</span>
@@ -679,7 +679,7 @@ CD4TAG
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
   method <span class="op">=</span> <span class="st">"log2"</span>,
   array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
-  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_log"</span>, <span class="st">"plot_log"</span><span class="op">)</span>
@@ -688,7 +688,7 @@ CD4TAG
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
   method <span class="op">=</span> <span class="st">"vsn"</span>,
   array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
-  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_vsn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_vsn"</span>, <span class="st">"plot_vsn"</span><span class="op">)</span>
@@ -697,7 +697,7 @@ CD4TAG
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
   method <span class="op">=</span> <span class="st">"cyclic_loess_log"</span>,
   array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
-  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_cyclic_loess_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -710,7 +710,7 @@ CD4TAG
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
   method <span class="op">=</span> <span class="st">"rlm"</span>,
   array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,
-  return_plot <span class="op">=</span> <span class="cn">T</span>,
+  return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_rlm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_rlm"</span>, <span class="st">"plot_rlm"</span><span class="op">)</span>
@@ -728,7 +728,7 @@ CD4TAG
 <span class="va">normalised_list_plot</span> <span class="op">&lt;-</span> <span class="va">normalised_list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"plot"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalised_list</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">normalised_list_plot</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/unnamed-chunk-25-1.png" width="1152" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/unnamed-chunk-25-1.png" width="1152" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div id="heatmaps" class="section level2">
@@ -739,23 +739,20 @@ CD4TAG
 <span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">norm_df</span> <span class="op">%&gt;%</span>
   <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">control_antigens</span><span class="op">)</span>
 <span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">pheatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">norm_df</span>,
-  scale <span class="op">=</span> <span class="st">"none"</span>, cluster_rows <span class="op">=</span> <span class="cn">F</span>,
+  scale <span class="op">=</span> <span class="st">"none"</span>, cluster_rows <span class="op">=</span> <span class="cn">FALSE</span>,
   main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"VSN"</span>, <span class="st">"Normalised Data"</span><span class="op">)</span>,
-  silent <span class="op">=</span> <span class="cn">T</span>
+  silent <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">ggplotify</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplotify/man/as.ggplot.html">as.ggplot</a></span><span class="op">(</span><span class="va">p3</span><span class="op">)</span>
 <span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p3</span> <span class="op">+</span> <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span>
 <span class="fu">ggsave</span><span class="op">(</span><span class="va">p</span>,
   filename <span class="op">=</span> <span class="st">"heatmap.PNG"</span>,
   width <span class="op">=</span> <span class="fl">16</span>, height <span class="op">=</span> <span class="fl">12</span>,
-  limitsize <span class="op">=</span> <span class="cn">F</span>,
+  limitsize <span class="op">=</span> <span class="cn">FALSE</span>,
   dpi <span class="op">=</span> <span class="fl">200</span>
-<span class="op">)</span></code></pre></div>
-<div class="figure" style="text-align: center">
-<img src="heatmap.png" alt="PCA analysis" width="100%"><p class="caption">
-PCA analysis
-</p>
-</div>
+<span class="op">)</span>
+<span class="va">p</span></code></pre></div>
+<p><img src="vignette_files/figure-html/unnamed-chunk-26-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div id="pca-analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -798,24 +795,29 @@ PCA analysis
 <span class="co">## combine the plots into one grid</span>
 <span class="co">## combine the plots into one grid</span>
 <span class="va">p_pca</span> <span class="op">&lt;-</span> <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="protGear_vignette_files/figure-html/pca,%20-1.png" width="1536" style="display: block; margin: auto;"></p>
+<p><img src="vignette_files/figure-html/pca,%20-1.png" width="1536" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">ggsave</span><span class="op">(</span><span class="va">p_pca</span>,
   filename <span class="op">=</span> <span class="st">"p_pca.PNG"</span>,
   width <span class="op">=</span> <span class="fl">16</span>, height <span class="op">=</span> <span class="fl">12</span>,
   units <span class="op">=</span> <span class="st">"in"</span>,
-  limitsize <span class="op">=</span> <span class="cn">F</span>,
+  limitsize <span class="op">=</span> <span class="cn">FALSE</span>,
   dpi <span class="op">=</span> <span class="fl">300</span>
-<span class="op">)</span></code></pre></div>
-<div class="figure">
-<img src="p_pca.png" alt=""><p class="caption">PCA Chart Repeat</p>
-</div>
+<span class="op">)</span>
+<span class="va">p_pca</span></code></pre></div>
+<pre><code>## TableGrob (2 x 2) "arrange": 4 grobs
+##   z     cells    name           grob
+## 1 1 (1-1,1-1) arrange gtable[layout]
+## 2 2 (1-1,2-2) arrange gtable[layout]
+## 3 3 (2-2,1-1) arrange gtable[layout]
+## 4 4 (2-2,2-2) arrange gtable[layout]</code></pre>
+<!-- ![PCA Chart Repeat](p_pca.PNG) -->
 </div>
 <div id="shiny-application" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny-application" class="anchor"></a>Shiny application</h2>
-<p>Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny® dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<p>Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">protGear</span><span class="fu">::</span><span class="fu"><a href="../reference/launch_protGear_interactive.html">launch_protGear_interactive</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
