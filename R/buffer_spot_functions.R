@@ -2,7 +2,7 @@
 #'
 #' @param Data1 An object of the class data frame
 #' @param buffer_spot A character string containing the name of the buffer spots.
-#' @import dplyr
+#' @import dplyr stats
 #' @importFrom dplyr select  filter
 #' @description A function to extract the buffer spots data. A buffer spot only has the solution for
 #'  proprietary ingredients for stabilizing protein and minimizing evaporation.
