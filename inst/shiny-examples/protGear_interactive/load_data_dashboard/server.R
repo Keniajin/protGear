@@ -292,7 +292,7 @@ output$select_spatial_type <- renderUI({
   prettyRadioButtons(inputId="spatial_type",
                      label = 'Plot an array 2D plot or a point graph:',
                      choices =  graphs,
-                     inline=T, animation = "jelly",
+                     inline= TRUE, animation = "jelly",
                      status = "default",
                      shape = "curve",bigger = TRUE)
 
@@ -852,7 +852,7 @@ output$files_in_batch <- shinydashboard::renderInfoBox({
 filenames_reactive <- reactive({
   genepix_vars <- genepix_vars()
   filenames_return <- list.files(file.path(genepix_vars$chip_path),
-                        pattern="*.txt$|*.gpr$", full.names=F)
+                        pattern="*.txt$|*.gpr$", full.names=FALSE)
 
 
   return(filenames_return)
@@ -1763,7 +1763,7 @@ dataCV_tag_reactive <- reactive({
 
 
 
-  }else if(input$chip_path_param!="" & is.null(inFile) & input$tag_subtract_btn==F) {
+  }else if(input$chip_path_param!="" & is.null(inFile) & input$tag_subtract_btn==FALSE) {
     dataCV_best2 <- data_CV_best2_reactive()
     filenames <- filenames_reactive()
 

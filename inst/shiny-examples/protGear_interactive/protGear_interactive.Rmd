@@ -17,7 +17,7 @@ pacman::p_load(tidyverse,ggpubr,limma,vsn,ggpubr,gtools,plotly,shinythemes,shiny
                shinycssloaders, gridExtra,pheatmap,scales,shinyFeedback,shinyalert, data.table,stringr, trend,
                flexdashboard, shiny)
 
-files.sources = list.files("scripts/functions_call_load/",full.names = T)
+files.sources = list.files("scripts/functions_call_load/",full.names = TRUE)
 sapply(files.sources, source)
 
 dir.create('error')

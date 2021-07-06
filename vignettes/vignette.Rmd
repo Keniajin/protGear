@@ -167,7 +167,7 @@ For this example I use the sub-folder 2 specified using `genepix_vars$paths[[2]]
 #### read in all the datasets
 ### list all the file names under data folder
 filenames <- list.files(file.path(genepix_vars$paths[[2]]), 
-                        pattern="*.txt$|*.gpr$", full.names=F)
+                        pattern="*.txt$|*.gpr$", full.names=FALSE)
 #' @___________________read_in_the_files_with_the_text_data_from_the_chip_____________________________
 ### read all the data files and save them in a list 
 data_path <- paste0(genepix_vars$paths[[2]],"/") 
@@ -205,7 +205,7 @@ Before selecting the best background correction approach the MFI signals are be 
 
 ```{r}
 p1 <- plot_FB(allData_bg,antigen_name="antigen",
-              bg_MFI="BG_Median",FG_MFI="FBG_Median",log=F)
+              bg_MFI="BG_Median",FG_MFI="FBG_Median",log=FALSE)
 
 
 p1
@@ -216,7 +216,7 @@ p1
 
 ```{r}
 p2 <- plot_bg(df=allData_bg, x_axis="Block",bg_MFI="BG_Median",
-        log_mfi=T) 
+        log_mfi=TRUE) 
 p2
 ```
 
@@ -617,7 +617,7 @@ p_pca
 Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. 
 The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.
 
-```{r, eval=F}
+```{r, eval=FALSE}
 protGear::launch_protGear_interactive()
 ```
 
