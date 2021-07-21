@@ -25,7 +25,7 @@ To Install R:
 
 ## protGear help pages
 
-- The main page - https://keniajin.github.io/protgear/ 
+- The main page - https://keniajin.github.io/protGear/ 
 - Vignette - https://keniajin.github.io/protGear/articles/vignette.html
 
 ## Contribute
