@@ -3,3 +3,5 @@
 [1] "The replicates per antigen per sample are more than expected for KK2-07"
 [1] "The replicates per antigen per sample are more than expected for KK2-08"
 [1] "The replicates per antigen per sample are more than expected for KK2-09"
+[1] "The replicates per antigen per sample are more than expected for KK2-06"
+[1] "The replicates per antigen per sample are more than expected for KK2-06"

@@ -10,6 +10,8 @@
 #' @export
 #'
 #' @examples
+#' bg_correct_df <- readr::read_csv(system.file("extdata", "Data1_sample.csv", package="protGear"))
+#' buffer_spots(Data1 = bg_correct_df)
 buffer_spots <- function(Data1 , buffer_spot = "buffer") {
   Data2_buffer <- Data1 %>%
     # within each Name count sampleID. We had grouped this earlier
@@ -55,8 +57,9 @@ buffer_spots <- function(Data1 , buffer_spot = "buffer") {
 #' @export
 #'
 #' @examples
-plot_buffer <-
-  function(df = buffers,
+#'buffers <- readr::read_csv(system.file("extdata", "buffers_sample2.csv", package="protGear"))
+#' plot_buffer(df=buffers,buffer_names = "sampleID")
+plot_buffer <-function(df = buffers,
            buffer_names = "antigen",
            buffer_mfi = "FMedianBG_correct",
            slide_id = ".id") {
@@ -69,7 +72,6 @@ plot_buffer <-
     p <- ggplot(data = df, aes_string(x = x, y = y)) +
       geom_jitter(aes_string(x = x, y = y, color = slide_id)) +
       geom_boxplot(aes_string(x = x, y = y), alpha = 0.2) +
-      #  ggrepel::geom_text_repel(data=filter(buffers, F635MedianB635>5000),aes(label=.id), size=3)+
       theme_light() +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
     return(p)

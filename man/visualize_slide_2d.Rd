@@ -19,3 +19,11 @@ A 2d plot of either the background or foreground values
 \description{
 Visualize the slide mimicking the original scan image using a 2d plot.
 }
+\examples{
+## Not run:
+visualize_slide_2d(
+infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", package="protGear"),
+MFI_var = "B635 Median"
+)
+## End(Not run)
+}

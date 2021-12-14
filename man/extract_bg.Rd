@@ -9,7 +9,7 @@ extract_bg(iden, data_files, genepix_vars = genepix_vars)
 \arguments{
 \item{iden}{A character indicating the name of the object to be used under data_files.}
 
-\item{data_files}{A list of data objects with names utlised by iden.}
+\item{data_files}{A list of data objects with names utilised by iden.}
 
 \item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
 }
@@ -20,8 +20,34 @@ A data frame of background values
 A generic function to extract the background data for micro array data.
 }
 \details{
-\\\_End_function\\\         #
-
-
 Extract the background values
+}
+\examples{
+## Not run:
+genepix_vars <- array_vars(
+channel = "635",
+chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+totsamples = 21,
+blockspersample = 2,
+mig_prefix = "_first",
+machine = 1,
+## optional
+date_process = "0520"
+)
+#Define the data path
+data_path <- paste0(genepix_vars$chip_path)
+# List the file names to use
+filenames <- list.files(genepix_vars$chip_path,
+                       pattern = '*.txt$|*.gpr$', full.names = FALSE
+)
+data_files <- purrr::map(
+ .x = filenames,
+  .f = read_array_files,
+  data_path = data_path,
+  genepix_vars = genepix_vars
+)
+data_files <- set_names(data_files, purrr::map(filenames, name_of_files))
+names(data_files)
+extract_bg(iden ="KK2-06" , data_files=data_files,genepix_vars=genepix_vars)
+## End(Not run)
 }

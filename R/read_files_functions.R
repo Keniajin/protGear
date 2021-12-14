@@ -1,21 +1,4 @@
-#' Return files in a folder
-#' @description This returns the list of all the files as data frames.
-#' @param filenames A list with the required file names to be read.
-#' @param data_path A directory path for the file names to be read.
-#' @importFrom purrr set_names
-#' @return A list of named slide files
-#' @export
-#'
-#' @examples
-#'
-return_files <- function(filenames,data_path ){
-  dfs <- purrr::map(filenames, read_files,data_path=data_path)
-  set_names(dfs, purrr::map(filenames, name_of_files))
-}
-
-
-
-#' Read mutiple array files
+#' Read multiple array files
 #' @title Read array files
 #' @param i  The name of the file which the data are to be read from.
 #' @param data_path  The path where the file with the data  is located
@@ -26,15 +9,27 @@ return_files <- function(filenames,data_path ){
 #' @importFrom purrr set_names
 #' @export
 #' @examples
-#'
-#'
+#' ## Not run:
+#' genepix_vars <- array_vars(
+#' channel = "635",
+#' chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#' totsamples = 21,
+#' blockspersample = 2,
+#' mig_prefix = "_first",
+#' machine = 1,
+#' date_process = "0520"
+#' )
+#' file_read <- "KK2-06.txt"
+#' read_array_files(i=file_read,
+#' data_path=system.file("extdata", "array_data/machine1/",
+#' package="protGear"), genepix_vars=genepix_vars)
+#' ## End(Not run)
 read_array_files <- function(i,data_path,genepix_vars){
   ###loop through all the data to read
   # skip- the number of lines of the data file to skip before beginning to read data ---
   if(length(grep("Block.*Column|Column.*Block", readLines( file.path(data_path,i)   ))-1) ==1) {
     x <- grep("Block.*Column|Column.*Block", readLines(  file.path(data_path,i)  ))-1
     #print(paste0(x,"_",i))
-    #d_f <- read.table( file.path(data_path,i),skip=x, header=TRUE)
     d_f <- data.table::fread(file.path(data_path,i),skip=x, header=TRUE)
     ## arrange block to ensure the order is maintains
     d_f <- d_f %>% arrange(Block)
@@ -65,45 +60,11 @@ read_array_files <- function(i,data_path,genepix_vars){
 
 
 
-#'
-#' @title Merge array data with the sample ID
-#' @description  merge several slide datasets
-#'
-#' @param dfs A character vector with the names of the
-#' @param filenames A vector or list of files names
-#' @param data_files A list with of data files
-#' @param totsamples The total number of samples per slide. defined in genepix vars
-#' @param blockspersample the number of samples in a block
-#' @param sampleID_path  location of the sample id files defined in the genepix vars
-#' @param bg A logical character indicating whether the background data is being merged or not
-#'
-#' @export
-#' @import purrr
-#' @return  A data frame of slide data merged together, for eith bg data or bg corrected data
-merge_datasets <- function(dfs,filenames , data_files ,totsamples, blockspersample ,sampleID_path,bg=FALSE){
-  if(bg==TRUE){
-    data1_transp <- purrr::map(.x=dfs, .f=transp_bg,
-                               totsamples=totsamples,blockspersample=blockspersample,
-                               sampleID_path=sampleID_path,data_files=data_files )
-  }else{
-    data1_transp <- purrr::map(.x=dfs, .f=transp,
-                               totsamples=totsamples,blockspersample=blockspersample,
-                               sampleID_path=sampleID_path,data_files=data_files )
-  }
-
-
-  data1_transp <- set_names(data1_transp, purrr::map(filenames, name_of_files))
-  return(data1_transp)
-}
-#'         \\\_End_function\\\         #
-#'
-#'
-
 
 #' Extract the background values
 #' @title  extract bg
 #' @param iden A character indicating the name of the object to be used under data_files.
-#' @param data_files A list of data objects with names utlised by iden.
+#' @param data_files A list of data objects with names utilised by iden.
 #' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @description A generic function to extract the background data for micro array data.
 #' @return A data frame of background values
@@ -111,6 +72,33 @@ merge_datasets <- function(dfs,filenames , data_files ,totsamples, blockspersamp
 #' @export
 #'
 #' @examples
+#' ## Not run:
+#' genepix_vars <- array_vars(
+#' channel = "635",
+#' chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#' totsamples = 21,
+#' blockspersample = 2,
+#' mig_prefix = "_first",
+#' machine = 1,
+#' ## optional
+#' date_process = "0520"
+#' )
+#' #Define the data path
+#' data_path <- paste0(genepix_vars$chip_path)
+#' # List the file names to use
+#' filenames <- list.files(genepix_vars$chip_path,
+#'                        pattern = '*.txt$|*.gpr$', full.names = FALSE
+#' )
+#' data_files <- purrr::map(
+#'  .x = filenames,
+#'   .f = read_array_files,
+#'   data_path = data_path,
+#'   genepix_vars = genepix_vars
+#' )
+#' data_files <- set_names(data_files, purrr::map(filenames, name_of_files))
+#' names(data_files)
+#' extract_bg(iden ="KK2-06" , data_files=data_files,genepix_vars=genepix_vars)
+#' ## End(Not run)
 extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 {
   ## read in the sample ID files
@@ -191,7 +179,7 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 
 
 
-#' @examples
+
 #' @title Plot background
 #'
 #' @param df A 	default dataset to use for plot.
@@ -204,19 +192,28 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 #' @export
 #' @import ggpubr
 #' @examples
-#'
-#'
-plot_bg <- function(df, x_axis="antigen",bg_MFI="B635_Median",
+#' ## Not run:
+#' #After extracting the background using \code{\link{extract_bg}} we plot the data using
+#' allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+#' plot_bg(allData_bg,
+#' x_axis = "antigen",
+#' bg_MFI = "BG_Median",  log_mfi = TRUE
+#' )
+#' ## End(Not run)
+
+plot_bg <- function(df, x_axis="antigen",bg_MFI="BG_Median",
                     log_mfi=TRUE){
   ## create an id to help in having a numeric sample ID to sort your data
   ## this is because all sampleIDs from the samples were not unique
   ## rename the original sampleID sampleID2
   bg_MFI_sys <- rlang::sym(bg_MFI)
+  ### check if the .id exists and renane it to slide
+  if('.id' %in% names(df)){
+    df <- df %>%  dplyr::rename(slide=.id)
+  }else  df <- df %>%  dplyr::mutate(slide="slide")
+
   bg_plot <- df %>%
-    rename(slide=.id) %>%
-    # rename(sampleID2=sampleID) %>%
-    #  group_by(sampleID2, slide) %>%
-    mutate(log_bg =    log2(!!bg_MFI_sys))
+    dplyr::mutate(log_bg =    log2(!!bg_MFI_sys))
 
   # bg_plot$sampleID <- group_indices(.data =bg_plot )
 
@@ -277,6 +274,14 @@ plot_bg <- function(df, x_axis="antigen",bg_MFI="B635_Median",
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
+#' ## Not run:
+#' #After extracting the background using \code{\link{extract_bg}} we plot the data using
+#' allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+#' plot_FB(allData_bg,
+#' antigen_name = "antigen",
+#' bg_MFI = "BG_Median", FG_MFI = "FBG_Median", log = FALSE
+#' )
+#' ## End(Not run)
 plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Median",
                     log_mfi=FALSE){
   ## create an id to help in having a numeric sample ID to sort your data
@@ -284,8 +289,12 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
   ## rename the original sampleID sampleID2
   bg_MFI_sys <- rlang::sym(bg_MFI)
   FB_MFI_sys <- rlang::sym(FG_MFI)
+  ### check if the .id exists and renane it to slide
+  if('.id' %in% names(df)){
+    df <- df %>%  dplyr::rename(slide=.id)
+  }else  df <- df %>%  dplyr::mutate(slide="slide")
+
   bg_plot <- df %>%
-    rename(slide=.id) %>%
     mutate(log_bg =log2(!!bg_MFI_sys),
            log_fb=log2(!!FB_MFI_sys))
 
@@ -327,7 +336,7 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 #' Background correction
 #' @title bg_correct
 #' @param iden A character indicating the name of the object to be used under Data1
-#' @param Data1 A list of data objects with names utlised by iden.
+#' @param Data1 A data frame with sample identifiers merged with micro array data.
 #' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @param method 	a description of the background correction to be used.  Possible values are \code{"none","subtract_local",
 #' "subtract_global","movingmin_bg","minimum_half","edwards" or "normexp"}. The default is \code{"subtract_local"}.
@@ -343,6 +352,23 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 #' @export
 #' @import rlang dplyr limma
 #' @examples
+#' ## Not run:
+#' genepix_vars <- array_vars(
+#'   channel = "635",
+#'   chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#'   totsamples = 21,
+#'   blockspersample = 2,
+#'   mig_prefix = "_first",
+#'   machine = 1,
+#'   ## optional
+#'   date_process = "0520"
+#' )
+#' raw_df <- readr::read_csv(system.file("extdata", "Data1_bg_sample.csv", package="protGear"))
+#' bg_correct(iden="iden",
+#' Data1 = raw_df,
+#' genepix_vars = genepix_vars, method="subtract_local"
+#' )
+#' ## End(Not run)
 bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
   #----------------------------------------------------------------------------------------------------
   if(paste0(genepix_vars$BG) %ni% names(Data1)){
@@ -512,7 +538,7 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
 #' Merge sample ID with the array data
 #'
 #' @param iden A character indicating the name of the object to be used under data_files.
-#' @param data_files A list of data objects with names utlised by iden.
+#' @param data_files A list of data objects with names utilised by iden.
 #' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @param method A description of the background correction to be used. See \code{\link{bg_correct}}.
 #' @description  A generic function that merges the protein data with the sample identifiers or sample names. If the file
@@ -521,6 +547,36 @@ bg_correct <- function(iden,Data1,genepix_vars,method="subtract_local"){
 #' @export
 #' @import dplyr
 #' @examples
+#' ## Not run:
+#' ### Define the genepix_vars
+#' genepix_vars <- array_vars(
+#'   channel = "635",
+#'   chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#'   totsamples = 21,
+#'   blockspersample = 2,
+#'   mig_prefix = "_first",
+#'   machine = 1,
+#'   ## optional
+#'   date_process = "0520"
+#' )
+#'
+#' ## the path where the micro-array data is located
+#' data_path <- paste0(genepix_vars$chip_path)
+#' filenames <- list.files(genepix_vars$chip_path,
+#'                         pattern = "*.txt$|*.gpr$", full.names = FALSE
+#' )
+#' ## create a list of all the files
+#' data_files <- purrr::map(
+#'  .x = filenames,
+#'   .f = read_array_files,
+#'   data_path = data_path,
+#'   genepix_vars = genepix_vars
+#' )
+#' data_files <- set_names(data_files, purrr::map(filenames, name_of_files))
+#' ## merge the lab data with samples and perform bg correction
+#' merge_sampleID(iden = "KK2-06", data_files = data_files,
+#'                genepix_vars =genepix_vars,method = "subtract_global" )
+#' ## End(Not run)
 merge_sampleID <- function(iden,data_files,genepix_vars,method)
 {
   ## read in the sample ID files
@@ -594,6 +650,10 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
 #' @export
 #' @import data.table
 #' @examples
+#' ## Not run:
+#' read_array_visualize(infile = system.file("extdata",
+#' "/array_data/machine1/KK2-06.txt", package="protGear"))
+#' ## End(Not run)
 read_array_visualize <- function(infile){
 
   x <- grep('Block.*Column|Column.*Block', readLines(infile))
@@ -615,6 +675,12 @@ read_array_visualize <- function(infile){
 #' @export
 #'
 #' @examples
+#' ## Not run:
+#' visualize_slide(
+#' infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", package="protGear"),
+#' MFI_var = "B635 Median"
+#' )
+#' ## End(Not run)
 visualize_slide <- function(infile, MFI_var,interactive=FALSE, d_f=NA){
   ## d_f only used for the shiny app
   if(is.na(d_f)){
@@ -663,6 +729,12 @@ visualize_slide <- function(infile, MFI_var,interactive=FALSE, d_f=NA){
 #' @export
 #' @import ggplot2
 #' @examples
+#' ## Not run:
+#' visualize_slide_2d(
+#' infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", package="protGear"),
+#' MFI_var = "B635 Median"
+#' )
+#' ## End(Not run)
 visualize_slide_2d <- function(infile, MFI_var , d_f=NA){
   if(is.na(d_f)){
     d_f <- read_array_visualize(infile)

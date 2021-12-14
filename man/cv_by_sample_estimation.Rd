@@ -29,3 +29,9 @@ A function to give the summary of the CV's by the sampleID
 \details{
 Summarise CV by samples
 }
+\examples{
+dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+## this file has 3 lab replicates and the default names
+dataCV <- cv_estimation(dataC  ,lab_replicates=3)
+cv_by_sample_estimation(dataCV, cv_variable = "cvCat_all", lab_replicates = 3)
+}

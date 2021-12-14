@@ -32,3 +32,13 @@ A generic function for plotting the background and foreground values.
 \details{
 Plot foreground and background values
 }
+\examples{
+## Not run:
+#After extracting the background using \code{\link{extract_bg}} we plot the data using
+allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+plot_FB(allData_bg,
+antigen_name = "antigen",
+bg_MFI = "BG_Median", FG_MFI = "FBG_Median", log = FALSE
+)
+## End(Not run)
+}

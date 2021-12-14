@@ -4,9 +4,6 @@
 #' @return launches the shiny interactive protGear app
 #' @import rmarkdown shiny flexdashboard shinydashboard pacman
 #' @export
-#' @examples
-
-
 launch_protGear_interactive <- function() {
   appDir <- system.file("shiny-examples", "protGear_interactive","protGear_interactive.Rmd", package = "protGear")
   if (appDir == "") {
@@ -23,8 +20,7 @@ launch_protGear_interactive <- function() {
 #' @return launches the app defined under theApp
 #' @export
 #' @examples
-#' launch_select()
-
+#'
 launch_select <- function(theApp) {
   # locate all the shiny app examples that exist
   validExamples <- list.files(system.file("shiny-examples", package = "protGear"))

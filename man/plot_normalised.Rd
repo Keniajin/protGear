@@ -19,3 +19,11 @@ A ggplot of normalised data
 \description{
 Comparison of normalised data by sample
 }
+\examples{
+matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
+method = "vsn",
+return_plot = FALSE
+)
+plot_normalised(normlise_vsn,method="vsn",batch_correct=FALSE)
+}

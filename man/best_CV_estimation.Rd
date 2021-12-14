@@ -24,3 +24,9 @@ A function to select the best CV by combining the replicates in duplicates. The 
 \details{
 Select set of replicates with the best CV
 }
+\examples{
+dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+## this file has 3 lab replicates and the default names
+dataCV <- cv_estimation(dataC  ,lab_replicates=3)
+best_CV_estimation(dataCV,slide_id = "iden", lab_replicates = 3, cv_cut_off = 20)
+}

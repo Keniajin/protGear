@@ -12,3 +12,6 @@ a data frame of batch corrected data by limma
 \description{
 Remove batch effect under development
 }
+\examples{
+
+}

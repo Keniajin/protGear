@@ -49,3 +49,23 @@ genepix_vars
 \description{
 A generic function returning a list with the data structure.
 }
+\examples{
+## specify the the parameters to process the data
+genepix_vars <- array_vars(
+## the channel the data was processed in
+  channel = "635",
+  ## folder where the array data is stored
+  chip_path = "data/array_data",
+  ## the number of samples per slide or in as single run
+  totsamples = 21,
+  ## How many blocks each sample occupies
+  blockspersample = 2,
+  ## folder where the array data samples id files are stored
+  sampleID_path = "data/array_sampleID/",
+  ## optional
+  mig_prefix = "_first",
+  machine = 1,
+  date_process = "0520"
+)
+genepix_vars
+}

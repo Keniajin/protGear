@@ -17,6 +17,22 @@
 #' @export
 #'
 #' @examples
+#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+#' #VSN
+#' normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
+#' method = "vsn",
+#' return_plot = TRUE
+#' )
+#' ## log
+#' normlise_log <- matrix_normalise(as.matrix(matrix_antigen),
+#' method = "log2",
+#' return_plot = TRUE
+#' )
+#' ## cyclic_loess_log
+#' normlise_cylic_log <- matrix_normalise(as.matrix(matrix_antigen),
+#' method = "cyclic_loess_log",
+#' return_plot = TRUE
+#' )
 matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=FALSE,batch_var1,batch_var2=day_batches,
                              return_plot=FALSE,plot_by_antigen=TRUE,control_antigens=NULL, array_matrix=NULL){
   if(method=="log2"){
@@ -119,25 +135,6 @@ matrix_normalise <- function(matrix_antigen, method="log2",batch_correct=FALSE,b
 }
 
 
-#' Plot mean vs SD of normalised data
-#'
-#' @param exprs_normalised A normalised object of class data frame or matrix
-#'
-#' @return A ggplot of mean vs standard deviation
-#' @export
-#' @description A genereic function to plot \code{mean} vs \code{sd} after normalisation.
-#' @import ggplot2
-#' @examples
-plot_mean_sd <- function(exprs_normalised){
-
-  ggplot(exprs_normalised ,  aes(x=rankMean, y=stdev)) +
-    geom_jitter( color="red") + theme_classic() +
-    ggtitle(paste0(toupper(unique(exprs_normalised$method)))) +
-    xlab("Mean rank normalised") +
-    ylab("SD normalised") +
-    theme_light()
-}
-
 
 
 #' Remove batch effect under development
@@ -146,7 +143,8 @@ plot_mean_sd <- function(exprs_normalised){
 #' @export
 #' @import limma
 #' @examples
-remove_batch_effect <- function( ){
+#'
+remove_batch_effect <- function(){
   ## running the limma batch removal approach after VSN (mathematical effect???)
   ## yet to include limma normalisation -->]
   # which can be included here from the antigen matrix object
@@ -174,6 +172,7 @@ remove_batch_effect <- function( ){
 #' @export
 #'
 #' @examples
+#'
 rlm_normalise_matrix <- function(matrix_antigen, array_matrix,control_antigens){
   array_matrix$sample_index <- as.character(array_matrix$sample_index )
 
@@ -209,6 +208,7 @@ rlm_normalise_matrix <- function(matrix_antigen, array_matrix,control_antigens){
 #' @return an elist of RLM normalisation to be utilised by \code{\link{rlm_normalise_matrix}}
 #' @export
 #' @examples
+#'
 rlm_normalise <- function(rlm_normalise_df){
   rlm_normalise_C <- rlm_normalise_df %>%
     filter(grepl("Control", Description))
@@ -418,6 +418,7 @@ rlm_normalise <- function(rlm_normalise_df){
 #' @export
 #'
 #' @examples
+#' output_trend_stats(name="t.test",p_val=0.001, z_val=5)
 output_trend_stats <- function(name, p_val, z_val){
   if(p_val<0.00001){
     prop <- "<0.00001"
@@ -442,6 +443,12 @@ output_trend_stats <- function(name, p_val, z_val){
 #' @export
 #'
 #' @examples
+#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+#' normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
+#' method = "vsn",
+#' return_plot = FALSE
+#' )
+#' plot_normalised(normlise_vsn,method="vsn",batch_correct=FALSE)
 plot_normalised <- function(exprs_normalised_df,method,batch_correct){
   exprs_normalised_df_plot <-  exprs_normalised_df %>%
     dplyr::mutate(mean_all_anti = rowMeans(., na.rm = TRUE),
@@ -491,6 +498,12 @@ plot_normalised <- function(exprs_normalised_df,method,batch_correct){
 #' @export
 #'
 #' @examples
+#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+#' normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
+#' method = "vsn",
+#' return_plot = FALSE
+#' )
+#' plot_normalised_antigen(normlise_vsn,method="vsn",batch_correct=FALSE)
 plot_normalised_antigen <- function(exprs_normalised_df,method,batch_correct){
   ## how can we combine these two functions and make them the same
   antigen_summ <- exprs_normalised_df %>%

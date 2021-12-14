@@ -15,3 +15,6 @@ an elist of RLM normalisation to be utilised by \code{\link{rlm_normalise_matrix
 \description{
 A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
 }
+\examples{
+
+}

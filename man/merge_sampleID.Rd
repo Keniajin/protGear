@@ -9,7 +9,7 @@ merge_sampleID(iden, data_files, genepix_vars, method)
 \arguments{
 \item{iden}{A character indicating the name of the object to be used under data_files.}
 
-\item{data_files}{A list of data objects with names utlised by iden.}
+\item{data_files}{A list of data objects with names utilised by iden.}
 
 \item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
 
@@ -21,4 +21,36 @@ a data frame merged with corresponding sample ID's. The sample ID are specified 
 \description{
 A generic function that merges the protein data with the sample identifiers or sample names. If the file
 does not have sample identifiers the function generates it automatically.
+}
+\examples{
+## Not run:
+### Define the genepix_vars
+genepix_vars <- array_vars(
+  channel = "635",
+  chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+  totsamples = 21,
+  blockspersample = 2,
+  mig_prefix = "_first",
+  machine = 1,
+  ## optional
+  date_process = "0520"
+)
+
+## the path where the micro-array data is located
+data_path <- paste0(genepix_vars$chip_path)
+filenames <- list.files(genepix_vars$chip_path,
+                        pattern = "*.txt$|*.gpr$", full.names = FALSE
+)
+## create a list of all the files
+data_files <- purrr::map(
+ .x = filenames,
+  .f = read_array_files,
+  data_path = data_path,
+  genepix_vars = genepix_vars
+)
+data_files <- set_names(data_files, purrr::map(filenames, name_of_files))
+## merge the lab data with samples and perform bg correction
+merge_sampleID(iden = "KK2-06", data_files = data_files,
+               genepix_vars =genepix_vars,method = "subtract_global" )
+## End(Not run)
 }

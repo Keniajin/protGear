@@ -4,7 +4,7 @@
 \alias{plot_bg}
 \title{Plot background}
 \usage{
-plot_bg(df, x_axis = "antigen", bg_MFI = "B635_Median", log_mfi = TRUE)
+plot_bg(df, x_axis = "antigen", bg_MFI = "BG_Median", log_mfi = TRUE)
 }
 \arguments{
 \item{df}{A     default dataset to use for plot.}
@@ -22,6 +22,12 @@ A ggplot of background values
 A generic function for plotting of R objects.
 }
 \examples{
-
-
+## Not run:
+#After extracting the background using \code{\link{extract_bg}} we plot the data using
+allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+plot_bg(allData_bg,
+x_axis = "antigen",
+bg_MFI = "BG_Median",  log_mfi = TRUE
+)
+## End(Not run)
 }

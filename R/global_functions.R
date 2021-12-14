@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @examples
+#' minpositive(c(-1,-2,3,5,6,7,8,9,10))
 minpositive <- function(x){
  min(x[x > 0], na.rm = TRUE)
 }
@@ -38,7 +39,26 @@ minpositive <- function(x){
 #' @export
 #'
 #' @examples
+#' ## specify the the parameters to process the data
+#' genepix_vars <- array_vars(
+#' ## the channel the data was processed in
+#'   channel = "635",
+#'   ## folder where the array data is stored
+#'   chip_path = "data/array_data",
+#'   ## the number of samples per slide or in as single run
+#'   totsamples = 21,
+#'   ## How many blocks each sample occupies
+#'   blockspersample = 2,
+#'   ## folder where the array data samples id files are stored
+#'   sampleID_path = "data/array_sampleID/",
+#'   ## optional
+#'   mig_prefix = "_first",
+#'   machine = 1,
+#'   date_process = "0520"
+#' )
+#' genepix_vars
 #' @return genepix_vars
+#'
 array_vars <- function(channel="635",
                        totsamples ,
                        FG="",
@@ -101,6 +121,7 @@ array_vars <- function(channel="635",
 #' @export
 #'
 #' @examples
+#' create_dir("data/sample_folder")
 create_dir <- function(path){
   if(!file.exists(paste0(path))) {
     dir.create(paste0(path))
@@ -116,9 +137,11 @@ create_dir <- function(path){
 #'
 #' @return a list of file names
 #' @export
-#' @description A generic function returning a vector with the names of files in the same directory
+#' @description A generic function returning a vector with the names of files in the same directory. Removes the file extension
 #' @examples
+#' name_of_files("KK2-06.txt")
 #' @return name
+
 name_of_files <- function(i) {
   name <- gsub("\\.txt*|\\.gpr*", "", i, perl = TRUE)
   name <- gsub(" repeat", "", name, perl = TRUE)
@@ -135,6 +158,8 @@ name_of_files <- function(i) {
 #' @description A generic function to write into the log file with a replicate check error
 #' @param iden An id for the file with replicates error
 #' @return  a log file showing the replicate errors
+#' @examples
+#'
 error_replicates <- function(iden) {
   sink("errors/error_replicates.txt" , append = TRUE)
   print(paste0("The replicates per antigen per sample are more than expected for ", iden))
@@ -157,6 +182,16 @@ error_replicates <- function(iden) {
 #' @export
 #'
 #' @examples
+#' genepix_vars <- array_vars(
+#' channel = "635",
+#' chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#' totsamples = 21,
+#' blockspersample = 2,
+#' mig_prefix = "_first",
+#' machine = 1,
+#' date_process = "0520"
+#' )
+#' check_sampleID_files(genepix_vars)
 check_sampleID_files <- function(genepix_vars){
   ## copy all sample ID with missing CSV file
   ##

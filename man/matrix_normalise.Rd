@@ -44,3 +44,21 @@ A data frame of normalised values
 \description{
 Normalize  Arrays
 }
+\examples{
+matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+#VSN
+normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
+method = "vsn",
+return_plot = TRUE
+)
+## log
+normlise_log <- matrix_normalise(as.matrix(matrix_antigen),
+method = "log2",
+return_plot = TRUE
+)
+## cyclic_loess_log
+normlise_cylic_log <- matrix_normalise(as.matrix(matrix_antigen),
+method = "cyclic_loess_log",
+return_plot = TRUE
+)
+}

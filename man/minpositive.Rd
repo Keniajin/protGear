@@ -15,3 +15,6 @@ Returns the minimum positive value in an object
 \description{
 Get the minimum positive value
 }
+\examples{
+minpositive(c(-1,-2,3,5,6,7,8,9,10))
+}

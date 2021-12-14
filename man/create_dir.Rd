@@ -15,3 +15,6 @@ created directory
 \description{
 creating a directory
 }
+\examples{
+create_dir("data/sample_folder")
+}

@@ -18,3 +18,7 @@ A data frame of the buffer control spots
 A function to extract the buffer spots data. A buffer spot only has the solution for
  proprietary ingredients for stabilizing protein and minimizing evaporation.
 }
+\examples{
+bg_correct_df <- readr::read_csv(system.file("extdata", "Data1_sample.csv", package="protGear"))
+buffer_spots(Data1 = bg_correct_df)
+}

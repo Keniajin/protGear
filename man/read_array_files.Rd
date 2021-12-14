@@ -20,9 +20,22 @@ a number of data frames in the global environment
 This helps to read the chip file(s).
 }
 \details{
-Read mutiple array files
+Read multiple array files
 }
 \examples{
-
-
+## Not run:
+genepix_vars <- array_vars(
+channel = "635",
+chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+totsamples = 21,
+blockspersample = 2,
+mig_prefix = "_first",
+machine = 1,
+date_process = "0520"
+)
+file_read <- "KK2-06.txt"
+read_array_files(i=file_read,
+data_path=system.file("extdata", "array_data/machine1/",
+package="protGear"), genepix_vars=genepix_vars)
+## End(Not run)
 }

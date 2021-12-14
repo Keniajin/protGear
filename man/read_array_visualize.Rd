@@ -15,3 +15,9 @@ a data frame to visualize the background or foreground values
 \description{
 Read a gpr file to visualize
 }
+\examples{
+## Not run:
+read_array_visualize(infile = system.file("extdata",
+"/array_data/machine1/KK2-06.txt", package="protGear"))
+## End(Not run)
+}

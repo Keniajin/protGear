@@ -16,6 +16,9 @@
 #' @export
 #'
 #' @examples
+#' dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+#' ## this file has 3 lab replicates and the default names
+#' cv_estimation(dataC  ,lab_replicates=3)
 cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', antigen_var='antigen' ,replicate_var='replicate' , mfi_var='FMedianBG_correct' , cv_cut_off=20){
   if(lab_replicates==1){
     dataC <- dataC %>%
@@ -118,6 +121,10 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
 #' @export
 #'
 #' @examples
+#' dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+#' ## this file has 3 lab replicates and the default names
+#' dataCV <- cv_estimation(dataC  ,lab_replicates=3)
+#' best_CV_estimation(dataCV,slide_id = "iden", lab_replicates = 3, cv_cut_off = 20)
 best_CV_estimation <- function(dataCV,slide_id,lab_replicates , cv_cut_off) {
   if(lab_replicates>1){
 
@@ -201,6 +208,15 @@ best_CV_estimation <- function(dataCV,slide_id,lab_replicates , cv_cut_off) {
 #' @export
 #'
 #' @examples
+#' tag_file <- readr::read_csv(system.file("extdata", "TAG_antigens.csv", package="protGear"))
+#' tag_antigens <- c("CD4TAG", "GST", "MBP")
+#' batch_vars <- list(machine = "m1", day = "0520")
+#' dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+#' ## this file has 3 lab replicates and the default names
+#' dataCV <- cv_estimation(dataC  ,lab_replicates=3)
+#' dataCV_best2 <- best_CV_estimation(dataCV,slide_id = "iden", lab_replicates = 3, cv_cut_off = 20)
+#' tag_subtract(dataCV_best2,tag_antigens=tag_antigens, mean_best_CV_var="mean_best_CV",
+#'  tag_file = tag_file,antigen_var = "antigen", batch_vars = batch_vars)
 tag_subtract <- function(dataC_mfi,tag_antigens, mean_best_CV_var,tag_file, batch_vars, sampleID_var='sampleID', antigen_var='antigen'){
   mean_best_CV_var <-  rlang::sym(paste0(mean_best_CV_var))
   sampleID_var<-  rlang::sym(paste0(sampleID_var))

@@ -9,7 +9,7 @@ bg_correct(iden, Data1, genepix_vars, method = "subtract_local")
 \arguments{
 \item{iden}{A character indicating the name of the object to be used under Data1}
 
-\item{Data1}{A list of data objects with names utlised by iden.}
+\item{Data1}{A data frame with sample identifiers merged with micro array data.}
 
 \item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
 
@@ -32,4 +32,23 @@ If method="minimum_half" then any intensity which is negative after background s
 a block.  If method="movingmin_value" then any intensity which is negative after background subtraction is reset to the minimum positive value
 in a block. For \code{edwards} we implement a similar algorithm with \code{limma::backgroundCorrect(method="edwards")} and for \code{'normexp'}
 we use  the saddle-point approximation to maximum likelihood, \code{\link[limma]{backgroundCorrect}} for more details.
+}
+\examples{
+## Not run:
+genepix_vars <- array_vars(
+  channel = "635",
+  chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+  totsamples = 21,
+  blockspersample = 2,
+  mig_prefix = "_first",
+  machine = 1,
+  ## optional
+  date_process = "0520"
+)
+raw_df <- readr::read_csv(system.file("extdata", "Data1_bg_sample.csv", package="protGear"))
+bg_correct(iden="iden",
+Data1 = raw_df,
+genepix_vars = genepix_vars, method="subtract_local"
+)
+## End(Not run)
 }

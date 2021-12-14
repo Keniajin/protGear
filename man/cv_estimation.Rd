@@ -39,3 +39,8 @@ A function to calculate the CV for the technical lab replicates. The default val
 \details{
 Coefficient of Variation
 }
+\examples{
+dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+## this file has 3 lab replicates and the default names
+cv_estimation(dataC  ,lab_replicates=3)
+}

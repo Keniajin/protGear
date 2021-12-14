@@ -19,3 +19,6 @@ A RLM normalised data frame
 \description{
 A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
 }
+\examples{
+
+}

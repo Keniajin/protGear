@@ -19,3 +19,6 @@ A statistics of mean standard deviation trend
 \description{
 Trend test using Cox–Stuart (C–S) and Mann–Kendall (M–K) trend tests
 }
+\examples{
+output_trend_stats(name="t.test",p_val=0.001, z_val=5)
+}

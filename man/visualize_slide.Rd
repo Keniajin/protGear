@@ -21,3 +21,11 @@ A ggplot of slide foreground values
 \description{
 Visualize the slide mimicking the original scan image.
 }
+\examples{
+## Not run:
+visualize_slide(
+infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", package="protGear"),
+MFI_var = "B635 Median"
+)
+## End(Not run)
+}

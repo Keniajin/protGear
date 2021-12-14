@@ -12,6 +12,10 @@
 #' @export
 #'
 #' @examples
+#' dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+#' ## this file has 3 lab replicates and the default names
+#' dataCV <- cv_estimation(dataC  ,lab_replicates=3)
+#' cv_by_sample_estimation(dataCV, cv_variable = "cvCat_all", lab_replicates = 3)
 cv_by_sample_estimation <- function(dataCV,cv_variable,lab_replicates, sampleID_var='sampleID'){
   ## creating a summary of the CV's by sampleID for each file
   ## helps in identifying samples with a high CV value

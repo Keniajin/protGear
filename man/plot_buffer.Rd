@@ -27,3 +27,7 @@ plot of buffer spots
 \description{
 Plot the buffer values
 }
+\examples{
+buffers <- readr::read_csv(system.file("extdata", "buffers_sample2.csv", package="protGear"))
+plot_buffer(df=buffers,buffer_names = "sampleID")
+}

@@ -17,3 +17,15 @@ A file with missing corresponding sample ID files
 A generic function to check if the file(s) witht the MFI values have a corresponding sample ID file. Sample ID file is
 a file with the identifiers for the samples in array file.
 }
+\examples{
+genepix_vars <- array_vars(
+channel = "635",
+chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+totsamples = 21,
+blockspersample = 2,
+mig_prefix = "_first",
+machine = 1,
+date_process = "0520"
+)
+check_sampleID_files(genepix_vars)
+}

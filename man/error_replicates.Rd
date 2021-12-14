@@ -15,3 +15,6 @@ a log file showing the replicate errors
 \description{
 A generic function to write into the log file with a replicate check error
 }
+\examples{
+
+}
