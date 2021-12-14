@@ -36,12 +36,11 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
     #dataC$replicate <- sub(".*_(.*)", "\\1", dataC$antigen)
 
     ## create a wide data to
-    sink("log_file.txt" , append = TRUE)
     if(length(unique(dataC$replicate ))>lab_replicates)  {
       try( stop(paste0("Some antigens seems to be repeated in a mini array for", iden)) , outFile = stdout())
       error_replicates(iden)
     }
-    sink()
+
   }else if(lab_replicates>1){
     ## Exclude the land mark and Buffer
     dataC <- dataC %>%
@@ -61,12 +60,12 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
     #dataC$antigen <- sub("\\_[^\\_]*$" , "", dataC$antigen)
 
     ## create a wide data to
-    sink("log_file.txt" , append = TRUE)
+
     if(length(unique(dataC$replicate ))>lab_replicates)  {
       try( stop(paste0("The replicates per antigen per sample are more than expected for ", iden)) , outFile = stdout())
       error_replicates(iden)
     }else(print("The replicates are as expected per sample per antigen"))
-    sink()
+
 
     ## reshaping the data
     Data3 <- dataC %>%
