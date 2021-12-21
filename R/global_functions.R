@@ -161,7 +161,7 @@ name_of_files <- function(i) {
 #' @examples
 #'
 error_replicates <- function(iden) {
-  sink("errors/error_replicates.txt" , append = TRUE)
+  sink("log_replicates.txt" , append = TRUE)
   print(paste0("The replicates per antigen per sample are more than expected for ", iden))
   sink()
 }
@@ -206,12 +206,9 @@ check_sampleID_files <- function(genepix_vars){
   miss_id_file <- sid_check[sid_check  %ni%  toupper(sid_files)]
 
 
-  ## create a folder to collect the errrors
-  if(dir.exists("errors")==FALSE){
-    dir.create("errors")
-  }
+
   if(length(miss_id_file)>0){
-    write.table(miss_id_file,"errors/missing_IDfile.txt")
+    write.table(miss_id_file,"missing_IDfile.txt")
   }
 
   if(length(miss_id_file)==0){

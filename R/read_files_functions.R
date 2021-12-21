@@ -5,7 +5,7 @@
 #' @param genepix_vars  A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
 #' @description This helps to read the chip file(s).
 #' @return a number of data frames in the global environment
-#' @import data.table
+#' @importFrom  data.table fread %like%
 #' @importFrom purrr set_names
 #' @export
 #' @examples
@@ -69,6 +69,7 @@ read_array_files <- function(i,data_path,genepix_vars){
 #' @description A generic function to extract the background data for micro array data.
 #' @return A data frame of background values
 #' @importFrom dplyr select arrange
+#' @importFrom data.table %like%
 #' @export
 #'
 #' @examples
@@ -123,7 +124,7 @@ extract_bg <- function(iden,data_files , genepix_vars=genepix_vars)
 
   ## capture errors for same sample ID in a slide
   if(length(unique(arraynames$v2)) <genepix_vars$totsamples) {
-    sink("error_replicates.txt" , append = TRUE)
+    sink("log_replicates.txt" , append = TRUE)
     print(paste0("Most likely there is a repeated sample name for " , iden))
     sink()
     arraynames <- arraynames %>%
@@ -597,7 +598,7 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
 
   ## capture errors for same sample ID in a slide
   if(length(unique(arraynames$v2)) <genepix_vars$totsamples) {
-    sink("error/error_replicates.txt" , append = TRUE)
+    sink("log_replicates.txt" , append = TRUE)
     print(paste0("Most likely there is a repeated sample name for " , iden))
     sink()
     arraynames <- arraynames %>%
@@ -648,7 +649,7 @@ merge_sampleID <- function(iden,data_files,genepix_vars,method)
 #'
 #' @return a data frame to visualize the background or foreground values
 #' @export
-#' @import data.table
+#' @importFrom  data.table fread
 #' @examples
 #' ## Not run:
 #' read_array_visualize(infile = system.file("extdata",

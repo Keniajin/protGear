@@ -7,6 +7,7 @@
 #' @param dataCV A dataframe
 #' @import dplyr tidyr
 #' @importFrom tidyr gather
+#' @importFrom dplyr lag filter
 #' @description A function to give the summary of the CV's by the sampleID
 #' @return A data frame of CV calculated by sample
 #' @export

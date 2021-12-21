@@ -2,7 +2,11 @@
 #'
 #' This is Function is to launch the shiny application
 #' @return launches the shiny interactive protGear app
-#' @import rmarkdown shiny flexdashboard shinydashboard pacman
+#' @import rmarkdown shiny shinydashboard  GGally pheatmap png
+#' grid styler factoextra FactoMineR magick ggplotify remotes stats
+#' @importFrom flexdashboard renderValueBox valueBoxOutput valueBox
+#' @importFrom  dplyr group_rows between first last
+#' @importFrom  kableExtra text_spec
 #' @export
 launch_protGear_interactive <- function() {
   appDir <- system.file("shiny-examples", "protGear_interactive","protGear_interactive.Rmd", package = "protGear")

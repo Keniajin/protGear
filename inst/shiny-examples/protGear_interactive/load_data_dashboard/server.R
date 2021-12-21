@@ -6,11 +6,13 @@
 ## http://www.cryer.co.uk/file-types/a/atf/genepix_file_formats.htm#example
 
 ## this loads packages from CRAN
-pacman::p_load(shiny,shinyFiles,DT,tidyverse,shinydashboard,shinyjs,
-               factoextra,FactoMineR)
+pac_loads <- c('shiny','shinyFiles','DT','tidyverse','shinydashboard','shinyjs',
+               'factoextra','FactoMineR','shinySignals','bubbles','ggplotify')
 
+
+sapply(pac_loads, require, character.only = TRUE)
 ## this loads or installs packages from github
-pacman::p_load_gh("hadley/shinySignals","jcheng5/bubbles","GuangchuangYu/ggplotify")
+#pacman::p_load_gh("hadley/shinySignals","jcheng5/bubbles","GuangchuangYu/ggplotify")
 
 
 

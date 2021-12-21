@@ -26,9 +26,8 @@ output:
 
 
 ```{r setup, include=FALSE}
-library(pacman)
-pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR,magick,rlang,GGally,ggplotify ,remotes)
-
+ploads <- c('tidyverse','ggpubr','gtools','purrr','scales','pheatmap', 'data.table','kableExtra','gridExtra', 'png','knitr' ,'grid','styler',  'factoextra','FactoMineR','magick','rlang','GGally','ggplotify', 'remotes')
+sapply(ploads, require, character.only = TRUE)
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
                       dev = "png", dev.args = list(type = "cairo-png"),
@@ -104,10 +103,10 @@ The parameters "`chip_path`", "`channel`" , "`totsamples`" and "`sampleID_path`"
 ```{r}
 ## specify the the parameters to process the data
 genepix_vars <- array_vars(channel="635" ,
-                           chip_path = "data/array_data",
+                           chip_path = system.file("extdata/array_data/", package="protGear"),
                            totsamples = 21,
                            blockspersample = 2,
-                           sampleID_path = "data/array_sampleID/",
+                           sampleID_path = system.file("extdata/array_sampleID/", package="protGear"),
                            mig_prefix = "_first",
                            machine =1,
                            ## optional 
@@ -118,7 +117,7 @@ genepix_vars <- array_vars(channel="635" ,
 The exact channel used should be checked in the header of the file from the quantification software under `Wavelengths`. 
 
 ```{r}
-header_gpr <- readLines("data/array_data/machine1/KK2-06.txt",
+header_gpr <- readLines(system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear"),
                         n=40)
 header_gpr <- gsub("\"", "", header_gpr[1:32])
 header_gpr[1:32]
@@ -138,7 +137,7 @@ protGear offers a functionality to inspect the slide visually for any strong spa
 Here we visualize the foreground MFI using the `r text_spec("visualize_slide",color="red")` function
 
 ```{r chunk6, fig.align='left'}
-visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
+visualize_slide(infile=system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear"),
                 MFI_var ='B635 Median' )
 
 ```
@@ -148,7 +147,7 @@ visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
 Here we visualize  the background MFI using the `visualize_slide_2d` function
 
 ```{r chunk7, fig.align='left'}
-visualize_slide_2d(infile ='data/array_data/machine1/KK2-06.txt' , 
+visualize_slide_2d(infile =system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear"), 
                    MFI_var ='F635 Median' )
 ```
 

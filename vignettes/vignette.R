@@ -1,6 +1,26 @@
 ## ----setup, include=FALSE-----------------------------------------------------
-library(pacman)
-pacman::p_load(tidyverse,ggpubr,gtools,purrr,scales,pheatmap, data.table,kableExtra,gridExtra, png,knitr ,grid,styler, pheatmap,  factoextra,FactoMineR,magick,rlang,GGally,ggplotify ,remotes)
+library(tidyverse)
+library(ggpubr)
+library(gtools)
+library(purrr)
+library(scales)
+library(pheatmap)
+library(data.table)
+library(kableExtra)
+library(gridExtra)
+library(png)
+library(knitr)
+library(grid)
+library(styler)
+library(factoextra)
+library(FactoMineR)
+library(magick)
+library(rlang)
+library(GGally)
+library(remotes)
+library(ggplotify)
+
+
 
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
@@ -25,28 +45,28 @@ library(protGear)
 ## -----------------------------------------------------------------------------
 ## specify the the parameters to process the data
 genepix_vars <- array_vars(channel="635" ,
-                           chip_path = "data/array_data",
+                           chip_path = system.file("extdata/array_data/", package="protGear") , #"data/array_data",
                            totsamples = 21,
                            blockspersample = 2,
-                           sampleID_path = "data/array_sampleID/",
+                           sampleID_path =system.file("extdata/array_sampleID/", package="protGear") , #"data/array_sampleID/",
                            mig_prefix = "_first",
                            machine =1,
                            ## optional
                            date_process = "0520")
 
 ## -----------------------------------------------------------------------------
-header_gpr <- readLines("data/array_data/machine1/KK2-06.txt",
+header_gpr <- readLines(system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear"),
                         n=40)
 header_gpr <- gsub("\"", "", header_gpr[1:32])
 header_gpr[1:32]
 
 ## ----chunk6, fig.align='left'-------------------------------------------------
-visualize_slide(infile='data/array_data/machine1/KK2-06.txt' ,
+visualize_slide(infile=system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear") ,
                 MFI_var ='B635 Median' )
 
 
 ## ----chunk7, fig.align='left'-------------------------------------------------
-visualize_slide_2d(infile ='data/array_data/machine1/KK2-06.txt' ,
+visualize_slide_2d(infile =system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear") ,
                    MFI_var ='F635 Median' )
 
 ## -----------------------------------------------------------------------------
@@ -109,6 +129,9 @@ lab_replicates=3
 dataCV <- set_names(dataCV, purrr::map(filenames, name_of_files))
 
 aa <- plyr::ldply(dataCV)
+
+
+
 GGally::ggpairs(aa,aes(color=cvCat_all) ,
         columns = paste(1:lab_replicates), title = "",  axisLabels = "show") +
   theme_light()

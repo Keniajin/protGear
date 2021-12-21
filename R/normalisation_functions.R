@@ -438,7 +438,10 @@ output_trend_stats <- function(name, p_val, z_val){
 #' @param method the method of normalisation used
 #' @param batch_correct the batch correction
 #'
-#' @import dplyr  trend ggplot2
+#' @import dplyr trend ggplot2
+#' @importFrom  readr  read_csv
+#' @importFrom genefilter rowSds
+#' @importFrom plyr .
 #' @return A ggplot of normalised data
 #' @export
 #'

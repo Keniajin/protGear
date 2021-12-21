@@ -116,6 +116,9 @@ cv_estimation <- function(dataC  ,lab_replicates , sampleID_var='sampleID', anti
 #' @description A function to select the best CV by combining the replicates in duplicates. The function has been build for up to to 3 replicates so far
 #' @import dplyr tidyr rlang
 #' @importFrom tidyr gather spread
+#' @importFrom dplyr mutate select
+#' @importFrom readr read_csv
+#' @importFrom  plyr .
 #' @return A data frame with the best CV's estimated
 #' @export
 #'
