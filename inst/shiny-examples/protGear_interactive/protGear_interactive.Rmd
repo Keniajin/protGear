@@ -13,7 +13,7 @@ runtime: shiny
 ```{r setup, include=FALSE}
 ## Inside the working directory create a sampleID folder to contain information of the sampleIDs
 ## they should be named according to the sampleID names
-pac_loads <- c('tidyverse','ggpubr','limma','vsn','ggpubr','gtools','plotly','shinythemes','shinyjs','shinyWidgets','GGally' ,'DT',   'shinycssloaders', 'gridExtra','pheatmap','scales','shinyFeedback','shinyalert', 'data.table','stringr', 'trend',   'flexdashboard', 'shiny')
+pac_loads <- c('tidyverse','ggpubr','limma','vsn','ggpubr','gtools','plotly','shinythemes','shinyjs','shinyWidgets','GGally' ,'DT',   'shinycssloaders', 'gridExtra','pheatmap','scales','shinyFeedback','shinyalert', 'data.table','stringr', 'trend',   'flexdashboard', 'shiny','factoextra')
 
 sapply(pac_loads, require, character.only = TRUE)
 

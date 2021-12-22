@@ -26,8 +26,26 @@ output:
 
 
 ```{r setup, include=FALSE}
-ploads <- c('tidyverse','ggpubr','gtools','purrr','scales','pheatmap', 'data.table','kableExtra','gridExtra', 'png','knitr' ,'grid','styler',  'factoextra','FactoMineR','magick','rlang','GGally','ggplotify', 'remotes')
-sapply(ploads, require, character.only = TRUE)
+library(ggpubr)
+library(gtools)
+library(purrr)
+library(scales)
+library(pheatmap)
+library(data.table)
+library(kableExtra)
+library(gridExtra)
+library(png)
+library(knitr)
+library(grid)
+library(styler)
+library(FactoMineR)
+library(factoextra)
+library(magick)
+library(rlang)
+library(GGally)
+library(ggplotify)
+library(remotes)
+
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
                       dev = "png", dev.args = list(type = "cairo-png"),
