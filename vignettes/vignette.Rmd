@@ -554,14 +554,17 @@ norm_df <- norm_df %>%
 p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = FALSE,
                             main=paste('VSN',"Normalised Data"),
                             silent = TRUE)
-p3 <- ggplotify::as.ggplot(p3)
-p <- p3 +  theme_void()
-ggsave(p ,
-         filename ="heatmap.PNG" ,
-         width = 16 , height = 12 , 
-         limitsize = FALSE,
-         dpi=200 )
-p
+#-------
+## if you want to save the file
+# p3 <- ggplotify::as.ggplot(p3)
+# p <- p3 +  theme_void()
+# ggsave(p ,
+#          filename ="heatmap.PNG" ,
+#          width = 16 , height = 12 , 
+#          limitsize = FALSE,
+#          dpi=200 )
+#-------
+p3
 ```
 
 
@@ -610,23 +613,17 @@ p4 <-  fviz_pca_var(res_pca, col.var = "cos2",
 ## combine the plots into one grid
 ## combine the plots into one grid
 p_pca <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
-
-ggsave(p_pca ,
-         filename ="p_pca.PNG" ,
-         width = 16 , height = 12 , 
-          units = "in",
-         limitsize = FALSE,
-         dpi=300)
+## If you want to save the file
+# ggsave(p_pca ,
+#          filename ="p_pca.PNG" ,
+#          width = 16 , height = 12 , 
+#           units = "in",
+#          limitsize = FALSE,
+#          dpi=300)
 p_pca 
 ```
 
 
-
-```{r image_pca, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'}
-#files <- list.files(pattern = 'p_pca')
-#knitr::include_graphics(files[[1]])
-#knitr::include_graphics('p_pca.PNG')
-```
 
 <!-- ![PCA Chart Repeat](p_pca.PNG) -->
 
