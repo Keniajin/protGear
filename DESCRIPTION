@@ -1,11 +1,10 @@
 Package: protGear
 Type: Package
 Title: Protein Micro Array Data Management and Interactive Visualization
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: c(person("Kennedy", "Mwai", role = c("cre", "aut"), email = "keniajin@gmail.com"),
              person(c("James", "Mburu"), role = "aut" , email = "mburuwanja@gmail.com") ,
              person(c("Jacqueline", "Waeni"), role = "ctb" , email = "jacqwaeni@gmail.com"))
-Maintainer: K Mwai <keniajin@gmail.com>
 Description: A generic three-step pre-processing package for protein microarray data. This package contains different data pre-processing procedures to allow comparison of their performance.These steps are background correction, the coefficient of variation (CV) based filtering,  batch correction and normalization.
 License: GPL-3
 URL: https://github.com/Keniajin/protGear

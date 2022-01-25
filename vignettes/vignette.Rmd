@@ -48,7 +48,7 @@ library(remotes)
 
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
-                      dev = "png", dev.args = list(type = "cairo-png"),
+                      dev = "png", #dev.args = list(type = "cairo-png"),
                        tidy='styler', tidy.opts=list(strict=TRUE))
 
 
@@ -95,6 +95,7 @@ remotes::install_github('Keniajin/protGear', dependencies=TRUE)
 ## Importing data
 
 ```{r}
+## load the package 
 library(protGear)
 ```
 

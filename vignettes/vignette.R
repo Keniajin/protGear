@@ -1,4 +1,4 @@
-## ----setup, include=FALSE----------------------------------------------------------------------------
+## ----setup, include=FALSE-------------------------------------------------------------------------------------------------------
 library(ggpubr)
 library(gtools)
 library(purrr)
@@ -21,7 +21,7 @@ library(remotes)
 
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
                       fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
-                      dev = "png", dev.args = list(type = "cairo-png"),
+                      dev = "png", #dev.args = list(type = "cairo-png"),
                        tidy='styler', tidy.opts=list(strict=TRUE))
 
 
@@ -36,23 +36,17 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
 ## }
 
 
-## ---- echo=FALSE-------------------------------------------------------------------------------------
-img1_path <- "folder_structure.png"
-#img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
-#include_graphics(img1_path)
- #grid.raster(img1)
-
-
-## ---- eval=FALSE-------------------------------------------------------------------------------------
+## ---- eval=FALSE----------------------------------------------------------------------------------------------------------------
 ## ## make sure devtools package is installed
 ## remotes::install_github('Keniajin/protGear', dependencies=TRUE)
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
+## load the package 
 library(protGear)
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 ## specify the the parameters to process the data
 genepix_vars <- array_vars(channel="635" ,
                            chip_path = system.file("extdata/array_data/", package="protGear"),
@@ -65,25 +59,25 @@ genepix_vars <- array_vars(channel="635" ,
                            date_process = "0520")
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 header_gpr <- readLines(system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear"),
                         n=40)
 header_gpr <- gsub("\"", "", header_gpr[1:32])
 header_gpr[1:32]
 
 
-## ----chunk6, fig.align='left'------------------------------------------------------------------------
+## ----chunk6, fig.align='left'---------------------------------------------------------------------------------------------------
 visualize_slide(infile=system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear"),
                 MFI_var ='B635 Median' )
 
 
 
-## ----chunk7, fig.align='left'------------------------------------------------------------------------
+## ----chunk7, fig.align='left'---------------------------------------------------------------------------------------------------
 visualize_slide_2d(infile =system.file("extdata/array_data/machine1/KK2-06.txt", package="protGear"), 
                    MFI_var ='F635 Median' )
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 #### read in all the datasets
 ### list all the file names under data folder
 filenames <- list.files(file.path(genepix_vars$paths[[2]]), 
@@ -98,7 +92,7 @@ data_files <- purrr::map(.x = filenames,
 data_files <- set_names(data_files, purrr::map(filenames, name_of_files))
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 ## utilising the map package we process a number of files  under data_files list
 dfs <- names(data_files) 
 allData_bg <- purrr::map(.x=dfs, .f=extract_bg,data_files=data_files,genepix_vars)
@@ -106,7 +100,7 @@ allData_bg <- set_names(allData_bg, purrr::map(filenames, name_of_files))
 allData_bg <- plyr::ldply(allData_bg)
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 p1 <- plot_FB(allData_bg,antigen_name="antigen",
               bg_MFI="BG_Median",FG_MFI="FBG_Median",log=FALSE)
 
@@ -115,19 +109,19 @@ p1
 
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 p2 <- plot_bg(df=allData_bg, x_axis="Block",bg_MFI="BG_Median",
         log_mfi=TRUE) 
 p2
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 sample_ID_merged_dfs <- purrr::map(.x=dfs, .f=merge_sampleID ,data_files=data_files , 
                              genepix_vars, method="subtract_local")
 sample_ID_merged_dfs <- set_names(sample_ID_merged_dfs, purrr::map(filenames, name_of_files))
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 buffer_transp <- purrr::map(.x=sample_ID_merged_dfs, .f=buffer_spots ,  buffer_spot="buffer")
 
 buffer_transp <- set_names(buffer_transp, purrr::map(filenames, name_of_files))
@@ -137,7 +131,7 @@ plot_buffer(buffers,buffer_names="antigen",buffer_mfi="FMedianBG_correct",slide_
 
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 #' @________________________________calculated_cv_for_each_data_file_______________________________________
 #' data without the selected mean for the best 2 CVs 
 dataCV <- purrr::map(.x=sample_ID_merged_dfs, .f=cv_estimation ,lab_replicates=3  ,
@@ -155,7 +149,7 @@ GGally::ggpairs(aa,aes(color=cvCat_all) ,
    
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 
 
 #' @________________________________summary_of_cv_for_each_sample________________________________________ 
@@ -169,7 +163,7 @@ all_cv_sample <- plyr::ldply(dataCV_sample)
 
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 less_20 <- rlang::sym(paste0("CV <= ",cv_cut_off, "_perc"))
 gt_20 <- rlang::sym(paste0("CV > ",cv_cut_off, "_perc"))
 
@@ -184,7 +178,7 @@ ggplot(all_cv_sample)+
   ggtitle("% of CV >20 or <=20 for each slide all repeats considered") 
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 #' @________________________________data_with_selected_best_2_CV_______________________________________ 
 #' data with the selected mean for the best 2 CVs
 dataCV_best2 <- purrr::map(.x=dataCV, .f=best_CV_estimation , slide_id="iden",lab_replicates=3,
@@ -200,7 +194,7 @@ dataCV_sample_best2 <- set_names(dataCV_sample_best2, purrr::map(filenames, name
 all_cv_sample_best2 <- plyr::ldply(dataCV_sample_best2)
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 ## plot only the CV perccentages
 ggplot(all_cv_sample_best2)+
   geom_violin(aes(.id,`CV <= 20_perc`, color="% CV =<20")) +
@@ -211,20 +205,20 @@ ggplot(all_cv_sample_best2)+
   ggtitle("% of CV >20 or <=20 for each slide") 
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 tag_file <- read.csv("TAG_antigens.csv")
 tag_antigens <- c("CD4TAG" , "GST", "MBP")
 batch_vars <- list(machine="m1", day="0520")
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 tb1 <- data.frame(head(tag_file, n=10))
 tb1 %>% 
   kable() %>%
   kable_styling()
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 #' @________________________________subtract_the_tag_values_______________________________________ 
 #'
 ## tag subtract 
@@ -237,7 +231,7 @@ dataCV_tag <- set_names(dataCV_tag, purrr::map(filenames, name_of_files))
 dataCV_tag <- plyr::ldply(dataCV_tag)
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 aaa <- dataCV_tag %>% 
   filter(TAG_name=="GST") 
 
@@ -255,7 +249,7 @@ ggplot(aaa,aes(as.factor(antigen),mfi,color=measure))  +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 df_to_normalise <-  dataCV_tag  %>%  ungroup() %>%  
   dplyr::select(slide=.id,sampleID,sample_array_ID,antigen,mean_best_CV) %>%  
   group_by(sampleID, slide)
@@ -293,7 +287,7 @@ control_antigens <- c("CommercialHumanIgG","CD4TAG")
 
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 normlise_df <- matrix_normalise(matrix_antigen, method = "vsn", array_matrix=array_matrix,
                        return_plot = TRUE,control_antigens=control_antigens)
 
@@ -301,7 +295,7 @@ normlise_df$plot_normalisation
 
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 control_antigens <- c("CommercialHumanIgG","CD4TAG")
 ## no normalisation
 normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen, 
@@ -354,11 +348,11 @@ normalise_list_none <- matrix_normalise(matrix_antigen=matrix_antigen,
   
 
 
-## ---- fig.align='center', fig.width=12, fig.height=15------------------------------------------------
+## ---- fig.align='center', fig.width=12, fig.height=15---------------------------------------------------------------------------
 p <- do.call("grid.arrange", c(normalised_list_plot, ncol=2))
 
 
-## ----------------------------------------------------------------------------------------------------
+## -------------------------------------------------------------------------------------------------------------------------------
 norm_df <- normlise_df$matrix_antigen_normalised
 norm_df <- norm_df %>% 
    dplyr::select(-control_antigens)
@@ -378,7 +372,7 @@ p3 <- pheatmap::pheatmap(norm_df ,scale = "none", cluster_rows = FALSE,
 p3
 
 
-## ----image_heat, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'------------------------------
+## ----image_heat, echo=FALSE, fig.cap="PCA analysis", out.width = '100%'---------------------------------------------------------
 
 #files <- list.files(pattern = 'heatmap')
 
@@ -386,7 +380,7 @@ p3
 #knitr::include_graphics('heatmap.PNG')
 
 
-## ----pca, , fig.align='center',fig.width=16,fig.height=12--------------------------------------------
+## ----pca, , fig.align='center',fig.width=16,fig.height=12-----------------------------------------------------------------------
 norm_df <- normlise_df$matrix_antigen_normalised
 res_pca <- prcomp( norm_df, scale = TRUE)
 var <- get_pca_var(res_pca)
@@ -431,6 +425,6 @@ p_pca <- gridExtra::grid.arrange(p1,p2,p3,p4, ncol=2 )
 p_pca 
 
 
-## ---- eval=FALSE-------------------------------------------------------------------------------------
+## ---- eval=FALSE----------------------------------------------------------------------------------------------------------------
 ## protGear::launch_protGear_interactive()
 
