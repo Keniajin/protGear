@@ -36,7 +36,7 @@ library(trend)
 library(flexdashboard)
 library(shiny)
 library(factoextra)
-
+library(shinyFiles)
 
 files.sources = list.files("scripts/functions_call_load/",full.names = TRUE)
 sapply(files.sources, source)
