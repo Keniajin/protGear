@@ -86,7 +86,7 @@ Create 2 folders that hold the '`.gpr`' files and the corresponding sample ident
 
 To install `protGear` run the following commands in R
 
-```{r, eval=FALSE}
+```{r}
 ## make sure devtools package is installed
 remotes::install_github('Keniajin/protGear', dependencies=TRUE)
 ```
