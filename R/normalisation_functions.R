@@ -438,8 +438,10 @@ output_trend_stats <- function(name, p_val, z_val){
 #' @param method the method of normalisation used
 #' @param batch_correct the batch correction
 #'
-#' @import dplyr trend ggplot2
+#' @import dplyr   ggplot2
 #' @importFrom  readr  read_csv
+#' @importFrom snpar cs.test
+#' @importFrom Kendall MannKendall
 #' @importFrom genefilter rowSds
 #' @importFrom plyr .
 #' @return A ggplot of normalised data
@@ -462,11 +464,17 @@ plot_normalised <- function(exprs_normalised_df,method,batch_correct){
 
   # perform the trend test using the Cox–Stuart (C–S) and Mann–Kendall (M–K) trend tests for
   #for the null hypothesis of no trend in the transformed standard deviations under several transformation
-  cs_trend <- trend::cs.test(exprs_normalised_df_plot$stdev_all_anti)
-  mk_trend <- trend::mk.test(exprs_normalised_df_plot$stdev_all_anti)
+  #cs_trend <- trend::cs.test(exprs_normalised_df_plot$stdev_all_anti)
+ # mk_trend <- trend::mk.test(exprs_normalised_df_plot$stdev_all_anti)
 
-  cs_stuart <- output_trend_stats("Cox-Stuart",cs_trend$p.value, cs_trend$statistic)
-  m_kendall <- output_trend_stats('Mann-Kendall',mk_trend$p.value,mk_trend$statistic )
+  cs_trend <- snpar::cs.test(exprs_normalised_df_plot$stdev_all_anti)
+  mk_trend2 <- Kendall::MannKendall(exprs_normalised_df_plot$stdev_all_anti)
+
+
+
+  cs_stuart <- output_trend_stats("Cox-Stuart",cs_trend$p.value, cs_trend$statistic[[1]])
+  m_kendall <- output_trend_stats('Mann-Kendall (tau stats)',mk_trend$sl[[1]],mk_trend$tau[[1]])
+
 
 
   normalisation_approaches <- c("Log2"="log2",
@@ -496,7 +504,9 @@ plot_normalised <- function(exprs_normalised_df,method,batch_correct){
 #' @param method the method of normalisation used
 #' @param batch_correct the batch correction
 #'
-#' @import dplyr trend
+#' @import dplyr
+#' @importFrom snpar cs.test
+#' @importFrom Kendall MannKendall
 #' @return A ggplot of various normalisation approaches
 #' @export
 #'
@@ -519,11 +529,17 @@ plot_normalised_antigen <- function(exprs_normalised_df,method,batch_correct){
 
   # perform the trend test using the Cox–Stuart (C–S) and Mann–Kendall (M–K) trend tests for
   #for the null hypothesis of no trend in the transformed standard deviations under several transformation
-  cs_trend2 <- trend::cs.test(antigen_summ$sd_mfi)
-  mk_trend2 <- trend::mk.test(antigen_summ$sd_mfi[!is.na(antigen_summ$sd_mfi)])
+  #cs_trend2 <- trend::cs.test(antigen_summ$sd_mfi)
+  #mk_trend2 <- trend::mk.test(antigen_summ$sd_mfi[!is.na(antigen_summ$sd_mfi)])
 
-  cs_stuart2 <- output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic)
-  m_kendall2 <- output_trend_stats('Mann-Kendall',mk_trend2$p.value,mk_trend2$statistic )
+  #cs_stuart2 <- output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic)
+  #m_kendall2 <- output_trend_stats('Mann-Kendall',mk_trend2$p.value,mk_trend2$statistic )
+
+  ## Changed here to use Kendall packages
+  cs_trend2 <- snpar::cs.test(antigen_summ$sd_mfi)
+  mk_trend2 <- Kendall::MannKendall(antigen_summ$sd_mfi[!is.na(antigen_summ$sd_mfi)])
+  cs_stuart2 <- output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic[[1]])
+  m_kendall2 <- output_trend_stats('Mann-Kendall (tau stats)',mk_trend2$sl[[1]],mk_trend2$tau[[1]])
 
 
   normalisation_approaches <- c("Log2"="log2",
