@@ -440,7 +440,6 @@ output_trend_stats <- function(name, p_val, z_val){
 #'
 #' @import dplyr   ggplot2
 #' @importFrom  readr  read_csv
-#' @importFrom snpar cs.test
 #' @importFrom Kendall MannKendall
 #' @importFrom genefilter rowSds
 #' @importFrom plyr .
@@ -467,12 +466,11 @@ plot_normalised <- function(exprs_normalised_df,method,batch_correct){
   #cs_trend <- trend::cs.test(exprs_normalised_df_plot$stdev_all_anti)
  # mk_trend <- trend::mk.test(exprs_normalised_df_plot$stdev_all_anti)
 
-  cs_trend <- snpar::cs.test(exprs_normalised_df_plot$stdev_all_anti)
-  mk_trend2 <- Kendall::MannKendall(exprs_normalised_df_plot$stdev_all_anti)
+  mk_trend <- Kendall::MannKendall(exprs_normalised_df_plot$stdev_all_anti)
 
 
 
-  cs_stuart <- output_trend_stats("Cox-Stuart",cs_trend$p.value, cs_trend$statistic[[1]])
+  cs_stuart <- "Cox-Stuart"
   m_kendall <- output_trend_stats('Mann-Kendall (tau stats)',mk_trend$sl[[1]],mk_trend$tau[[1]])
 
 
@@ -505,7 +503,6 @@ plot_normalised <- function(exprs_normalised_df,method,batch_correct){
 #' @param batch_correct the batch correction
 #'
 #' @import dplyr
-#' @importFrom snpar cs.test
 #' @importFrom Kendall MannKendall
 #' @return A ggplot of various normalisation approaches
 #' @export
@@ -536,9 +533,8 @@ plot_normalised_antigen <- function(exprs_normalised_df,method,batch_correct){
   #m_kendall2 <- output_trend_stats('Mann-Kendall',mk_trend2$p.value,mk_trend2$statistic )
 
   ## Changed here to use Kendall packages
-  cs_trend2 <- snpar::cs.test(antigen_summ$sd_mfi)
   mk_trend2 <- Kendall::MannKendall(antigen_summ$sd_mfi[!is.na(antigen_summ$sd_mfi)])
-  cs_stuart2 <- output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic[[1]])
+  cs_stuart2 <- "Cox-Stuart" #output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic[[1]])
   m_kendall2 <- output_trend_stats('Mann-Kendall (tau stats)',mk_trend2$sl[[1]],mk_trend2$tau[[1]])
 
 
