@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.54</span>
       </span>
     </div>
 
@@ -147,6 +147,119 @@
 
     <p>a data frame to visualize the background or foreground values</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Not run:</span>
+<span class='fu'>read_array_visualize</span><span class='op'>(</span>infile <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>,
+<span class='st'>"/array_data/machine1/KK2-06.txt"</span>, package<span class='op'>=</span><span class='st'>"protGear"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       Flags Normalize Autoflag Block Column Row                 Name   ID     X
+#&gt;    1:     0         0        0     1      1   1             Landmark  1F1  2310
+#&gt;    2:     0         0        0     1      2   1               MSP3.6  1B3  2540
+#&gt;    3:     0         0        0     1      3   1           ETRAMP10.2  1H3  2770
+#&gt;    4:     0         0        0     1      4   1                 GAMA  1D5  3000
+#&gt;    5:     0         0        0     1      5   1                MSRP4  1F5  3230
+#&gt;   ---                                                                          
+#&gt; 8060:     0         0        0    42      4  24               Buffer 1K12 18630
+#&gt; 8061:     0         0        0    42      5  24               Buffer 1M12 18860
+#&gt; 8062:     0         0        0    42      6  24               Buffer  1I8 19090
+#&gt; 8063:     0         0        0    42      7  24 Commercial Human IgG  1O8 19320
+#&gt; 8064:     0         0        0    42      8  24             Landmark 1K10 19550
+#&gt;           Y Dia. F635 Median F635 Mean F635 SD F635 CV  B635 B635 Median
+#&gt;    1:  1130  150       65535     65330    1317       2  5188        5188
+#&gt;    2:  1130  150       13182     15490    8030      51  1652        1652
+#&gt;    3:  1130  150        2310      3200    2755      86   899         899
+#&gt;    4:  1130  150       18395     18499    7449      40   845         845
+#&gt;    5:  1130  150       25786     27006    9322      34   836         836
+#&gt;   ---                                                                   
+#&gt; 8060: 60450  150         701       719     214      29   574         574
+#&gt; 8061: 60450  150        2222      2765    2250      81   685         685
+#&gt; 8062: 60450  150       12219     14067   12815      91  1412        1412
+#&gt; 8063: 60450  150       65535     65535       0       0 26861       26861
+#&gt; 8064: 60450  150       65535     60763   10793      17 27943       27943
+#&gt;       B635 Mean B635 SD B635 CV % &gt; B635+1SD % &gt; B635+2SD F635 % Sat.
+#&gt;    1:     13457   19832     147          100          100          96
+#&gt;    2:     10216   19396     189           18            2           0
+#&gt;    3:      1446    2690     186           24            6           0
+#&gt;    4:      1014     903      89          100           99           0
+#&gt;    5:      1292    2408     186           99           97           0
+#&gt;   ---                                                                
+#&gt; 8060:       712     941     132            1            0           0
+#&gt; 8061:       791     443      56           71           65           0
+#&gt; 8062:      4712    9336     198           55           29           0
+#&gt; 8063:     29706   23322      78          100            0         100
+#&gt; 8064:     32939   18291      55           87           79          79
+#&gt;       F635 Total Intensity SNR 635 Ratio of Medians (635/594)
+#&gt;    1:             10191549   2.616                      1e+05
+#&gt;    2:              2416423   0.272                      1e+05
+#&gt;    3:               499274   0.652                      1e+05
+#&gt;    4:              2885913  19.363                      1e+05
+#&gt;    5:              4212925  10.679                      1e+05
+#&gt;   ---                                                        
+#&gt; 8060:               112241   0.007                      1e+05
+#&gt; 8061:               431327   4.456                      1e+05
+#&gt; 8062:              2194514   1.002                      1e+05
+#&gt; 8063:             10223460   1.536                      1e+05
+#&gt; 8064:              9479001   1.521                      1e+05
+#&gt;       Ratio of Means (635/594) Median of Ratios (635/594)
+#&gt;    1:                    1e+05                          0
+#&gt;    2:                    1e+05                          0
+#&gt;    3:                    1e+05                          0
+#&gt;    4:                    1e+05                          0
+#&gt;    5:                    1e+05                          0
+#&gt;   ---                                                    
+#&gt; 8060:                    1e+05                          0
+#&gt; 8061:                    1e+05                          0
+#&gt; 8062:                    1e+05                          0
+#&gt; 8063:                    1e+05                          0
+#&gt; 8064:                    1e+05                          0
+#&gt;       Mean of Ratios (635/594) Ratios SD (635/594) Rgn Ratio (635/594)
+#&gt;    1:                        0                   0                   0
+#&gt;    2:                        0                   0                   0
+#&gt;    3:                        0                   0                   0
+#&gt;    4:                        0                   0                   0
+#&gt;    5:                        0                   0                   0
+#&gt;   ---                                                                 
+#&gt; 8060:                        0                   0                   0
+#&gt; 8061:                        0                   0                   0
+#&gt; 8062:                        0                   0                   0
+#&gt; 8063:                        0                   0                   0
+#&gt; 8064:                        0                   0                   0
+#&gt;       Rgn R2 (635/594) Log Ratio (635/594) F635 Median - B635 F635 Mean - B635
+#&gt;    1:                0              16.610              60347            60142
+#&gt;    2:                0              16.610              11530            13838
+#&gt;    3:                0              16.610               1411             2301
+#&gt;    4:                0              16.610              17550            17654
+#&gt;    5:                0              16.610              24950            26170
+#&gt;   ---                                                                         
+#&gt; 8060:                0              16.610                127              145
+#&gt; 8061:                0              16.610               1537             2080
+#&gt; 8062:                0              16.610              10807            12655
+#&gt; 8063:                0              16.610              38674            38674
+#&gt; 8064:                0              16.610              37592            32820
+#&gt;       Sum of Medians (635/594) Sum of Means (635/594) F Pixels B Pixels
+#&gt;    1:                    60347                  60142      156     1072
+#&gt;    2:                    11530                  13838      156      972
+#&gt;    3:                     1411                   2301      156      972
+#&gt;    4:                    17550                  17654      156      972
+#&gt;    5:                    24950                  26170      156      972
+#&gt;   ---                                                                  
+#&gt; 8060:                      127                    145      156      972
+#&gt; 8061:                     1537                   2080      156      972
+#&gt; 8062:                    10807                  12655      156      972
+#&gt; 8063:                    38674                  38674      156      972
+#&gt; 8064:                    37592                  32820      156     1072
+#&gt;       Circularity Index
+#&gt;    1:         100     1
+#&gt;    2:         100     2
+#&gt;    3:         100     3
+#&gt;    4:         100     4
+#&gt;    5:         100     5
+#&gt;   ---                  
+#&gt; 8060:         100  8060
+#&gt; 8061:         100  8061
+#&gt; 8062:         100  8062
+#&gt; 8063:         100  8063
+#&gt; 8064:         100  8064</div><div class='input'><span class='co'>## End(Not run)</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

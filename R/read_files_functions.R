@@ -709,7 +709,7 @@ visualize_slide <- function(infile, MFI_var,interactive=FALSE, d_f=NA){
     theme(legend.position = "none")  +
     scale_color_gradient2(midpoint=mid, low="blue", mid="white",
                           high="red", space ="Lab" )+
-    geom_text(aes(x=meanX, y=-meanY, label=paste("Block",Block)), color="black",size=4)
+    geom_text(aes(x=meanX, y=-meanY, label=paste("Block",Block)), color="black",size=2)
 
   if(interactive==FALSE){
     return(p)
