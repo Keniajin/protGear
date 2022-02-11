@@ -171,16 +171,16 @@ Microarray data is imported using the `r text_spec("read_array_files()",color="r
  - `data_path` - The path where the file with the data  is located 
  - `genepix_vars` -  A list of specific definitions of the experiment design. See  `r text_spec("array_vars()",color="red")`  
 
-For this example I use the sub-folder 2 specified using `genepix_vars$paths[[2]]` which is this path under vignette folder `r genepix_vars$paths[[2]]`. 
+For this example I use the sub-folder 1 specified using `genepix_vars$paths[[1]]` which is this path under vignette folder `r genepix_vars$paths[[1]]`. 
  
 ```{r}
 #### read in all the datasets
 ### list all the file names under data folder
-filenames <- list.files(file.path(genepix_vars$paths[[2]]), 
+filenames <- list.files(file.path(genepix_vars$paths[[1]]), 
                         pattern="*.txt$|*.gpr$", full.names=FALSE)
 #' @___________________read_in_the_files_with_the_text_data_from_the_chip_____________________________
 ### read all the data files and save them in a list 
-data_path <- paste0(genepix_vars$paths[[2]],"/") 
+data_path <- paste0(genepix_vars$paths[[1]],"/") 
 data_files <- purrr::map(.x = filenames, 
                          .f = read_array_files,
                          data_path=data_path ,
