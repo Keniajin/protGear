@@ -34,7 +34,7 @@ minpositive <- function(x){
 #' @param date_process Optional:A character indicating the date when the samples were processed.
 #'
 #' @description A generic function returning a list with the data structure.
-#' @import rlang
+#' @importFrom rlang sym
 #' @return a list of parameters required to process the data
 #' @export
 #'

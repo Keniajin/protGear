@@ -49,7 +49,7 @@ buffer_spots <- function(Data1 , buffer_spot = "buffer") {
 #' Default to 'FMedianBG_correct'
 #' @param slide_id  A character string containing the name of the slide/array identifier variable.
 #' @param df A data frame to be used to plot
-#' @import dplyr ggplot2 gtools
+#' @import dplyr ggplot2
 #' @importFrom dplyr select  filter
 #' @importFrom gtools mixedsort
 #' @importFrom ggplot2 ggplot

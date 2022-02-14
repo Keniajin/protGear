@@ -12,7 +12,7 @@
 #' @param array_matrix  An object of class dataframe or matrix used with \code{method='rlm'} indicating the sample index and
 #' @param plot_by_antigen Logical to indicate whether to plot by antigen or not
 #' slide name for the matrix_antigen object.
-#' @import limma magrittr tibble
+#' @import limma tibble
 #' @return A data frame of normalised values
 #' @export
 #'

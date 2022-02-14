@@ -351,7 +351,8 @@ plot_FB <- function(df, antigen_name="antigen",bg_MFI="BG_Median",FG_MFI="FBG_Me
 #' @description  A generic function to perform background correction.
 #' @return A data frame with background corrected data
 #' @export
-#' @import rlang dplyr limma
+#' @import  dplyr limma
+#' @importFrom rlang sym
 #' @examples
 #' ## Not run:
 #' genepix_vars <- array_vars(

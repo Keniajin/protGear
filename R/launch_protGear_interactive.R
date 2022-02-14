@@ -2,9 +2,10 @@
 #'
 #' This is Function is to launch the shiny application
 #' @return launches the shiny interactive protGear app
-#' @import rmarkdown shiny shinydashboard  GGally pheatmap png
-#' grid styler factoextra FactoMineR magick ggplotify remotes stats
+#' @import rmarkdown shiny GGally pheatmap png
+#' grid styler factoextra FactoMineR magick ggplotify remotes
 #' @importFrom flexdashboard renderValueBox valueBoxOutput valueBox
+#' @importFrom shinydashboard renderInfoBox
 #' @importFrom  dplyr group_rows between first last
 #' @importFrom  kableExtra text_spec
 #' @export
