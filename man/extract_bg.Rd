@@ -46,7 +46,7 @@ data_files <- purrr::map(
   data_path = data_path,
   genepix_vars = genepix_vars
 )
-data_files <- set_names(data_files, purrr::map(filenames, name_of_files))
+data_files <- purrr::set_names(data_files, purrr::map(filenames, name_of_files))
 names(data_files)
 extract_bg(iden ="KK2-06" , data_files=data_files,genepix_vars=genepix_vars)
 ## End(Not run)

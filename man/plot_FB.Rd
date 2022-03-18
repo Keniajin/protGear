@@ -15,13 +15,15 @@ plot_FB(
 \arguments{
 \item{df}{An object containing the data to which the plot is done.}
 
-\item{antigen_name}{The \code{variable} describing which features/proteins/antibodies in the data should be used to plot}
+\item{antigen_name}{The \code{variable} describing which features/proteins/
+antibodies in the data should be used to plot}
 
 \item{bg_MFI}{A numeric \code{variable} describing which is the background MFI}
 
 \item{FG_MFI}{A numeric \code{variable} describing which is the foreground MFI}
 
-\item{log_mfi}{a logical value indicating whether the MFI values should be log transformed or not.}
+\item{log_mfi}{a logical value indicating whether the MFI values should be
+log transformed or not.}
 }
 \value{
 a ggplot of foreground vs background MFI values

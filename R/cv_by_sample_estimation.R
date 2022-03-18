@@ -17,25 +17,28 @@
 #' ## this file has 3 lab replicates and the default names
 #' dataCV <- cv_estimation(dataC  ,lab_replicates=3)
 #' cv_by_sample_estimation(dataCV, cv_variable = "cvCat_all", lab_replicates = 3)
-cv_by_sample_estimation <- function(dataCV,cv_variable,lab_replicates, sampleID_var='sampleID'){
-  ## creating a summary of the CV's by sampleID for each file
-  ## helps in identifying samples with a high CV value
-  if(lab_replicates>1){
-    iden <- unique(dataCV$iden)
-    dataC_cvSample <-  dataCV %>%
-      group_by_at(c(sampleID_var, cv_variable)) %>%
-      summarise(n= n()) %>%
-      mutate(perc = round((n / sum(n))*100,2)) %>%
-      #rename(cvCat='get(cv_variable)') %>%
-      ungroup() %>%
-      gather(variable, value, -c(sampleID_var, cv_variable)) %>%
-      unite(temp, !!(cv_variable), variable) %>%
-      tidyr::spread(temp, value, fill=0)
-  }else{
-    dataC_cvSample <- NULL
-    warning("The experiment is specified not to have lab replicates")
+cv_by_sample_estimation <-
+  function(dataCV,
+           cv_variable,
+           lab_replicates,
+           sampleID_var = 'sampleID') {
+    ## creating a summary of the CV's by sampleID for each file
+    ## helps in identifying samples with a high CV value
+    if (lab_replicates > 1) {
+      iden <- unique(dataCV$iden)
+      dataC_cvSample <-  dataCV %>%
+        group_by_at(c(sampleID_var, cv_variable)) %>%
+        summarise(n = n()) %>%
+        mutate(perc = round((n / sum(n)) * 100, 2)) %>%
+        #rename(cvCat='get(cv_variable)') %>%
+        ungroup() %>%
+        gather(variable, value,-c(sampleID_var, cv_variable)) %>%
+        unite(temp,!!(cv_variable), variable) %>%
+        tidyr::spread(temp, value, fill = 0)
+    } else{
+      dataC_cvSample <- NULL
+      warning("The experiment is specified not to have lab replicates")
+    }
+
+    return(dataC_cvSample)
   }
-
-  return(dataC_cvSample)
-}
-

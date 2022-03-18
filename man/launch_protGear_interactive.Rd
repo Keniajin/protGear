@@ -12,3 +12,12 @@ launches the shiny interactive protGear app
 \description{
 This is Function is to launch the shiny application
 }
+\examples{
+app <- system.file("shiny-examples", "protGear_interactive",
+"protGear_interactive.Rmd", package = "protGear")
+ if (app!=""){
+ ## run this
+ #launch_protGear_interactive()
+ }
+
+}

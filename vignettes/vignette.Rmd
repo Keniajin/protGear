@@ -25,7 +25,7 @@ output:
 
 
 
-```{r setup, include=FALSE}
+```{r setup, message=FALSE, warning=FALSE}
 library(ggpubr)
 library(gtools)
 library(purrr)
@@ -45,10 +45,11 @@ library(rlang)
 library(GGally)
 library(ggplotify)
 library(remotes)
-
+library(dplyr)
+library(tidyr)
 knitr::opts_chunk$set(echo = TRUE, message=FALSE,warning = FALSE,
-                      fig.align = 'center',#tidy = T,tidy.opts=list(arrow=TRUE, indent=2),
-                      dev = "png", #dev.args = list(type = "cairo-png"),
+                      fig.align = 'center',
+                      dev = "png", 
                        tidy='styler', tidy.opts=list(strict=TRUE))
 
 
@@ -82,13 +83,15 @@ Create 2 folders that hold the '`.gpr`' files and the corresponding sample ident
 
 ![sample ID file structure](image_slide.png)
 
-### Installation
+### Installation 
 
-To install `protGear` run the following commands in R
+To install `protGear` from BioConductor the following commands in R
 
-```{r install, eval=FALSE}
-## make sure devtools package is installed
-remotes::install_github('Keniajin/protGear', dependencies=TRUE)
+```{r install_package, eval=FALSE}
+## install from BioConductor
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install('protGear')
 ```
 
 
@@ -280,7 +283,7 @@ dataCV <- set_names(dataCV, purrr::map(filenames, name_of_files))
 
 aa <- plyr::ldply(dataCV)
 GGally::ggpairs(aa,aes(color=cvCat_all) ,
-        columns = paste(1:lab_replicates), title = "",  axisLabels = "show") +
+        columns = paste(seq_len(lab_replicates)), title = "",  axisLabels = "show") +
   theme_light()
    
 ```
@@ -618,5 +621,9 @@ The dashboard is launched as below from R or RStudio. To Install R: Open an inte
 
 ```{r shiny_launch, eval=FALSE}
 protGear::launch_protGear_interactive()
+```
+
+```{r}
+sessionInfo()
 ```
 

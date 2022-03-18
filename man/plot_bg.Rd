@@ -13,7 +13,8 @@ plot_bg(df, x_axis = "antigen", bg_MFI = "BG_Median", log_mfi = TRUE)
 
 \item{bg_MFI}{A numeric \code{variable} describing which is the background MFI}
 
-\item{log_mfi}{a logical value indicating whether the MFI values should be log transformed or not.}
+\item{log_mfi}{a logical value indicating whether the MFI values should be
+log transformed or not.}
 }
 \value{
 A ggplot of background values

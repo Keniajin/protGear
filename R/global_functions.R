@@ -1,6 +1,7 @@
 ##________________________________________________________________________###
 ###creating a pipe operator to negate the %in% operator
-#https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html http://stackoverflow.com/questions/24941080/meaning-of-symbol-in-r
+#https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html
+# http://stackoverflow.com/questions/24941080/meaning-of-symbol-in-r
 "%ni%" <- Negate("%in%")
 
 
@@ -13,8 +14,8 @@
 #'
 #' @examples
 #' minpositive(c(-1,-2,3,5,6,7,8,9,10))
-minpositive <- function(x){
- min(x[x > 0], na.rm = TRUE)
+minpositive <- function(x) {
+  min(x[x > 0], na.rm = TRUE)
 }
 
 
@@ -59,52 +60,57 @@ minpositive <- function(x){
 #' genepix_vars
 #' @return genepix_vars
 #'
-array_vars <- function(channel="635",
+array_vars <- function(channel = "635",
                        totsamples ,
-                       FG="",
-                       BG="",
-                       FBG="",
+                       FG = "",
+                       BG = "",
+                       FBG = "",
                        blockspersample,
                        chip_path = "data/array_data",
-                       sampleID_path ="data/array_sampleID/",
+                       sampleID_path = "data/array_sampleID/",
                        mig_prefix = "_first",
-                       machine ="",
-                       date_process = "" ){
-
+                       machine = "",
+                       date_process = "") {
   ####List the directories with the CHIP data###############
   paths <- list.dirs(path = chip_path, recursive =  TRUE)
   ## remove the parent directory
   ## the folders with the chip data with the different batches is left
-  paths <- paths[!grepl(paste0( chip_path,"$") , paths)]
-  if(FG==""){
-    FG <- rlang::sym(paste0("F",channel,".Median"))
-  }else{
+  paths <- paths[!grepl(paste0(chip_path, "$") , paths)]
+  if (FG == "") {
+    FG <- rlang::sym(paste0("F", channel, ".Median"))
+  } else{
     FG <- rlang::sym(FG)
   }
-  if(BG==""){
-    BG <- rlang::sym(paste0("B",channel,".Median"))
-  }else{
+  if (BG == "") {
+    BG <- rlang::sym(paste0("B", channel, ".Median"))
+  } else{
     BG <- rlang::sym(BG)
-    }
-  if(FBG==""){
-    FBG <- rlang::sym(paste0("F",channel,".Median...B",channel))
-  }else{
+  }
+  if (FBG == "") {
+    FBG <- rlang::sym(paste0("F", channel, ".Median...B", channel))
+  } else{
     FBG <- rlang::sym(FBG)
   }
 
-  genepix_vars <- list(FG= FG,#rlang::sym(paste0("F",channel,".Median")),
-                       BG= BG,#rlang::sym(paste0("B",channel,".Median")) ,
-                       FBG= FBG,#rlang::sym(paste0("F",channel,".Median...B",channel)),
-                       paths=paths,
-                       chip_path=chip_path,
-                       sampleID_path=sampleID_path,
-                       mig_prefix=mig_prefix,
-                       machine=machine,
-                       date_process=date_process,
-                       totsamples=totsamples,
-                       blockspersample=blockspersample,
-                       mp=machine,
-                       dp=date_process)
+  genepix_vars <-
+    list(
+      FG = FG,
+      #rlang::sym(paste0("F",channel,".Median")),
+      BG = BG,
+      #rlang::sym(paste0("B",channel,".Median")) ,
+      FBG = FBG,
+      #rlang::sym(paste0("F",channel,".Median...B",channel)),
+      paths = paths,
+      chip_path = chip_path,
+      sampleID_path = sampleID_path,
+      mig_prefix = mig_prefix,
+      machine = machine,
+      date_process = date_process,
+      totsamples = totsamples,
+      blockspersample = blockspersample,
+      mp = machine,
+      dp = date_process
+    )
   return(genepix_vars)
 }
 
@@ -122,10 +128,11 @@ array_vars <- function(channel="635",
 #'
 #' @examples
 #' create_dir("data/sample_folder")
-create_dir <- function(path){
-  if(!file.exists(paste0(path))) {
-    dir.create(paste0(path))
-  }else warning(paste0("The folder",path," already exists"))
+create_dir <- function(path) {
+  if (!file.exists(paste0(path))) {
+    dir.create(path)
+  } else
+    warning("The folder", path, " already exists")
 }
 
 
@@ -158,11 +165,12 @@ name_of_files <- function(i) {
 #' @description A generic function to write into the log file with a replicate check error
 #' @param iden An id for the file with replicates error
 #' @return  a log file showing the replicate errors
-#' @examples
+#' @keywords internal
 #'
 error_replicates <- function(iden) {
   sink("log_replicates.txt" , append = TRUE)
-  print(paste0("The replicates per antigen per sample are more than expected for ", iden))
+  warning("The replicates per antigen per sample are more than expected for ",
+          iden)
   sink()
 }
 #'         \\\_End_Function_\\\         #
@@ -192,13 +200,23 @@ error_replicates <- function(iden) {
 #' date_process = "0520"
 #' )
 #' check_sampleID_files(genepix_vars)
-check_sampleID_files <- function(genepix_vars){
+check_sampleID_files <- function(genepix_vars) {
   ## copy all sample ID with missing CSV file
   ##
-  sid_files <- gsub(".csv", "",list.files(genepix_vars$sampleID_path))
+  sid_files <-
+    gsub(".csv", "", list.files(genepix_vars$sampleID_path))
   ## check if all the chip files have an existing sampleID file
-  sid_check <- gsub(".txt|.gpr", "",list.files(genepix_vars$chip_path , recursive = TRUE,
-                                               pattern="*.txt|*.gpr", full.names=FALSE))
+  sid_check <-
+    gsub(
+      ".txt|.gpr",
+      "",
+      list.files(
+        genepix_vars$chip_path ,
+        recursive = TRUE,
+        pattern = "*.txt|*.gpr",
+        full.names = FALSE
+      )
+    )
   ## convert all the file names to caps to avoid merge errrors due to case
   sid_check <- toupper(sub(".*/(.*)", "\\1", sid_check))
 
@@ -207,14 +225,14 @@ check_sampleID_files <- function(genepix_vars){
 
 
 
-  if(length(miss_id_file)>0){
-    write.table(miss_id_file,"missing_IDfile.txt")
+  if (length(miss_id_file) > 0) {
+    write.table(miss_id_file, "missing_IDfile.txt")
   }
 
-  if(length(miss_id_file)==0){
+  if (length(miss_id_file) == 0) {
     warning("All array files have a corresponding sampleID file")
     return(0)
-  }else{
+  } else{
     return(miss_id_file)
   }
 

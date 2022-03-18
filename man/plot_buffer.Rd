@@ -14,12 +14,15 @@ plot_buffer(
 \arguments{
 \item{df}{A data frame to be used to plot}
 
-\item{buffer_names}{A character string containing the name of the variable with buffer spots. Default set to 'antigen'.}
+\item{buffer_names}{A character string containing the name of the variable
+with buffer spots. Default set to 'antigen'.}
 
-\item{buffer_mfi}{A character string containing the name of the variable with MFI value.Assuming background correction is done already.
+\item{buffer_mfi}{A character string containing the name of the variable with
+MFI value.Assuming background correction is done already.
 Default to 'FMedianBG_correct'}
 
-\item{slide_id}{A character string containing the name of the slide/array identifier variable.}
+\item{slide_id}{A character string containing the name of the slide/array
+identifier variable.}
 }
 \value{
 plot of buffer spots
@@ -28,6 +31,7 @@ plot of buffer spots
 Plot the buffer values
 }
 \examples{
-buffers <- readr::read_csv(system.file("extdata", "buffers_sample2.csv", package="protGear"))
+buffers <- readr::read_csv(system.file("extdata", "buffers_sample2.csv",
+package="protGear"))
 plot_buffer(df=buffers,buffer_names = "sampleID")
 }

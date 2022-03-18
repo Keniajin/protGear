@@ -73,7 +73,7 @@ does not have sample identifiers the function generates it automatically." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.54</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.544</span>
       </span>
     </div>
 
@@ -187,7 +187,7 @@ does not have sample identifiers the function generates it automatically.</p>
   data_path <span class='op'>=</span> <span class='va'>data_path</span>,
   genepix_vars <span class='op'>=</span> <span class='va'>genepix_vars</span>
 <span class='op'>)</span>
-<span class='va'>data_files</span> <span class='op'>&lt;-</span> <span class='fu'>set_names</span><span class='op'>(</span><span class='va'>data_files</span>, <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>filenames</span>, <span class='va'>name_of_files</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>data_files</span> <span class='op'>&lt;-</span> <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/set_names.html'>set_names</a></span><span class='op'>(</span><span class='va'>data_files</span>, <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>filenames</span>, <span class='va'>name_of_files</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'>## merge the lab data with samples and perform bg correction</span>
 <span class='fu'>merge_sampleID</span><span class='op'>(</span>iden <span class='op'>=</span> <span class='st'>"KK2-06"</span>, data_files <span class='op'>=</span> <span class='va'>data_files</span>,
                genepix_vars <span class='op'>=</span><span class='va'>genepix_vars</span>,method <span class='op'>=</span> <span class='st'>"subtract_global"</span> <span class='op'>)</span>
@@ -195,16 +195,16 @@ does not have sample identifiers the function generates it automatically.</p>
 #&gt; <span style='color: #949494;'># Groups:   sampleID, antigen [2,457]</span>
 #&gt;    sampleID sample_array_ID antigen    FMedian BGMedian FMedianBG_correct Block
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>             <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> SID_gen1               1 Landmark     <span style='text-decoration: underline;'>65</span>535     <span style='text-decoration: underline;'>5</span>188             <span style='text-decoration: underline;'>64</span>638     1
-#&gt; <span style='color: #BCBCBC;'> 2</span> SID_gen1               1 MSP3.6       <span style='text-decoration: underline;'>13</span>182     <span style='text-decoration: underline;'>1</span>652             <span style='text-decoration: underline;'>12</span>285     1
-#&gt; <span style='color: #BCBCBC;'> 3</span> SID_gen1               1 ETRAMP10.2    <span style='text-decoration: underline;'>2</span>310      899              <span style='text-decoration: underline;'>1</span>413     1
-#&gt; <span style='color: #BCBCBC;'> 4</span> SID_gen1               1 GAMA         <span style='text-decoration: underline;'>18</span>395      845             <span style='text-decoration: underline;'>17</span>498     1
-#&gt; <span style='color: #BCBCBC;'> 5</span> SID_gen1               1 MSRP4        <span style='text-decoration: underline;'>25</span>786      836             <span style='text-decoration: underline;'>24</span>889     1
-#&gt; <span style='color: #BCBCBC;'> 6</span> SID_gen1               1 MSP4         <span style='text-decoration: underline;'>15</span>503      790             <span style='text-decoration: underline;'>14</span>606     1
-#&gt; <span style='color: #BCBCBC;'> 7</span> SID_gen1               1 RAMA          <span style='text-decoration: underline;'>7</span>602      753              <span style='text-decoration: underline;'>6</span>705     1
-#&gt; <span style='color: #BCBCBC;'> 8</span> SID_gen1               1 ASP          <span style='text-decoration: underline;'>17</span>234      754             <span style='text-decoration: underline;'>16</span>337     1
-#&gt; <span style='color: #BCBCBC;'> 9</span> SID_gen1               1 Landmark     <span style='text-decoration: underline;'>65</span>535     <span style='text-decoration: underline;'>5</span>024             <span style='text-decoration: underline;'>64</span>638     1
-#&gt; <span style='color: #BCBCBC;'>10</span> SID_gen1               1 MSP3.6       <span style='text-decoration: underline;'>12</span>911     <span style='text-decoration: underline;'>2</span>590             <span style='text-decoration: underline;'>12</span>014     1
+#&gt; <span style='color: #BCBCBC;'> 1</span> SID_gen1               1 Landmark     <span style='text-decoration: underline;'>65</span>535     <span style='text-decoration: underline;'>2</span>443             <span style='text-decoration: underline;'>64</span>413     1
+#&gt; <span style='color: #BCBCBC;'> 2</span> SID_gen1               1 MSP3.6        <span style='text-decoration: underline;'>5</span>488     <span style='text-decoration: underline;'>1</span>126              <span style='text-decoration: underline;'>4</span>366     1
+#&gt; <span style='color: #BCBCBC;'> 3</span> SID_gen1               1 ETRAMP10.2    <span style='text-decoration: underline;'>6</span>350     <span style='text-decoration: underline;'>1</span>026              <span style='text-decoration: underline;'>5</span>228     1
+#&gt; <span style='color: #BCBCBC;'> 4</span> SID_gen1               1 GAMA         <span style='text-decoration: underline;'>15</span>768     <span style='text-decoration: underline;'>1</span>059             <span style='text-decoration: underline;'>14</span>646     1
+#&gt; <span style='color: #BCBCBC;'> 5</span> SID_gen1               1 MSRP4        <span style='text-decoration: underline;'>65</span>535     <span style='text-decoration: underline;'>1</span>413             <span style='text-decoration: underline;'>64</span>413     1
+#&gt; <span style='color: #BCBCBC;'> 6</span> SID_gen1               1 MSP4         <span style='text-decoration: underline;'>65</span>535     <span style='text-decoration: underline;'>1</span>405             <span style='text-decoration: underline;'>64</span>413     1
+#&gt; <span style='color: #BCBCBC;'> 7</span> SID_gen1               1 RAMA         <span style='text-decoration: underline;'>43</span>966     <span style='text-decoration: underline;'>1</span>085             <span style='text-decoration: underline;'>42</span>844     1
+#&gt; <span style='color: #BCBCBC;'> 8</span> SID_gen1               1 ASP          <span style='text-decoration: underline;'>65</span>535     <span style='text-decoration: underline;'>1</span>092             <span style='text-decoration: underline;'>64</span>413     1
+#&gt; <span style='color: #BCBCBC;'> 9</span> SID_gen1               1 Landmark     <span style='text-decoration: underline;'>65</span>535     <span style='text-decoration: underline;'>4</span>198             <span style='text-decoration: underline;'>64</span>413     1
+#&gt; <span style='color: #BCBCBC;'>10</span> SID_gen1               1 MSP3.6        <span style='text-decoration: underline;'>6</span>596     <span style='text-decoration: underline;'>1</span>343              <span style='text-decoration: underline;'>5</span>474     1
 #&gt; <span style='color: #949494;'># ... with 8,054 more rows, and 4 more variables: Column &lt;int&gt;, Row &lt;int&gt;,</span>
 #&gt; <span style='color: #949494;'>#   replicate &lt;int&gt;, iden &lt;chr&gt;</span></div><div class='input'><span class='co'>## End(Not run)</span>
 </div></pre>

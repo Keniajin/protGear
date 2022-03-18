@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.54</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.544</span>
       </span>
     </div>
 
@@ -164,29 +164,29 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>dataC</span> <span class='op'>&lt;-</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"dataC.csv"</span>, package<span class='op'>=</span><span class='st'>"protGear"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='font-weight: bold;'>Rows: </span><span style='color: #0000BB;'>8064</span> <span style='font-weight: bold;'>Columns: </span><span style='color: #0000BB;'>11</span></span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
+</div><div class='output co'>#&gt; <span class='message'><span style='font-weight: bold;'>Rows: </span><span style='color: #0000BB;'>567</span> <span style='font-weight: bold;'>Columns: </span><span style='color: #0000BB;'>11</span></span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
 #&gt; <span class='message'><span style='font-weight: bold;'>Delimiter:</span> ","</span>
 #&gt; <span class='message'><span style='color: #BB0000;'>chr</span> (3): sampleID, antigen, iden</span>
 #&gt; <span class='message'><span style='color: #00BB00;'>dbl</span> (8): sample_array_ID, FMedian, BGMedian, FMedianBG_correct, Block, Colum...</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>i</span> Use <span style='color: #262626; background-color: #DADADA;'>`spec()`</span> to retrieve the full column specification for this data.</span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>i</span> Specify the column types or set <span style='color: #262626; background-color: #DADADA;'>`show_col_types = FALSE`</span> to quiet this message.</span></div><div class='input'><span class='co'>## this file has 3 lab replicates and the default names</span>
 <span class='va'>dataCV</span> <span class='op'>&lt;-</span> <span class='fu'><a href='cv_estimation.html'>cv_estimation</a></span><span class='op'>(</span><span class='va'>dataC</span>  ,lab_replicates<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "The replicates are as expected per sample per antigen"</div><div class='input'><span class='fu'>best_CV_estimation</span><span class='op'>(</span><span class='va'>dataCV</span>,slide_id <span class='op'>=</span> <span class='st'>"iden"</span>, lab_replicates <span class='op'>=</span> <span class='fl'>3</span>, cv_cut_off <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `row`</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2,457 x 27</span>
-#&gt; <span style='color: #949494;'># Groups:   row [2,457]</span>
-#&gt;      row antigen sampleID sample_array_ID   meanX     sdX sdX2_X3 sdX1_X3 sdX1_X2
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span>     1 AARP    0.0085                11  -<span style='color: #BB0000;'>10.7</span>     5.13    2.12    4.95    7.07
-#&gt; <span style='color: #BCBCBC;'> 2</span>     2 AARP    0.0255                 8  -<span style='color: #BB0000;'>11.3</span>     3.79    4.95    4.24    0.71
-#&gt; <span style='color: #BCBCBC;'> 3</span>     3 AARP    0.076                  5   -<span style='color: #BB0000;'>8</span>      11.1     9.9     5.66   15.6 
-#&gt; <span style='color: #BCBCBC;'> 4</span>     4 AARP    0.23                   2  -<span style='color: #BB0000;'>12.7</span>     9.61    8.49   13.4     4.95
-#&gt; <span style='color: #BCBCBC;'> 5</span>     5 AARP    0.73                  19   -<span style='color: #BB0000;'>6.33</span>   18.9     3.54   21.2    24.8 
-#&gt; <span style='color: #BCBCBC;'> 6</span>     6 AARP    177.78                 4   58.3   472.    460.    648.    188.  
-#&gt; <span style='color: #BCBCBC;'> 7</span>     7 AARP    19.75                 10   98     100.    109.    133.     24.0 
-#&gt; <span style='color: #BCBCBC;'> 8</span>     8 AARP    2.19                  16   -<span style='color: #BB0000;'>2.33</span>   34.1    43.1     2.83   40.3 
-#&gt; <span style='color: #BCBCBC;'> 9</span>     9 AARP    533                    1 -<span style='color: #BB0000;'>520</span>    <span style='text-decoration: underline;'>1</span>312.    264.   <span style='text-decoration: underline;'>1</span>458.   <span style='text-decoration: underline;'>1</span>722.  
-#&gt; <span style='color: #BCBCBC;'>10</span>    10 AARP    59.26                  7  395.    394.    457.    505.     48.1 
-#&gt; <span style='color: #949494;'># ... with 2,447 more rows, and 18 more variables: CVX &lt;dbl&gt;, CVX2_X3 &lt;dbl&gt;,</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The replicates are as expected per sample per antigen</span></div><div class='input'><span class='fu'>best_CV_estimation</span><span class='op'>(</span><span class='va'>dataCV</span>,slide_id <span class='op'>=</span> <span class='st'>"iden"</span>, lab_replicates <span class='op'>=</span> <span class='fl'>3</span>, cv_cut_off <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Adding missing grouping variables: `row`</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 126 x 27</span>
+#&gt; <span style='color: #949494;'># Groups:   row [126]</span>
+#&gt;      row antigen sampleID sample_array_ID  meanX   sdX sdX2_X3 sdX1_X3 sdX1_X2
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span>     1 AMA1    0.0085                11   643.  98.5    70      69.3   139. 
+#&gt; <span style='color: #BCBCBC;'> 2</span>     2 AMA1    0.0255                 8   699   52.6    74.2    33.9    40.3
+#&gt; <span style='color: #BCBCBC;'> 3</span>     3 AMA1    0.076                  5   633.  81.3    35.4    77.1   112. 
+#&gt; <span style='color: #BCBCBC;'> 4</span>     4 AMA1    0.23                   2  <span style='text-decoration: underline;'>1</span>725.  60.5    32.5    84.8    52.3
+#&gt; <span style='color: #BCBCBC;'> 5</span>     5 AMA1    0.73                  19  <span style='text-decoration: underline;'>2</span>504. 119.    166.     61.5   105. 
+#&gt; <span style='color: #BCBCBC;'> 6</span>     6 AMA1    177.78                 4 <span style='text-decoration: underline;'>58</span>262  709.    994.    383.    612. 
+#&gt; <span style='color: #BCBCBC;'> 7</span>     7 AMA1    19.75                 10 <span style='text-decoration: underline;'>64</span>143. 353.    476.    367.    109. 
+#&gt; <span style='color: #BCBCBC;'> 8</span>     8 AMA1    2.19                  16  <span style='text-decoration: underline;'>9</span>243  383.    528.    156.    372. 
+#&gt; <span style='color: #BCBCBC;'> 9</span>     9 AMA1    533                    1 <span style='text-decoration: underline;'>53</span>180. 559.    117.    735.    619. 
+#&gt; <span style='color: #BCBCBC;'>10</span>    10 AMA1    59.26                  7 <span style='text-decoration: underline;'>61</span>601  894.   <span style='text-decoration: underline;'>1</span>078.   <span style='text-decoration: underline;'>1</span>111.     32.5
+#&gt; <span style='color: #949494;'># ... with 116 more rows, and 18 more variables: CVX &lt;dbl&gt;, CVX2_X3 &lt;dbl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   CVX1_X3 &lt;dbl&gt;, CVX1_X2 &lt;dbl&gt;, cvCat_all &lt;chr&gt;, cvSelected_all &lt;dbl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   iden &lt;chr&gt;, 1 &lt;dbl&gt;, 2 &lt;dbl&gt;, 3 &lt;dbl&gt;, x &lt;chr&gt;, meanX1_X2 &lt;dbl&gt;,</span>
 #&gt; <span style='color: #949494;'>#   meanX1_X3 &lt;dbl&gt;, meanX2_X3 &lt;dbl&gt;, meanSelected &lt;dbl&gt;, mean_best_CV &lt;dbl&gt;,</span>

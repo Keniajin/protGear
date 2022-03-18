@@ -11,7 +11,8 @@ read_array_files(i, data_path, genepix_vars)
 
 \item{data_path}{The path where the file with the data  is located}
 
-\item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
+\item{genepix_vars}{A list of specific definitions of the experiment design.
+See \code{\link{array_vars}}.}
 }
 \value{
 a number of data frames in the global environment

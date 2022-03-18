@@ -16,5 +16,7 @@ launches the app defined under theApp
 This is Function is to launch mutiple shiny applications for protGear
 }
 \examples{
-
+validExamples <-
+ list.files(system.file("shiny-examples", package = "protGear"))
+#launch_select(validExamples[[1]])
 }

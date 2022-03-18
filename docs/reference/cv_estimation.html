@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.54</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.544</span>
       </span>
     </div>
 
@@ -185,31 +185,31 @@ Default to 'FMedianBG_correct'</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>dataC</span> <span class='op'>&lt;-</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"dataC.csv"</span>, package<span class='op'>=</span><span class='st'>"protGear"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='font-weight: bold;'>Rows: </span><span style='color: #0000BB;'>8064</span> <span style='font-weight: bold;'>Columns: </span><span style='color: #0000BB;'>11</span></span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
+</div><div class='output co'>#&gt; <span class='message'><span style='font-weight: bold;'>Rows: </span><span style='color: #0000BB;'>567</span> <span style='font-weight: bold;'>Columns: </span><span style='color: #0000BB;'>11</span></span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>--</span> <span style='font-weight: bold;'>Column specification</span> <span style='color: #00BBBB;'>--------------------------------------------------------</span></span>
 #&gt; <span class='message'><span style='font-weight: bold;'>Delimiter:</span> ","</span>
 #&gt; <span class='message'><span style='color: #BB0000;'>chr</span> (3): sampleID, antigen, iden</span>
 #&gt; <span class='message'><span style='color: #00BB00;'>dbl</span> (8): sample_array_ID, FMedian, BGMedian, FMedianBG_correct, Block, Colum...</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>i</span> Use <span style='color: #262626; background-color: #DADADA;'>`spec()`</span> to retrieve the full column specification for this data.</span>
 #&gt; <span class='message'><span style='color: #00BBBB;'>i</span> Specify the column types or set <span style='color: #262626; background-color: #DADADA;'>`show_col_types = FALSE`</span> to quiet this message.</span></div><div class='input'><span class='co'>## this file has 3 lab replicates and the default names</span>
 <span class='fu'>cv_estimation</span><span class='op'>(</span><span class='va'>dataC</span>  ,lab_replicates<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "The replicates are as expected per sample per antigen"</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2,457 x 21</span>
-#&gt; <span style='color: #949494;'># Groups:   antigen [117]</span>
-#&gt;    antigen sampleID sample_array_ID   meanX meanX2_X3 meanX1_X3 meanX1_X2    sdX
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> AARP    0.0085                11  -<span style='color: #BB0000;'>10.7</span>      -<span style='color: #BB0000;'>13.5</span>      -<span style='color: #BB0000;'>8.5</span>     -<span style='color: #BB0000;'>10</span>   5.13<span style='color: #949494;'>e</span>0
-#&gt; <span style='color: #BCBCBC;'> 2</span> AARP    0.0255                 8  -<span style='color: #BB0000;'>11.3</span>      -<span style='color: #BB0000;'>10.5</span>     -<span style='color: #BB0000;'>10</span>       -<span style='color: #BB0000;'>13.5</span> 3.79<span style='color: #949494;'>e</span>0
-#&gt; <span style='color: #BCBCBC;'> 3</span> AARP    0.076                  5   -<span style='color: #BB0000;'>8</span>         -<span style='color: #BB0000;'>3</span>       -<span style='color: #BB0000;'>14</span>        -<span style='color: #BB0000;'>7</span>   1.11<span style='color: #949494;'>e</span>1
-#&gt; <span style='color: #BCBCBC;'> 4</span> AARP    0.23                   2  -<span style='color: #BB0000;'>12.7</span>      -<span style='color: #BB0000;'>17</span>       -<span style='color: #BB0000;'>13.5</span>      -<span style='color: #BB0000;'>7.5</span> 9.61<span style='color: #949494;'>e</span>0
-#&gt; <span style='color: #BCBCBC;'> 5</span> AARP    0.73                  19   -<span style='color: #BB0000;'>6.33</span>       4.5     -<span style='color: #BB0000;'>13</span>       -<span style='color: #BB0000;'>10.5</span> 1.89<span style='color: #949494;'>e</span>1
-#&gt; <span style='color: #BCBCBC;'> 6</span> AARP    177.78                 4   58.3      256.      122.     -<span style='color: #BB0000;'>203</span>   4.72<span style='color: #949494;'>e</span>2
-#&gt; <span style='color: #BCBCBC;'> 7</span> AARP    19.75                 10   98        135       118        41   1.00<span style='color: #949494;'>e</span>2
-#&gt; <span style='color: #BCBCBC;'> 8</span> AARP    2.19                  16   -<span style='color: #BB0000;'>2.33</span>       6.5     -<span style='color: #BB0000;'>22</span>         8.5 3.41<span style='color: #949494;'>e</span>1
-#&gt; <span style='color: #BCBCBC;'> 9</span> AARP    533                    1 -<span style='color: #BB0000;'>520</span>        230.     -<span style='color: #BB0000;'>988</span>      -<span style='color: #BB0000;'>802.</span>  1.31<span style='color: #949494;'>e</span>3
-#&gt; <span style='color: #BCBCBC;'>10</span> AARP    59.26                  7  395.       525       491       168   3.94<span style='color: #949494;'>e</span>2
-#&gt; <span style='color: #949494;'># ... with 2,447 more rows, and 13 more variables: sdX2_X3 &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   sdX1_X3 &lt;dbl&gt;, sdX1_X2 &lt;dbl&gt;, CVX &lt;dbl&gt;, CVX2_X3 &lt;dbl&gt;, CVX1_X3 &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   CVX1_X2 &lt;dbl&gt;, cvCat_all &lt;chr&gt;, cvSelected_all &lt;dbl&gt;, iden &lt;chr&gt;, 1 &lt;dbl&gt;,</span>
-#&gt; <span style='color: #949494;'>#   2 &lt;dbl&gt;, 3 &lt;dbl&gt;</span></div></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The replicates are as expected per sample per antigen</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 126 x 21</span>
+#&gt; <span style='color: #949494;'># Groups:   antigen [6]</span>
+#&gt;    antigen sampleID sample_array_ID  meanX meanX2_X3 meanX1_X3 meanX1_X2   sdX
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> AMA1    0.0085                11   643.      594.      692       642.  98.5
+#&gt; <span style='color: #BCBCBC;'> 2</span> AMA1    0.0255                 8   699       700.      672       724.  52.6
+#&gt; <span style='color: #BCBCBC;'> 3</span> AMA1    0.076                  5   633.      588       668.      642.  81.3
+#&gt; <span style='color: #BCBCBC;'> 4</span> AMA1    0.23                   2  <span style='text-decoration: underline;'>1</span>725.     <span style='text-decoration: underline;'>1</span>757      <span style='text-decoration: underline;'>1</span>720      <span style='text-decoration: underline;'>1</span>697   60.5
+#&gt; <span style='color: #BCBCBC;'> 5</span> AMA1    0.73                  19  <span style='text-decoration: underline;'>2</span>504.     <span style='text-decoration: underline;'>2</span>494.     <span style='text-decoration: underline;'>2</span>568.     <span style='text-decoration: underline;'>2</span>450  119. 
+#&gt; <span style='color: #BCBCBC;'> 6</span> AMA1    177.78                 4 <span style='text-decoration: underline;'>58</span>262     <span style='text-decoration: underline;'>58</span>208     <span style='text-decoration: underline;'>58</span>640.    <span style='text-decoration: underline;'>57</span>938. 709. 
+#&gt; <span style='color: #BCBCBC;'> 7</span> AMA1    19.75                 10 <span style='text-decoration: underline;'>64</span>143.    <span style='text-decoration: underline;'>64</span>204.    <span style='text-decoration: underline;'>64</span>280.    <span style='text-decoration: underline;'>63</span>944  353. 
+#&gt; <span style='color: #BCBCBC;'> 8</span> AMA1    2.19                  16  <span style='text-decoration: underline;'>9</span>243      <span style='text-decoration: underline;'>9</span>294      <span style='text-decoration: underline;'>9</span>031      <span style='text-decoration: underline;'>9</span>404  383. 
+#&gt; <span style='color: #BCBCBC;'> 9</span> AMA1    533                    1 <span style='text-decoration: underline;'>53</span>180.    <span style='text-decoration: underline;'>52</span>860.    <span style='text-decoration: underline;'>53</span>298     <span style='text-decoration: underline;'>53</span>380. 559. 
+#&gt; <span style='color: #BCBCBC;'>10</span> AMA1    59.26                  7 <span style='text-decoration: underline;'>61</span>601     <span style='text-decoration: underline;'>61</span>870.    <span style='text-decoration: underline;'>61</span>848.    <span style='text-decoration: underline;'>61</span>085  894. 
+#&gt; <span style='color: #949494;'># ... with 116 more rows, and 13 more variables: sdX2_X3 &lt;dbl&gt;, sdX1_X3 &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   sdX1_X2 &lt;dbl&gt;, CVX &lt;dbl&gt;, CVX2_X3 &lt;dbl&gt;, CVX1_X3 &lt;dbl&gt;, CVX1_X2 &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   cvCat_all &lt;chr&gt;, cvSelected_all &lt;dbl&gt;, iden &lt;chr&gt;, 1 &lt;dbl&gt;, 2 &lt;dbl&gt;,</span>
+#&gt; <span style='color: #949494;'>#   3 &lt;dbl&gt;</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
