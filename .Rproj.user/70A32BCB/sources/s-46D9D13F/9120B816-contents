@@ -1,3 +1,0 @@
-ssh-keygen -t ed25519 -C "keniajin@gmail.com"
-
-https://bioconductor.org/developers/how-to/git/new-package-workflow/
