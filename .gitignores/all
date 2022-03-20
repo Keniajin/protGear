@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.git
+data/
+processed_data/
+to_update.md
+*.Rproj
+log_file.txt
+.gitignore
+.Rbuildignore
+.gitignores/
