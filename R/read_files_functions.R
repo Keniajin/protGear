@@ -520,8 +520,7 @@ bg_correct <-
           Row
         ) %>%
         mutate(FMedianBG_correct = FMedian) %>%
-        mutate(replicate = 1:n()) #%>%
-      #filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
+        mutate(replicate = 1:n()) 
       #----------------------------------------------------------------------------------------------------
 
     } else if (method == "subtract_local") {
@@ -542,8 +541,6 @@ bg_correct <-
           Row
         ) %>%
         dplyr::mutate(replicate = 1:n())
-      #%>%
-      # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
       #----------------------------------------------------------------------------------------------------
 
     } else if (method == "subtract_global") {
@@ -564,8 +561,6 @@ bg_correct <-
           Row
         ) %>%
         mutate(replicate = 1:n())
-      #%>%
-      # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
       #----------------------------------------------------------------------------------------------------
     } else if (method == "movingmin_bg") {
       ## this is subtracted
@@ -585,8 +580,6 @@ bg_correct <-
           Row
         ) %>%
         mutate(replicate = 1:n())
-      # %>%
-      # filter(!grepl('^[Ll][Aa][Nn][Dd][Mm][Aa][Rr][Kk]|^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
 
     } else if (method == "minimum_half") {
       ## this approach ensures all the MFI values are positive
@@ -731,7 +724,6 @@ bg_correct <-
 
 
 #' Merge sample ID with the array data
-#'
 #' @param iden A character indicating the name of the object to be used under data_files.
 #' @param data_files A list of data objects with names utilised by iden.
 #' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
