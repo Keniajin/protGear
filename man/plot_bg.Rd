@@ -7,11 +7,12 @@
 plot_bg(df, x_axis = "antigen", bg_MFI = "BG_Median", log_mfi = TRUE)
 }
 \arguments{
-\item{df}{A     default dataset to use for plot.}
+\item{df}{A default dataset to use for plot.}
 
 \item{x_axis}{The variable on the x axis}
 
-\item{bg_MFI}{A numeric \code{variable} describing which is the background MFI}
+\item{bg_MFI}{A numeric \code{variable} describing which is the 
+background MFI}
 
 \item{log_mfi}{a logical value indicating whether the MFI values should be
 log transformed or not.}
@@ -24,8 +25,10 @@ A generic function for plotting of R objects.
 }
 \examples{
 ## Not run:
-#After extracting the background using \code{\link{extract_bg}} we plot the data using
-allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+#After extracting the background using \code{\link{extract_bg}} 
+#we plot the data using
+allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv",
+ package="protGear"))
 plot_bg(allData_bg,
 x_axis = "antigen",
 bg_MFI = "BG_Median",  log_mfi = TRUE

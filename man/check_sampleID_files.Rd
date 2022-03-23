@@ -8,19 +8,22 @@ Check existing sample ID names}
 check_sampleID_files(genepix_vars)
 }
 \arguments{
-\item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
+\item{genepix_vars}{A list of specific definitions of the experiment design.
+See \code{\link{array_vars}}.}
 }
 \value{
 A file with missing corresponding sample ID files
 }
 \description{
-A generic function to check if the file(s) witht the MFI values have a corresponding sample ID file. Sample ID file is
+A generic function to check if the file(s) 
+with the MFI values have a corresponding sample ID file. Sample ID file is
 a file with the identifiers for the samples in array file.
 }
 \examples{
 genepix_vars <- array_vars(
 channel = "635",
-chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+chip_path = system.file("extdata", "array_data/machine1/", 
+package="protGear"),
 totsamples = 21,
 blockspersample = 2,
 mig_prefix = "_first",

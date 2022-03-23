@@ -10,14 +10,18 @@ rlm_normalise(rlm_normalise_df)
 \item{rlm_normalise_df}{rlm normalised data frame}
 }
 \value{
-an elist of RLM normalisation to be utilised by \code{\link{rlm_normalise_matrix}}
+an elist of RLM normalisation to be utilised by 
+\code{\link{rlm_normalise_matrix}}
 }
 \description{
-A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
+A function for \code{method='rlm'} from 
+\code{\link{matrix_normalise}}.
 }
 \examples{
-matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
-#rlm_normalise_df <- rlm_normalise_matrix(matrix_antigen=matrix_antigen, array_matrix=array_matrix,
+matrix_antigen <- readr::read_csv(system.file("extdata", 
+"matrix_antigen.csv", package="protGear"))
+#rlm_normalise_df <- rlm_normalise_matrix(matrix_antigen=matrix_antigen, 
+#array_matrix=array_matrix,
 # control_antigens=control_antigens)
 # rlm_normalise(rlm_normalise_df)
 }

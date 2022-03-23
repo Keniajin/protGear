@@ -15,7 +15,8 @@ a list of file names
 name
 }
 \description{
-A generic function returning a vector with the names of files in the same directory. Removes the file extension
+A generic function returning a vector with the names of 
+files in the same directory. Removes the file extension
 }
 \examples{
 name_of_files("KK2-06.txt")

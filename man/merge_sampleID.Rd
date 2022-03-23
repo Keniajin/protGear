@@ -7,19 +7,24 @@
 merge_sampleID(iden, data_files, genepix_vars, method)
 }
 \arguments{
-\item{iden}{A character indicating the name of the object to be used under data_files.}
+\item{iden}{A character indicating the name of the object to be used under
+data_files.}
 
 \item{data_files}{A list of data objects with names utilised by iden.}
 
-\item{genepix_vars}{A list of specific definitions of the experiment design. See \code{\link{array_vars}}.}
+\item{genepix_vars}{A list of specific definitions of the experiment design.
+See \code{\link{array_vars}}.}
 
-\item{method}{A description of the background correction to be used. See \code{\link{bg_correct}}.}
+\item{method}{A description of the background correction to be used. 
+See \code{\link{bg_correct}}.}
 }
 \value{
-a data frame merged with corresponding sample ID's. The sample ID are specified in the sample ID files
+a data frame merged with corresponding sample ID's.
+The sample ID are specified in the sample ID files
 }
 \description{
-A generic function that merges the protein data with the sample identifiers or sample names. If the file
+A generic function that merges the protein data with the
+ sample identifiers or sample names. If the file
 does not have sample identifiers the function generates it automatically.
 }
 \examples{
@@ -27,7 +32,8 @@ does not have sample identifiers the function generates it automatically.
 ### Define the genepix_vars
 genepix_vars <- array_vars(
   channel = "635",
-  chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+  chip_path = system.file("extdata", "array_data/machine1/",
+   package="protGear"),
   totsamples = 21,
   blockspersample = 2,
   mig_prefix = "_first",
@@ -48,7 +54,8 @@ data_files <- purrr::map(
   data_path = data_path,
   genepix_vars = genepix_vars
 )
-data_files <- purrr::set_names(data_files, purrr::map(filenames, name_of_files))
+data_files <- purrr::set_names(data_files, 
+purrr::map(filenames, name_of_files))
 ## merge the lab data with samples and perform bg correction
 merge_sampleID(iden = "KK2-06", data_files = data_files,
                genepix_vars =genepix_vars,method = "subtract_global" )

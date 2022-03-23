@@ -27,7 +27,8 @@ Read multiple array files
 ## Not run:
 genepix_vars <- array_vars(
 channel = "635",
-chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+chip_path = system.file("extdata", "array_data/machine1/", 
+package="protGear"),
 totsamples = 21,
 blockspersample = 2,
 mig_prefix = "_first",

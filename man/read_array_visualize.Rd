@@ -7,7 +7,8 @@
 read_array_visualize(infile)
 }
 \arguments{
-\item{infile}{a .gpr file to be used to visualize the expression intensities of the slide spots}
+\item{infile}{a .gpr file to be used to visualize the expression intensities
+of the slide spots}
 }
 \value{
 a data frame to visualize the background or foreground values

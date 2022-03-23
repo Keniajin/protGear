@@ -9,9 +9,11 @@ best_CV_estimation(dataCV, slide_id, lab_replicates, cv_cut_off)
 \arguments{
 \item{dataCV}{A data frame}
 
-\item{slide_id}{A character string containing the identifier of the data frame variable.}
+\item{slide_id}{A character string containing the identifier of the data
+frame variable.}
 
-\item{lab_replicates}{A numeric value indicating the number of lab replicates.}
+\item{lab_replicates}{A numeric value indicating the 
+number of lab replicates.}
 
 \item{cv_cut_off}{a numeric value for the CV cut off. Should be between 0-100}
 }
@@ -19,14 +21,17 @@ best_CV_estimation(dataCV, slide_id, lab_replicates, cv_cut_off)
 A data frame with the best CV's estimated
 }
 \description{
-A function to select the best CV by combining the replicates in duplicates. The function has been build for up to to 3 replicates so far
+A function to select the best CV by combining the replicates in 
+duplicates. The function has been build for up to to 3 replicates so far
 }
 \details{
 Select set of replicates with the best CV
 }
 \examples{
-dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+dataC <- readr::read_csv(system.file("extdata",
+ "dataC.csv", package="protGear"))
 ## this file has 3 lab replicates and the default names
 dataCV <- cv_estimation(dataC  ,lab_replicates=3)
-best_CV_estimation(dataCV,slide_id = "iden", lab_replicates = 3, cv_cut_off = 20)
+best_CV_estimation(dataCV,slide_id = "iden", lab_replicates = 3,
+ cv_cut_off = 20)
 }

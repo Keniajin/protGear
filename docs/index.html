@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.544</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.545</span>
       </span>
     </div>
 
@@ -82,20 +82,29 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="general-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#general-information" class="anchor"></a>General information</h3>
+<div id="general-information" class="section level2">
+<h2 class="hasAnchor">
+<a href="#general-information" class="anchor"></a>General information</h2>
 <p>protGear is a package for protein micro-array data processing just before the main analysis.</p>
 <p>The package loads the ‘<code>gpr</code>’ or ‘<code>txt</code>’ file format extracted by the quantification software and merges this with the specific sample identifiers. The package processes multiple files extracted in a batch with their corresponding sample identifier file. The sample identifier file has 2 variables ‘<code>v1</code>’ and ‘<code>v2</code>’ which indicate the mini-array or block number and sample identifier respectively. The ‘<code>gpr</code>’ file and the corresponding sample identifier file have the same file name. protGear also provides a web based <span class="math inline"><em>S</em><em>h</em><em>i</em><em>n</em><em>y</em><sup>(<em>R</em>)</sup></span> platform for real time visualization of the data processing.</p>
 <p>There is a package vignette included with this package with a step by step use of the package. Check <a href="https://keniajin.github.io/protGear/" class="uri">https://keniajin.github.io/protGear/</a> under articles.</p>
 </div>
-<div id="installing-the-package" class="section level2">
+<div id="installing-the-devel-package" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installing-the-package" class="anchor"></a>Installing the package</h2>
+<a href="#installing-the-devel-package" class="anchor"></a>Installing the devel package</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span> 
-
 <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Keniajin/protGear/"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="installing-from-bioc-bioconductor" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installing-from-bioc-bioconductor" class="anchor"></a>Installing from Bioc BioConductor</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## install from BioConductor</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"protGear"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="to-run-the-shiny-application" class="section level2">
 <h2 class="hasAnchor">

@@ -22,17 +22,30 @@ minpositive <- function(x) {
 
 #' List the array structure variables
 #'
-#' @param channel A character indicating the channel that the data was scanned at. It is mostly included in the MFI variable names.
+#' @param channel A character indicating the channel that the data was scanned 
+#' at. It is mostly included in the MFI variable names.
 #' @param totsamples A numeric value indicating teh number of samples on a slide.
-#' @param blockspersample A numeric value indicating the numer of blocks in a mini-array. The \code{".gal"} file can help in getting this
-#' @param chip_path A character indicating the path of the folder  location with the array data.
-#' @param sampleID_path A character indicating the path of the folder location with the sample identifiers matching the array structure.
-#' @param mig_prefix Optional: A character indicating the identifier of an MIG dilution file
-#' @param machine Optional:A character indicating the machine used to process the data in the folder
-#' @param FG  Optional:A character indicating the name of the foreground variable name. if not specified its created as \code{paste0("F",channel,".Median")}
-#' @param BG Optional:A character indicating the name of the background variable name.  if not specified its created as \code{paste0("B",channel,".Median")}
-#' @param FBG Optional:A character indicating the name of the foreground - background variable name.  if not specified its created as \code{paste0("F",channel,".Median...B",channel)}
-#' @param date_process Optional:A character indicating the date when the samples were processed.
+#' @param blockspersample A numeric value indicating the numer of blocks in a 
+#' mini-array. The \code{".gal"} file can help in getting this
+#' @param chip_path A character indicating the path of the folder  location with
+#'  the array data.
+#' @param sampleID_path A character indicating the path of the folder location 
+#' with the sample identifiers matching the array structure.
+#' @param mig_prefix Optional: A character indicating the identifier of an MIG
+#'  dilution file
+#' @param machine Optional:A character indicating the machine used to process
+#'  the data in the folder
+#' @param FG  Optional:A character indicating the name of the foreground
+#'  variable name. if not specified its created as 
+#'  \code{paste0("F",channel,".Median")}
+#' @param BG Optional:A character indicating the name of the background 
+#' variable name.  if not specified its created as 
+#' \code{paste0("B",channel,".Median")}
+#' @param FBG Optional:A character indicating the name of the 
+#' foreground - background variable name.  if not specified its 
+#' created as \code{paste0("F",channel,".Median...B",channel)}
+#' @param date_process Optional:A character indicating the date
+#'  when the samples were processed.
 #'
 #' @description A generic function returning a list with the data structure.
 #' @importFrom rlang sym
@@ -144,7 +157,8 @@ create_dir <- function(path) {
 #'
 #' @return a list of file names
 #' @export
-#' @description A generic function returning a vector with the names of files in the same directory. Removes the file extension
+#' @description A generic function returning a vector with the names of 
+#' files in the same directory. Removes the file extension
 #' @examples
 #' name_of_files("KK2-06.txt")
 #' @return name
@@ -162,7 +176,8 @@ name_of_files <- function(i) {
 
 #'         \\\_Start_Function_For Error\\\         #
 #'
-#' @description A generic function to write into the log file with a replicate check error
+#' @description A generic function to write into the log 
+#' file with a replicate check error
 #' @param iden An id for the file with replicates error
 #' @return  a log file showing the replicate errors
 #' @keywords internal
@@ -181,8 +196,10 @@ error_replicates <- function(iden) {
 
 ###
 #' Check existing sample ID names
-#' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
-#' @description  A generic function to check if the file(s) witht the MFI values have a corresponding sample ID file. Sample ID file is
+#' @param genepix_vars A list of specific definitions of the experiment design.
+#'  See \code{\link{array_vars}}.
+#' @description  A generic function to check if the file(s) 
+#' with the MFI values have a corresponding sample ID file. Sample ID file is
 #' a file with the identifiers for the samples in array file.
 #' @return A file with missing corresponding sample ID files
 #' @importFrom stats median quantile rnorm sd
@@ -192,7 +209,8 @@ error_replicates <- function(iden) {
 #' @examples
 #' genepix_vars <- array_vars(
 #' channel = "635",
-#' chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#' chip_path = system.file("extdata", "array_data/machine1/", 
+#' package="protGear"),
 #' totsamples = 21,
 #' blockspersample = 2,
 #' mig_prefix = "_first",
