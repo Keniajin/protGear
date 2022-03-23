@@ -13,6 +13,7 @@ error_replicates(iden)
 a log file showing the replicate errors
 }
 \description{
-A generic function to write into the log file with a replicate check error
+A generic function to write into the log 
+file with a replicate check error
 }
 \keyword{internal}

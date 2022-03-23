@@ -20,7 +20,8 @@ A ggplot of various normalisation approaches
 Comparison of normalised data by feature
 }
 \examples{
-matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+matrix_antigen <- readr::read_csv(system.file("extdata", 
+"matrix_antigen.csv", package="protGear"))
 normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
 method = "vsn",
 return_plot = FALSE

@@ -15,7 +15,8 @@
 #' ## Not run:
 #' genepix_vars <- array_vars(
 #' channel = "635",
-#' chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#' chip_path = system.file("extdata", "array_data/machine1/", 
+#' package="protGear"),
 #' totsamples = 21,
 #' blockspersample = 2,
 #' mig_prefix = "_first",
@@ -29,8 +30,10 @@
 #' ## End(Not run)
 read_array_files <- function(i, data_path, genepix_vars) {
   ###loop through all the data to read
-  # skip- the number of lines of the data file to skip before beginning to read data ---
-  if (length(grep("Block.*Column|Column.*Block", readLines(file.path(data_path, i))) -
+  # skip- the number of lines of the data file to skip before 
+  #beginning to read data ---
+  if (length(grep("Block.*Column|Column.*Block", 
+                  readLines(file.path(data_path, i))) -
              1) == 1) {
     x <-
       grep("Block.*Column|Column.*Block", readLines(file.path(data_path, i))) -
@@ -76,10 +79,13 @@ read_array_files <- function(i, data_path, genepix_vars) {
 
 #' Extract the background values
 #' @title  extract bg
-#' @param iden A character indicating the name of the object to be used under data_files.
+#' @param iden A character indicating the name of the object to be
+#'  used under data_files.
 #' @param data_files A list of data objects with names utilised by iden.
-#' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
-#' @description A generic function to extract the background data for micro array data.
+#' @param genepix_vars A list of specific definitions of the experiment design.
+#'  See \code{\link{array_vars}}.
+#' @description A generic function to extract the background 
+#' data for micro array data.
 #' @return A data frame of background values
 #' @importFrom dplyr select arrange
 #' @importFrom data.table %like%
@@ -90,7 +96,8 @@ read_array_files <- function(i, data_path, genepix_vars) {
 #' ## Not run:
 #' genepix_vars <- array_vars(
 #' channel = "635",
-#' chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#' chip_path = system.file("extdata", "array_data/machine1/", 
+#' package="protGear"),
 #' totsamples = 21,
 #' blockspersample = 2,
 #' mig_prefix = "_first",
@@ -110,7 +117,8 @@ read_array_files <- function(i, data_path, genepix_vars) {
 #'   data_path = data_path,
 #'   genepix_vars = genepix_vars
 #' )
-#' data_files <- purrr::set_names(data_files, purrr::map(filenames, name_of_files))
+#' data_files <- purrr::set_names(data_files, 
+#' purrr::map(filenames, name_of_files))
 #' names(data_files)
 #' extract_bg(iden ="KK2-06" , data_files=data_files,genepix_vars=genepix_vars)
 #' ## End(Not run)
@@ -119,7 +127,8 @@ extract_bg <- function(iden, data_files , genepix_vars = genepix_vars)
   ## read in the sample ID files
   ## this can be pulled from a mysql table
   ## if the sample ID is not available, we create an automated sampleID
-  if (file.exists(file.path(genepix_vars$sampleID_path, paste0(iden , ".csv")))) {
+  if (file.exists(file.path(genepix_vars$sampleID_path, 
+                            paste0(iden , ".csv")))) {
     arraynames <-
       read.csv(
         file.path(genepix_vars$sampleID_path, paste0(iden , ".csv")) ,
@@ -199,7 +208,7 @@ extract_bg <- function(iden, data_files , genepix_vars = genepix_vars)
       names(Data1)[names(Data1) %like% paste0(genepix_vars$FG, '$')]
   }
 
-  #----------------------------------------------------------------------------------------------------
+  #----------------------------------------------------------------------------
   ##save the MFI values of the Background
   data1_bg <-
     Data1 %>% dplyr::select(
@@ -217,7 +226,7 @@ extract_bg <- function(iden, data_files , genepix_vars = genepix_vars)
       )
     )
   # combine Name and replicate
-  #----------------------------------------------------------------------------------------------------
+  #----------------------------------------------------------------------------
   return(data1_bg)
 }
 
@@ -227,10 +236,11 @@ extract_bg <- function(iden, data_files , genepix_vars = genepix_vars)
 
 #' @title Plot background
 #'
-#' @param df A 	default dataset to use for plot.
-#' @param bg_MFI A numeric \code{variable} describing which is the background MFI
+#' @param df A default dataset to use for plot.
+#' @param bg_MFI A numeric \code{variable} describing which is the 
+#' background MFI
 #' @param x_axis The variable on the x axis
-#' @param log_mfi 	a logical value indicating whether the MFI values should be
+#' @param log_mfi a logical value indicating whether the MFI values should be
 #' log transformed or not.
 #'
 #' @description  A generic function for plotting of R objects.
@@ -239,8 +249,10 @@ extract_bg <- function(iden, data_files , genepix_vars = genepix_vars)
 #' @import ggpubr
 #' @examples
 #' ## Not run:
-#' #After extracting the background using \code{\link{extract_bg}} we plot the data using
-#' allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+#' #After extracting the background using \code{\link{extract_bg}} 
+#' #we plot the data using
+#' allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv",
+#'  package="protGear"))
 #' plot_bg(allData_bg,
 #' x_axis = "antigen",
 #' bg_MFI = "BG_Median",  log_mfi = TRUE
@@ -315,7 +327,8 @@ plot_bg <- function(df,
     #                     x="antigen" , y=bg_MFI,
     #                     facet.by = "replicate",ncol=1)
     # p_pubr <- ggpar(p_pubr,font.tickslab = c(8,"#993333"),
-    #                 xtickslab.rt = 45 , ylab = "Background of the replicates raw")
+    #                 xtickslab.rt = 45 , ylab = "Background of the 
+    #replicates raw")
 
     p_bg <-
       ggplot(data = bg_plot , aes_string(x = x_axis , y = bg_MFI)) +
@@ -335,18 +348,23 @@ plot_bg <- function(df,
 #' @param df An object containing the data to which the plot is done.
 #' @param antigen_name The \code{variable} describing which features/proteins/
 #' antibodies in the data should be used to plot
-#' @param bg_MFI A numeric \code{variable} describing which is the background MFI
-#' @param FG_MFI A numeric \code{variable} describing which is the foreground MFI
-#' @param log_mfi 	a logical value indicating whether the MFI values should be
+#' @param bg_MFI A numeric \code{variable} describing which is the 
+#' background MFI
+#' @param FG_MFI A numeric \code{variable} describing which is the 
+#' foreground MFI
+#' @param log_mfi a logical value indicating whether the MFI values should be
 #' log transformed or not.
-#' @description A generic function for plotting the background and foreground values.
+#' @description A generic function for plotting the background and foreground
+#'  values.
 #' @return a ggplot of foreground vs background MFI values
 #' @export
 #' @import ggplot2 dplyr
 #' @examples
 #' ## Not run:
-#' #After extracting the background using \code{\link{extract_bg}} we plot the data using
-#' allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+#' #After extracting the background using \code{\link{extract_bg}} 
+#' #we plot the data using
+#' allData_bg <- readr::read_csv(system.file("extdata", 
+#' "bg_example.csv", package="protGear"))
 #' plot_FB(allData_bg,
 #' antigen_name = "antigen",
 #' bg_MFI = "BG_Median", FG_MFI = "FBG_Median", log = FALSE
@@ -433,18 +451,30 @@ plot_FB <-
 
 #' Background correction
 #' @title bg_correct
-#' @param iden A character indicating the name of the object to be used under Data1
-#' @param Data1 A data frame with sample identifiers merged with micro array data.
-#' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
-#' @param method 	a description of the background correction to be used.  Possible values are \code{"none","subtract_local",
-#' "subtract_global","movingmin_bg","minimum_half","edwards" or "normexp"}. The default is \code{"subtract_local"}.
-#' @details  The function implements background correction methods developed by \code{\link[limma]{backgroundCorrect}}. But the
-#' \code{minimum_half and movingmin_bg} uses the block of the protein array as the grid. If method="movingmin_bg" the minimum
+#' @param iden A character indicating the name of the object to be 
+#' used under Data1
+#' @param Data1 A data frame with sample identifiers merged with micro 
+#' array data.
+#' @param genepix_vars A list of specific definitions of the experiment design.
+#'  See \code{\link{array_vars}}.
+#' @param method a description of the background correction to be used. 
+#'  Possible values are \code{"none","subtract_local",
+#' "subtract_global","movingmin_bg","minimum_half","edwards" or "normexp"}. 
+#' The default is \code{"subtract_local"}.
+#' @details  The function implements background correction methods developed 
+#' by \code{\link[limma]{backgroundCorrect}}. But the
+#' \code{minimum_half and movingmin_bg} uses the block of the protein array as
+#' the grid. If method="movingmin_bg" the minimum
 #' background value within a  block is subtracted.
-#' If method="minimum_half" then any intensity which is negative after background subtraction is reset to be equal to half the minimum positive value in
-#' a block.  If method="movingmin_value" then any intensity which is negative after background subtraction is reset to the minimum positive value
-#' in a block. For \code{edwards} we implement a similar algorithm with \code{limma::backgroundCorrect(method="edwards")} and for \code{'normexp'}
-#' we use  the saddle-point approximation to maximum likelihood, \code{\link[limma]{backgroundCorrect}} for more details.
+#' If method="minimum_half" then any intensity which is negative after 
+#' background subtraction is reset to be equal to half the 
+#' minimum positive value in
+#' a block.  If method="movingmin_value" then any intensity which is negative 
+#' after background subtraction is reset to the minimum positive value
+#' in a block. For \code{edwards} we implement a similar algorithm with 
+#' \code{limma::backgroundCorrect(method="edwards")} and for \code{'normexp'}
+#' we use  the saddle-point approximation to maximum likelihood, 
+#' \code{\link[limma]{backgroundCorrect}} for more details.
 #' @description  A generic function to perform background correction.
 #' @return A data frame with background corrected data
 #' @export
@@ -454,7 +484,8 @@ plot_FB <-
 #' ## Not run:
 #' genepix_vars <- array_vars(
 #'   channel = "635",
-#'   chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#'   chip_path = system.file("extdata", "array_data/machine1/",
+#'   package="protGear"),
 #'   totsamples = 21,
 #'   blockspersample = 2,
 #'   mig_prefix = "_first",
@@ -462,7 +493,8 @@ plot_FB <-
 #'   ## optional
 #'   date_process = "0520"
 #' )
-#' raw_df <- readr::read_csv(system.file("extdata", "Data1_bg_sample.csv", package="protGear"))
+#' raw_df <- readr::read_csv(system.file("extdata", "Data1_bg_sample.csv",
+#'  package="protGear"))
 #' bg_correct(iden="iden",
 #' Data1 = raw_df,
 #' genepix_vars = genepix_vars, method="subtract_local"
@@ -470,7 +502,7 @@ plot_FB <-
 #' ## End(Not run)
 bg_correct <-
   function(iden, Data1, genepix_vars, method = "subtract_local") {
-    #----------------------------------------------------------------------------------------------------
+    #--------------------------------------------------------------------------
     if (paste0(genepix_vars$BG) %ni% names(Data1)) {
       genepix_vars$BG <-
         names(Data1)[names(Data1) %like% paste0(genepix_vars$BG, '$')]
@@ -503,10 +535,11 @@ bg_correct <-
     file_ident <- paste0(iden, "_raw_MFI_BG", ".csv")
 
     #create_dir(path = system.file("processe_data/raw_MFI_BG/"))
-    #write_csv(data1_full_bg ,system.file("processed_data/raw_MFI_BG/", 'file_ident', package="protGear"))
-    #----------------------------------------------------------------------------------------------------
+    #write_csv(data1_full_bg ,system.file("processed_data/raw_MFI_BG/", 
+    #'file_ident', package="protGear"))
+    #-----------------------------------------------------------------------
     if (method == "none" | method == "") {
-      #----------------------------------------------------------------------------------------------------
+      #------------------------------------------------------------------------
       ##MFI values without subtracting the background
       Data1 <- Data1 %>%
         dplyr::select(
@@ -521,14 +554,16 @@ bg_correct <-
         ) %>%
         mutate(FMedianBG_correct = FMedian) %>%
         mutate(replicate = 1:n()) 
-      #----------------------------------------------------------------------------------------------------
+      #------------------------------------------------------------------------
 
     } else if (method == "subtract_local") {
-      ## this approach subtracts the local background estimated by the Array Jet Machine
-      #----------------------------------------------------------------------------------------------------
+      ## this approach subtracts the local background estimated by 
+      #the Array Jet Machine
+      #-------------------------------------------------------------------------
       ##save the MFI values with subtracting the background
       Data1 <- Data1 %>%
-        dplyr::mutate(FMedianBG_correct = (!!genepix_vars$FG) - (!!genepix_vars$BG)) %>%
+        dplyr::mutate(FMedianBG_correct = (!!genepix_vars$FG) - 
+                        (!!genepix_vars$BG)) %>%
         dplyr::select(
           sampleID,
           sample_array_ID,
@@ -541,11 +576,11 @@ bg_correct <-
           Row
         ) %>%
         dplyr::mutate(replicate = 1:n())
-      #----------------------------------------------------------------------------------------------------
+      #------------------------------------------------------------------------
 
     } else if (method == "subtract_global") {
       ## this approach subracts the median of the backgrounds in a slide
-      #----------------------------------------------------------------------------------------------------
+      #------------------------------------------------------------------------
       ##save the MFI values with subtracting the background
       Data1 <- Data1 %>%
         mutate(FMedianBG_correct = !!genepix_vars$FG - global_BGMedian) %>%
@@ -561,12 +596,13 @@ bg_correct <-
           Row
         ) %>%
         mutate(replicate = 1:n())
-      #----------------------------------------------------------------------------------------------------
+      #------------------------------------------------------------------------
     } else if (method == "movingmin_bg") {
       ## this is subtracted
       Data1 <- Data1 %>%
         mutate(FMedianBG_correct = !!genepix_vars$FG-!!genepix_vars$BG) %>%
-        ## this is generated while reading the array files using read_array_files function
+      ## this is generated while reading the array files using 
+        #read_array_files function
         mutate(FMedianBG_correct = !!genepix_vars$FG - minimum_BGMedian) %>%
         dplyr::select(
           sampleID,
@@ -583,8 +619,9 @@ bg_correct <-
 
     } else if (method == "minimum_half") {
       ## this approach ensures all the MFI values are positive
-      ## if the MFI <0 after subtraction the MFI is set to the half of the minimum corrected intensities
-      #----------------------------------------------------------------------------------------------------
+      ## if the MFI <0 after subtraction the MFI is set to the half of the 
+      #minimum corrected intensities
+      #------------------------------------------------------------------------
       ##save the MFI values with subtracting the background
       Data1 <- Data1 %>%
         mutate(FMedianBG_correct = !!genepix_vars$FG-!!genepix_vars$BG) %>%
@@ -608,11 +645,12 @@ bg_correct <-
         )) %>%
         group_by(sampleID, antigen) %>%
         mutate(replicate = 1:n())
-      #----------------------------------------------------------------------------------------------------
+      #------------------------------------------------------------------------
     } else if (method == "minimum_value") {
       ## this approach ensures all the MFI values are positive
-      ## if the MFI <0 after subtraction the MFI is set to the minimum of the corrected intensities
-      #----------------------------------------------------------------------------------------------------
+      ## if the MFI <0 after subtraction the MFI is set to the minimum of 
+      #the corrected intensities
+      #-------------------------------------------------------------------------
       Data1 <- Data1 %>%
         mutate(FMedianBG_correct = !!genepix_vars$FG-!!genepix_vars$BG) %>%
         dplyr::select(
@@ -634,22 +672,26 @@ bg_correct <-
         group_by(sampleID, antigen) %>%
         mutate(replicate = 1:n())
 
-      #----------------------------------------------------------------------------------------------------
+      #------------------------------------------------------------------------
     } else if (method == "edwards") {
-      #a log-linear interpolation method is used to adjust lower intensities as in Edwards (2003).
+      #a log-linear interpolation method is used to adjust lower intensities as 
+      #in Edwards (2003).
       Data1 <- Data1 %>%
         mutate(FMedianBG_correct = !!genepix_vars$FG-!!genepix_vars$BG)
       one <- matrix(1, nrow(Data1), 1)
       delta.vec <- function(d, f = 0.1) {
         ##  mean(d < 1e-16, na.rm = TRUE) % of values that are negative
-        ## mean(d < 1e-16, na.rm = TRUE) * (1 + f) the % of values just above the negative values
+        ## mean(d < 1e-16, na.rm = TRUE) * (1 + f) the % of values just 
+        #above the negative values
         ## gives the quartile cut off value of the threshold
         quantile(d,
                  probs = mean(d < 1e-16, na.rm = TRUE) * (1 + f),
                  na.rm = TRUE)
       }
-      #delta <- one %*% apply(as.matrix(Data1[['FMedianBG_correct']]), 2, delta.vec)
-      ## no need to multiply with 1 since its returning the same value and we want to implement in a data frame
+      #delta <- one %*% apply(as.matrix(Data1[['FMedianBG_correct']]), 
+      #2, delta.vec)
+      ## no need to multiply with 1 since its returning the same value 
+      #and we want to implement in a data frame
       delta <-
         apply(as.matrix(Data1[['FMedianBG_correct']]), 2, delta.vec)
 
@@ -675,9 +717,12 @@ bg_correct <-
         group_by(sampleID, antigen) %>%
         dplyr::mutate(replicate = 1:n())
     } else if (method == "normexp") {
-      ##a convolution of normal and exponential distributions is fitted to the foreground intensities using
-      #the background intensities as a covariate, and the expected signal given the observed foreground becomes
-      #the corrected intensity. This results in a smooth monotonic transformation of the background subtracted
+      ##a convolution of normal and exponential distributions is fitted to the 
+      #foreground intensities using
+      #the background intensities as a covariate, and the expected signal given
+      #the observed foreground becomes
+      #the corrected intensity. This results in a smooth monotonic 
+      #transformation of the background subtracted
       #intensities such that all the corrected intensities are positive.
       ##Both norm exp are implemented in Limma for DNA micro array data
       Data1 <- Data1 %>%
@@ -685,8 +730,10 @@ bg_correct <-
       E <- as.matrix(Data1[['FMedianBG_correct']])
       rownames(E) <- rownames(Data1)
 
-      ## here we use Here "saddle" gives the saddle-point approximation to maximum likelihood from
-      # Ritchie et al (2007) and improved by Silver et al (2009) --> check limma for details
+      ## here we use Here "saddle" gives the saddle-point approximation to 
+      #maximum likelihood from
+      # Ritchie et al (2007) and improved by Silver et al (2009) 
+      #--> check limma for details
       ## can we use offset--> updates
       bg_correct <-
         limma::backgroundCorrect.matrix(
@@ -699,7 +746,8 @@ bg_correct <-
         )
       bg_correct <- data.frame(FMedianBG_correct = bg_correct)
 
-      ## select the important variables and join with the background corrected data
+      ## select the important variables and join with the background 
+      #corrected data
       Data1 <- Data1 %>%
         dplyr::select(
           sampleID,
@@ -724,13 +772,18 @@ bg_correct <-
 
 
 #' Merge sample ID with the array data
-#' @param iden A character indicating the name of the object to be used under data_files.
+#' @param iden A character indicating the name of the object to be used under
+#' data_files.
 #' @param data_files A list of data objects with names utilised by iden.
-#' @param genepix_vars A list of specific definitions of the experiment design. See \code{\link{array_vars}}.
-#' @param method A description of the background correction to be used. See \code{\link{bg_correct}}.
-#' @description  A generic function that merges the protein data with the sample identifiers or sample names. If the file
+#' @param genepix_vars A list of specific definitions of the experiment design.
+#'  See \code{\link{array_vars}}.
+#' @param method A description of the background correction to be used. 
+#' See \code{\link{bg_correct}}.
+#' @description  A generic function that merges the protein data with the
+#'  sample identifiers or sample names. If the file
 #' does not have sample identifiers the function generates it automatically.
-#' @return a data frame merged with corresponding sample ID's. The sample ID are specified in the sample ID files
+#' @return a data frame merged with corresponding sample ID's.
+#' The sample ID are specified in the sample ID files
 #' @export
 #' @import dplyr
 #' @importFrom purrr set_names
@@ -739,7 +792,8 @@ bg_correct <-
 #' ### Define the genepix_vars
 #' genepix_vars <- array_vars(
 #'   channel = "635",
-#'   chip_path = system.file("extdata", "array_data/machine1/", package="protGear"),
+#'   chip_path = system.file("extdata", "array_data/machine1/",
+#'    package="protGear"),
 #'   totsamples = 21,
 #'   blockspersample = 2,
 #'   mig_prefix = "_first",
@@ -760,7 +814,8 @@ bg_correct <-
 #'   data_path = data_path,
 #'   genepix_vars = genepix_vars
 #' )
-#' data_files <- purrr::set_names(data_files, purrr::map(filenames, name_of_files))
+#' data_files <- purrr::set_names(data_files, 
+#' purrr::map(filenames, name_of_files))
 #' ## merge the lab data with samples and perform bg correction
 #' merge_sampleID(iden = "KK2-06", data_files = data_files,
 #'                genepix_vars =genepix_vars,method = "subtract_global" )
@@ -769,7 +824,8 @@ merge_sampleID <- function(iden, data_files, genepix_vars, method)
 {
   ## read in the sample ID files
   ## this can be pulled from a mysql table
-  if (file.exists(file.path(genepix_vars$sampleID_path, paste0(iden , ".csv")))) {
+  if (file.exists(file.path(genepix_vars$sampleID_path,
+                            paste0(iden , ".csv")))) {
     arraynames <-
       read.csv(
         file.path(genepix_vars$sampleID_path, paste0(iden , ".csv")) ,
@@ -851,7 +907,8 @@ merge_sampleID <- function(iden, data_files, genepix_vars, method)
 
 #' Read a gpr file to visualize
 #'
-#' @param infile a .gpr file to be used to visualize the expression intensities of the slide spots
+#' @param infile a .gpr file to be used to visualize the expression intensities
+#'  of the slide spots
 #'
 #' @return a data frame to visualize the background or foreground values
 #' @export
@@ -870,10 +927,13 @@ read_array_visualize <- function(infile) {
 
 #' Visualize the slide mimicking the original scan image.
 #'
-#' @param infile a .gpr file to be used to visualize the expression intensities of the slide spots
-#' @param MFI_var the MFI variable to plot, can be either the background or foreground value
+#' @param infile a .gpr file to be used to visualize the expression 
+#' intensities of the slide spots
+#' @param MFI_var the MFI variable to plot, can be either the
+#'  background or foreground value
 #' @param d_f  a data frame with array data
-#' @param interactive a logical to specify whether an interactive graph is returned or not
+#' @param interactive a logical to specify whether an interactive 
+#' graph is returned or not
 #'
 #' @import htmltools ggplot2
 #' @importFrom plotly ggplotly
@@ -883,7 +943,8 @@ read_array_visualize <- function(infile) {
 #' @examples
 #' ## Not run:
 #' visualize_slide(
-#' infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", package="protGear"),
+#' infile = system.file("extdata", "/array_data/machine1/KK2-06.txt",
+#'  package="protGear"),
 #' MFI_var = "B635 Median"
 #' )
 #' ## End(Not run)
@@ -922,8 +983,10 @@ visualize_slide <-
       point_size <- 1
     ## plot the visual slide
     p <- ggplot(d_f, aes(x = X, y = -Y, text = labels)) +
-      #geom_rect(aes(xmin = minX, xmax = maxX, ymin = -minY, ymax = -maxY),color = "black",alpha=0.0001,fill="blue") +
-      geom_point(size = point_size, aes_string(colour = sprintf("log(`%s`)", MFI_var))) +
+      #geom_rect(aes(xmin = minX, xmax = maxX, ymin = -minY, ymax = -maxY),
+      #color = "black",alpha=0.0001,fill="blue") +
+      geom_point(size = point_size, 
+                 aes_string(colour = sprintf("log(`%s`)", MFI_var))) +
       theme_void() +
       theme(legend.position = "none")  +
       scale_color_gradient2(
@@ -952,8 +1015,10 @@ visualize_slide <-
 
 #' Visualize the slide mimicking the original scan image using a 2d plot.
 #'
-#' @param infile - a .gpr file to be used to visualize the expression intensities of the slide spots
-#' @param MFI_var the MFI variable to plot, can be either the background or foreground value
+#' @param infile - a .gpr file to be used to visualize the expression 
+#' intensities of the slide spots
+#' @param MFI_var the MFI variable to plot, can be either the 
+#' background or foreground value
 #' @param d_f a data frame with array data
 #'
 #' @return A 2d plot of either the background or foreground values
@@ -962,7 +1027,8 @@ visualize_slide <-
 #' @examples
 #' ## Not run:
 #' visualize_slide_2d(
-#' infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", package="protGear"),
+#' infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", 
+#' package="protGear"),
 #' MFI_var = "B635 Median"
 #' )
 #' ## End(Not run)

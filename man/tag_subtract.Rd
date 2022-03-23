@@ -17,17 +17,23 @@ tag_subtract(
 \arguments{
 \item{dataC_mfi}{A dataframe}
 
-\item{tag_antigens}{A character vector with the names of proteins or antigens used as TAG.}
+\item{tag_antigens}{A character vector with the names of proteins or antigens
+used as TAG.}
 
-\item{mean_best_CV_var}{A character string containing the identifier of the variable with the MFI values.}
+\item{mean_best_CV_var}{A character string containing the identifier of the 
+variable with the MFI values.}
 
-\item{tag_file}{A data frame with variables \code{antigen, TAG, TAG_name } to show the TAG for the different antigens or proteins in dataC_mfi}
+\item{tag_file}{A data frame with variables \code{antigen, TAG, TAG_name } 
+to show the TAG for the different antigens or proteins in dataC_mfi}
 
-\item{batch_vars}{A list of characters identifying variables in dataC_mfi for indicating  batch.}
+\item{batch_vars}{A list of characters identifying variables in dataC_mfi 
+for indicating  batch.}
 
-\item{sampleID_var}{A character string containing the name of the sample identifier variable. Default set to 'sampleID'}
+\item{sampleID_var}{A character string containing the name of the sample 
+identifier variable. Default set to 'sampleID'}
 
-\item{antigen_var}{A character string containing the name of the features/protein variable. Default to 'antigen'}
+\item{antigen_var}{A character string containing the name of the
+features/protein variable. Default to 'antigen'}
 }
 \value{
 A data frame of TAG values subtracted
@@ -39,13 +45,17 @@ A data frame of TAG values subtracted
 Subtract the purification TAG data
 }
 \examples{
-tag_file <- readr::read_csv(system.file("extdata", "TAG_antigens.csv", package="protGear"))
+tag_file <- readr::read_csv(system.file("extdata", "TAG_antigens.csv", 
+package="protGear"))
 tag_antigens <- c("CD4TAG", "GST", "MBP")
 batch_vars <- list(machine = "m1", day = "0520")
-dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+dataC <- readr::read_csv(system.file("extdata", "dataC.csv",
+ package="protGear"))
 ## this file has 3 lab replicates and the default names
 dataCV <- cv_estimation(dataC  ,lab_replicates=3)
-dataCV_best2 <- best_CV_estimation(dataCV,slide_id = "iden", lab_replicates = 3, cv_cut_off = 20)
-tag_subtract(dataCV_best2,tag_antigens=tag_antigens, mean_best_CV_var="mean_best_CV",
+dataCV_best2 <- best_CV_estimation(dataCV,slide_id = "iden", 
+lab_replicates = 3, cv_cut_off = 20)
+tag_subtract(dataCV_best2,tag_antigens=tag_antigens, 
+mean_best_CV_var="mean_best_CV",
  tag_file = tag_file,antigen_var = "antigen", batch_vars = batch_vars)
 }

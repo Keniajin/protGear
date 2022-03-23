@@ -1,22 +1,28 @@
 #' Summarise CV by samples
 #' @title cv by sample
 #'
-#' @param cv_variable A character string containing the identifier of the variable with CV values.
-#' @param lab_replicates A numeric value indicating the number of lab replicates.
-#' @param  sampleID_var A character string containing the name of the sample identifier variable. Default set to 'sampleID'
+#' @param cv_variable A character string containing the identifier 
+#' of the variable with CV values.
+#' @param lab_replicates A numeric value indicating the number of lab 
+#' replicates.
+#' @param  sampleID_var A character string containing the name of the 
+#' sample identifier variable. Default set to 'sampleID'
 #' @param dataCV A dataframe
 #' @import dplyr tidyr
 #' @importFrom tidyr gather
 #' @importFrom dplyr lag filter
-#' @description A function to give the summary of the CV's by the sampleID
+#' @description A function to give the summary of 
+#' the CV's by the sampleID
 #' @return A data frame of CV calculated by sample
 #' @export
 #'
 #' @examples
-#' dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+#' dataC <- readr::read_csv(system.file("extdata", 
+#' "dataC.csv", package="protGear"))
 #' ## this file has 3 lab replicates and the default names
 #' dataCV <- cv_estimation(dataC  ,lab_replicates=3)
-#' cv_by_sample_estimation(dataCV, cv_variable = "cvCat_all", lab_replicates = 3)
+#' cv_by_sample_estimation(dataCV, cv_variable = "cvCat_all",
+#'  lab_replicates = 3)
 cv_by_sample_estimation <-
   function(dataCV,
            cv_variable,

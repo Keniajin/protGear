@@ -7,11 +7,14 @@
 visualize_slide(infile, MFI_var, interactive = FALSE, d_f = NA)
 }
 \arguments{
-\item{infile}{a .gpr file to be used to visualize the expression intensities of the slide spots}
+\item{infile}{a .gpr file to be used to visualize the expression 
+intensities of the slide spots}
 
-\item{MFI_var}{the MFI variable to plot, can be either the background or foreground value}
+\item{MFI_var}{the MFI variable to plot, can be either the
+background or foreground value}
 
-\item{interactive}{a logical to specify whether an interactive graph is returned or not}
+\item{interactive}{a logical to specify whether an interactive 
+graph is returned or not}
 
 \item{d_f}{a data frame with array data}
 }
@@ -24,7 +27,8 @@ Visualize the slide mimicking the original scan image.
 \examples{
 ## Not run:
 visualize_slide(
-infile = system.file("extdata", "/array_data/machine1/KK2-06.txt", package="protGear"),
+infile = system.file("extdata", "/array_data/machine1/KK2-06.txt",
+ package="protGear"),
 MFI_var = "B635 Median"
 )
 ## End(Not run)

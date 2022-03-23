@@ -1,15 +1,23 @@
 #' Normalize  Arrays
 #'
-#' @param matrix_antigen An object of class matrix with  features/proteins as columns and samples as the rows
-#' @param method character string specifying the normalization method. Choices are \code{"none","log2","vsn","cyclic_loess"}
+#' @param matrix_antigen An object of class matrix with  features/proteins as 
+#' columns and samples as the rows
+#' @param method character string specifying the normalization method.
+#'  Choices are \code{"none","log2","vsn","cyclic_loess"}
 #' \code{"cyclic_loess_log" ,"rlm"}
-#' @param batch_correct A logical value indicating whether batch correction should be done or not
-#' @param batch_var1 A character or factor vector of size similar to rows of \code{matrix_antigen} indicating the first batch.
-#' @param batch_var2 A character or factor vector of size similar to rows of \code{matrix_antigen} indicating the second batch.
-#' @param return_plot A logical value indicating whether a plot is returned to show the results of normalisation.
-#' @param control_antigens  logical vector specifying the subset of spots which are non-differentially-expressed control spots,
+#' @param batch_correct A logical value indicating whether batch
+#'  correction should be done or not
+#' @param batch_var1 A character or factor vector of size similar to rows 
+#' of \code{matrix_antigen} indicating the first batch.
+#' @param batch_var2 A character or factor vector of size similar to rows 
+#' of \code{matrix_antigen} indicating the second batch.
+#' @param return_plot A logical value indicating whether a plot is returned 
+#' to show the results of normalisation.
+#' @param control_antigens  logical vector specifying the subset of spots 
+#' which are non-differentially-expressed control spots,
 #' for use with \code{method="rlm"}
-#' @param array_matrix  An object of class dataframe or matrix used with \code{method='rlm'} indicating the sample index and
+#' @param array_matrix  An object of class dataframe or matrix used with
+#'  \code{method='rlm'} indicating the sample index and
 #' @param plot_by_antigen Logical to indicate whether to plot by antigen or not
 #' slide name for the matrix_antigen object.
 #' @import limma tibble vsn
@@ -17,7 +25,8 @@
 #' @export
 #'
 #' @examples
-#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+#' matrix_antigen <- readr::read_csv(system.file("extdata", 
+#' "matrix_antigen.csv", package="protGear"))
 #' #VSN
 #' normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
 #' method = "vsn",
@@ -45,7 +54,8 @@ matrix_normalise <-
            array_matrix = NULL) {
     if (method == "log2") {
       exprs_log <- matrix_antigen
-      ## since log can handle negative values , we convert all the negative values to a constant value
+      ## since log can handle negative values , we convert all the 
+     # negative values to a constant value
       # exprs_log[exprs_log<0] <- 1
 
       ## any value that is negative is allocated the smallest value in the batch
@@ -120,7 +130,8 @@ matrix_normalise <-
     }
 
     cv_val <-
-      round(sd(as.matrix(exprs_normalised), na.rm = TRUE) / mean(as.matrix(exprs_normalised), na.rm = TRUE), 4) *
+      round(sd(as.matrix(exprs_normalised), na.rm = TRUE) / 
+              mean(as.matrix(exprs_normalised), na.rm = TRUE), 4) *
       100
     cv_val <- paste(cv_val, "%", sep = "")
     #exprs_normalised_df <- as.data.frame(exprs_normalised)
@@ -182,14 +193,17 @@ matrix_normalise <-
 #' @param matrix_antigen A matrix with antigen data
 #' @param array_matrix A matrix with control antigen data
 #' @param control_antigens the control antigens for RLM normalisation
-#' @description  A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
+#' @description  A function for \code{method='rlm'} from 
+#' \code{\link{matrix_normalise}}.
 #' @return A RLM normalised data frame
 #' @import dplyr
 #' @export
 #'
 #' @examples
-#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
-#' # rlm_normalise_matrix(matrix_antigen=matrix_antigen, array_matrix=array_matrix,
+#' matrix_antigen <- readr::read_csv(system.file("extdata",
+#'  "matrix_antigen.csv", package="protGear"))
+#' # rlm_normalise_matrix(matrix_antigen=matrix_antigen,
+#'  #array_matrix=array_matrix,
 #' # control_antigens=control_antigens)
 rlm_normalise_matrix <-
   function(matrix_antigen,
@@ -217,7 +231,8 @@ rlm_normalise_matrix <-
 
     ## create a variable to indicate the control antigens
     rlm_normalise_df <-   rlm_normalise_df %>%
-      mutate(Description = ifelse(antigen %in% all_of(control_antigens) , "Control", "Sample"))
+      mutate(Description = ifelse(antigen %in% all_of(control_antigens) ,
+                                  "Control", "Sample"))
     return(rlm_normalise_df)
   }
 
@@ -225,13 +240,17 @@ rlm_normalise_matrix <-
 #' RLM normalisation
 #'
 #' @param rlm_normalise_df rlm normalised data frame
-#' @description  A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
-#' @return an elist of RLM normalisation to be utilised by \code{\link{rlm_normalise_matrix}}
+#' @description  A function for \code{method='rlm'} from 
+#' \code{\link{matrix_normalise}}.
+#' @return an elist of RLM normalisation to be utilised by 
+#' \code{\link{rlm_normalise_matrix}}
 #' @export
 #' @keywords internal
 #' @examples
-#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
-#' #rlm_normalise_df <- rlm_normalise_matrix(matrix_antigen=matrix_antigen, array_matrix=array_matrix,
+#' matrix_antigen <- readr::read_csv(system.file("extdata", 
+#' "matrix_antigen.csv", package="protGear"))
+#' #rlm_normalise_df <- rlm_normalise_matrix(matrix_antigen=matrix_antigen, 
+#' #array_matrix=array_matrix,
 #' # control_antigens=control_antigens)
 #' # rlm_normalise(rlm_normalise_df)
 rlm_normalise <- function(rlm_normalise_df) {
@@ -394,8 +413,8 @@ rlm_normalise <- function(rlm_normalise_df) {
 
 
 
-  ### added by ken - to convert all the negatives in the sample antigens to make them to the half of
-  ## the lowest positive
+  ### added by ken - to convert all the negatives in the sample antigens
+ # to make them to the half of the lowest positive
 
   min_pos <- minpositive(sample_elist$E)
   sample_elist$E <-
@@ -482,7 +501,8 @@ output_trend_stats <- function(name, p_val, z_val) {
 #' @export
 #'
 #' @examples
-#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+#' matrix_antigen <- readr::read_csv(system.file("extdata", 
+#' "matrix_antigen.csv", package="protGear"))
 #' normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
 #' method = "vsn",
 #' return_plot = FALSE
@@ -504,8 +524,10 @@ plot_normalised <-
       ) %>%
       arrange(rank_mean_all_anti)
 
-    # perform the trend test using the Cox–Stuart (C–S) and Mann–Kendall (M–K) trend tests for
-    #for the null hypothesis of no trend in the transformed standard deviations under several transformation
+    # perform the trend test using the Cox–Stuart (C–S) and Mann–Kendall (M–K) 
+    #trend tests for the null hypothesis of no 
+    #trend in the transformed standard deviations
+    #under several transformation
     #cs_trend <- trend::cs.test(exprs_normalised_df_plot$stdev_all_anti)
     # mk_trend <- trend::mk.test(exprs_normalised_df_plot$stdev_all_anti)
 
@@ -516,7 +538,8 @@ plot_normalised <-
 
     cs_stuart <- "Cox-Stuart"
     m_kendall <-
-      output_trend_stats('Mann-Kendall (tau stats)', mk_trend$sl[[1]], mk_trend$tau[[1]])
+      output_trend_stats('Mann-Kendall (tau stats)', mk_trend$sl[[1]],
+                         mk_trend$tau[[1]])
 
 
 
@@ -533,9 +556,10 @@ plot_normalised <-
       ggplot(exprs_normalised_df_plot ,
              aes(x = rank_mean_all_anti, y = stdev_all_anti)) +
       geom_jitter(color = "red") + theme_classic() +
-      expand_limits(y = c(0, 10)) +  stat_cor() + geom_smooth(color = 'blue', se = FALSE, size =
-                                                                0.5) +
-      ggtitle(paste(norm_method, "Normalisation")) + xlab("pooled mean rank (mean of features by sample)") +
+      expand_limits(y = c(0, 10)) +  
+      stat_cor() + geom_smooth(color = 'blue', se = FALSE, size = 0.5) +
+      ggtitle(paste(norm_method, "Normalisation")) + 
+      xlab("pooled mean rank (mean of features by sample)") +
       ylab("pooled SD") +
       labs(caption = paste0(m_kendall , "\n", cs_stuart)) +
       theme(plot.caption = element_text(
@@ -560,7 +584,8 @@ plot_normalised <-
 #' @export
 #'
 #' @examples
-#' matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+#' matrix_antigen <- readr::read_csv(system.file("extdata", 
+#' "matrix_antigen.csv", package="protGear"))
 #' normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
 #' method = "vsn",
 #' return_plot = FALSE
@@ -583,21 +608,27 @@ plot_normalised_antigen <-
       ) %>%
       arrange(rank_mean_all_anti)
 
-    # perform the trend test using the Cox–Stuart (C–S) and Mann–Kendall (M–K) trend tests for
-    #for the null hypothesis of no trend in the transformed standard deviations under several transformation
-    #cs_trend2 <- trend::cs.test(antigen_summ$sd_mfi)
-    #mk_trend2 <- trend::mk.test(antigen_summ$sd_mfi[!is.na(antigen_summ$sd_mfi)])
+    # perform the trend test using the Cox–Stuart (C–S) and Mann–Kendall (M–K) 
+   # trend tests for
+    #for the null hypothesis of no trend in the transformed standard deviations
+   # under several transformation
+  #cs_trend2 <- trend::cs.test(antigen_summ$sd_mfi)
+  #mk_trend2 <- trend::mk.test(antigen_summ$sd_mfi[!is.na(antigen_summ$sd_mfi)])
 
-    #cs_stuart2 <- output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic)
-    #m_kendall2 <- output_trend_stats('Mann-Kendall',mk_trend2$p.value,mk_trend2$statistic )
+  #cs_stuart2 <- output_trend_stats("Cox-Stuart",
+    #cs_trend2$p.value, cs_trend2$statistic)
+  #m_kendall2 <- output_trend_stats('Mann-Kendall',
+ #mk_trend2$p.value,mk_trend2$statistic )
 
     ## Changed here to use Kendall packages
     mk_trend2 <-
       Kendall::MannKendall(antigen_summ$sd_mfi[!is.na(antigen_summ$sd_mfi)])
-    cs_stuart2 <-
-      "Cox-Stuart" #output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic[[1]])
+    cs_stuart2 <-   "Cox-Stuart" 
+    
+  #output_trend_stats("Cox-Stuart",cs_trend2$p.value, cs_trend2$statistic[[1]])
     m_kendall2 <-
-      output_trend_stats('Mann-Kendall (tau stats)', mk_trend2$sl[[1]], mk_trend2$tau[[1]])
+      output_trend_stats('Mann-Kendall (tau stats)', 
+                         mk_trend2$sl[[1]], mk_trend2$tau[[1]])
 
 
     normalisation_approaches <- c(
@@ -612,9 +643,11 @@ plot_normalised_antigen <-
     p_norm <-
       ggplot(antigen_summ ,  aes(x = rank_mean_all_anti, y = sd_mfi)) +
       geom_jitter(color = "red") + theme_classic() +
-      expand_limits(y = c(0, 10)) +  stat_cor() + geom_smooth(color = 'blue', se = FALSE, size =
+      expand_limits(y = c(0, 10)) +  stat_cor() + geom_smooth(color = 'blue',
+                                                              se = FALSE, size =
                                                                 0.5) +
-      ggtitle(paste(norm_method, "Normalisation")) + xlab("Pooled mean rank (mean of features)") +
+      ggtitle(paste(norm_method, "Normalisation")) + 
+      xlab("Pooled mean rank (mean of features)") +
       ylab("pooled SD") +
       labs(caption = paste0(m_kendall2 , "\n", cs_stuart2)) +
       theme(plot.caption = element_text(

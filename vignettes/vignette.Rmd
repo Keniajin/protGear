@@ -12,6 +12,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
 link-citations: true
 output:
+  BiocStyle: html_document
   html_document:
     df_print: paged
     toc: true

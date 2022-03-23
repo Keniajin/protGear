@@ -17,26 +17,34 @@ matrix_normalise(
 )
 }
 \arguments{
-\item{matrix_antigen}{An object of class matrix with  features/proteins as columns and samples as the rows}
+\item{matrix_antigen}{An object of class matrix with  features/proteins as 
+columns and samples as the rows}
 
-\item{method}{character string specifying the normalization method. Choices are \code{"none","log2","vsn","cyclic_loess"}
+\item{method}{character string specifying the normalization method.
+ Choices are \code{"none","log2","vsn","cyclic_loess"}
 \code{"cyclic_loess_log" ,"rlm"}}
 
-\item{batch_correct}{A logical value indicating whether batch correction should be done or not}
+\item{batch_correct}{A logical value indicating whether batch
+correction should be done or not}
 
-\item{batch_var1}{A character or factor vector of size similar to rows of \code{matrix_antigen} indicating the first batch.}
+\item{batch_var1}{A character or factor vector of size similar to rows 
+of \code{matrix_antigen} indicating the first batch.}
 
-\item{batch_var2}{A character or factor vector of size similar to rows of \code{matrix_antigen} indicating the second batch.}
+\item{batch_var2}{A character or factor vector of size similar to rows 
+of \code{matrix_antigen} indicating the second batch.}
 
-\item{return_plot}{A logical value indicating whether a plot is returned to show the results of normalisation.}
+\item{return_plot}{A logical value indicating whether a plot is returned 
+to show the results of normalisation.}
 
 \item{plot_by_antigen}{Logical to indicate whether to plot by antigen or not
 slide name for the matrix_antigen object.}
 
-\item{control_antigens}{logical vector specifying the subset of spots which are non-differentially-expressed control spots,
+\item{control_antigens}{logical vector specifying the subset of spots 
+which are non-differentially-expressed control spots,
 for use with \code{method="rlm"}}
 
-\item{array_matrix}{An object of class dataframe or matrix used with \code{method='rlm'} indicating the sample index and}
+\item{array_matrix}{An object of class dataframe or matrix used with
+\code{method='rlm'} indicating the sample index and}
 }
 \value{
 A data frame of normalised values
@@ -45,7 +53,8 @@ A data frame of normalised values
 Normalize  Arrays
 }
 \examples{
-matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
+matrix_antigen <- readr::read_csv(system.file("extdata", 
+"matrix_antigen.csv", package="protGear"))
 #VSN
 normlise_vsn <- matrix_normalise(as.matrix(matrix_antigen),
 method = "vsn",

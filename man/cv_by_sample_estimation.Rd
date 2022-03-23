@@ -14,24 +14,30 @@ cv_by_sample_estimation(
 \arguments{
 \item{dataCV}{A dataframe}
 
-\item{cv_variable}{A character string containing the identifier of the variable with CV values.}
+\item{cv_variable}{A character string containing the identifier 
+of the variable with CV values.}
 
-\item{lab_replicates}{A numeric value indicating the number of lab replicates.}
+\item{lab_replicates}{A numeric value indicating the number of lab 
+replicates.}
 
-\item{sampleID_var}{A character string containing the name of the sample identifier variable. Default set to 'sampleID'}
+\item{sampleID_var}{A character string containing the name of the 
+sample identifier variable. Default set to 'sampleID'}
 }
 \value{
 A data frame of CV calculated by sample
 }
 \description{
-A function to give the summary of the CV's by the sampleID
+A function to give the summary of 
+the CV's by the sampleID
 }
 \details{
 Summarise CV by samples
 }
 \examples{
-dataC <- readr::read_csv(system.file("extdata", "dataC.csv", package="protGear"))
+dataC <- readr::read_csv(system.file("extdata", 
+"dataC.csv", package="protGear"))
 ## this file has 3 lab replicates and the default names
 dataCV <- cv_estimation(dataC  ,lab_replicates=3)
-cv_by_sample_estimation(dataCV, cv_variable = "cvCat_all", lab_replicates = 3)
+cv_by_sample_estimation(dataCV, cv_variable = "cvCat_all",
+ lab_replicates = 3)
 }

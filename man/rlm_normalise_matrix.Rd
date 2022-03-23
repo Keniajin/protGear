@@ -17,10 +17,13 @@ rlm_normalise_matrix(matrix_antigen, array_matrix, control_antigens)
 A RLM normalised data frame
 }
 \description{
-A function for \code{method='rlm'} from \code{\link{matrix_normalise}}.
+A function for \code{method='rlm'} from 
+\code{\link{matrix_normalise}}.
 }
 \examples{
-matrix_antigen <- readr::read_csv(system.file("extdata", "matrix_antigen.csv", package="protGear"))
-# rlm_normalise_matrix(matrix_antigen=matrix_antigen, array_matrix=array_matrix,
+matrix_antigen <- readr::read_csv(system.file("extdata",
+ "matrix_antigen.csv", package="protGear"))
+# rlm_normalise_matrix(matrix_antigen=matrix_antigen,
+ #array_matrix=array_matrix,
 # control_antigens=control_antigens)
 }

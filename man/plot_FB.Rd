@@ -18,9 +18,11 @@ plot_FB(
 \item{antigen_name}{The \code{variable} describing which features/proteins/
 antibodies in the data should be used to plot}
 
-\item{bg_MFI}{A numeric \code{variable} describing which is the background MFI}
+\item{bg_MFI}{A numeric \code{variable} describing which is the 
+background MFI}
 
-\item{FG_MFI}{A numeric \code{variable} describing which is the foreground MFI}
+\item{FG_MFI}{A numeric \code{variable} describing which is the 
+foreground MFI}
 
 \item{log_mfi}{a logical value indicating whether the MFI values should be
 log transformed or not.}
@@ -29,15 +31,18 @@ log transformed or not.}
 a ggplot of foreground vs background MFI values
 }
 \description{
-A generic function for plotting the background and foreground values.
+A generic function for plotting the background and foreground
+ values.
 }
 \details{
 Plot foreground and background values
 }
 \examples{
 ## Not run:
-#After extracting the background using \code{\link{extract_bg}} we plot the data using
-allData_bg <- readr::read_csv(system.file("extdata", "bg_example.csv", package="protGear"))
+#After extracting the background using \code{\link{extract_bg}} 
+#we plot the data using
+allData_bg <- readr::read_csv(system.file("extdata", 
+"bg_example.csv", package="protGear"))
 plot_FB(allData_bg,
 antigen_name = "antigen",
 bg_MFI = "BG_Median", FG_MFI = "FBG_Median", log = FALSE

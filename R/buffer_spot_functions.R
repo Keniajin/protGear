@@ -16,19 +16,19 @@
 #' package="protGear"))
 #' buffer_spots(Data1 = bg_correct_df)
 buffer_spots <- function(Data1 , buffer_spot = "buffer") {
-  Data2_buffer <- Data1 %>%
+ Data2_buffer <- Data1 %>%
     # within each Name count sampleID. We had grouped this earlier
     # n() - gives number of observations in the current group
     mutate(replicate = 1:n()) %>%
     # Select only relevant variables
     dplyr::select(sampleID,
-                   antigen,
-                   replicate,
-                   FMedianBG_correct,
-                   Block,
-                   Column,
-                   Row)
-
+                  antigen,
+                  replicate,
+                  FMedianBG_correct,
+                  Block,
+                  Column,
+                  Row)
+  
   if (buffer_spot == 'buffer') {
     Data2_buffer <- Data2_buffer %>%
       filter(grepl('^[bB][Uu][Ff][Ff][Ee][Rr]', antigen))
@@ -36,8 +36,8 @@ buffer_spots <- function(Data1 , buffer_spot = "buffer") {
     Data2_buffer <- Data2_buffer %>%
       filter(grepl(paste0('^', buffer_spot), tolower(antigen)))
   }
-
-
+  
+  
   Data2_buffer <- Data2_buffer %>%
     # combine Name and replicate
     unite(antigen, antigen, replicate)
@@ -73,9 +73,10 @@ plot_buffer <- function(df = buffers,
   x <- buffer_names
   y <- buffer_mfi
   df[[buffer_names]] <- factor(df[[buffer_names]] ,
-                               levels = mixedsort(unique(as.character(df[[buffer_names]]))))
-
-
+                               levels = mixedsort(unique(
+                                 as.character(df[[buffer_names]]))))
+  
+  
   p <- ggplot(data = df, aes_string(x = x, y = y)) +
     geom_jitter(aes_string(x = x, y = y, color = slide_id)) +
     geom_boxplot(aes_string(x = x, y = y), alpha = 0.2) +
