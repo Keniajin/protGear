@@ -9,7 +9,7 @@ There is a package vignette included with this package with a step by step use o
 
 ``` r
 library(remotes) 
-remotes::install_github("Keniajin/protGear/")
+remotes::install_github("keniajin/protGear")
 ```
 
 

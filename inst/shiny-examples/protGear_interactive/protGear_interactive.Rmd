@@ -38,10 +38,6 @@ library(shiny)
 library(factoextra)
 library(shinyFiles)
 
-files.sources = list.files("scripts/functions_call_load/",full.names = TRUE)
-sapply(files.sources, source)
-
-dir.create('error')
 #### save all the files as objects
 #Increasing the default maximum upload restriction of Shiny to 10GB can add to globally
 if(Sys.getenv('SHINY_PORT') == "") options(shiny.maxRequestSize=10000*1024^2)
@@ -67,10 +63,10 @@ Data Processing {data-width=300}
 ======================================================================
 
 ```{r, height = "100vh"}
+dir_app <- system.file("shiny-examples/protGear_interactive/load_data_dashboard/", package = "protGear")
 fluidRow(class="sidebarItemExpanded",
     column(12,div(style = "height: 100vh;margin:0,padding:0;",
-shinyAppDir("load_data_dashboard/",
-            options = list(width = "100%", height = "100vh"))
+shinyAppDir(dir_app, options = list(width = "100%", height = "100vh"))
 )))
 ```
 
@@ -81,10 +77,11 @@ About protGear {data-width=300}
  
 
 ```{r, height = "100%"}
+about_dir_app <- system.file("shiny-examples/protGear_interactive/about_app/", package = "protGear")
+
 fluidRow(
     column(12,div(style = "height:1000px;background-color: white;margin: 0;padding: 0;",
-shinyAppDir("about_app/",
-            options = list(width = "100%", height = "100%"))
+shinyAppDir(about_dir_app, options = list(width = "100%", height = "100%"))
 )))
 ```
 

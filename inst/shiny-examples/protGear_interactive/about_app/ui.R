@@ -6,9 +6,12 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       h2("Installation"),
-      p("protGear is available on Github, so you can install it in the usual way
+      p("protGear is available on BioConductor Github, so you can install it in the usual way
         from your R console:"),
-      code('remotes::install_github("Keniajin/protGear")'),
+      h3("Installation Bioconductor"),
+      code('BiocManager::install("protGear")'),
+      h3("Installation of development version Github"),
+      code('remotes::install_github("keniajin/protGear")'),
       br(),
       br(),
       br(),
