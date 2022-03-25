@@ -20,4 +20,9 @@
 
  + Updated the NEWS file 
  + Removed other non Bioconductor files 
- 
+
+
+## protGear 0.99.545 (2022-03-23) 
+
+ + Updated the shiny app path 
+ + Added Bioconductor installation in the app
