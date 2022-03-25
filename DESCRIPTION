@@ -1,7 +1,7 @@
 Package: protGear
 Type: Package
 Title: Protein Micro Array Data Management and Interactive Visualization
-Version: 0.99.545
+Version: 0.99.546
 Authors@R: c(person("Kennedy", "Mwai", role = c("cre", "aut"), email = "keniajin@gmail.com"),
              person(c("James", "Mburu"), role = "aut" , email = "mburuwanja@gmail.com") ,
              person(c("Jacqueline", "Waeni"), role = "ctb" , email = "jacqwaeni@gmail.com"))
