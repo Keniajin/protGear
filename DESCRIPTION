@@ -1,7 +1,7 @@
 Package: protGear
 Type: Package
 Title: Protein Micro Array Data Management and Interactive Visualization
-Version: 0.99.55
+Version: 0.99.551
 Authors@R: c(person("Kennedy", "Mwai", role = c("cre", "aut"), email = "keniajin@gmail.com"),
              person(c("James", "Mburu"), role = "aut" , email = "mburuwanja@gmail.com") ,
              person(c("Jacqueline", "Waeni"), role = "ctb" , email = "jacqwaeni@gmail.com"))
@@ -15,7 +15,7 @@ Imports:
      magrittr (>= 1.5) , stats (>= 3.6) , ggplot2 (>= 3.3.0)  , tidyr (>= 1.1.3) , data.table (>= 1.14.0),
     ggpubr (>= 0.4.0), gtools (>= 3.8.2) , tibble (>= 3.1.0) ,  rmarkdown (>= 2.9) , knitr (>= 1.33),
     utils (>= 3.6), genefilter (>= 1.74.0), readr (>= 2.0.1) , Biobase (>= 2.52.0), 
-    plyr (>= 1.8.6) , Kendall (>= 2.2.1)  , shiny (>= 1.0.0) ,  purrr (>= 0.3.4),  plotly (>= 4.9.0) , MASS (>= 7.3) , 
+    plyr (>= 1.8.6) , Kendall (>= 2.2)  , shiny (>= 1.0.0) ,  purrr (>= 0.3.4),  plotly (>= 4.9.0) , MASS (>= 7.3) , 
     htmltools (>= 0.4.0) , flexdashboard (>= 0.5.2) , shinydashboard (>= 0.7.1) , kableExtra (>= 1.3.4), 
     GGally (>= 2.1.2) , pheatmap (>= 1.0.12) ,  grid(>= 4.1.1),
      styler (>= 1.6.1) , factoextra (>= 1.0.7) ,FactoMineR (>= 2.4) , rlang (>= 0.4.11),
