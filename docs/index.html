@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.545</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Keniajin/protGear/">
+  <a href="https://github.com/Keniajin/protGear/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -82,101 +78,107 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="general-information" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-information" class="anchor"></a>General information</h2>
+<div class="section level2">
+<h2 id="general-information">General information<a class="anchor" aria-label="anchor" href="#general-information"></a>
+</h2>
 <p>protGear is a package for protein micro-array data processing just before the main analysis.</p>
 <p>The package loads the ‘<code>gpr</code>’ or ‘<code>txt</code>’ file format extracted by the quantification software and merges this with the specific sample identifiers. The package processes multiple files extracted in a batch with their corresponding sample identifier file. The sample identifier file has 2 variables ‘<code>v1</code>’ and ‘<code>v2</code>’ which indicate the mini-array or block number and sample identifier respectively. The ‘<code>gpr</code>’ file and the corresponding sample identifier file have the same file name. protGear also provides a web based <span class="math inline"><em>S</em><em>h</em><em>i</em><em>n</em><em>y</em><sup>(<em>R</em>)</sup></span> platform for real time visualization of the data processing.</p>
-<p>There is a package vignette included with this package with a step by step use of the package. Check <a href="https://keniajin.github.io/protGear/" class="uri">https://keniajin.github.io/protGear/</a> under articles.</p>
+<p>There is a package vignette included with this package with a step by step use of the package. Check <a href="https://keniajin.github.io/protGear/" class="external-link uri">https://keniajin.github.io/protGear/</a> under articles.</p>
 </div>
-<div id="installing-the-devel-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installing-the-devel-package" class="anchor"></a>Installing the devel package</h2>
+<div class="section level2">
+<h2 id="installing-the-devel-package">Installing the devel package<a class="anchor" aria-label="anchor" href="#installing-the-devel-package"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span> 
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Keniajin/protGear/"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span> 
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"keniajin/protGear"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="installing-from-bioc-bioconductor" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installing-from-bioc-bioconductor" class="anchor"></a>Installing from Bioc BioConductor</h2>
+<div class="section level2">
+<h2 id="installing-from-bioc-bioconductor">Installing from Bioc BioConductor<a class="anchor" aria-label="anchor" href="#installing-from-bioc-bioconductor"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## install from BioConductor</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"protGear"</span><span class="op">)</span></code></pre></div>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"protGear"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="to-run-the-shiny-application" class="section level2">
-<h2 class="hasAnchor">
-<a href="#to-run-the-shiny-application" class="anchor"></a>To run the shiny application</h2>
+<div class="section level2">
+<h2 id="to-run-the-shiny-application">To run the shiny application<a class="anchor" aria-label="anchor" href="#to-run-the-shiny-application"></a>
+</h2>
 <p>To use the application locally on your compute install R and launch the app using the following command. <code><a href="reference/launch_protGear_interactive.html">protGear::launch_protGear_interactive()</a></code></p>
-<p>To Install R:</p>
-<ul>
-<li>Open an Internet browser and go to www.r-project.org.</li>
-<li>Under “Getting Started” click the “download R” link</li>
-<li>Select a CRAN location (a mirror site) and click the corresponding link.</li>
-<li>Download R depending on your operating system.</li>
-</ul>
+<p>To Install R: - Open an Internet browser and go to www.r-project.org. - Under “Getting Started” click the “download R” link - Select a CRAN location (a mirror site) and click the corresponding link. - Download R depending on your operating system.</p>
 </div>
-<div id="protgear-help-pages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#protgear-help-pages" class="anchor"></a>protGear help pages</h2>
+<div class="section level2">
+<h2 id="protgear-help-pages">protGear help pages<a class="anchor" aria-label="anchor" href="#protgear-help-pages"></a>
+</h2>
 <ul>
-<li>The main page - <a href="https://keniajin.github.io/protGear/" class="uri">https://keniajin.github.io/protGear/</a>
+<li>The main page - <a href="https://keniajin.github.io/protGear/" class="external-link uri">https://keniajin.github.io/protGear/</a>
 </li>
-<li>Vignette - <a href="https://keniajin.github.io/protGear/articles/vignette.html" class="uri">https://keniajin.github.io/protGear/articles/vignette.html</a>
+<li>Vignette - <a href="https://keniajin.github.io/protGear/articles/vignette.html" class="external-link uri">https://keniajin.github.io/protGear/articles/vignette.html</a>
 </li>
 </ul>
 </div>
-<div id="contribute" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contribute" class="anchor"></a>Contribute</h2>
-<p>Check the Github page for <a href="https://github.com/Keniajin/protGear/">source code</a>.</p>
+<div class="section level2">
+<h2 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>
+</h2>
+<p>Check the Github page for <a href="https://github.com/Keniajin/protGear/" class="external-link">source code</a>.</p>
 </div>
-<div id="publication" class="section level2">
-<h2 class="hasAnchor">
-<a href="#publication" class="anchor"></a>Publication</h2>
+<div class="section level2">
+<h2 id="publication">Publication<a class="anchor" aria-label="anchor" href="#publication"></a>
+</h2>
 <p>Mwai K, Kibinge N, Tuju J, Kamuyu G, Kimathi R, Mburu J, Chepsat E, Nyamako L, Chege T, Nkumama I, Kinyanjui S. et al. , protGear: A protein microarray data pre-processing suite. Computational and Structural Biotechnology Journal. 2021 Apr 24.</p>
-<p>DOI: <a href="https://doi.org/10.1016/j.csbj.2021.04.044" class="uri">https://doi.org/10.1016/j.csbj.2021.04.044</a></p>
+<p>DOI: <a href="https://doi.org/10.1016/j.csbj.2021.04.044" class="external-link uri">https://doi.org/10.1016/j.csbj.2021.04.044</a></p>
 </div>
 
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/Keniajin/protGear/">https://​github.com/​Keniajin/​protGear/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Keniajin/protGear/issues">https://​github.com/​Keniajin/​protGear/​issues</a>
-</li>
+<li><a href="https://github.com/Keniajin/protGear/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Keniajin/protGear/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing protGear</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Kennedy Mwai <br><small class="roles"> Maintainer, author </small>  </li>
 <li>James Mburu <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Kennedy Mwai, James Mburu.</p>
+  <p></p>
+<p>Developed by Kennedy Mwai, James Mburu.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -184,6 +186,8 @@
 
   
 
+
+  
 
   </body>
 </html>

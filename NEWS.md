@@ -26,3 +26,9 @@
 
  + Updated the shiny app path 
  + Added Bioconductor installation in the app
+ 
+ 
+## protGear 0.99.55 (2022-04-08) 
+
+ + removed vignette.R and csv file
+

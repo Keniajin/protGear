@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.545</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Keniajin/protGear/">
+  <a href="https://github.com/Keniajin/protGear/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -79,16 +75,16 @@
 
       
 
-      </header><script src="vignette_files/header-attrs-2.11/header-attrs.js"></script><script src="vignette_files/kePrint-0.0.1/kePrint.js"></script><link href="vignette_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+      </header><script src="vignette_files/kePrint-0.0.1/kePrint.js"></script><link href="vignette_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>protGear vignette processing suite</h1>
-                        <h4 class="author">Kennedy Mwai</h4>
+                        <h4 data-toc-skip class="author">Kennedy Mwai</h4>
             
-            <h4 class="date">23 March, 2022</h4>
+            <h4 data-toc-skip class="date">08 April, 2022</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/Keniajin/protGear/blob/master/vignettes/vignette.Rmd"><code>vignettes/vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Keniajin/protGear/blob/HEAD/vignettes/vignette.Rmd" class="external-link"><code>vignettes/vignette.Rmd</code></a></small>
       <div class="hidden name"><code>vignette.Rmd</code></div>
 
     </div>
@@ -96,80 +92,80 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/">ggpubr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-gregmisc/gtools">gtools</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rforge.net/png/">png</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler">styler</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://factominer.free.fr">FactoMineR</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.sthda.com/english/rpkgs/factoextra">factoextra</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/magick/">magick</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org">rlang</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GuangchuangYu/ggplotify">ggplotify</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>echo <span class="op">=</span> <span class="cn">TRUE</span>, message<span class="op">=</span><span class="cn">FALSE</span>,warning <span class="op">=</span> <span class="cn">FALSE</span>,
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/ggpubr/" class="external-link">ggpubr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-gregmisc/gtools" class="external-link">gtools</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org" class="external-link">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rforge.net/png/" class="external-link">png</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lib/styler" class="external-link">styler</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://factominer.free.fr" class="external-link">FactoMineR</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.sthda.com/english/rpkgs/factoextra" class="external-link">factoextra</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/magick/" class="external-link">magick</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rlang.r-lib.org" class="external-link">rlang</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/" class="external-link">GGally</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GuangchuangYu/ggplotify" class="external-link">ggplotify</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>echo <span class="op">=</span> <span class="cn">TRUE</span>, message<span class="op">=</span><span class="cn">FALSE</span>,warning <span class="op">=</span> <span class="cn">FALSE</span>,
                       fig.align <span class="op">=</span> <span class="st">'center'</span>,
                       dev <span class="op">=</span> <span class="st">"png"</span>, 
-                       tidy<span class="op">=</span><span class="st">'styler'</span>, tidy.opts<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>strict<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                       tidy<span class="op">=</span><span class="st">'styler'</span>, tidy.opts<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>strict<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <style type="text/css">
 .custom-inline {
   color: red;
   font-weight: 700
 }
 </style>
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
-<div id="general-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#general-information" class="anchor"></a>General information</h3>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<div class="section level3">
+<h3 id="general-information">General information<a class="anchor" aria-label="anchor" href="#general-information"></a>
+</h3>
 <p>protGear is a package for protein micro data processing just before the main analysis. The package loads the ‘<code>gpr</code>’ or ‘<code>txt</code>’ file format extracted by the quantification software and merges this with the specific sample identifiers. The package processes multiple files extracted batch by batch with their corresponding sample identifier file. The sample identifier file has 2 variables ‘<code>v1</code>’ and ‘<code>v2</code>’ which indicate the mini-array or block number and sample identifier respectively. The ‘<code>gpr</code>’ file and the corresponding sample identifier file have the same file name. protGear also provides a web based <span class="math inline">\(Shiny^{(R)}\)</span> platform for real time visualization of the data processing.</p>
 <p>In this vignette the general work-flow of protGear will be outlined by processing a sample dataset from a multicentre study <strong>Plasmodium falciparum</strong> Merozoite Protein Microarray. The multicentre study design motivated the development of the protGear suite.</p>
-<p>The details of the methodologies are published here <a href="https://doi.org/10.1016/j.csbj.2021.04.044" class="uri">https://doi.org/10.1016/j.csbj.2021.04.044</a></p>
+<p>The details of the methodologies are published here <a href="https://doi.org/10.1016/j.csbj.2021.04.044" class="external-link uri">https://doi.org/10.1016/j.csbj.2021.04.044</a></p>
 </div>
-<div id="analysis-setup" class="section level3">
-<h3 class="hasAnchor">
-<a href="#analysis-setup" class="anchor"></a>Analysis setup</h3>
+<div class="section level3">
+<h3 id="analysis-setup">Analysis setup<a class="anchor" aria-label="anchor" href="#analysis-setup"></a>
+</h3>
 <p>Create 2 folders that hold the ‘<code>.gpr</code>’ files and the corresponding sample identifier files.</p>
 <div class="figure">
 <img src="folder_structure.png" style="width:70.0%" alt=""><p class="caption">Folder structure of array and sample ID files</p>
 </div>
 </div>
 </div>
-<div id="sample-identifier-file" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sample-identifier-file" class="anchor"></a>Sample identifier file</h2>
+<div class="section level2">
+<h2 id="sample-identifier-file">Sample identifier file<a class="anchor" aria-label="anchor" href="#sample-identifier-file"></a>
+</h2>
 <div class="figure">
 <img src="image_slide.png" alt=""><p class="caption">sample ID file structure</p>
 </div>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
 <p>To install <code>protGear</code> from BioConductor the following commands in R</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## install from BioConductor</span>
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"protGear"</span><span class="op">)</span></code></pre></div>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"protGear"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="importing-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#importing-data" class="anchor"></a>Importing data</h2>
+<div class="section level2">
+<h2 id="importing-data">Importing data<a class="anchor" aria-label="anchor" href="#importing-data"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## load the package</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Keniajin/protGear">protGear</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Keniajin/protGear" class="external-link">protGear</a></span><span class="op">)</span></code></pre></div>
 <p>The first part is to specify the parameters of the micro-array experiment to assist in processing the data. The parameters specified are</p>
 <ul>
 <li>channel - The scanner fluorescence output used to record the data. It can be green,red,blue among others with a specified number.</li>
@@ -186,10 +182,10 @@
 <code class="sourceCode R"><span class="co">## specify the the parameters to process the data</span>
 <span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/array_vars.html">array_vars</a></span><span class="op">(</span>
   channel <span class="op">=</span> <span class="st">"635"</span>,
-  chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
+  chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
   totsamples <span class="op">=</span> <span class="fl">21</span>,
   blockspersample <span class="op">=</span> <span class="fl">2</span>,
-  sampleID_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_sampleID/"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
+  sampleID_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_sampleID/"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
   mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,
   machine <span class="op">=</span> <span class="fl">1</span>,
   <span class="co">## optional</span>
@@ -197,74 +193,74 @@
 <span class="op">)</span></code></pre></div>
 <p>The exact channel used should be checked in the header of the file from the quantification software under <code>Wavelengths</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">header_gpr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/machine1/KK2-06.txt"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
+<code class="sourceCode R"><span class="va">header_gpr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/machine1/KK2-06.txt"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
   n <span class="op">=</span> <span class="fl">40</span>
 <span class="op">)</span>
-<span class="va">header_gpr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"\""</span>, <span class="st">""</span>, <span class="va">header_gpr</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span><span class="op">]</span><span class="op">)</span>
+<span class="va">header_gpr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"\""</span>, <span class="st">""</span>, <span class="va">header_gpr</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span><span class="op">]</span><span class="op">)</span>
 <span class="va">header_gpr</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span><span class="op">]</span></code></pre></div>
-<pre><code>##  [1] "ATF\t1\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                                
-##  [2] "29\t31\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                                
-##  [3] "Type=GenePix Export 3\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                               
-##  [4] "DateTime=2017/09/05 17:17:47\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                        
-##  [5] "Settings=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                           
-##  [6] "GalFile=C:\\Users\\rkimathi\\Desktop\\GAL FILE DATA.gal\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                             
-##  [7] "PixelSize=10\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                        
-##  [8] "Wavelengths=635\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     
-##  [9] "ImageFiles=Z:\\Multicenter study\\4_9_2017\\data\\BRB0001.tif 0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                     
-## [10] "NormalizationMethod=None\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                            
-## [11] "NormalizationFactors=1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                              
-## [12] "JpegImage=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                          
-## [13] "StdDev=Type 1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                       
-## [14] "FeatureType=Circular\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                
-## [15] "Barcode=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                            
-## [16] "BackgroundSubtraction=LocalFeature\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                  
-## [17] "ImageOrigin=0, 0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                    
-## [18] "JpegOrigin=1670, 840\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                
-## [19] "Creator=GenePix Pro 7.3.0.0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                         
-## [20] "Scanner=GenePix 4300 [141110]\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                       
-## [21] "FocusPosition=0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     
-## [22] "Temperature=0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                       
-## [23] "LinesAveraged=1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     
-## [24] "Comment=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                            
-## [25] "PMTGain=400\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                         
-## [26] "ScanPower=100\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                       
-## [27] "LaserPower=0.55\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     
-## [28] "Filters=Standard Red\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                
-## [29] "ScanRegion=0,0,2200,7200\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                            
-## [30] "ScanArea=1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                          
-## [31] "Supplier=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                           
-## [32] "Flags\tNormalize\tAutoflag\tBlock\tColumn\tRow\tName\tID\tX\tY\tF635 Median\tB635\tB635 Median\tSNR 635\tF635 Median - B635\tIndex"</code></pre>
+<pre><code><span class="co">##  [1] "ATF\t1\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                                </span>
+<span class="co">##  [2] "29\t31\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                                </span>
+<span class="co">##  [3] "Type=GenePix Export 3\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                               </span>
+<span class="co">##  [4] "DateTime=2017/09/05 17:17:47\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                        </span>
+<span class="co">##  [5] "Settings=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                           </span>
+<span class="co">##  [6] "GalFile=C:\\Users\\rkimathi\\Desktop\\GAL FILE DATA.gal\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                             </span>
+<span class="co">##  [7] "PixelSize=10\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                        </span>
+<span class="co">##  [8] "Wavelengths=635\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     </span>
+<span class="co">##  [9] "ImageFiles=Z:\\Multicenter study\\4_9_2017\\data\\BRB0001.tif 0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                     </span>
+<span class="co">## [10] "NormalizationMethod=None\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                            </span>
+<span class="co">## [11] "NormalizationFactors=1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                              </span>
+<span class="co">## [12] "JpegImage=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                          </span>
+<span class="co">## [13] "StdDev=Type 1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                       </span>
+<span class="co">## [14] "FeatureType=Circular\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                </span>
+<span class="co">## [15] "Barcode=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                            </span>
+<span class="co">## [16] "BackgroundSubtraction=LocalFeature\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                  </span>
+<span class="co">## [17] "ImageOrigin=0, 0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                    </span>
+<span class="co">## [18] "JpegOrigin=1670, 840\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                </span>
+<span class="co">## [19] "Creator=GenePix Pro 7.3.0.0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                         </span>
+<span class="co">## [20] "Scanner=GenePix 4300 [141110]\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                       </span>
+<span class="co">## [21] "FocusPosition=0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     </span>
+<span class="co">## [22] "Temperature=0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                       </span>
+<span class="co">## [23] "LinesAveraged=1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     </span>
+<span class="co">## [24] "Comment=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                            </span>
+<span class="co">## [25] "PMTGain=400\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                         </span>
+<span class="co">## [26] "ScanPower=100\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                       </span>
+<span class="co">## [27] "LaserPower=0.55\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                     </span>
+<span class="co">## [28] "Filters=Standard Red\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                </span>
+<span class="co">## [29] "ScanRegion=0,0,2200,7200\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                            </span>
+<span class="co">## [30] "ScanArea=1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                          </span>
+<span class="co">## [31] "Supplier=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                           </span>
+<span class="co">## [32] "Flags\tNormalize\tAutoflag\tBlock\tColumn\tRow\tName\tID\tX\tY\tF635 Median\tB635\tB635 Median\tSNR 635\tF635 Median - B635\tIndex"</span></code></pre>
 <p>The function <span style="     color: red !important;">check_sampleID_files()</span> helps to check whether each micro array file has a corresponding sample identifier file. The sample identifier files are generated from the lab plate maps to match the corresponding samples on a specific slide.If the sample identifier file is missing, protGear automatically generates the id’s.</p>
-<div id="spatial-structure-of-slide" class="section level3">
-<h3 class="hasAnchor">
-<a href="#spatial-structure-of-slide" class="anchor"></a>Spatial structure of slide</h3>
+<div class="section level3">
+<h3 id="spatial-structure-of-slide">Spatial structure of slide<a class="anchor" aria-label="anchor" href="#spatial-structure-of-slide"></a>
+</h3>
 <p>protGear offers a functionality to inspect the slide visually for any strong spatial biases when the scan image is not available. However, we recommend using the scanned image to visualize the spatial artefacts that might not be recorded in the <code>.gpr</code> file. We include the functions <span style="     color: red !important;">visualize_slide()</span> and <span style="     color: red !important;">visualize_slide_2d()</span> to check the spatial structure. The functions are build on <span style="     color: red !important;">structure_plot()</span> which shows the block and mini-array structure of a slide.</p>
-<div id="visualize-the-foreground-mfi" class="section level4">
-<h4 class="hasAnchor">
-<a href="#visualize-the-foreground-mfi" class="anchor"></a>Visualize the foreground MFI</h4>
+<div class="section level4">
+<h4 id="visualize-the-foreground-mfi">Visualize the foreground MFI<a class="anchor" aria-label="anchor" href="#visualize-the-foreground-mfi"></a>
+</h4>
 <p>Here we visualize the foreground MFI using the <span style="     color: red !important;">visualize_slide</span> function</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/visualize_slide.html">visualize_slide</a></span><span class="op">(</span>
-  infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/machine1/KK2-06.txt"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
+  infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/machine1/KK2-06.txt"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
   MFI_var <span class="op">=</span> <span class="st">"F635 Median"</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/slide_struct-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
-<div id="visualize-the-background-mfi" class="section level4">
-<h4 class="hasAnchor">
-<a href="#visualize-the-background-mfi" class="anchor"></a>Visualize the background MFI</h4>
+<div class="section level4">
+<h4 id="visualize-the-background-mfi">Visualize the background MFI<a class="anchor" aria-label="anchor" href="#visualize-the-background-mfi"></a>
+</h4>
 <p>Here we visualize the background MFI using the <code>visualize_slide_2d</code> function</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/visualize_slide_2d.html">visualize_slide_2d</a></span><span class="op">(</span>
-  infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/machine1/KK2-06.txt"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
+  infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/machine1/KK2-06.txt"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,
   MFI_var <span class="op">=</span> <span class="st">"B635 Median"</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/slide_struct_2d-1.png" width="700" style="display: block; margin: auto auto auto 0;"></p>
 </div>
 </div>
-<div id="import--gprtxt-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#import--gprtxt-data" class="anchor"></a>Import .gpr/txt data</h3>
+<div class="section level3">
+<h3 id="import--gprtxt-data">Import .gpr/txt data<a class="anchor" aria-label="anchor" href="#import--gprtxt-data"></a>
+</h3>
 <p>Microarray data is imported using the <span style="     color: red !important;">read_array_files()</span> function. The function accepts the following mandatory arguments;</p>
 <ul>
 <li>
@@ -275,28 +271,28 @@
 <code>genepix_vars</code> - A list of specific definitions of the experiment design. See <span style="     color: red !important;">array_vars()</span>
 </li>
 </ul>
-<p>For this example I use the sub-folder 1 specified using <code>genepix_vars$paths[[1]]</code> which is this path under vignette folder C:/Users/kmwai/Documents/R/win-library/4.1/protGear/extdata/array_data/machine1.</p>
+<p>For this example I use the sub-folder 1 specified using <code>genepix_vars$paths[[1]]</code> which is this path under vignette folder C:/Users/kmwai/AppData/Local/Temp/RtmpKCqvKS/temp_libpath10442d5c457c/protGear/extdata/array_data/machine1.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#### read in all the datasets</span>
 <span class="co">### list all the file names under data folder</span>
-<span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
+<span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,
   pattern <span class="op">=</span> <span class="st">"*.txt$|*.gpr$"</span>, full.names <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 <span class="co">#' @___________________read_in_the_files_with_the_text_data_from_the_chip_____________________________</span>
 <span class="co">### read all the data files and save them in a list</span>
-<span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="st">"/"</span><span class="op">)</span>
-<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">paths</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="st">"/"</span><span class="op">)</span>
+<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">filenames</span>,
   .f <span class="op">=</span> <span class="va">read_array_files</span>,
   data_path <span class="op">=</span> <span class="va">data_path</span>,
   genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span>
 <span class="op">)</span>
-<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">data_files</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">data_files</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="background-correction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#background-correction" class="anchor"></a>Background Correction</h2>
+<div class="section level2">
+<h2 id="background-correction">Background Correction<a class="anchor" aria-label="anchor" href="#background-correction"></a>
+</h2>
 <p>Background noise is caused by non-specific fluorescence such as auto-fluorescence of the glass slide or non-specific binding of parameters and reference substances. To cut down the effect of background noise we have included different approaches for background correction. First, we extract the background values, visualize and select the best background approach. We have implemented five different approaches;</p>
 <ol style="list-style-type: decimal">
 <li>Local background subtraction</li>
@@ -308,13 +304,13 @@
 <p>In ‘<code>.gpr</code>’ files the Background column starts with a ‘<code>B</code>’ followed by the wavelength or channel. In order to perform background correction, we extract the background mean fluorescent intensities (MFI’s) using the function <span style="     color: red !important;">extract_bg()</span> . The function accepts the arguments <code>iden</code> which is the file identifier, <code>data_files</code> a list of data objects with names utilised by <code>iden</code> and <code>genepix_vars</code> defined using <span style="     color: red !important;">array_vars()</span> function. We utilise the <code>purr::map</code> function to extract the background MFI of multiple data files.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## utilising the map package we process a number of files  under data_files list</span>
-<span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span>
-<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">extract_bg</span>, data_files <span class="op">=</span> <span class="va">data_files</span>, <span class="va">genepix_vars</span><span class="op">)</span>
-<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">allData_bg</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
-<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">allData_bg</span><span class="op">)</span></code></pre></div>
-<div id="foreground-vs-background" class="section level3">
-<h3 class="hasAnchor">
-<a href="#foreground-vs-background" class="anchor"></a>Foreground vs Background</h3>
+<span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span>
+<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">extract_bg</span>, data_files <span class="op">=</span> <span class="va">data_files</span>, <span class="va">genepix_vars</span><span class="op">)</span>
+<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">allData_bg</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html" class="external-link">ldply</a></span><span class="op">(</span><span class="va">allData_bg</span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="foreground-vs-background">Foreground vs Background<a class="anchor" aria-label="anchor" href="#foreground-vs-background"></a>
+</h3>
 <p>Before selecting the best background correction approach the MFI signals are be inspected visually. In protGear we first utilise the function <span style="     color: red !important;">plot_FB()</span> that graphs the background, <em>BG_Median</em> and foreground values, <em>FBG_Median</em>. On the protGear Shiny platform the visuals are interactive and you can identify the features or blocks with strong bias.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_FB.html">plot_FB</a></span><span class="op">(</span><span class="va">allData_bg</span>,
@@ -326,9 +322,9 @@
 <span class="va">p1</span></code></pre></div>
 <p><img src="vignette_files/figure-html/bg_vs_fg-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="background-mfi-by-blocks" class="section level3">
-<h3 class="hasAnchor">
-<a href="#background-mfi-by-blocks" class="anchor"></a>Background MFI by blocks</h3>
+<div class="section level3">
+<h3 id="background-mfi-by-blocks">Background MFI by blocks<a class="anchor" aria-label="anchor" href="#background-mfi-by-blocks"></a>
+</h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_bg.html">plot_bg</a></span><span class="op">(</span>
   df <span class="op">=</span> <span class="va">allData_bg</span>, x_axis <span class="op">=</span> <span class="st">"Block"</span>, bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>,
@@ -337,41 +333,41 @@
 <span class="va">p2</span></code></pre></div>
 <p><img src="vignette_files/figure-html/bg_plot-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="background-correction-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#background-correction-1" class="anchor"></a>Background correction</h3>
+<div class="section level3">
+<h3 id="background-correction-1">Background correction<a class="anchor" aria-label="anchor" href="#background-correction-1"></a>
+</h3>
 <p>After background visualization and selecting the best approach the array data are merged with their specific sample identifier files.</p>
 <p><em><span style="     color: red !important;">Note:</span></em> Each array file must have its own corresponding sample identifier <code>.csv</code> file stored in <span style="     color: red !important;">array_vars()</span> function under <code>sampleID_path</code>. Check General information section.</p>
 <p>The method of background subtraction selected is specified under <span style="     color: red !important;">method</span> below. The background correction is performed by <span style="     color: red !important;">bg_correct()</span> function.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">merge_sampleID</span>, data_files <span class="op">=</span> <span class="va">data_files</span>,
   <span class="va">genepix_vars</span>, method <span class="op">=</span> <span class="st">"subtract_local"</span>
 <span class="op">)</span>
-<span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">sample_ID_merged_dfs</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">sample_ID_merged_dfs</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="buffer-spots" class="section level2">
-<h2 class="hasAnchor">
-<a href="#buffer-spots" class="anchor"></a>Buffer spots</h2>
+<div class="section level2">
+<h2 id="buffer-spots">Buffer spots<a class="anchor" aria-label="anchor" href="#buffer-spots"></a>
+</h2>
 <p>Buffer spots are specific to the experiment design and are not always included. Buffer spots are used to check for unexpected scanning artefacts. The buffer spots should have similar values in different slides. Some outliers are expected for buffer spots close sample spots or landmark. However you can specify the name of your control antigens here <span style="     color: blue !important;">buffer_spot="buffer"</span> if you do not have buffer spots.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">buffer_spots</span>, buffer_spot <span class="op">=</span> <span class="st">"buffer"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">buffer_spots</span>, buffer_spot <span class="op">=</span> <span class="st">"buffer"</span><span class="op">)</span>
 
-<span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">buffer_transp</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">buffer_transp</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">buffers</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">buffer_transp</span><span class="op">)</span>
+<span class="va">buffers</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html" class="external-link">ldply</a></span><span class="op">(</span><span class="va">buffer_transp</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plot_buffer.html">plot_buffer</a></span><span class="op">(</span><span class="va">buffers</span>, buffer_names <span class="op">=</span> <span class="st">"antigen"</span>, buffer_mfi <span class="op">=</span> <span class="st">"FMedianBG_correct"</span>, slide_id <span class="op">=</span> <span class="st">".id"</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/buffer_spots_data-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="coefficient-of-variation-cv" class="section level2">
-<h2 class="hasAnchor">
-<a href="#coefficient-of-variation-cv" class="anchor"></a>Coefficient of Variation (CV)</h2>
+<div class="section level2">
+<h2 id="coefficient-of-variation-cv">Coefficient of Variation (CV)<a class="anchor" aria-label="anchor" href="#coefficient-of-variation-cv"></a>
+</h2>
 <p>To calculate the CV’s we utilise the <span style="     color: red !important;">cv_estimation()</span> function with a <code>cv_cut_off</code> specified , sample identifier variable and antigen specified under <code>sampleID_var</code> and <code>antigen</code> respectively. The <code>replicate_var</code> and <code>mfi_var</code> identifies the variable with the replicate rank generated and MFI’s values.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________calculated_cv_for_each_data_file_______________________________________</span>
 <span class="co">#' data without the selected mean for the best 2 CVs</span>
-<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">cv_estimation</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>,
   cv_cut_off <span class="op">=</span> <span class="fl">20</span>,
   sampleID_var <span class="op">=</span> <span class="st">"sampleID"</span>, antigen_var <span class="op">=</span> <span class="st">"antigen"</span>, replicate_var <span class="op">=</span> <span class="st">"replicate"</span>,
@@ -379,96 +375,96 @@
 <span class="op">)</span>
 
 <span class="va">lab_replicates</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">dataCV</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">dataCV</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV</span><span class="op">)</span>
-<span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html">ggpairs</a></span><span class="op">(</span><span class="va">aa</span>, <span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">cvCat_all</span><span class="op">)</span>,
-  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">lab_replicates</span><span class="op">)</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">""</span>, axisLabels <span class="op">=</span> <span class="st">"show"</span>
+<span class="va">aa</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html" class="external-link">ldply</a></span><span class="op">(</span><span class="va">dataCV</span><span class="op">)</span>
+<span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggpairs.html" class="external-link">ggpairs</a></span><span class="op">(</span><span class="va">aa</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">cvCat_all</span><span class="op">)</span>,
+  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">lab_replicates</span><span class="op">)</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">""</span>, axisLabels <span class="op">=</span> <span class="st">"show"</span>
 <span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/replicates_plot-1.png" width="700" style="display: block; margin: auto;"></p>
-<div id="summary-of-cv-values" class="section level3">
-<h3 class="hasAnchor">
-<a href="#summary-of-cv-values" class="anchor"></a>Summary of CV values</h3>
+<div class="section level3">
+<h3 id="summary-of-cv-values">Summary of CV values<a class="anchor" aria-label="anchor" href="#summary-of-cv-values"></a>
+</h3>
 <p>Here we create a summary of the CV values for each sample/slide utilising the <span style="     color: red !important;">cv_by_sample_estimation()</span> function. This helps to identify samples with high values of CV. On the protGear dashboard an interactive table is created to show the summary for each sample.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________summary_of_cv_for_each_sample________________________________________</span>
 <span class="co">#' creates summaries by cv's greater than 20 and less than 20</span>
 
 <span class="va">cv_cut_off</span> <span class="op">&lt;-</span> <span class="fl">20</span>
-<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV</span>, .f <span class="op">=</span> <span class="fu">protGear</span><span class="fu">::</span><span class="va"><a href="../reference/cv_by_sample_estimation.html">cv_by_sample_estimation</a></span>, cv_variable <span class="op">=</span> <span class="st">"cvCat_all"</span>,
   lab_replicates <span class="op">=</span> <span class="fl">3</span>
 <span class="op">)</span>
-<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">dataCV_sample</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
-<span class="va">all_cv_sample</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample</span><span class="op">)</span></code></pre></div>
+<span class="va">dataCV_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">dataCV_sample</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">all_cv_sample</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html" class="external-link">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">less_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &lt;= "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gt_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CV &gt; "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">less_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html" class="external-link">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CV &lt;= "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gt_20</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html" class="external-link">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CV &gt; "</span>, <span class="va">cv_cut_off</span>, <span class="st">"_perc"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">less_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &lt;="</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
-<span class="va">gt_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"% CV &gt;"</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">all_cv_sample</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &lt;= 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &gt; 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">Others_perc</span>, color <span class="op">=</span> <span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide all repeats considered"</span><span class="op">)</span></code></pre></div>
+<span class="va">less_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html" class="external-link">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"% CV &lt;="</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
+<span class="va">gt_20_per</span> <span class="op">&lt;-</span> <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/sym.html" class="external-link">sym</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"% CV &gt;"</span>, <span class="va">cv_cut_off</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">all_cv_sample</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &lt;= 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &gt; 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">Others_perc</span>, color <span class="op">=</span> <span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide all repeats considered"</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/cv_by_sample-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="best-replicates" class="section level3">
-<h3 class="hasAnchor">
-<a href="#best-replicates" class="anchor"></a>Best replicates</h3>
+<div class="section level3">
+<h3 id="best-replicates">Best replicates<a class="anchor" aria-label="anchor" href="#best-replicates"></a>
+</h3>
 <p>We have implemented a function <span style="     color: red !important;">best_CV_estimation()</span> to select the best replicates if an experiment has more than 2 technical replicates. This helps to select the less variable replicates.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________data_with_selected_best_2_CV_______________________________________</span>
 <span class="co">#' data with the selected mean for the best 2 CVs</span>
-<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV</span>, .f <span class="op">=</span> <span class="va">best_CV_estimation</span>, slide_id <span class="op">=</span> <span class="st">"iden"</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>,
   cv_cut_off <span class="op">=</span> <span class="fl">20</span>
 <span class="op">)</span>
 
 <span class="co">## give the names to the returned list</span>
-<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">dataCV_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV_best2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">dataCV_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
 
 
-<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV_best2</span>, .f <span class="op">=</span> <span class="va">cv_by_sample_estimation</span>,
   cv_variable <span class="op">=</span> <span class="st">"best_CV_cat"</span>, lab_replicates <span class="op">=</span> <span class="fl">3</span>
 <span class="op">)</span>
-<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">dataCV_sample_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
-<span class="va">all_cv_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample_best2</span><span class="op">)</span></code></pre></div>
+<span class="va">dataCV_sample_best2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">dataCV_sample_best2</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">all_cv_sample_best2</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html" class="external-link">ldply</a></span><span class="op">(</span><span class="va">dataCV_sample_best2</span><span class="op">)</span></code></pre></div>
 <p>On the violin below we observe that with selecting the less variable replicates , the percentage of the “good CV” values increases.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## plot only the CV perccentages</span>
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">all_cv_sample_best2</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &lt;= 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &gt; 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_violin</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">.id</span>, <span class="va">Others_perc</span>, color <span class="op">=</span> <span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">all_cv_sample_best2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &lt;= 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV =&lt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">`CV &gt; 20_perc`</span>, color <span class="op">=</span> <span class="st">"% CV &gt;20"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">Others_perc</span>, color <span class="op">=</span> <span class="st">"Others"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"% of CV"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"% of CV &gt;20 or &lt;=20 for each slide"</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/best_cv_plot-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div id="tag-subtraction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tag-subtraction" class="anchor"></a>Tag subtraction</h2>
+<div class="section level2">
+<h2 id="tag-subtraction">Tag subtraction<a class="anchor" aria-label="anchor" href="#tag-subtraction"></a>
+</h2>
 <p>Tag subtraction is applied for antigens containing purification tags. A file with the specific TAG name for each antigen is loaded. The file has the <code>antigen,TAG and TAG_name</code> and the TAG_name must be part of the antigens listed.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tag_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/TAG_antigens.csv"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">tag_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD4TAG"</span>, <span class="st">"GST"</span>, <span class="st">"MBP"</span><span class="op">)</span>
-<span class="va">batch_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>machine <span class="op">=</span> <span class="st">"m1"</span>, day <span class="op">=</span> <span class="st">"0520"</span><span class="op">)</span></code></pre></div>
-<div id="overview-of-the-tag-file" class="section level3">
-<h3 class="hasAnchor">
-<a href="#overview-of-the-tag-file" class="anchor"></a>Overview of the TAG file</h3>
+<code class="sourceCode R"><span class="va">tag_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/TAG_antigens.csv"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tag_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CD4TAG"</span>, <span class="st">"GST"</span>, <span class="st">"MBP"</span><span class="op">)</span>
+<span class="va">batch_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>machine <span class="op">=</span> <span class="st">"m1"</span>, day <span class="op">=</span> <span class="st">"0520"</span><span class="op">)</span></code></pre></div>
+<div class="section level3">
+<h3 id="overview-of-the-tag-file">Overview of the TAG file<a class="anchor" aria-label="anchor" href="#overview-of-the-tag-file"></a>
+</h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tag_file</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
-<span class="va">tb1</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<table class="table table">
+<code class="sourceCode R"><span class="va">tb1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tag_file</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tb1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<table class="table table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
 antigen
@@ -594,46 +590,46 @@ CD4TAG
 </tbody>
 </table>
 </div>
-<div id="subtracting-the-tag-values" class="section level3">
-<h3 class="hasAnchor">
-<a href="#subtracting-the-tag-values" class="anchor"></a>Subtracting the TAG values</h3>
+<div class="section level3">
+<h3 id="subtracting-the-tag-values">Subtracting the TAG values<a class="anchor" aria-label="anchor" href="#subtracting-the-tag-values"></a>
+</h3>
 <p>The function <span style="     color: red !important;">tag_subtract()</span> implements the TAG subtration by matching the TAG names with the corresponding TAG values.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#' @________________________________subtract_the_tag_values_______________________________________</span>
 <span class="co">#'</span>
 <span class="co">## tag subtract</span>
 <span class="co">## read in the KILCHip TAG file to substract GST-1, MBP -2 and  CD4TAG - 0 file</span>
-<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span>
+<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>
   .x <span class="op">=</span> <span class="va">dataCV_best2</span>, .f <span class="op">=</span> <span class="va">tag_subtract</span>,
   tag_antigens <span class="op">=</span> <span class="va">tag_antigens</span>, mean_best_CV_var <span class="op">=</span> <span class="st">"mean_best_CV"</span>, tag_file <span class="op">=</span> <span class="va">tag_file</span>,
   antigen_var <span class="op">=</span> <span class="st">"antigen"</span>,
   batch_vars <span class="op">=</span> <span class="va">batch_vars</span>
 <span class="op">)</span>
-<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html">set_names</a></span><span class="op">(</span><span class="va">dataCV_tag</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
-<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html">ldply</a></span><span class="op">(</span><span class="va">dataCV_tag</span><span class="op">)</span></code></pre></div>
+<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">dataCV_tag</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dataCV_tag</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/ldply.html" class="external-link">ldply</a></span><span class="op">(</span><span class="va">dataCV_tag</span><span class="op">)</span></code></pre></div>
 <p>In this example here we plot a graph of antigens Tagged with GST before and after TAG subtraction.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">TAG_name</span> <span class="op">==</span> <span class="st">"GST"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">TAG_name</span> <span class="op">==</span> <span class="st">"GST"</span><span class="op">)</span>
 
-<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span>, <span class="va">mean_best_CV_tag</span><span class="op">)</span>
+<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span>, <span class="va">mean_best_CV_tag</span><span class="op">)</span>
 
-<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">measure</span>, <span class="va">mfi</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">.id</span><span class="op">:</span><span class="va">antigen</span><span class="op">)</span><span class="op">)</span>
+<span class="va">aaa</span> <span class="op">&lt;-</span> <span class="va">aaa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span><span class="va">measure</span>, <span class="va">mfi</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">.id</span><span class="op">:</span><span class="va">antigen</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu">ggplot</span><span class="op">(</span><span class="va">aaa</span>, <span class="fu">aes</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">antigen</span><span class="op">)</span>, <span class="va">mfi</span>, color <span class="op">=</span> <span class="va">measure</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">measure</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_light</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">xlab</span><span class="op">(</span><span class="st">"antigen name"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Before and after TAG subtraction"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">aaa</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">antigen</span><span class="op">)</span>, <span class="va">mfi</span>, color <span class="op">=</span> <span class="va">measure</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">measure</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"antigen name"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Before and after TAG subtraction"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/before_after_tag-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div id="normalisation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#normalisation" class="anchor"></a>Normalisation</h2>
+<div class="section level2">
+<h2 id="normalisation">Normalisation<a class="anchor" aria-label="anchor" href="#normalisation"></a>
+</h2>
 <p>To normalise the data, we create a matrix <code>matrix_antigen</code> with all the data combined. We ensure the slide identifier is included as row names of the matrix or we have a way to join them after normalisation. The <code>array_matrix</code> matrix is used to hold these parameters. In place of <code>AMA1</code> in the example below you use one of your features or antigen. We have implemented four different normalisation techniques;</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -643,43 +639,43 @@ CD4TAG
 <li>VSN normalisation.</li>
 </ol>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df_to_normalise</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>slide <span class="op">=</span> <span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">sample_array_ID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sampleID</span>, <span class="va">slide</span><span class="op">)</span>
-<span class="va">df_to_normalise</span><span class="op">$</span><span class="va">sample_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_data.html">group_indices</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">df_to_normalise</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df_to_normalise</span> <span class="op">&lt;-</span> <span class="va">dataCV_tag</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>slide <span class="op">=</span> <span class="va">.id</span>, <span class="va">sampleID</span>, <span class="va">sample_array_ID</span>, <span class="va">antigen</span>, <span class="va">mean_best_CV</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">sampleID</span>, <span class="va">slide</span><span class="op">)</span>
+<span class="va">df_to_normalise</span><span class="op">$</span><span class="va">sample_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_data.html" class="external-link">group_indices</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">df_to_normalise</span><span class="op">)</span>
 
 <span class="co">###</span>
-<span class="va">to_normalise</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">slide</span>, <span class="op">-</span><span class="va">sampleID</span>, <span class="op">-</span><span class="va">sample_array_ID</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">antigen</span>, <span class="va">sample_index</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">value</span>, <span class="op">-</span><span class="op">(</span><span class="va">antigen</span><span class="op">:</span><span class="va">sample_index</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html">unite</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">antigen</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">variable</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">value</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
+<span class="va">to_normalise</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">slide</span>, <span class="op">-</span><span class="va">sampleID</span>, <span class="op">-</span><span class="va">sample_array_ID</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">antigen</span>, <span class="va">sample_index</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html" class="external-link">gather</a></span><span class="op">(</span><span class="va">variable</span>, <span class="va">value</span>, <span class="op">-</span><span class="op">(</span><span class="va">antigen</span><span class="op">:</span><span class="va">sample_index</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">antigen</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">variable</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html" class="external-link">spread</a></span><span class="op">(</span><span class="va">temp</span>, <span class="va">value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 
 <span class="co">### get the row names of the machine data</span>
-<span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">to_normalise</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">to_normalise</span><span class="op">$</span><span class="va">sample_index</span>
+<span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">to_normalise</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">to_normalise</span><span class="op">$</span><span class="va">sample_index</span>
 <span class="co"># batch_all &lt;- as.factor(paste0(to_normalise$machine,"/",to_normalise$day))</span>
 <span class="co"># machines &lt;- as.factor(to_normalise$machine)</span>
 <span class="co"># day_batches &lt;- as.factor(to_normalise$day)</span>
 
 <span class="co">## create the matrix to normalise</span>
-<span class="va">matrix_antigen</span> <span class="op">&lt;-</span> <span class="va">to_normalise</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sample_index</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
+<span class="va">matrix_antigen</span> <span class="op">&lt;-</span> <span class="va">to_normalise</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sample_index</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>
 
 
 <span class="co">## create the matrix to hold the important parameters</span>
 <span class="co">## in place of AMA1 you use one of your features or antigen</span>
-<span class="va">array_matrix</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">antigen</span> <span class="op">==</span> <span class="st">"AMA1"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sample_array_ID</span>, <span class="va">sample_index</span>, <span class="va">slide</span><span class="op">)</span>
+<span class="va">array_matrix</span> <span class="op">&lt;-</span> <span class="va">df_to_normalise</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">antigen</span> <span class="op">==</span> <span class="st">"AMA1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sample_array_ID</span>, <span class="va">sample_index</span>, <span class="va">slide</span><span class="op">)</span>
 
-<span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span></code></pre></div>
+<span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span></code></pre></div>
 <p>The <span style="     color: red !important;">matrix_normalise()</span> function is used to normalise the data and returns a list of plots and a matrix of normalised values. A plot is returned if <code>return_plot = TRUE</code> otherwise only a matrix of normalised values will be returned.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">normlise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span><span class="va">matrix_antigen</span>,
@@ -689,12 +685,12 @@ CD4TAG
 
 <span class="va">normlise_df</span><span class="op">$</span><span class="va">plot_normalisation</span></code></pre></div>
 <p><img src="vignette_files/figure-html/normalised_df-1.png" width="700" style="display: block; margin: auto;"></p>
-<div id="compare-normalisation-methods" class="section level3">
-<h3 class="hasAnchor">
-<a href="#compare-normalisation-methods" class="anchor"></a>Compare normalisation methods</h3>
+<div class="section level3">
+<h3 id="compare-normalisation-methods">Compare normalisation methods<a class="anchor" aria-label="anchor" href="#compare-normalisation-methods"></a>
+</h3>
 <p>On the dashboard we compare the different normalisation techniques using the <span style="     color: red !important;">mutiple_plot()</span> function after loading the data.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span>
 <span class="co">## no normalisation</span>
 <span class="va">normalise_list_none</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
@@ -703,7 +699,7 @@ CD4TAG
   return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_none</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_none"</span>, <span class="st">"plot_none"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">normalise_list_none</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_none"</span>, <span class="st">"plot_none"</span><span class="op">)</span>
 <span class="co">## log2 normalisation</span>
 <span class="va">normalise_list_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
@@ -712,7 +708,7 @@ CD4TAG
   return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_log"</span>, <span class="st">"plot_log"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">normalise_list_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_log"</span>, <span class="st">"plot_log"</span><span class="op">)</span>
 <span class="co">## vsn normalisation</span>
 <span class="va">normalise_list_vsn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
@@ -721,7 +717,7 @@ CD4TAG
   return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_vsn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_vsn"</span>, <span class="st">"plot_vsn"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">normalise_list_vsn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_vsn"</span>, <span class="st">"plot_vsn"</span><span class="op">)</span>
 <span class="co">## cyclic loess with log</span>
 <span class="va">normalise_list_cyclic_loess_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span>
   matrix_antigen <span class="op">=</span> <span class="va">matrix_antigen</span>,
@@ -730,7 +726,7 @@ CD4TAG
   return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_cyclic_loess_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">normalise_list_cyclic_loess_log</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
   <span class="st">"matrix_antigen_cyclic_loess_log"</span>,
   <span class="st">"plot_cyclic_loess_log"</span>
 <span class="op">)</span>
@@ -743,11 +739,11 @@ CD4TAG
   return_plot <span class="op">=</span> <span class="cn">TRUE</span>,
   control_antigens <span class="op">=</span> <span class="va">control_antigens</span>
 <span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalise_list_rlm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_rlm"</span>, <span class="st">"plot_rlm"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">normalise_list_rlm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"matrix_antigen_rlm"</span>, <span class="st">"plot_rlm"</span><span class="op">)</span>
 
 
 <span class="co">## create a list after normalisation</span>
-<span class="va">normalised_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+<span class="va">normalised_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
   <span class="va">normalise_list_none</span>,
   <span class="va">normalise_list_log</span>,
   <span class="va">normalise_list_vsn</span>,
@@ -755,22 +751,22 @@ CD4TAG
   <span class="va">normalise_list_rlm</span>
 <span class="op">)</span>
 <span class="co">##</span>
-<span class="va">normalised_list_plot</span> <span class="op">&lt;-</span> <span class="va">normalised_list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"plot"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">normalised_list</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<span class="va">normalised_list_plot</span> <span class="op">&lt;-</span> <span class="va">normalised_list</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"plot"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">normalised_list</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">normalised_list_plot</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="st">"grid.arrange"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">normalised_list_plot</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/plot_comparison-1.png" width="1152" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div id="heatmaps" class="section level2">
-<h2 class="hasAnchor">
-<a href="#heatmaps" class="anchor"></a>Heatmaps</h2>
+<div class="section level2">
+<h2 id="heatmaps">Heatmaps<a class="anchor" aria-label="anchor" href="#heatmaps"></a>
+</h2>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">normlise_df</span><span class="op">$</span><span class="va">matrix_antigen_normalised</span>
-<span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">norm_df</span> <span class="op">%&gt;%</span>
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">control_antigens</span><span class="op">)</span>
-<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">pheatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">norm_df</span>,
+<span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">norm_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">control_antigens</span><span class="op">)</span>
+<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">pheatmap</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html" class="external-link">pheatmap</a></span><span class="op">(</span><span class="va">norm_df</span>,
   scale <span class="op">=</span> <span class="st">"none"</span>, cluster_rows <span class="op">=</span> <span class="cn">FALSE</span>,
-  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"VSN"</span>, <span class="st">"Normalised Data"</span><span class="op">)</span>,
+  main <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"VSN"</span>, <span class="st">"Normalised Data"</span><span class="op">)</span>,
   silent <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="co">#-------</span>
@@ -786,39 +782,39 @@ CD4TAG
 <span class="va">p3</span></code></pre></div>
 <p><img src="vignette_files/figure-html/heat_norm-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
-<div id="pca-analysis" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pca-analysis" class="anchor"></a>PCA analysis</h2>
+<div class="section level2">
+<h2 id="pca-analysis">PCA analysis<a class="anchor" aria-label="anchor" href="#pca-analysis"></a>
+</h2>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">norm_df</span> <span class="op">&lt;-</span> <span class="va">normlise_df</span><span class="op">$</span><span class="va">matrix_antigen_normalised</span>
-<span class="va">res_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">norm_df</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/get_pca.html">get_pca_var</a></span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span>
+<span class="va">res_pca</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html" class="external-link">prcomp</a></span><span class="op">(</span><span class="va">norm_df</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/get_pca.html" class="external-link">get_pca_var</a></span><span class="op">(</span><span class="va">res_pca</span><span class="op">)</span>
 <span class="va">vars_visualise</span> <span class="op">&lt;-</span> <span class="fl">20</span>
 <span class="co"># Visualize the PCA</span>
 <span class="co">## individuals contributing to the PCA</span>
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_ind</a></span><span class="op">(</span><span class="va">res_pca</span>,
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html" class="external-link">fviz_pca_ind</a></span><span class="op">(</span><span class="va">res_pca</span>,
   col.var <span class="op">=</span> <span class="st">"contrib"</span>, <span class="co"># Color by contributions to the PC</span>
-  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,
+  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,
   repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span>
-<span class="op">)</span> <span class="op">+</span> <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span>
+<span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># Select the top vars_visualise contributing variables</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_biplot</a></span><span class="op">(</span><span class="va">res_pca</span>,
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html" class="external-link">fviz_pca_biplot</a></span><span class="op">(</span><span class="va">res_pca</span>,
   label <span class="op">=</span> <span class="st">"var"</span>,
-  select.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>contrib <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>
+  select.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>contrib <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>
 <span class="op">)</span> <span class="op">+</span>
-  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span>
 
 
 <span class="co"># Total cos2 of variables on Dim.1 and Dim.2</span>
-<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_cos2.html">fviz_cos2</a></span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, top <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>
+<span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_cos2.html" class="external-link">fviz_cos2</a></span><span class="op">(</span><span class="va">res_pca</span>, choice <span class="op">=</span> <span class="st">"var"</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, top <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>
 
 
 <span class="co"># Color by cos2 values: quality on the factor map</span>
-<span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html">fviz_pca_var</a></span><span class="op">(</span><span class="va">res_pca</span>,
+<span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_pca.html" class="external-link">fviz_pca_var</a></span><span class="op">(</span><span class="va">res_pca</span>,
   col.var <span class="op">=</span> <span class="st">"cos2"</span>,
-  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,
-  select.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>contrib <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>,
+  gradient.cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span><span class="op">)</span>,
+  select.var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>contrib <span class="op">=</span> <span class="va">vars_visualise</span><span class="op">)</span>,
   repel <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Avoid text overlapping</span>
 <span class="op">)</span>
 
@@ -826,7 +822,7 @@ CD4TAG
 <span class="co">## combine the plots into one grid</span>
 <span class="co">## combine the plots into one grid</span>
 <span class="co">## combine the plots into one grid</span>
-<span class="va">p_pca</span> <span class="op">&lt;-</span> <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<span class="va">p_pca</span> <span class="op">&lt;-</span> <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p><img src="vignette_files/figure-html/pca-1.png" width="1536" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## If you want to save the file</span>
@@ -837,95 +833,92 @@ CD4TAG
 <span class="co">#          limitsize = FALSE,</span>
 <span class="co">#          dpi=300)</span>
 <span class="va">p_pca</span></code></pre></div>
-<pre><code>## TableGrob (2 x 2) "arrange": 4 grobs
-##   z     cells    name           grob
-## 1 1 (1-1,1-1) arrange gtable[layout]
-## 2 2 (1-1,2-2) arrange gtable[layout]
-## 3 3 (2-2,1-1) arrange gtable[layout]
-## 4 4 (2-2,2-2) arrange gtable[layout]</code></pre>
+<pre><code><span class="co">## TableGrob (2 x 2) "arrange": 4 grobs</span>
+<span class="co">##   z     cells    name           grob</span>
+<span class="co">## 1 1 (1-1,1-1) arrange gtable[layout]</span>
+<span class="co">## 2 2 (1-1,2-2) arrange gtable[layout]</span>
+<span class="co">## 3 3 (2-2,1-1) arrange gtable[layout]</span>
+<span class="co">## 4 4 (2-2,2-2) arrange gtable[layout]</span></code></pre>
 </div>
-<div id="shiny-application" class="section level2">
-<h2 class="hasAnchor">
-<a href="#shiny-application" class="anchor"></a>Shiny application</h2>
+<div class="section level2">
+<h2 id="shiny-application">Shiny application<a class="anchor" aria-label="anchor" href="#shiny-application"></a>
+</h2>
 <p>Shiny is an R package that makes it easy to build interactive web apps straight from R. protGear has a built in user-friendly Shiny dashboard to assist in real-time processing and visualization. It provides five sequential steps for handling a data table of fluorescent intensities. The dashboard is launched as below from R or RStudio. To Install R: Open an internet browser and go to www.r-project.org.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">protGear</span><span class="fu">::</span><span class="fu"><a href="../reference/launch_protGear_interactive.html">launch_protGear_interactive</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## R version 4.1.1 (2021-08-10)
-## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 10 x64 (build 19042)
-## 
-## Matrix products: default
-## 
-## locale:
-## [1] LC_COLLATE=English_United Kingdom.1252 
-## [2] LC_CTYPE=English_United Kingdom.1252   
-## [3] LC_MONETARY=English_United Kingdom.1252
-## [4] LC_NUMERIC=C                           
-## [5] LC_TIME=English_United Kingdom.1252    
-## 
-## attached base packages:
-## [1] parallel  grid      stats     graphics  grDevices utils     datasets 
-## [8] methods   base     
-## 
-## other attached packages:
-##  [1] protGear_0.99.543   vsn_3.60.0          Biobase_2.52.0     
-##  [4] BiocGenerics_0.38.0 limma_3.48.3        tidyr_1.1.3        
-##  [7] dplyr_1.0.7         remotes_2.4.0       ggplotify_0.1.0    
-## [10] GGally_2.1.2        rlang_0.4.11        magick_2.7.3       
-## [13] factoextra_1.0.7    FactoMineR_2.4      styler_1.6.1       
-## [16] knitr_1.34          png_0.1-7           gridExtra_2.3      
-## [19] kableExtra_1.3.4    data.table_1.14.0   pheatmap_1.0.12    
-## [22] scales_1.1.1        purrr_0.3.4         gtools_3.9.2       
-## [25] ggpubr_0.4.0        ggplot2_3.3.5      
-## 
-## loaded via a namespace (and not attached):
-##   [1] readxl_1.3.1           backports_1.2.1        systemfonts_1.0.2     
-##   [4] plyr_1.8.6             lazyeval_0.2.2         shinydashboard_0.7.1  
-##   [7] splines_4.1.1          GenomeInfoDb_1.28.4    digest_0.6.27         
-##  [10] flexdashboard_0.5.2    yulab.utils_0.0.2      htmltools_0.5.2       
-##  [13] fansi_0.5.0            magrittr_2.0.1         memoise_2.0.0         
-##  [16] cluster_2.1.2          tzdb_0.1.2             openxlsx_4.2.4        
-##  [19] readr_2.0.1            Biostrings_2.60.2      annotate_1.70.0       
-##  [22] Kendall_2.2            R.utils_2.10.1         svglite_2.0.0         
-##  [25] pkgdown_1.6.1          colorspace_2.0-2       blob_1.2.2            
-##  [28] rvest_1.0.1            ggrepel_0.9.1          textshaping_0.3.5     
-##  [31] haven_2.4.3            xfun_0.26              RCurl_1.98-1.5        
-##  [34] crayon_1.4.1           jsonlite_1.7.2         genefilter_1.74.0     
-##  [37] survival_3.2-13        glue_1.4.2             gtable_0.3.0          
-##  [40] XVector_0.32.0         zlibbioc_1.38.0        webshot_0.5.2         
-##  [43] R.cache_0.15.0         car_3.0-11             abind_1.4-5           
-##  [46] DBI_1.1.1              rstatix_0.7.0          Rcpp_1.0.7            
-##  [49] viridisLite_0.4.0      xtable_1.8-4           gridGraphics_0.5-1    
-##  [52] bit_4.0.4              flashClust_1.01-2      foreign_0.8-81        
-##  [55] preprocessCore_1.54.0  stats4_4.1.1           DT_0.19               
-##  [58] htmlwidgets_1.5.4      httr_1.4.2             RColorBrewer_1.1-2    
-##  [61] ellipsis_0.3.2         farver_2.1.0           pkgconfig_2.0.3       
-##  [64] reshape_0.8.8          XML_3.99-0.8           R.methodsS3_1.8.1     
-##  [67] sass_0.4.0             utf8_1.2.2             labeling_0.4.2        
-##  [70] tidyselect_1.1.1       later_1.3.0            AnnotationDbi_1.54.1  
-##  [73] munsell_0.5.0          cellranger_1.1.0       tools_4.1.1           
-##  [76] cachem_1.0.6           cli_3.0.1              generics_0.1.0        
-##  [79] RSQLite_2.2.8          broom_0.7.9            evaluate_0.14         
-##  [82] stringr_1.4.0          fastmap_1.1.0          yaml_2.2.1            
-##  [85] ragg_1.1.3             rematch2_2.1.2         bit64_4.0.5           
-##  [88] fs_1.5.0               zip_2.2.0              KEGGREST_1.32.0       
-##  [91] nlme_3.1-153           mime_0.11              R.oo_1.24.0           
-##  [94] leaps_3.1              xml2_1.3.2             compiler_4.1.1        
-##  [97] rstudioapi_0.13        plotly_4.9.4.1         curl_4.3.2            
-## [100] affyio_1.62.0          ggsignif_0.6.3         tibble_3.1.4          
-## [103] bslib_0.3.0            stringi_1.7.4          highr_0.9             
-## [106] desc_1.3.0             forcats_0.5.1          lattice_0.20-44       
-## [109] Matrix_1.3-4           vctrs_0.3.8            pillar_1.6.2          
-## [112] lifecycle_1.0.0        BiocManager_1.30.16    jquerylib_0.1.4       
-## [115] bitops_1.0-7           httpuv_1.6.3           R6_2.5.1              
-## [118] affy_1.70.0            promises_1.2.0.1       rio_0.5.27            
-## [121] IRanges_2.26.0         boot_1.3-28            MASS_7.3-54           
-## [124] assertthat_0.2.1       rprojroot_2.0.2        withr_2.4.2           
-## [127] GenomeInfoDbData_1.2.6 S4Vectors_0.30.0       mgcv_1.8-36           
-## [130] hms_1.1.0              rmarkdown_2.11         carData_3.0-4         
-## [133] scatterplot3d_0.3-41   shiny_1.6.0</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## R Under development (unstable) (2022-01-05 r81453 ucrt)</span>
+<span class="co">## Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
+<span class="co">## Running under: Windows 10 x64 (build 19042)</span>
+<span class="co">## </span>
+<span class="co">## Matrix products: default</span>
+<span class="co">## </span>
+<span class="co">## locale:</span>
+<span class="co">## [1] LC_COLLATE=English_United Kingdom.utf8 </span>
+<span class="co">## [2] LC_CTYPE=English_United Kingdom.utf8   </span>
+<span class="co">## [3] LC_MONETARY=English_United Kingdom.utf8</span>
+<span class="co">## [4] LC_NUMERIC=C                           </span>
+<span class="co">## [5] LC_TIME=English_United Kingdom.utf8    </span>
+<span class="co">## </span>
+<span class="co">## attached base packages:</span>
+<span class="co">## [1] grid      stats     graphics  grDevices utils     datasets  methods  </span>
+<span class="co">## [8] base     </span>
+<span class="co">## </span>
+<span class="co">## other attached packages:</span>
+<span class="co">##  [1] protGear_0.99.55    vsn_3.63.0          Biobase_2.55.0     </span>
+<span class="co">##  [4] BiocGenerics_0.41.2 limma_3.51.5        tidyr_1.2.0        </span>
+<span class="co">##  [7] dplyr_1.0.8         remotes_2.4.2       ggplotify_0.1.0    </span>
+<span class="co">## [10] GGally_2.1.2        rlang_1.0.2         magick_2.7.3       </span>
+<span class="co">## [13] factoextra_1.0.7    FactoMineR_2.4      styler_1.7.0       </span>
+<span class="co">## [16] knitr_1.38          png_0.1-7           gridExtra_2.3      </span>
+<span class="co">## [19] kableExtra_1.3.4    data.table_1.14.2   pheatmap_1.0.12    </span>
+<span class="co">## [22] scales_1.1.1        purrr_0.3.4         gtools_3.9.2       </span>
+<span class="co">## [25] ggpubr_0.4.0        ggplot2_3.3.5      </span>
+<span class="co">## </span>
+<span class="co">## loaded via a namespace (and not attached):</span>
+<span class="co">##   [1] backports_1.4.1        systemfonts_1.0.4      plyr_1.8.7            </span>
+<span class="co">##   [4] lazyeval_0.2.2         shinydashboard_0.7.2   splines_4.2.0         </span>
+<span class="co">##   [7] GenomeInfoDb_1.31.7    digest_0.6.29          flexdashboard_0.5.2   </span>
+<span class="co">##  [10] yulab.utils_0.0.4      htmltools_0.5.2        fansi_1.0.3           </span>
+<span class="co">##  [13] magrittr_2.0.2         memoise_2.0.1          cluster_2.1.2         </span>
+<span class="co">##  [16] tzdb_0.2.0             readr_2.1.2            Biostrings_2.63.2     </span>
+<span class="co">##  [19] annotate_1.73.0        Kendall_2.2.1          R.utils_2.11.0        </span>
+<span class="co">##  [22] svglite_2.1.0          pkgdown_2.0.2          colorspace_2.0-3      </span>
+<span class="co">##  [25] blob_1.2.2             rvest_1.0.2            ggrepel_0.9.1         </span>
+<span class="co">##  [28] textshaping_0.3.6      xfun_0.30              crayon_1.5.1          </span>
+<span class="co">##  [31] RCurl_1.98-1.6         jsonlite_1.8.0         genefilter_1.77.1     </span>
+<span class="co">##  [34] survival_3.2-13        glue_1.6.2             gtable_0.3.0          </span>
+<span class="co">##  [37] XVector_0.35.0         zlibbioc_1.41.0        webshot_0.5.2         </span>
+<span class="co">##  [40] R.cache_0.15.0         car_3.0-12             abind_1.4-5           </span>
+<span class="co">##  [43] DBI_1.1.2              rstatix_0.7.0          Rcpp_1.0.8.3          </span>
+<span class="co">##  [46] viridisLite_0.4.0      xtable_1.8-4           gridGraphics_0.5-1    </span>
+<span class="co">##  [49] flashClust_1.01-2      bit_4.0.4              preprocessCore_1.57.0 </span>
+<span class="co">##  [52] stats4_4.2.0           DT_0.22                htmlwidgets_1.5.4     </span>
+<span class="co">##  [55] httr_1.4.2             RColorBrewer_1.1-3     ellipsis_0.3.2        </span>
+<span class="co">##  [58] farver_2.1.0           pkgconfig_2.0.3        reshape_0.8.8         </span>
+<span class="co">##  [61] XML_3.99-0.9           R.methodsS3_1.8.1      sass_0.4.1            </span>
+<span class="co">##  [64] utf8_1.2.2             labeling_0.4.2         tidyselect_1.1.2      </span>
+<span class="co">##  [67] later_1.3.0            AnnotationDbi_1.57.1   munsell_0.5.0         </span>
+<span class="co">##  [70] tools_4.2.0            cachem_1.0.6           cli_3.2.0             </span>
+<span class="co">##  [73] generics_0.1.2         RSQLite_2.2.11         broom_0.7.12          </span>
+<span class="co">##  [76] evaluate_0.15          stringr_1.4.0          fastmap_1.1.0         </span>
+<span class="co">##  [79] yaml_2.3.5             ragg_1.2.2             rematch2_2.1.2        </span>
+<span class="co">##  [82] bit64_4.0.5            fs_1.5.2               KEGGREST_1.35.0       </span>
+<span class="co">##  [85] nlme_3.1-153           mime_0.12              R.oo_1.24.0           </span>
+<span class="co">##  [88] leaps_3.1              xml2_1.3.3             compiler_4.2.0        </span>
+<span class="co">##  [91] rstudioapi_0.13        plotly_4.10.0          affyio_1.65.0         </span>
+<span class="co">##  [94] ggsignif_0.6.3         tibble_3.1.6           bslib_0.3.1           </span>
+<span class="co">##  [97] stringi_1.7.6          highr_0.9              desc_1.4.1            </span>
+<span class="co">## [100] lattice_0.20-45        Matrix_1.4-0           vctrs_0.3.8           </span>
+<span class="co">## [103] pillar_1.7.0           lifecycle_1.0.1        BiocManager_1.30.16   </span>
+<span class="co">## [106] jquerylib_0.1.4        bitops_1.0-7           httpuv_1.6.5          </span>
+<span class="co">## [109] R6_2.5.1               affy_1.73.0            promises_1.2.0.1      </span>
+<span class="co">## [112] IRanges_2.29.1         boot_1.3-28            MASS_7.3-54           </span>
+<span class="co">## [115] assertthat_0.2.1       rprojroot_2.0.3        withr_2.5.0           </span>
+<span class="co">## [118] S4Vectors_0.33.11      GenomeInfoDbData_1.2.7 mgcv_1.8-38           </span>
+<span class="co">## [121] hms_1.1.1              rmarkdown_2.13         carData_3.0-5         </span>
+<span class="co">## [124] scatterplot3d_0.3-41   shiny_1.7.1</span></code></pre>
 </div>
   </div>
 
@@ -940,11 +933,13 @@ CD4TAG
 
 
       <footer><div class="copyright">
-  <p>Developed by Kennedy Mwai, James Mburu.</p>
+  <p></p>
+<p>Developed by Kennedy Mwai, James Mburu.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -952,6 +947,8 @@ CD4TAG
 
   
 
+
+  
 
   </body>
 </html>
