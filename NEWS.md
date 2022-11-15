@@ -32,7 +32,7 @@
  + removed vignette.R and csv file
  
  
-## protGear 0.99.56 (2022-11-15) 
+## protGear 1.3.0 (2022-11-15) 
 
  + Updated shiny app to load
  + Added missing paths for launch_protGear_interactive 
