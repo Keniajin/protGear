@@ -1,7 +1,7 @@
 Package: protGear
 Type: Package
 Title: Protein Micro Array Data Management and Interactive Visualization
-Version: 0.99.551
+Version: 0.99.552
 Authors@R: c(person("Kennedy", "Mwai", role = c("cre", "aut"), email = "keniajin@gmail.com"),
              person(c("James", "Mburu"), role = "aut" , email = "mburuwanja@gmail.com") ,
              person(c("Jacqueline", "Waeni"), role = "ctb" , email = "jacqwaeni@gmail.com"))
@@ -27,5 +27,5 @@ Suggests:
 biocViews: Microarray, OneChannel, Preprocessing , BiomedicalInformatics , Proteomics , BatchEffect, Normalization , Bayesian, Clustering, Regression,SystemsBiology, ImmunoOncology
 Encoding: UTF-8
 LazyData: false
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.2
 VignetteBuilder: knitr
