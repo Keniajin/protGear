@@ -1,5 +1,5 @@
 step;text
-1;Define the structure of the micro-array data structure (Start of data processing)
+1;Define the structure of your micro-array data structure (Start of data processing)
 
 2;Load the data scanned from the array machine.  This also includes joining the data with the sample identifiers.
 
