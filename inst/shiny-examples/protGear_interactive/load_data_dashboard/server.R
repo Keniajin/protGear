@@ -7,7 +7,7 @@
 
 ## this loads packages from CRAN
 pac_loads <- c('shiny','shinyFiles','DT','tidyverse','shinydashboard','shinyjs',
-               'factoextra','FactoMineR','shinySignals','bubbles','ggplotify')
+               'factoextra','FactoMineR','shinySignals','bubbles','ggplotify','shinythemes')
 
 
 sapply(pac_loads, require, character.only = TRUE)
@@ -49,9 +49,9 @@ observe({ # called only once at app init
 #show intro modal
 observeEvent("", {
   showModal(modalDialog(
-    #intro_html <- ,
-    includeHTML(system.file("shiny-examples/protGear_interactive/", "intro_text.html", package="protGear" ,
-                            mustWork = TRUE)),
+       includeHTML(system.file("shiny-examples/protGear_interactive/", "intro_text.html", package="protGear" ,
+                             mustWork = TRUE)),
+   
     easyClose = TRUE,
     footer = tagList(
       actionButton(inputId = "intro", label = "DISMISS (INTRODUCTION TOUR)", icon = icon("info-circle"))

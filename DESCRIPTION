@@ -27,5 +27,5 @@ Suggests:
 biocViews: Microarray, OneChannel, Preprocessing , BiomedicalInformatics , Proteomics , BatchEffect, Normalization , Bayesian, Clustering, Regression,SystemsBiology, ImmunoOncology
 Encoding: UTF-8
 LazyData: false
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.2
 VignetteBuilder: knitr
