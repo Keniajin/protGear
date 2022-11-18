@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">visualize_slide_2d</span><span class="op">(</span><span class="va">infile</span>, <span class="va">MFI_var</span>, d_f <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">visualize_slide_2d</span><span class="op">(</span><span class="va">infile</span>, <span class="va">MFI_var</span>, d_f <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,27 +71,34 @@
     <dl><dt>infile</dt>
 <dd><p>- a .gpr file to be used to visualize the expression 
 intensities of the slide spots</p></dd>
+
+
 <dt>MFI_var</dt>
 <dd><p>the MFI variable to plot, can be either the 
 background or foreground value</p></dd>
+
+
 <dt>d_f</dt>
 <dd><p>a data frame with array data</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A 2d plot of either the background or foreground values</p>
+    
+
+<p>A 2d plot of either the background or foreground values</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Not run:</span></span>
-<span class="r-in"><span class="fu">visualize_slide_2d</span><span class="op">(</span></span>
-<span class="r-in">infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"/array_data/machine1/KK2-06.txt"</span>, </span>
-<span class="r-in">package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span>
-<span class="r-in">MFI_var <span class="op">=</span> <span class="st">"B635 Median"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Not run:</span></span></span>
+<span class="r-in"><span><span class="fu">visualize_slide_2d</span><span class="op">(</span></span></span>
+<span class="r-in"><span>infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"/array_data/machine1/KK2-06.txt"</span>, </span></span>
+<span class="r-in"><span>package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>MFI_var <span class="op">=</span> <span class="st">"B635 Median"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="visualize_slide_2d-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co">## End(Not run)</span></span>
+<span class="r-in"><span><span class="co">## End(Not run)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -106,7 +113,7 @@ background or foreground value</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

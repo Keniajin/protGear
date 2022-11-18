@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -63,19 +63,19 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">array_vars</span><span class="op">(</span>
-  channel <span class="op">=</span> <span class="st">"635"</span>,
-  <span class="va">totsamples</span>,
-  FG <span class="op">=</span> <span class="st">""</span>,
-  BG <span class="op">=</span> <span class="st">""</span>,
-  FBG <span class="op">=</span> <span class="st">""</span>,
-  <span class="va">blockspersample</span>,
-  chip_path <span class="op">=</span> <span class="st">"data/array_data"</span>,
-  sampleID_path <span class="op">=</span> <span class="st">"data/array_sampleID/"</span>,
-  mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,
-  machine <span class="op">=</span> <span class="st">""</span>,
-  date_process <span class="op">=</span> <span class="st">""</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">array_vars</span><span class="op">(</span></span>
+<span>  channel <span class="op">=</span> <span class="st">"635"</span>,</span>
+<span>  <span class="va">totsamples</span>,</span>
+<span>  FG <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  BG <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  FBG <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  <span class="va">blockspersample</span>,</span>
+<span>  chip_path <span class="op">=</span> <span class="st">"data/array_data"</span>,</span>
+<span>  sampleID_path <span class="op">=</span> <span class="st">"data/array_sampleID/"</span>,</span>
+<span>  mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span>
+<span>  machine <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  date_process <span class="op">=</span> <span class="st">""</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -83,65 +83,90 @@
     <dl><dt>channel</dt>
 <dd><p>A character indicating the channel that the data was scanned 
 at. It is mostly included in the MFI variable names.</p></dd>
+
+
 <dt>totsamples</dt>
 <dd><p>A numeric value indicating teh number of samples on a slide.</p></dd>
+
+
 <dt>FG</dt>
 <dd><p>Optional:A character indicating the name of the foreground
 variable name. if not specified its created as 
 <code>paste0("F",channel,".Median")</code></p></dd>
+
+
 <dt>BG</dt>
 <dd><p>Optional:A character indicating the name of the background 
 variable name.  if not specified its created as 
 <code>paste0("B",channel,".Median")</code></p></dd>
+
+
 <dt>FBG</dt>
 <dd><p>Optional:A character indicating the name of the 
 foreground - background variable name.  if not specified its 
 created as <code>paste0("F",channel,".Median...B",channel)</code></p></dd>
+
+
 <dt>blockspersample</dt>
 <dd><p>A numeric value indicating the numer of blocks in a 
 mini-array. The <code>".gal"</code> file can help in getting this</p></dd>
+
+
 <dt>chip_path</dt>
 <dd><p>A character indicating the path of the folder  location with
 the array data.</p></dd>
+
+
 <dt>sampleID_path</dt>
 <dd><p>A character indicating the path of the folder location 
 with the sample identifiers matching the array structure.</p></dd>
+
+
 <dt>mig_prefix</dt>
 <dd><p>Optional: A character indicating the identifier of an MIG
 dilution file</p></dd>
+
+
 <dt>machine</dt>
 <dd><p>Optional:A character indicating the machine used to process
 the data in the folder</p></dd>
+
+
 <dt>date_process</dt>
 <dd><p>Optional:A character indicating the date
 when the samples were processed.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a list of parameters required to process the data
-genepix_vars</p>
+    
+
+<p>a list of parameters required to process the data</p>
+
+
+<p>genepix_vars</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## specify the the parameters to process the data</span></span>
-<span class="r-in"><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu">array_vars</span><span class="op">(</span></span>
-<span class="r-in"><span class="co">## the channel the data was processed in</span></span>
-<span class="r-in">  channel <span class="op">=</span> <span class="st">"635"</span>,</span>
-<span class="r-in">  <span class="co">## folder where the array data is stored</span></span>
-<span class="r-in">  chip_path <span class="op">=</span> <span class="st">"data/array_data"</span>,</span>
-<span class="r-in">  <span class="co">## the number of samples per slide or in as single run</span></span>
-<span class="r-in">  totsamples <span class="op">=</span> <span class="fl">21</span>,</span>
-<span class="r-in">  <span class="co">## How many blocks each sample occupies</span></span>
-<span class="r-in">  blockspersample <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">  <span class="co">## folder where the array data samples id files are stored</span></span>
-<span class="r-in">  sampleID_path <span class="op">=</span> <span class="st">"data/array_sampleID/"</span>,</span>
-<span class="r-in">  <span class="co">## optional</span></span>
-<span class="r-in">  mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span>
-<span class="r-in">  machine <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in">  date_process <span class="op">=</span> <span class="st">"0520"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">genepix_vars</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## specify the the parameters to process the data</span></span></span>
+<span class="r-in"><span><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu">array_vars</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="co">## the channel the data was processed in</span></span></span>
+<span class="r-in"><span>  channel <span class="op">=</span> <span class="st">"635"</span>,</span></span>
+<span class="r-in"><span>  <span class="co">## folder where the array data is stored</span></span></span>
+<span class="r-in"><span>  chip_path <span class="op">=</span> <span class="st">"data/array_data"</span>,</span></span>
+<span class="r-in"><span>  <span class="co">## the number of samples per slide or in as single run</span></span></span>
+<span class="r-in"><span>  totsamples <span class="op">=</span> <span class="fl">21</span>,</span></span>
+<span class="r-in"><span>  <span class="co">## How many blocks each sample occupies</span></span></span>
+<span class="r-in"><span>  blockspersample <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  <span class="co">## folder where the array data samples id files are stored</span></span></span>
+<span class="r-in"><span>  sampleID_path <span class="op">=</span> <span class="st">"data/array_sampleID/"</span>,</span></span>
+<span class="r-in"><span>  <span class="co">## optional</span></span></span>
+<span class="r-in"><span>  mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span></span>
+<span class="r-in"><span>  machine <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  date_process <span class="op">=</span> <span class="st">"0520"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">genepix_vars</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $FG</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F635.Median</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -195,7 +220,7 @@ genepix_vars</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

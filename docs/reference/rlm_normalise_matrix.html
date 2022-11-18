@@ -18,7 +18,7 @@ matrix_normalise."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -65,27 +65,34 @@ matrix_normalise."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rlm_normalise_matrix</span><span class="op">(</span><span class="va">matrix_antigen</span>, <span class="va">array_matrix</span>, <span class="va">control_antigens</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rlm_normalise_matrix</span><span class="op">(</span><span class="va">matrix_antigen</span>, <span class="va">array_matrix</span>, <span class="va">control_antigens</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>matrix_antigen</dt>
 <dd><p>A matrix with antigen data</p></dd>
+
+
 <dt>array_matrix</dt>
 <dd><p>A matrix with control antigen data</p></dd>
+
+
 <dt>control_antigens</dt>
 <dd><p>the control antigens for RLM normalisation</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A RLM normalised data frame</p>
+    
+
+<p>A RLM normalised data frame</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">matrix_antigen</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
-<span class="r-in"> <span class="st">"matrix_antigen.csv"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">matrix_antigen</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span> <span class="st">"matrix_antigen.csv"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">105</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">117</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
@@ -93,9 +100,9 @@ matrix_normalise."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="r-in"><span class="co"># rlm_normalise_matrix(matrix_antigen=matrix_antigen,</span></span>
-<span class="r-in"> <span class="co">#array_matrix=array_matrix,</span></span>
-<span class="r-in"><span class="co"># control_antigens=control_antigens)</span></span>
+<span class="r-in"><span><span class="co"># rlm_normalise_matrix(matrix_antigen=matrix_antigen,</span></span></span>
+<span class="r-in"><span> <span class="co">#array_matrix=array_matrix,</span></span></span>
+<span class="r-in"><span><span class="co"># control_antigens=control_antigens)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -110,7 +117,7 @@ matrix_normalise."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

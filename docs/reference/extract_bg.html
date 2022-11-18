@@ -18,7 +18,7 @@ data for micro array data."><!-- mathjax --><script src="https://cdnjs.cloudflar
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -65,7 +65,7 @@ data for micro array data.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">extract_bg</span><span class="op">(</span><span class="va">iden</span>, <span class="va">data_files</span>, genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extract_bg</span><span class="op">(</span><span class="va">iden</span>, <span class="va">data_files</span>, genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -73,15 +73,22 @@ data for micro array data.</p>
     <dl><dt>iden</dt>
 <dd><p>A character indicating the name of the object to be
 used under data_files.</p></dd>
+
+
 <dt>data_files</dt>
 <dd><p>A list of data objects with names utilised by iden.</p></dd>
+
+
 <dt>genepix_vars</dt>
 <dd><p>A list of specific definitions of the experiment design.
 See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame of background values</p>
+    
+
+<p>A data frame of background values</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -90,35 +97,35 @@ See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Not run:</span></span>
-<span class="r-in"><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="array_vars.html">array_vars</a></span><span class="op">(</span></span>
-<span class="r-in">channel <span class="op">=</span> <span class="st">"635"</span>,</span>
-<span class="r-in">chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"array_data/machine1/"</span>, </span>
-<span class="r-in">package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span>
-<span class="r-in">totsamples <span class="op">=</span> <span class="fl">21</span>,</span>
-<span class="r-in">blockspersample <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span>
-<span class="r-in">machine <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in"><span class="co">## optional</span></span>
-<span class="r-in">date_process <span class="op">=</span> <span class="st">"0520"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co">#Define the data path</span></span>
-<span class="r-in"><span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># List the file names to use</span></span>
-<span class="r-in"><span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span>,</span>
-<span class="r-in">                       pattern <span class="op">=</span> <span class="st">'*.txt$|*.gpr$'</span>, full.names <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span>
-<span class="r-in"> .x <span class="op">=</span> <span class="va">filenames</span>,</span>
-<span class="r-in">  .f <span class="op">=</span> <span class="va">read_array_files</span>,</span>
-<span class="r-in">  data_path <span class="op">=</span> <span class="va">data_path</span>,</span>
-<span class="r-in">  genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">data_files</span>, </span>
-<span class="r-in"><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Not run:</span></span></span>
+<span class="r-in"><span><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="array_vars.html">array_vars</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>channel <span class="op">=</span> <span class="st">"635"</span>,</span></span>
+<span class="r-in"><span>chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"array_data/machine1/"</span>, </span></span>
+<span class="r-in"><span>package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>totsamples <span class="op">=</span> <span class="fl">21</span>,</span></span>
+<span class="r-in"><span>blockspersample <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span></span>
+<span class="r-in"><span>machine <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span><span class="co">## optional</span></span></span>
+<span class="r-in"><span>date_process <span class="op">=</span> <span class="st">"0520"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#Define the data path</span></span></span>
+<span class="r-in"><span><span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># List the file names to use</span></span></span>
+<span class="r-in"><span><span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span>,</span></span>
+<span class="r-in"><span>                       pattern <span class="op">=</span> <span class="st">'*.txt$|*.gpr$'</span>, full.names <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span> .x <span class="op">=</span> <span class="va">filenames</span>,</span></span>
+<span class="r-in"><span>  .f <span class="op">=</span> <span class="va">read_array_files</span>,</span></span>
+<span class="r-in"><span>  data_path <span class="op">=</span> <span class="va">data_path</span>,</span></span>
+<span class="r-in"><span>  genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">data_files</span>, </span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "BRB001" "KK2-06"</span>
-<span class="r-in"><span class="fu">extract_bg</span><span class="op">(</span>iden <span class="op">=</span><span class="st">"KK2-06"</span> , data_files<span class="op">=</span><span class="va">data_files</span>,genepix_vars<span class="op">=</span><span class="va">genepix_vars</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">extract_bg</span><span class="op">(</span>iden <span class="op">=</span><span class="st">"KK2-06"</span> , data_files<span class="op">=</span><span class="va">data_files</span>,genepix_vars<span class="op">=</span><span class="va">genepix_vars</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>KK2-06 Not found in the sampleID files heredata/array_sampleID/</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7,245 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   sampleID, antigen [2,415]</span></span>
@@ -135,7 +142,7 @@ See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> SID_gen1 ETRAMP10.2     1       <span style="text-decoration: underline;">7</span>123      <span style="text-decoration: underline;">1</span>136         2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> SID_gen1 GAMA           1      <span style="text-decoration: underline;">17</span>420      <span style="text-decoration: underline;">1</span>311         2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 7,235 more rows</span></span>
-<span class="r-in"><span class="co">## End(Not run)</span></span>
+<span class="r-in"><span><span class="co">## End(Not run)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -150,7 +157,7 @@ See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

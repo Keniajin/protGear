@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -65,35 +65,46 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_FB</span><span class="op">(</span>
-  <span class="va">df</span>,
-  antigen_name <span class="op">=</span> <span class="st">"antigen"</span>,
-  bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>,
-  FG_MFI <span class="op">=</span> <span class="st">"FBG_Median"</span>,
-  log_mfi <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_FB</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  antigen_name <span class="op">=</span> <span class="st">"antigen"</span>,</span>
+<span>  bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>,</span>
+<span>  FG_MFI <span class="op">=</span> <span class="st">"FBG_Median"</span>,</span>
+<span>  log_mfi <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>An object containing the data to which the plot is done.</p></dd>
+
+
 <dt>antigen_name</dt>
 <dd><p>The <code>variable</code> describing which features/proteins/
 antibodies in the data should be used to plot</p></dd>
+
+
 <dt>bg_MFI</dt>
 <dd><p>A numeric <code>variable</code> describing which is the 
 background MFI</p></dd>
+
+
 <dt>FG_MFI</dt>
 <dd><p>A numeric <code>variable</code> describing which is the 
 foreground MFI</p></dd>
+
+
 <dt>log_mfi</dt>
 <dd><p>a logical value indicating whether the MFI values should be
 log transformed or not.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a ggplot of foreground vs background MFI values</p>
+    
+
+<p>a ggplot of foreground vs background MFI values</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -102,11 +113,11 @@ log transformed or not.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Not run:</span></span>
-<span class="r-in"><span class="co">#After extracting the background using \code{\link{extract_bg}} </span></span>
-<span class="r-in"><span class="co">#we plot the data using</span></span>
-<span class="r-in"><span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span>
-<span class="r-in"><span class="st">"bg_example.csv"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Not run:</span></span></span>
+<span class="r-in"><span><span class="co">#After extracting the background using \code{\link{extract_bg}} </span></span></span>
+<span class="r-in"><span><span class="co">#we plot the data using</span></span></span>
+<span class="r-in"><span><span class="va">allData_bg</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span></span>
+<span class="r-in"><span><span class="st">"bg_example.csv"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">126</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">6</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
@@ -115,12 +126,12 @@ log transformed or not.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="r-in"><span class="fu">plot_FB</span><span class="op">(</span><span class="va">allData_bg</span>,</span>
-<span class="r-in">antigen_name <span class="op">=</span> <span class="st">"antigen"</span>,</span>
-<span class="r-in">bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>, FG_MFI <span class="op">=</span> <span class="st">"FBG_Median"</span>, log <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">plot_FB</span><span class="op">(</span><span class="va">allData_bg</span>,</span></span>
+<span class="r-in"><span>antigen_name <span class="op">=</span> <span class="st">"antigen"</span>,</span></span>
+<span class="r-in"><span>bg_MFI <span class="op">=</span> <span class="st">"BG_Median"</span>, FG_MFI <span class="op">=</span> <span class="st">"FBG_Median"</span>, log <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_FB-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co">## End(Not run)</span></span>
+<span class="r-in"><span><span class="co">## End(Not run)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -135,7 +146,7 @@ log transformed or not.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

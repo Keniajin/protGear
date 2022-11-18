@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -65,43 +65,58 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cv_estimation</span><span class="op">(</span>
-  <span class="va">dataC</span>,
-  <span class="va">lab_replicates</span>,
-  sampleID_var <span class="op">=</span> <span class="st">"sampleID"</span>,
-  antigen_var <span class="op">=</span> <span class="st">"antigen"</span>,
-  replicate_var <span class="op">=</span> <span class="st">"replicate"</span>,
-  mfi_var <span class="op">=</span> <span class="st">"FMedianBG_correct"</span>,
-  cv_cut_off <span class="op">=</span> <span class="fl">20</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cv_estimation</span><span class="op">(</span></span>
+<span>  <span class="va">dataC</span>,</span>
+<span>  <span class="va">lab_replicates</span>,</span>
+<span>  sampleID_var <span class="op">=</span> <span class="st">"sampleID"</span>,</span>
+<span>  antigen_var <span class="op">=</span> <span class="st">"antigen"</span>,</span>
+<span>  replicate_var <span class="op">=</span> <span class="st">"replicate"</span>,</span>
+<span>  mfi_var <span class="op">=</span> <span class="st">"FMedianBG_correct"</span>,</span>
+<span>  cv_cut_off <span class="op">=</span> <span class="fl">20</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dataC</dt>
 <dd><p>A dataset a data frame with feature variables to be used</p></dd>
+
+
 <dt>lab_replicates</dt>
 <dd><p>A numeric value indicating the number of lab replicates</p></dd>
+
+
 <dt>sampleID_var</dt>
 <dd><p>A character string containing the name of the sample 
 identifier variable. Default set to 'sampleID'</p></dd>
+
+
 <dt>antigen_var</dt>
 <dd><p>A character string containing the name of the 
 features/protein variable. Default to 'antigen'</p></dd>
+
+
 <dt>replicate_var</dt>
 <dd><p>A character string containing the name of the replicate
 variable. Default to 'replicate'</p></dd>
+
+
 <dt>mfi_var</dt>
 <dd><p>A character string containing the name of the variable with 
 MFI value.Assuming background correction is done already.
 Default to 'FMedianBG_correct'</p></dd>
+
+
 <dt>cv_cut_off</dt>
 <dd><p>Optional value indicating the cut off of flagging CV's. 
 Default set at 20.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame where CV's of the replicates have been calculated</p>
+    
+
+<p>A data frame where CV's of the replicates have been calculated</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -110,8 +125,8 @@ Default set at 20.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">dataC</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span>
-<span class="r-in"><span class="st">"dataC.csv"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dataC</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span></span>
+<span class="r-in"><span><span class="st">"dataC.csv"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Rows: </span><span style="color: #0000BB;">567</span> <span style="font-weight: bold;">Columns: </span><span style="color: #0000BB;">11</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Column specification</span> <span style="color: #00BBBB;">────────────────────────────────────────────────────────</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Delimiter:</span> ","</span>
@@ -120,27 +135,28 @@ Default set at 20.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="r-in"><span class="co">## this file has 3 lab replicates and the default names</span></span>
-<span class="r-in"><span class="fu">cv_estimation</span><span class="op">(</span><span class="va">dataC</span>  ,lab_replicates<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co">## this file has 3 lab replicates and the default names</span></span></span>
+<span class="r-in"><span><span class="fu">cv_estimation</span><span class="op">(</span><span class="va">dataC</span>  ,lab_replicates<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The replicates are as expected per sample per antigen</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 126 × 21</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   antigen [6]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    antigen sampleID sample_array_ID  meanX meanX2_X3 meanX1_X3 meanX1_X2   sdX</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> AMA1    0.0085                11   643.      594.      692       642.  98.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> AMA1    0.0255                 8   699       700.      672       724.  52.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AMA1    0.076                  5   633.      588       668.      642.  81.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AMA1    0.23                   2  <span style="text-decoration: underline;">1</span>725.     <span style="text-decoration: underline;">1</span>757      <span style="text-decoration: underline;">1</span>720      <span style="text-decoration: underline;">1</span>697   60.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AMA1    0.73                  19  <span style="text-decoration: underline;">2</span>504.     <span style="text-decoration: underline;">2</span>494.     <span style="text-decoration: underline;">2</span>568.     <span style="text-decoration: underline;">2</span>450  119. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AMA1    177.78                 4 <span style="text-decoration: underline;">58</span>262     <span style="text-decoration: underline;">58</span>208     <span style="text-decoration: underline;">58</span>640.    <span style="text-decoration: underline;">57</span>938. 709. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AMA1    19.75                 10 <span style="text-decoration: underline;">64</span>143.    <span style="text-decoration: underline;">64</span>204.    <span style="text-decoration: underline;">64</span>280.    <span style="text-decoration: underline;">63</span>944  353. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AMA1    2.19                  16  <span style="text-decoration: underline;">9</span>243      <span style="text-decoration: underline;">9</span>294      <span style="text-decoration: underline;">9</span>031      <span style="text-decoration: underline;">9</span>404  383. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> AMA1    533                    1 <span style="text-decoration: underline;">53</span>180.    <span style="text-decoration: underline;">52</span>860.    <span style="text-decoration: underline;">53</span>298     <span style="text-decoration: underline;">53</span>380. 559. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> AMA1    59.26                  7 <span style="text-decoration: underline;">61</span>601     <span style="text-decoration: underline;">61</span>870.    <span style="text-decoration: underline;">61</span>848.    <span style="text-decoration: underline;">61</span>085  894. </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 116 more rows, and 13 more variables: sdX2_X3 &lt;dbl&gt;, sdX1_X3 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sdX1_X2 &lt;dbl&gt;, CVX &lt;dbl&gt;, CVX2_X3 &lt;dbl&gt;, CVX1_X3 &lt;dbl&gt;, CVX1_X2 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cvCat_all &lt;chr&gt;, cvSelected_all &lt;dbl&gt;, iden &lt;chr&gt;, `1` &lt;dbl&gt;, `2` &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   `3` &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    antigen sampleID sampl…¹  meanX meanX…² meanX…³ meanX…⁴   sdX sdX2_X3 sdX1_X3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> AMA1    0.0085        11   643.    594.    692     642.  98.5    70      69.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> AMA1    0.0255         8   699     700.    672     724.  52.6    74.2    33.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AMA1    0.076          5   633.    588     668.    642.  81.3    35.4    77.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AMA1    0.23           2  <span style="text-decoration: underline;">1</span>725.   <span style="text-decoration: underline;">1</span>757    <span style="text-decoration: underline;">1</span>720    <span style="text-decoration: underline;">1</span>697   60.5    32.5    84.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AMA1    0.73          19  <span style="text-decoration: underline;">2</span>504.   <span style="text-decoration: underline;">2</span>494.   <span style="text-decoration: underline;">2</span>568.   <span style="text-decoration: underline;">2</span>450  119.    166.     61.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AMA1    177.78         4 <span style="text-decoration: underline;">58</span>262   <span style="text-decoration: underline;">58</span>208   <span style="text-decoration: underline;">58</span>640.  <span style="text-decoration: underline;">57</span>938. 709.    994.    383. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AMA1    19.75         10 <span style="text-decoration: underline;">64</span>143.  <span style="text-decoration: underline;">64</span>204.  <span style="text-decoration: underline;">64</span>280.  <span style="text-decoration: underline;">63</span>944  353.    476.    367. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AMA1    2.19          16  <span style="text-decoration: underline;">9</span>243    <span style="text-decoration: underline;">9</span>294    <span style="text-decoration: underline;">9</span>031    <span style="text-decoration: underline;">9</span>404  383.    528.    156. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> AMA1    533            1 <span style="text-decoration: underline;">53</span>180.  <span style="text-decoration: underline;">52</span>860.  <span style="text-decoration: underline;">53</span>298   <span style="text-decoration: underline;">53</span>380. 559.    117.    735. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> AMA1    59.26          7 <span style="text-decoration: underline;">61</span>601   <span style="text-decoration: underline;">61</span>870.  <span style="text-decoration: underline;">61</span>848.  <span style="text-decoration: underline;">61</span>085  894.   <span style="text-decoration: underline;">1</span>078.   <span style="text-decoration: underline;">1</span>111. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 116 more rows, 11 more variables: sdX1_X2 &lt;dbl&gt;, CVX &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CVX2_X3 &lt;dbl&gt;, CVX1_X3 &lt;dbl&gt;, CVX1_X2 &lt;dbl&gt;, cvCat_all &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   cvSelected_all &lt;dbl&gt;, iden &lt;chr&gt;, `1` &lt;dbl&gt;, `2` &lt;dbl&gt;, `3` &lt;dbl&gt;, and</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​sample_array_ID, ²​meanX2_X3, ³​meanX1_X3,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁴​meanX1_X2</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -155,7 +171,7 @@ Default set at 20.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

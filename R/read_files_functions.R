@@ -481,25 +481,20 @@ plot_FB <-
 #' @import  dplyr limma
 #' @importFrom rlang sym
 #' @examples
-#' ## Not run:
+#' ## Not Run
 #' genepix_vars <- array_vars(
-#'   channel = "635",
-#'   chip_path = system.file("extdata", "array_data/machine1/",
-#'   package="protGear"),
+#'   channel = '635',
+#'   chip_path = system.file('extdata', 'array_data/machine1/',
+#'   package='protGear'),
 #'   totsamples = 21,
 #'   blockspersample = 2,
-#'   mig_prefix = "_first",
+#'   mig_prefix = '_first',
 #'   machine = 1,
-#'   ## optional
-#'   date_process = "0520"
-#' )
-#' raw_df <- readr::read_csv(system.file("extdata", "Data1_bg_sample.csv",
-#'  package="protGear"))
-#' bg_correct(iden="iden",
-#' Data1 = raw_df,
-#' genepix_vars = genepix_vars, method="subtract_local"
-#' )
-#' ## End(Not run)
+#'   date_process = '0520')
+#' raw_df <- readr::read_csv(system.file('extdata','Data1_bg_sample.csv',
+#'  package='protGear'))
+#' bg_correct(iden='iden', Data1 = raw_df, genepix_vars = genepix_vars,
+#'  method='subtract_local')
 bg_correct <-
   function(iden, Data1, genepix_vars, method = "subtract_local") {
     #--------------------------------------------------------------------------

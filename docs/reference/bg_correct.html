@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bg_correct</span><span class="op">(</span><span class="va">iden</span>, <span class="va">Data1</span>, <span class="va">genepix_vars</span>, method <span class="op">=</span> <span class="st">"subtract_local"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bg_correct</span><span class="op">(</span><span class="va">iden</span>, <span class="va">Data1</span>, <span class="va">genepix_vars</span>, method <span class="op">=</span> <span class="st">"subtract_local"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,21 +71,30 @@
     <dl><dt>iden</dt>
 <dd><p>A character indicating the name of the object to be 
 used under Data1</p></dd>
+
+
 <dt>Data1</dt>
 <dd><p>A data frame with sample identifiers merged with micro 
 array data.</p></dd>
+
+
 <dt>genepix_vars</dt>
 <dd><p>A list of specific definitions of the experiment design.
 See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>a description of the background correction to be used. 
  Possible values are <code>"none","subtract_local",
 "subtract_global","movingmin_bg","minimum_half","edwards" or "normexp"</code>. 
 The default is <code>"subtract_local"</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame with background corrected data</p>
+    
+
+<p>A data frame with background corrected data</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -118,7 +127,7 @@ we use  the saddle-point approximation to maximum likelihood,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_array_visualize</span><span class="op">(</span><span class="va">infile</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_array_visualize</span><span class="op">(</span><span class="va">infile</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -71,17 +71,20 @@
     <dl><dt>infile</dt>
 <dd><p>a .gpr file to be used to visualize the expression intensities
 of the slide spots</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a data frame to visualize the background or foreground values</p>
+    
+
+<p>a data frame to visualize the background or foreground values</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Not run:</span></span>
-<span class="r-in"><span class="fu">read_array_visualize</span><span class="op">(</span>infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span>
-<span class="r-in"><span class="st">"/array_data/machine1/KK2-06.txt"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Not run:</span></span></span>
+<span class="r-in"><span><span class="fu">read_array_visualize</span><span class="op">(</span>infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,</span></span>
+<span class="r-in"><span><span class="st">"/array_data/machine1/KK2-06.txt"</span>, package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Flags Normalize Autoflag Block Column Row                 Name   ID     X</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    1:     0         0        0     1      1   1             Landmark  1F1  2130</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    2:     0         0        0     1      2   1               MSP3.6  1B3  2360</span>
@@ -106,7 +109,7 @@ of the slide spots</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8062: 60490        2383  1125        1125   0.223               1258  8062</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8063: 60490       65535 19685       19685   1.936              45850  8063</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8064: 60490       65535 18134       18134   1.564              47401  8064</span>
-<span class="r-in"><span class="co">## End(Not run)</span></span>
+<span class="r-in"><span><span class="co">## End(Not run)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -121,7 +124,7 @@ of the slide spots</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

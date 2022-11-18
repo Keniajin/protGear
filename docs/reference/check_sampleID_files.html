@@ -21,7 +21,7 @@ a file with the identifiers for the samples in array file."><!-- mathjax --><scr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -70,7 +70,7 @@ a file with the identifiers for the samples in array file.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">check_sampleID_files</span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_sampleID_files</span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,25 +78,28 @@ a file with the identifiers for the samples in array file.</p>
     <dl><dt>genepix_vars</dt>
 <dd><p>A list of specific definitions of the experiment design.
 See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A file with missing corresponding sample ID files</p>
+    
+
+<p>A file with missing corresponding sample ID files</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="array_vars.html">array_vars</a></span><span class="op">(</span></span>
-<span class="r-in">channel <span class="op">=</span> <span class="st">"635"</span>,</span>
-<span class="r-in">chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"array_data/machine1/"</span>, </span>
-<span class="r-in">package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span>
-<span class="r-in">totsamples <span class="op">=</span> <span class="fl">21</span>,</span>
-<span class="r-in">blockspersample <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span>
-<span class="r-in">machine <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in">date_process <span class="op">=</span> <span class="st">"0520"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu">check_sampleID_files</span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="array_vars.html">array_vars</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>channel <span class="op">=</span> <span class="st">"635"</span>,</span></span>
+<span class="r-in"><span>chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"array_data/machine1/"</span>, </span></span>
+<span class="r-in"><span>package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>totsamples <span class="op">=</span> <span class="fl">21</span>,</span></span>
+<span class="r-in"><span>blockspersample <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span></span>
+<span class="r-in"><span>machine <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>date_process <span class="op">=</span> <span class="st">"0520"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">check_sampleID_files</span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "BRB001" "KK2-06"</span>
 </code></pre></div>
     </div>
@@ -112,7 +115,7 @@ See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

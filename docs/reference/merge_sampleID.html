@@ -19,7 +19,7 @@ does not have sample identifiers the function generates it automatically."><!-- 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.55</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@ does not have sample identifiers the function generates it automatically.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">merge_sampleID</span><span class="op">(</span><span class="va">iden</span>, <span class="va">data_files</span>, <span class="va">genepix_vars</span>, <span class="va">method</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">merge_sampleID</span><span class="op">(</span><span class="va">iden</span>, <span class="va">data_files</span>, <span class="va">genepix_vars</span>, <span class="va">method</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -75,72 +75,81 @@ does not have sample identifiers the function generates it automatically.</p>
     <dl><dt>iden</dt>
 <dd><p>A character indicating the name of the object to be used under
 data_files.</p></dd>
+
+
 <dt>data_files</dt>
 <dd><p>A list of data objects with names utilised by iden.</p></dd>
+
+
 <dt>genepix_vars</dt>
 <dd><p>A list of specific definitions of the experiment design.
 See <code><a href="array_vars.html">array_vars</a></code>.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>A description of the background correction to be used. 
 See <code><a href="bg_correct.html">bg_correct</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a data frame merged with corresponding sample ID's.
+    
+
+<p>a data frame merged with corresponding sample ID's.
 The sample ID are specified in the sample ID files</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Not run:</span></span>
-<span class="r-in"><span class="co">### Define the genepix_vars</span></span>
-<span class="r-in"><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="array_vars.html">array_vars</a></span><span class="op">(</span></span>
-<span class="r-in">  channel <span class="op">=</span> <span class="st">"635"</span>,</span>
-<span class="r-in">  chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"array_data/machine1/"</span>,</span>
-<span class="r-in">   package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span>
-<span class="r-in">  totsamples <span class="op">=</span> <span class="fl">21</span>,</span>
-<span class="r-in">  blockspersample <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">  mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span>
-<span class="r-in">  machine <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in">  <span class="co">## optional</span></span>
-<span class="r-in">  date_process <span class="op">=</span> <span class="st">"0520"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## the path where the micro-array data is located</span></span>
-<span class="r-in"><span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span>,</span>
-<span class="r-in">                        pattern <span class="op">=</span> <span class="st">"*.txt$|*.gpr$"</span>, full.names <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co">## create a list of all the files</span></span>
-<span class="r-in"><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span>
-<span class="r-in"> .x <span class="op">=</span> <span class="va">filenames</span>,</span>
-<span class="r-in">  .f <span class="op">=</span> <span class="va">read_array_files</span>,</span>
-<span class="r-in">  data_path <span class="op">=</span> <span class="va">data_path</span>,</span>
-<span class="r-in">  genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">data_files</span>, </span>
-<span class="r-in"><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">## merge the lab data with samples and perform bg correction</span></span>
-<span class="r-in"><span class="fu">merge_sampleID</span><span class="op">(</span>iden <span class="op">=</span> <span class="st">"KK2-06"</span>, data_files <span class="op">=</span> <span class="va">data_files</span>,</span>
-<span class="r-in">               genepix_vars <span class="op">=</span><span class="va">genepix_vars</span>,method <span class="op">=</span> <span class="st">"subtract_global"</span> <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Not run:</span></span></span>
+<span class="r-in"><span><span class="co">### Define the genepix_vars</span></span></span>
+<span class="r-in"><span><span class="va">genepix_vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="array_vars.html">array_vars</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  channel <span class="op">=</span> <span class="st">"635"</span>,</span></span>
+<span class="r-in"><span>  chip_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"array_data/machine1/"</span>,</span></span>
+<span class="r-in"><span>   package<span class="op">=</span><span class="st">"protGear"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  totsamples <span class="op">=</span> <span class="fl">21</span>,</span></span>
+<span class="r-in"><span>  blockspersample <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  mig_prefix <span class="op">=</span> <span class="st">"_first"</span>,</span></span>
+<span class="r-in"><span>  machine <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  <span class="co">## optional</span></span></span>
+<span class="r-in"><span>  date_process <span class="op">=</span> <span class="st">"0520"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## the path where the micro-array data is located</span></span></span>
+<span class="r-in"><span><span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">filenames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">genepix_vars</span><span class="op">$</span><span class="va">chip_path</span>,</span></span>
+<span class="r-in"><span>                        pattern <span class="op">=</span> <span class="st">"*.txt$|*.gpr$"</span>, full.names <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## create a list of all the files</span></span></span>
+<span class="r-in"><span><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span> .x <span class="op">=</span> <span class="va">filenames</span>,</span></span>
+<span class="r-in"><span>  .f <span class="op">=</span> <span class="va">read_array_files</span>,</span></span>
+<span class="r-in"><span>  data_path <span class="op">=</span> <span class="va">data_path</span>,</span></span>
+<span class="r-in"><span>  genepix_vars <span class="op">=</span> <span class="va">genepix_vars</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">data_files</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/set_names.html" class="external-link">set_names</a></span><span class="op">(</span><span class="va">data_files</span>, </span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">filenames</span>, <span class="va">name_of_files</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## merge the lab data with samples and perform bg correction</span></span></span>
+<span class="r-in"><span><span class="fu">merge_sampleID</span><span class="op">(</span>iden <span class="op">=</span> <span class="st">"KK2-06"</span>, data_files <span class="op">=</span> <span class="va">data_files</span>,</span></span>
+<span class="r-in"><span>               genepix_vars <span class="op">=</span><span class="va">genepix_vars</span>,method <span class="op">=</span> <span class="st">"subtract_global"</span> <span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>KK2-06.csv Not found in the sampleID filesdata/array_sampleID/</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8,064 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   sampleID, antigen [2,457]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    sampleID sample_array_ID antigen    FMedian BGMedian FMedianBG_correct Block</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SID_gen1               1 Landmark     <span style="text-decoration: underline;">65</span>535     <span style="text-decoration: underline;">2</span>443             <span style="text-decoration: underline;">64</span>413     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SID_gen1               1 MSP3.6        <span style="text-decoration: underline;">5</span>488     <span style="text-decoration: underline;">1</span>126              <span style="text-decoration: underline;">4</span>366     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SID_gen1               1 ETRAMP10.2    <span style="text-decoration: underline;">6</span>350     <span style="text-decoration: underline;">1</span>026              <span style="text-decoration: underline;">5</span>228     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SID_gen1               1 GAMA         <span style="text-decoration: underline;">15</span>768     <span style="text-decoration: underline;">1</span>059             <span style="text-decoration: underline;">14</span>646     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SID_gen1               1 MSRP4        <span style="text-decoration: underline;">65</span>535     <span style="text-decoration: underline;">1</span>413             <span style="text-decoration: underline;">64</span>413     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SID_gen1               1 MSP4         <span style="text-decoration: underline;">65</span>535     <span style="text-decoration: underline;">1</span>405             <span style="text-decoration: underline;">64</span>413     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SID_gen1               1 RAMA         <span style="text-decoration: underline;">43</span>966     <span style="text-decoration: underline;">1</span>085             <span style="text-decoration: underline;">42</span>844     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SID_gen1               1 ASP          <span style="text-decoration: underline;">65</span>535     <span style="text-decoration: underline;">1</span>092             <span style="text-decoration: underline;">64</span>413     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> SID_gen1               1 Landmark     <span style="text-decoration: underline;">65</span>535     <span style="text-decoration: underline;">4</span>198             <span style="text-decoration: underline;">64</span>413     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> SID_gen1               1 MSP3.6        <span style="text-decoration: underline;">6</span>596     <span style="text-decoration: underline;">1</span>343              <span style="text-decoration: underline;">5</span>474     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 8,054 more rows, and 4 more variables: Column &lt;int&gt;, Row &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   replicate &lt;int&gt;, iden &lt;chr&gt;</span></span>
-<span class="r-in"><span class="co">## End(Not run)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    sampleID sample_…¹ antigen FMedian BGMed…² FMedi…³ Block Column   Row repli…⁴</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> SID_gen1         1 Landma…   <span style="text-decoration: underline;">65</span>535    <span style="text-decoration: underline;">2</span>443   <span style="text-decoration: underline;">64</span>413     1      1     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> SID_gen1         1 MSP3.6     <span style="text-decoration: underline;">5</span>488    <span style="text-decoration: underline;">1</span>126    <span style="text-decoration: underline;">4</span>366     1      2     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SID_gen1         1 ETRAMP…    <span style="text-decoration: underline;">6</span>350    <span style="text-decoration: underline;">1</span>026    <span style="text-decoration: underline;">5</span>228     1      3     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> SID_gen1         1 GAMA      <span style="text-decoration: underline;">15</span>768    <span style="text-decoration: underline;">1</span>059   <span style="text-decoration: underline;">14</span>646     1      4     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> SID_gen1         1 MSRP4     <span style="text-decoration: underline;">65</span>535    <span style="text-decoration: underline;">1</span>413   <span style="text-decoration: underline;">64</span>413     1      5     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> SID_gen1         1 MSP4      <span style="text-decoration: underline;">65</span>535    <span style="text-decoration: underline;">1</span>405   <span style="text-decoration: underline;">64</span>413     1      6     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> SID_gen1         1 RAMA      <span style="text-decoration: underline;">43</span>966    <span style="text-decoration: underline;">1</span>085   <span style="text-decoration: underline;">42</span>844     1      7     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> SID_gen1         1 ASP       <span style="text-decoration: underline;">65</span>535    <span style="text-decoration: underline;">1</span>092   <span style="text-decoration: underline;">64</span>413     1      8     1       1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> SID_gen1         1 Landma…   <span style="text-decoration: underline;">65</span>535    <span style="text-decoration: underline;">4</span>198   <span style="text-decoration: underline;">64</span>413     1      1     2       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> SID_gen1         1 MSP3.6     <span style="text-decoration: underline;">6</span>596    <span style="text-decoration: underline;">1</span>343    <span style="text-decoration: underline;">5</span>474     1      2     2       2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 8,054 more rows, 1 more variable: iden &lt;chr&gt;, and abbreviated variable</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   names ¹​sample_array_ID, ²​BGMedian, ³​FMedianBG_correct, ⁴​replicate</span></span>
+<span class="r-in"><span><span class="co">## End(Not run)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -155,7 +164,7 @@ The sample ID are specified in the sample ID files</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
