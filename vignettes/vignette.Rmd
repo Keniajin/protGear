@@ -33,7 +33,7 @@ library(purrr)
 library(scales)
 library(pheatmap)
 library(data.table)
-library(kableExtra)
+#library(kableExtra)
 library(gridExtra)
 library(png)
 library(knitr)
@@ -375,8 +375,8 @@ batch_vars <- list(machine="m1", day="0520")
 ```{r tag_glimpse}
 tb1 <- data.frame(head(tag_file, n=10))
 tb1 %>% 
-  kable() %>%
-  kable_styling()
+  knitr::kable() #%>%
+  #kable_styling()
 ```
 
 
