@@ -495,6 +495,7 @@ plot_FB <-
 #'  package='protGear'))
 #' bg_correct(iden='iden', Data1 = raw_df, genepix_vars = genepix_vars,
 #'  method='subtract_local')
+#'  
 bg_correct <-
   function(iden, Data1, genepix_vars, method = "subtract_local") {
     #--------------------------------------------------------------------------
