@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">protGear</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.31</span>
       </span>
     </div>
 
@@ -82,7 +82,7 @@
                         <h4 data-toc-skip class="author">Kennedy
 Mwai</h4>
             
-            <h4 data-toc-skip class="date">27 November, 2022</h4>
+            <h4 data-toc-skip class="date">11 December, 2022</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Keniajin/protGear/blob/HEAD/../vignettes/vignette.Rmd" class="external-link"><code>../vignettes/vignette.Rmd</code></a></small>
       <div class="hidden name"><code>vignette.Rmd</code></div>
@@ -98,7 +98,6 @@ Mwai</h4>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org" class="external-link">scales</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com" class="external-link">data.table</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span><span class="op">)</span> <span class="co">## kable extra casusing warnings</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rforge.net/png/" class="external-link">png</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
@@ -116,7 +115,24 @@ Mwai</h4>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>echo <span class="op">=</span> <span class="cn">TRUE</span>, message<span class="op">=</span><span class="cn">FALSE</span>,warning <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                      fig.align <span class="op">=</span> <span class="st">'center'</span>,</span>
 <span>                      dev <span class="op">=</span> <span class="st">"png"</span>, </span>
-<span>                       tidy<span class="op">=</span><span class="st">'styler'</span>, tidy.opts<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>strict<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>                       tidy<span class="op">=</span><span class="st">'styler'</span>, tidy.opts<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>strict<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co">## Color Format</span></span>
+<span><span class="va">colFmt</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">color</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">outputFormat</span> <span class="op">&lt;-</span> <span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_knit.html" class="external-link">opts_knit</a></span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"rmarkdown.pandoc.to"</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">outputFormat</span> <span class="op">==</span> <span class="st">'latex'</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"\\textcolor{"</span>,<span class="va">color</span>,<span class="st">"}{"</span>,<span class="va">x</span>,<span class="st">"}"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span><span class="op">(</span><span class="va">outputFormat</span> <span class="op">==</span> <span class="st">'html'</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"&lt;font color='"</span>,<span class="va">color</span>,<span class="st">"'&gt;"</span>,<span class="va">x</span>,<span class="st">"&lt;/font&gt;"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">ret</span> <span class="op">&lt;-</span> <span class="va">x</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">ret</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <style type="text/css">
 .custom-inline {
   color: red;
@@ -257,8 +273,8 @@ from the quantification software under <code>Wavelengths</code>.</p>
 <span><span class="co">## [30] "ScanArea=1\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                          </span></span>
 <span><span class="co">## [31] "Supplier=\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"                                                                                           </span></span>
 <span><span class="co">## [32] "Flags\tNormalize\tAutoflag\tBlock\tColumn\tRow\tName\tID\tX\tY\tF635 Median\tB635\tB635 Median\tSNR 635\tF635 Median - B635\tIndex"</span></span></code></pre>
-<p>The function <span style="     color: red !important;">check_sampleID_files()</span> helps
-to check whether each micro array file has a corresponding sample
+<p>The function <font color="red">check_sampleID_files()</font> helps to
+check whether each micro array file has a corresponding sample
 identifier file. The sample identifier files are generated from the lab
 plate maps to match the corresponding samples on a specific slide.If the
 sample identifier file is missing, protGear automatically generates the
@@ -270,13 +286,16 @@ id’s.</p>
 strong spatial biases when the scan image is not available. However, we
 recommend using the scanned image to visualize the spatial artefacts
 that might not be recorded in the <code>.gpr</code> file. We include the
-functions <span style="     color: red !important;">visualize_slide()</span> and <span style="     color: red !important;">visualize_slide_2d()</span> to check
-the spatial structure. The functions are build on <span style="     color: red !important;">structure_plot()</span> which shows
-the block and mini-array structure of a slide.</p>
+functions <font color="red">visualize_slide()</font> and
+<font color="red">visualize_slide_2d()</font> to check the spatial
+structure. The functions are build on
+<font color="red">structure_plot()</font> which shows the block and
+mini-array structure of a slide.</p>
 <div class="section level4">
 <h4 id="visualize-the-foreground-mfi">Visualize the foreground MFI<a class="anchor" aria-label="anchor" href="#visualize-the-foreground-mfi"></a>
 </h4>
-<p>Here we visualize the foreground MFI using the <span style="     color: red !important;">visualize_slide</span> function</p>
+<p>Here we visualize the foreground MFI using the
+<font color="red">visualize_slide</font> function</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/visualize_slide.html">visualize_slide</a></span><span class="op">(</span></span>
 <span>  infile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/array_data/machine1/KK2-06.txt"</span>, package <span class="op">=</span> <span class="st">"protGear"</span><span class="op">)</span>,</span>
@@ -300,19 +319,21 @@ the block and mini-array structure of a slide.</p>
 <div class="section level3">
 <h3 id="import--gprtxt-data">Import .gpr/txt data<a class="anchor" aria-label="anchor" href="#import--gprtxt-data"></a>
 </h3>
-<p>Microarray data is imported using the <span style="     color: red !important;">read_array_files()</span> function.
-The function accepts the following mandatory arguments;</p>
+<p>Microarray data is imported using the
+<font color="red">read_array_files()</font> function. The function
+accepts the following mandatory arguments;</p>
 <ul>
 <li>
 <code>filename</code> - the name of the file which the data are to
 be read from. In this example a list of multiple files from a folder is
-used and passed to using <span style="     color: red !important;">purrr</span>.</li>
+used and passed to <font color="red">read_array_files()</font> using
+<font color="red">purrr</font>.</li>
 <li>
 <code>data_path</code> - The path where the file with the data is
 located</li>
 <li>
 <code>genepix_vars</code> - A list of specific definitions of the
-experiment design. See <span style="     color: red !important;">array_vars()</span>
+experiment design. See <font color="red">array_vars()</font>
 </li>
 </ul>
 <p>For this example I use the sub-folder 1 specified using
@@ -357,12 +378,14 @@ approaches;</p>
 <p>In ‘<code>.gpr</code>’ files the Background column starts with a
 ‘<code>B</code>’ followed by the wavelength or channel. In order to
 perform background correction, we extract the background mean
-fluorescent intensities (MFI’s) using the function <span style="     color: red !important;">extract_bg()</span> . The function
-accepts the arguments <code>iden</code> which is the file identifier,
+fluorescent intensities (MFI’s) using the function
+<font color="red">extract_bg()</font> . The function accepts the
+arguments <code>iden</code> which is the file identifier,
 <code>data_files</code> a list of data objects with names utilised by
-<code>iden</code> and <code>genepix_vars</code> defined using <span style="     color: red !important;">array_vars()</span> function. We
-utilise the <code>purr::map</code> function to extract the background
-MFI of multiple data files.</p>
+<code>iden</code> and <code>genepix_vars</code> defined using
+<font color="red">array_vars()</font> function. We utilise the
+<code>purr::map</code> function to extract the background MFI of
+multiple data files.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## utilising the map package we process a number of files  under data_files list</span></span>
 <span><span class="va">dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">data_files</span><span class="op">)</span></span>
@@ -374,11 +397,10 @@ MFI of multiple data files.</p>
 </h3>
 <p>Before selecting the best background correction approach the MFI
 signals are be inspected visually. In protGear we first utilise the
-function <span style="     color: red !important;">plot_FB()</span> that
-graphs the background, <em>BG_Median</em> and foreground values,
-<em>FBG_Median</em>. On the protGear Shiny platform the visuals are
-interactive and you can identify the features or blocks with strong
-bias.</p>
+function <font color="red">plot_FB()</font> that graphs the background,
+<em>BG_Median</em> and foreground values, <em>FBG_Median</em>. On the
+protGear Shiny platform the visuals are interactive and you can identify
+the features or blocks with strong bias.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_FB.html">plot_FB</a></span><span class="op">(</span><span class="va">allData_bg</span>,</span>
 <span>  antigen_name <span class="op">=</span> <span class="st">"antigen"</span>,</span>
@@ -405,13 +427,13 @@ bias.</p>
 </h3>
 <p>After background visualization and selecting the best approach the
 array data are merged with their specific sample identifier files.</p>
-<p><em><span style="     color: red !important;">Note:</span></em> Each
-array file must have its own corresponding sample identifier
-<code>.csv</code> file stored in <span style="     color: red !important;">array_vars()</span> function under
+<p><em><font color="red">Note:</font></em> Each array file must have its
+own corresponding sample identifier <code>.csv</code> file stored in
+<font color="red">array_vars()</font> function under
 <code>sampleID_path</code>. Check General information section.</p>
 <p>The method of background subtraction selected is specified under
-<span style="     color: red !important;">method</span> below. The
-background correction is performed by <span style="     color: red !important;">bg_correct()</span> function.</p>
+<font color="red">method</font> below. The background correction is
+performed by <font color="red">bg_correct()</font> function.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample_ID_merged_dfs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span></span>
 <span>  .x <span class="op">=</span> <span class="va">dfs</span>, .f <span class="op">=</span> <span class="va">merge_sampleID</span>, data_files <span class="op">=</span> <span class="va">data_files</span>,</span>
@@ -428,8 +450,8 @@ included. Buffer spots are used to check for unexpected scanning
 artefacts. The buffer spots should have similar values in different
 slides. Some outliers are expected for buffer spots close sample spots
 or landmark. However you can specify the name of your control antigens
-here <span style="     color: blue !important;">buffer_spot="buffer"</span> if you
-do not have buffer spots.</p>
+here <font color="blue">buffer_spot=“buffer”</font> if you do not have
+buffer spots.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">buffer_transp</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">sample_ID_merged_dfs</span>, .f <span class="op">=</span> <span class="va">buffer_spots</span>, buffer_spot <span class="op">=</span> <span class="st">"buffer"</span><span class="op">)</span></span>
 <span></span>
@@ -442,8 +464,9 @@ do not have buffer spots.</p>
 <div class="section level2">
 <h2 id="coefficient-of-variation-cv">Coefficient of Variation (CV)<a class="anchor" aria-label="anchor" href="#coefficient-of-variation-cv"></a>
 </h2>
-<p>To calculate the CV’s we utilise the <span style="     color: red !important;">cv_estimation()</span> function with
-a <code>cv_cut_off</code> specified , sample identifier variable and
+<p>To calculate the CV’s we utilise the
+<font color="red">cv_estimation()</font> function with a
+<code>cv_cut_off</code> specified , sample identifier variable and
 antigen specified under <code>sampleID_var</code> and
 <code>antigen</code> respectively. The <code>replicate_var</code> and
 <code>mfi_var</code> identifies the variable with the replicate rank
@@ -471,7 +494,7 @@ generated and MFI’s values.</p>
 <h3 id="summary-of-cv-values">Summary of CV values<a class="anchor" aria-label="anchor" href="#summary-of-cv-values"></a>
 </h3>
 <p>Here we create a summary of the CV values for each sample/slide
-utilising the <span style="     color: red !important;">cv_by_sample_estimation()</span>
+utilising the <font color="red">cv_by_sample_estimation()</font>
 function. This helps to identify samples with high values of CV. On the
 protGear dashboard an interactive table is created to show the summary
 for each sample.</p>
@@ -504,9 +527,10 @@ for each sample.</p>
 <div class="section level3">
 <h3 id="best-replicates">Best replicates<a class="anchor" aria-label="anchor" href="#best-replicates"></a>
 </h3>
-<p>We have implemented a function <span style="     color: red !important;">best_CV_estimation()</span> to
-select the best replicates if an experiment has more than 2 technical
-replicates. This helps to select the less variable replicates.</p>
+<p>We have implemented a function
+<font color="red">best_CV_estimation()</font> to select the best
+replicates if an experiment has more than 2 technical replicates. This
+helps to select the less variable replicates.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @________________________________data_with_selected_best_2_CV_______________________________________</span></span>
 <span><span class="co">#' data with the selected mean for the best 2 CVs</span></span>
@@ -688,7 +712,7 @@ CD4TAG
 <div class="section level3">
 <h3 id="subtracting-the-tag-values">Subtracting the TAG values<a class="anchor" aria-label="anchor" href="#subtracting-the-tag-values"></a>
 </h3>
-<p>The function <span style="     color: red !important;">tag_subtract()</span> implements the
+<p>The function <font color="red">tag_subtract()</font> implements the
 TAG subtration by matching the TAG names with the corresponding TAG
 values.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -780,11 +804,10 @@ normalisation techniques;</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sample_array_ID</span>, <span class="va">sample_index</span>, <span class="va">slide</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span></span></code></pre></div>
-<p>The <span style="     color: red !important;">matrix_normalise()</span> function
-is used to normalise the data and returns a list of plots and a matrix
-of normalised values. A plot is returned if
-<code>return_plot = TRUE</code> otherwise only a matrix of normalised
-values will be returned.</p>
+<p>The <font color="red">matrix_normalise()</font> function is used to
+normalise the data and returns a list of plots and a matrix of
+normalised values. A plot is returned if <code>return_plot = TRUE</code>
+otherwise only a matrix of normalised values will be returned.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">normlise_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix_normalise.html">matrix_normalise</a></span><span class="op">(</span><span class="va">matrix_antigen</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"vsn"</span>, array_matrix <span class="op">=</span> <span class="va">array_matrix</span>,</span>
@@ -797,8 +820,8 @@ values will be returned.</p>
 <h3 id="compare-normalisation-methods">Compare normalisation methods<a class="anchor" aria-label="anchor" href="#compare-normalisation-methods"></a>
 </h3>
 <p>On the dashboard we compare the different normalisation techniques
-using the <span style="     color: red !important;">mutiple_plot()</span> function after
-loading the data.</p>
+using the <font color="red">mutiple_plot()</font> function after loading
+the data.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">control_antigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CommercialHumanIgG"</span>, <span class="st">"CD4TAG"</span><span class="op">)</span></span>
 <span><span class="co">## no normalisation</span></span>
@@ -987,9 +1010,9 @@ Install R: Open an internet browser and go to www.r-project.org.</p>
 <span><span class="co">## [10] GGally_2.1.2        rlang_1.0.6         magick_2.7.3       </span></span>
 <span><span class="co">## [13] factoextra_1.0.7    FactoMineR_2.6      styler_1.8.1       </span></span>
 <span><span class="co">## [16] knitr_1.41          png_0.1-7           gridExtra_2.3      </span></span>
-<span><span class="co">## [19] kableExtra_1.3.4    data.table_1.14.6   pheatmap_1.0.12    </span></span>
-<span><span class="co">## [22] scales_1.2.1        purrr_0.3.5         gtools_3.9.3       </span></span>
-<span><span class="co">## [25] ggpubr_0.5.0        ggplot2_3.4.0      </span></span>
+<span><span class="co">## [19] data.table_1.14.6   pheatmap_1.0.12     scales_1.2.1       </span></span>
+<span><span class="co">## [22] purrr_0.3.5         gtools_3.9.3        ggpubr_0.5.0       </span></span>
+<span><span class="co">## [25] ggplot2_3.4.0      </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##   [1] backports_1.4.1        systemfonts_1.0.4      plyr_1.8.8            </span></span>
@@ -999,44 +1022,44 @@ Install R: Open an internet browser and go to www.r-project.org.</p>
 <span><span class="co">##  [13] fansi_1.0.3            magrittr_2.0.3         memoise_2.0.1         </span></span>
 <span><span class="co">##  [16] cluster_2.1.4          tzdb_0.3.0             readr_2.1.3           </span></span>
 <span><span class="co">##  [19] Biostrings_2.66.0      annotate_1.76.0        Kendall_2.2.1         </span></span>
-<span><span class="co">##  [22] R.utils_2.12.2         sandwich_3.0-2         svglite_2.1.0         </span></span>
-<span><span class="co">##  [25] pkgdown_2.0.6          colorspace_2.0-3       blob_1.2.3            </span></span>
-<span><span class="co">##  [28] rvest_1.0.3            ggrepel_0.9.2          textshaping_0.3.6     </span></span>
+<span><span class="co">##  [22] R.utils_2.12.2         svglite_2.1.0          sandwich_3.0-2        </span></span>
+<span><span class="co">##  [25] pkgdown_2.0.6          colorspace_2.0-3       rvest_1.0.3           </span></span>
+<span><span class="co">##  [28] blob_1.2.3             ggrepel_0.9.2          textshaping_0.3.6     </span></span>
 <span><span class="co">##  [31] xfun_0.35              RCurl_1.98-1.9         crayon_1.5.2          </span></span>
 <span><span class="co">##  [34] jsonlite_1.8.3         genefilter_1.80.0      survival_3.4-0        </span></span>
-<span><span class="co">##  [37] zoo_1.8-11             glue_1.6.2             gtable_0.3.1          </span></span>
-<span><span class="co">##  [40] XVector_0.38.0         zlibbioc_1.44.0        emmeans_1.8.2         </span></span>
-<span><span class="co">##  [43] webshot_0.5.4          R.cache_0.16.0         car_3.1-1             </span></span>
-<span><span class="co">##  [46] abind_1.4-5            mvtnorm_1.1-3          DBI_1.1.3             </span></span>
-<span><span class="co">##  [49] rstatix_0.7.1          Rcpp_1.0.9             viridisLite_0.4.1     </span></span>
-<span><span class="co">##  [52] xtable_1.8-4           gridGraphics_0.5-1     flashClust_1.01-2     </span></span>
-<span><span class="co">##  [55] bit_4.0.5              preprocessCore_1.60.0  stats4_4.2.2          </span></span>
-<span><span class="co">##  [58] DT_0.26                htmlwidgets_1.5.4      httr_1.4.4            </span></span>
-<span><span class="co">##  [61] RColorBrewer_1.1-3     ellipsis_0.3.2         farver_2.1.1          </span></span>
-<span><span class="co">##  [64] pkgconfig_2.0.3        reshape_0.8.9          XML_3.99-0.12         </span></span>
-<span><span class="co">##  [67] R.methodsS3_1.8.2      multcompView_0.1-8     sass_0.4.4            </span></span>
-<span><span class="co">##  [70] utf8_1.2.2             labeling_0.4.2         tidyselect_1.2.0      </span></span>
-<span><span class="co">##  [73] later_1.3.0            AnnotationDbi_1.60.0   munsell_0.5.0         </span></span>
-<span><span class="co">##  [76] tools_4.2.2            cachem_1.0.6           cli_3.4.1             </span></span>
-<span><span class="co">##  [79] generics_0.1.3         RSQLite_2.2.19         broom_1.0.1           </span></span>
-<span><span class="co">##  [82] evaluate_0.18          stringr_1.4.1          fastmap_1.1.0         </span></span>
-<span><span class="co">##  [85] yaml_2.3.6             ragg_1.2.4             bit64_4.0.5           </span></span>
-<span><span class="co">##  [88] fs_1.5.2               KEGGREST_1.38.0        nlme_3.1-160          </span></span>
-<span><span class="co">##  [91] mime_0.12              R.oo_1.25.0            leaps_3.1             </span></span>
-<span><span class="co">##  [94] xml2_1.3.3             compiler_4.2.2         rstudioapi_0.14       </span></span>
-<span><span class="co">##  [97] plotly_4.10.1          affyio_1.68.0          ggsignif_0.6.4        </span></span>
-<span><span class="co">## [100] tibble_3.1.8           bslib_0.4.1            stringi_1.7.8         </span></span>
-<span><span class="co">## [103] highr_0.9              desc_1.4.2             lattice_0.20-45       </span></span>
-<span><span class="co">## [106] Matrix_1.5-3           vctrs_0.5.1            pillar_1.8.1          </span></span>
-<span><span class="co">## [109] lifecycle_1.0.3        BiocManager_1.30.19    jquerylib_0.1.4       </span></span>
-<span><span class="co">## [112] estimability_1.4.1     bitops_1.0-7           httpuv_1.6.6          </span></span>
-<span><span class="co">## [115] R6_2.5.1               affy_1.76.0            promises_1.2.0.1      </span></span>
-<span><span class="co">## [118] IRanges_2.32.0         codetools_0.2-18       boot_1.3-28.1         </span></span>
-<span><span class="co">## [121] MASS_7.3-58.1          assertthat_0.2.1       rprojroot_2.0.3       </span></span>
-<span><span class="co">## [124] withr_2.5.0            GenomeInfoDbData_1.2.9 S4Vectors_0.36.0      </span></span>
-<span><span class="co">## [127] multcomp_1.4-20        mgcv_1.8-41            hms_1.1.2             </span></span>
-<span><span class="co">## [130] rmarkdown_2.18         carData_3.0-5          scatterplot3d_0.3-42  </span></span>
-<span><span class="co">## [133] shiny_1.7.3</span></span></code></pre>
+<span><span class="co">##  [37] zoo_1.8-11             glue_1.6.2             kableExtra_1.3.4      </span></span>
+<span><span class="co">##  [40] gtable_0.3.1           zlibbioc_1.44.0        emmeans_1.8.2         </span></span>
+<span><span class="co">##  [43] XVector_0.38.0         webshot_0.5.4          R.cache_0.16.0        </span></span>
+<span><span class="co">##  [46] car_3.1-1              abind_1.4-5            mvtnorm_1.1-3         </span></span>
+<span><span class="co">##  [49] DBI_1.1.3              rstatix_0.7.1          Rcpp_1.0.9            </span></span>
+<span><span class="co">##  [52] viridisLite_0.4.1      xtable_1.8-4           gridGraphics_0.5-1    </span></span>
+<span><span class="co">##  [55] flashClust_1.01-2      bit_4.0.5              preprocessCore_1.60.0 </span></span>
+<span><span class="co">##  [58] stats4_4.2.2           DT_0.26                htmlwidgets_1.5.4     </span></span>
+<span><span class="co">##  [61] httr_1.4.4             RColorBrewer_1.1-3     ellipsis_0.3.2        </span></span>
+<span><span class="co">##  [64] farver_2.1.1           pkgconfig_2.0.3        reshape_0.8.9         </span></span>
+<span><span class="co">##  [67] XML_3.99-0.12          R.methodsS3_1.8.2      multcompView_0.1-8    </span></span>
+<span><span class="co">##  [70] sass_0.4.4             utf8_1.2.2             labeling_0.4.2        </span></span>
+<span><span class="co">##  [73] tidyselect_1.2.0       later_1.3.0            AnnotationDbi_1.60.0  </span></span>
+<span><span class="co">##  [76] munsell_0.5.0          tools_4.2.2            cachem_1.0.6          </span></span>
+<span><span class="co">##  [79] cli_3.4.1              generics_0.1.3         RSQLite_2.2.19        </span></span>
+<span><span class="co">##  [82] broom_1.0.1            evaluate_0.18          stringr_1.4.1         </span></span>
+<span><span class="co">##  [85] fastmap_1.1.0          yaml_2.3.6             ragg_1.2.4            </span></span>
+<span><span class="co">##  [88] bit64_4.0.5            fs_1.5.2               KEGGREST_1.38.0       </span></span>
+<span><span class="co">##  [91] nlme_3.1-160           mime_0.12              R.oo_1.25.0           </span></span>
+<span><span class="co">##  [94] xml2_1.3.3             leaps_3.1              compiler_4.2.2        </span></span>
+<span><span class="co">##  [97] rstudioapi_0.14        plotly_4.10.1          affyio_1.68.0         </span></span>
+<span><span class="co">## [100] ggsignif_0.6.4         tibble_3.1.8           bslib_0.4.1           </span></span>
+<span><span class="co">## [103] stringi_1.7.8          highr_0.9              desc_1.4.2            </span></span>
+<span><span class="co">## [106] lattice_0.20-45        Matrix_1.5-3           vctrs_0.5.1           </span></span>
+<span><span class="co">## [109] pillar_1.8.1           lifecycle_1.0.3        BiocManager_1.30.19   </span></span>
+<span><span class="co">## [112] jquerylib_0.1.4        estimability_1.4.1     bitops_1.0-7          </span></span>
+<span><span class="co">## [115] httpuv_1.6.6           R6_2.5.1               affy_1.76.0           </span></span>
+<span><span class="co">## [118] promises_1.2.0.1       IRanges_2.32.0         codetools_0.2-18      </span></span>
+<span><span class="co">## [121] boot_1.3-28.1          MASS_7.3-58.1          assertthat_0.2.1      </span></span>
+<span><span class="co">## [124] rprojroot_2.0.3        withr_2.5.0            GenomeInfoDbData_1.2.9</span></span>
+<span><span class="co">## [127] multcomp_1.4-20        S4Vectors_0.36.0       mgcv_1.8-41           </span></span>
+<span><span class="co">## [130] hms_1.1.2              rmarkdown_2.18         carData_3.0-5         </span></span>
+<span><span class="co">## [133] scatterplot3d_0.3-42   shiny_1.7.3</span></span></code></pre>
 </div>
   </div>
 

@@ -37,3 +37,9 @@
  + Updated shiny app to load
  + Added missing paths for launch_protGear_interactive 
 
+
+## protGear 1.3.33 (2022-12-11) 
+
+ + Removed kableExtra due to build error 
+
+
