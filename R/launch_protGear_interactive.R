@@ -7,7 +7,6 @@
 #' @importFrom flexdashboard renderValueBox valueBoxOutput valueBox
 #' @importFrom shinydashboard renderInfoBox
 #' @importFrom  dplyr group_rows between first last
-#' @importFrom  kableExtra text_spec
 #' @export
 #' @examples
 #' app <- system.file("shiny-examples", "protGear_interactive",
